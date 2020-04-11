@@ -1,0 +1,11 @@
+@import url('./styles/colors.css');
+@import url('./styles//typo.css');
+
+:root {
+  /* СЕМАНТИЧЕСКИЕ ПЕРЕМЕННЫЕ */
+
+  /* button */
+  --button-font-size: var(--default-font-size);
+  --button-text-color: var(--primary-text-color);
+  --button-background-color: var(--primary-bg-color);
+}
