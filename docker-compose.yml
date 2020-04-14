@@ -29,7 +29,7 @@ services:
       - frontend:frontend
       - backend:backend
   postgres:
-    build: ./docker-compose/postgres
+    build: ./docker-config/postgres
     environment:
       - POSTGRES_USER=hypertube
       - POSTGRES_PASSWORD=Hypertube12345
