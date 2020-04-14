@@ -2,7 +2,7 @@ version: '3'
 
 services:
   backend:
-    build: ./docker-config/backend
+    build: ./backend
     environment:
       - PGUSER=hypertube
       - PGHOST=postgres
@@ -16,20 +16,20 @@ services:
     depends_on:
       - postgres
   frontend:
-    build: ./docker-config/frontend
+    build: ./frontend
     ports:
       - '3000:3000'
     volumes:
       - ./frontend:/app
   proxy:
-    build: ./docker-config/proxy
+    build: ./proxy
     ports:
       - '8080:8080'
     links:
       - frontend:frontend
       - backend:backend
   postgres:
-    build: ./docker-config/postgres
+    image: postgres:12.2
     environment:
       - POSTGRES_USER=hypertube
       - POSTGRES_PASSWORD=Hypertube12345
