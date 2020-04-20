@@ -4,7 +4,8 @@
   "description": "frontend hypertube school21 project (online cinema)",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx webpack-dev-server --hot --inline"
+    "start": "npx webpack-dev-server --hot --inline",
+    "dev": "npm install && npm start"
   },
   "author": "",
   "license": "ISC",
