@@ -1,3 +1,82 @@
-.header {
-  
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family: "Roboto", Arial, sans-serif;
+    background-color: #0e0e0e;
+    color: #b9b9b9;
+    font-size: 28px;
+}
+
+.Header {
+    background-color: black;
+}
+
+.Nav {
+    display: flex;
+    justify-content: space-between;
+    min-height: 100px;
+}
+
+.Nav-Logo, .Nav-Login, .Nav-Register {
+    display: flex;
+    width: 10.5%
+}
+
+.Nav-Lang {
+    display: flex;
+    width: 5%;
+    outline: none;
+}
+
+.NavList-NavItem2 {
+    width: 52%;
+}
+
+.Nav-Search {
+    width: 51.5%;
+    height: 60px;
+    padding: 20px;
+}
+
+.Search-Form {
+    background-color: #343434;
+    display: flex;
+    height: 60px;
+    padding: 0 20px;
+}
+
+.Search-Input {
+    outline: none;
+    width: 100%;
+    border:none;
+    color: #b9b9b9;
+    background-color: #343434;
+    font-size: 28px;
+}
+
+.Search-Input::placeholder {
+    color: #b9b9b9;
+}
+
+.Search-Button {
+    cursor: pointer;
+    outline: none;
+    color: #b9b9b9;
+    background: #343434;
+    border: none;
+}
+
+.Lang, .Login-Link, .Register-Link, .Logo-Link  {
+    margin: auto;
+    text-align: center;
+}
+
+.Lang {
+    cursor: pointer;
+}
+
+.Link {
+    text-decoration: none;
+    color: #b9b9b9;
 }

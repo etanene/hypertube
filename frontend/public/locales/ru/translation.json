@@ -1,0 +1,41 @@
+{
+  "header": {
+    "login": "Войти",
+    "register": "Регистрация",
+    "lang": "EN",
+    "search": "Поиск фильмов"
+  },
+  "main": {
+    "menu": {
+      "showWatched": "Показывать просмотренные",
+      "genreSearch": "Поиск по жанру",
+      "movieSort": [
+        {"type":  "date_added", "name": "По дате добавления"},
+        {"type":  "year", "name": "Сначала новые"},
+        {"type":  "rating", "name": "По рейтингу"},
+        {"type":  "title", "name": "По названию"}
+      ],
+      "genres":  [
+        {"type": "Comedy", "name":  "Комедия"},
+        {"type": "Horror", "name":  "Ужасы"},
+        {"type": "Sci-fi", "name":  "Научная фантастика"},
+        {"type": "Romantic", "name":  "Романтика"},
+        {"type": "Action", "name":  "Боевик"},
+        {"type": "Thriller", "name":  "Триллер"},
+        {"type": "Drama", "name":  "Драма"},
+        {"type": "Fantasy", "name":  "Фэнтези"},
+        {"type": "Adventures", "name":  "Приключения"},
+        {"type": "Crime", "name":  "Криминал"},
+        {"type": "War", "name":  "Война"},
+        {"type": "Sport", "name":  "Спорт"},
+        {"type": "Mystery", "name":  "Загадочное"},
+        {"type": "Family", "name":  "Семейное"},
+        {"type": "Documentary", "name":  "Документальное"}
+      ]
+    },
+    "movieList": {
+      "loading": "Загрузка...",
+      "error": "Произошла ошибка. Пожалуйста, перезагрузите страницу."
+    }
+  }
+}

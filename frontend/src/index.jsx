@@ -1,20 +1,17 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-
-import store from './redux/store';
-
+import './services/i18n';
 import App from './App';
 import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Suspense fallback="loading">
         <App />
-      </BrowserRouter>
-    </Provider>
+      </Suspense>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root'),
 );

@@ -1,0 +1,33 @@
+.ShowGenre {
+    cursor: pointer;
+    display: flex;
+    outline: none;
+    width: 300px;
+    height: 60px;
+    font-size: 22px;
+    background-color: #343434;
+}
+
+.MovieMenu-ShowGenre {
+    padding: 0;
+    margin: 2% 11%;
+}
+
+.ShowGenre-Icon {
+    margin: auto;
+    text-align: center;
+    font-size: 48px;
+}
+
+.ShowGenre-RemoveGenreIcon {
+    margin: auto;
+    text-align: center;
+    font-size: 24px;
+    padding-left: 5px;
+}
+
+.ShowGenre-Text {
+    display: flex;
+    text-align: center;
+    margin: auto;
+}

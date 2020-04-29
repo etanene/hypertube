@@ -1,21 +1,41 @@
-import React from 'react';
+import React, { useReducer, useState } from 'react';
 import { cn } from '@bem-react/classname';
+import MoviesContext from './context/moviesContext';
+import useMovieSearch from './services/useMovieSearch';
+import Header from './components/Header/Header';
+import MovieMenu from './components/Main/MovieMenu/MovieMenu';
+import MovieList from './components/Main/MovieList/MovieList';
+import queryReducer from './reducers/query';
 
-import Header from './components/Header';
-import Main from './components/Main';
-import Footer from './components/Footer';
-import './App.css';
+const App = () => {
+  const [queryOptions, dispatch] = useReducer(queryReducer, {});
+  const [pageNumber, setPageNumber] = useState(1);
+  const {
+    isLoading,
+    error,
+    movies,
+    hasMore,
+  } = useMovieSearch(queryOptions, pageNumber);
+  const movieListCss = cn('MovieList');
 
-const appCss = cn('app');
-
-function App() {
   return (
-    <div className={appCss()}>
+    <MoviesContext.Provider
+      value={
+        {
+          isLoading,
+          movies,
+          error,
+          dispatch,
+          setPageNumber,
+          hasMore,
+        }
+      }
+    >
       <Header />
-      <Main />
-      <Footer />
-    </div>
+      <MovieMenu />
+      <MovieList cls={movieListCss} />
+    </MoviesContext.Provider>
   );
-}
+};
 
 export default App;

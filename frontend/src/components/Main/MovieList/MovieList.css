@@ -1,0 +1,19 @@
+.MovieList {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    justify-content: space-between;
+    padding: 0 10%;
+}
+
+.MovieList-Message {
+    margin: 2% 1%;
+    width: 100%;
+}
+
+.MovieList-Item {
+    cursor: pointer;
+    width: 300px;
+    margin: 2% 1%;
+    background-color: #343434;
+}
