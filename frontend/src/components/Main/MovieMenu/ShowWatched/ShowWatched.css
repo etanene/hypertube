@@ -1,7 +1,7 @@
 .ShowWatched {
     justify-content: space-between;
     display: flex;
-    font-size: 18px;
+    font-size: var(--font-size-m);
     width: 300px;
 }
 
@@ -10,7 +10,7 @@
 }
 
 .ShowWatched-Text {
-    font-size: 18px;
+    font-size: var(--font-size-m);
 }
 
 .ShowWatched-Checkbox {

@@ -28,7 +28,7 @@ const Genre = (props) => {
         }
       }}
     >
-      <img src="/sci-fi.png" alt="Genre poster" className={genreCss('Image')} />
+      <img src={`/genre_images/${type}.png`} alt="Genre poster" className={genreCss('Image')} />
       <span className={genreCss('Title')}>{name}</span>
     </div>
   );

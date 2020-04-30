@@ -36,13 +36,13 @@
     text-align: center;
     padding: 15px;
     color: #e5e5e5;
-    font-size: 24px;
+    font-size: var(--font-size-xl);
 }
 
 .Movie-Rating {
     border-radius: 15px 0 0 15px;
     text-align: center;
-    font-size: 24px;
+    font-size: var(--font-size-xl);
     width: 80px;
     height: 30px;
     background-color: #e5e5e5;

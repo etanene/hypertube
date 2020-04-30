@@ -39,7 +39,7 @@ const GenreSearch = (props) => {
         }
       }}
     >
-      {genreIndex
+      {genreIndex !== null
         ? (
           <span className={showGenreCss('Text')}>
             {genres[genreIndex].name}
