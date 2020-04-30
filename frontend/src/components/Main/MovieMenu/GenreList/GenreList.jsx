@@ -14,12 +14,12 @@ const GenreList = (props) => {
     visible
     && (
       <ul className={cls()}>
-        {genres.map((genre) => (
+        {genres.map((genre, index) => (
           <li
             className={cls('Item')}
             key={genre.name}
           >
-            <Genre genre={genre} />
+            <Genre genre={genre} index={index} />
           </li>
         ))}
       </ul>

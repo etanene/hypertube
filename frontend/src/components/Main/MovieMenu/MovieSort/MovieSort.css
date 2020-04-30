@@ -4,7 +4,7 @@
     flex-direction: column;
     width: 300px;
     font-size: 22px;
-    background-color: #343434;
+    background-color: var(--grey);
 }
 
 .MovieMenu-MovieSort {
@@ -18,7 +18,7 @@
     height: 60px;
     width: 300px;
     display: flex;
-    border-bottom: #0e0e0e 3px solid;
+    border-bottom: var(--dark-grey) 3px solid;
 }
 
 .MovieSort-SortBy {

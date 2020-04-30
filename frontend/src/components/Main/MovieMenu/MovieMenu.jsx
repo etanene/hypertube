@@ -11,15 +11,15 @@ const MovieMenu = () => {
   const movieMenuCss = cn('MovieMenu');
   const genreListCss = cn('GenreList');
   const [visibleGenres, setVisibleGenres] = useState(false);
-  const [genre, setGenre] = useState('');
+  const [genreIndex, setGenreIndex] = useState(null);
 
   return (
     <GenresContext.Provider
       value={{
         visible: visibleGenres,
         setVisible: setVisibleGenres,
-        genre,
-        setGenre,
+        genreIndex,
+        setGenreIndex,
       }}
     >
       <div className={movieMenuCss()}>

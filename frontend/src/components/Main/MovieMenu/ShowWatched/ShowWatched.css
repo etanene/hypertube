@@ -20,7 +20,7 @@
 
 .Checkbox {
     cursor: pointer;
-    background: #343434;
+    background: var(--grey);
 }
 
 .ShowWatched-Icon {

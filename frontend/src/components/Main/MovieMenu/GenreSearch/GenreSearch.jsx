@@ -10,11 +10,12 @@ const GenreSearch = (props) => {
   const {
     visible,
     setVisible,
-    genre,
-    setGenre,
+    genreIndex,
+    setGenreIndex,
   } = useContext(GenresContext);
   const { dispatch } = useContext(MoviesContext);
   const { t } = useTranslation();
+  const genres = t('main.menu.genres', { returnObjects: true });
   const showGenreCss = cn('ShowGenre');
   const iconCss = cn('material-icons');
 
@@ -23,7 +24,7 @@ const GenreSearch = (props) => {
   };
   const handleRemoveGenre = () => {
     dispatch({ type: 'ADD_QUERY', query: { genre: '' } });
-    setGenre('');
+    setGenreIndex(null);
   };
 
   return (
@@ -38,10 +39,10 @@ const GenreSearch = (props) => {
         }
       }}
     >
-      {genre
+      {genreIndex
         ? (
           <span className={showGenreCss('Text')}>
-            {genre}
+            {genres[genreIndex].name}
             <i
               role="button"
               tabIndex={0}
@@ -62,9 +63,7 @@ const GenreSearch = (props) => {
           </span>
         )
         : <span className={showGenreCss('Text')}>{t('main.menu.genreSearch')}</span>}
-      <i
-        className={iconCss({}, [showGenreCss('Icon')])}
-      >
+      <i className={iconCss({}, [showGenreCss('Icon')])}>
         {visible ? 'arrow_drop_up' : 'arrow_drop_down'}
       </i>
     </div>
