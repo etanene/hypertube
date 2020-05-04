@@ -39,6 +39,10 @@
     font-size: var(--font-size-xl);
 }
 
+.Movie-Link {
+    text-decoration: none;
+}
+
 .Movie-Rating {
     border-radius: 15px 0 0 15px;
     text-align: center;

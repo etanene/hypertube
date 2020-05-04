@@ -9,6 +9,9 @@ body {
 }
 
 .Header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     background-color: black;
 }
 
@@ -21,6 +24,10 @@ body {
 .Nav-Logo, .Nav-Login, .Nav-Register {
     display: flex;
     width: 10.5%
+}
+
+.Nav-Logo {
+    margin-left: 1%;
 }
 
 .Nav-Lang {

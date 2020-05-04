@@ -1,5 +1,6 @@
 import React from 'react';
 import { cn } from '@bem-react/classname';
+import { Link } from 'react-router-dom';
 
 const Logo = (props) => {
   const { cls } = props;
@@ -8,10 +9,9 @@ const Logo = (props) => {
 
   return (
     <div className={cls}>
-      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-      <a href="#" className={logoCss('Link', [linkCss()])}>
+      <Link className={logoCss('Link', [linkCss()])} to="/">
         Hypertube
-      </a>
+      </Link>
     </div>
   );
 };

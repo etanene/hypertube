@@ -1,8 +1,9 @@
 import React, { useReducer, useState } from 'react';
-import { cn } from '@bem-react/classname';
+import { BrowserRouter, Route } from 'react-router-dom';
 import MoviesContext from './context/moviesContext';
 import useMovieSearch from './services/useMovieSearch';
 import Header from './components/Header/Header';
+import MoviePage from './components/Main/MoviePage/MoviePage';
 import MovieMenu from './components/Main/MovieMenu/MovieMenu';
 import MovieList from './components/Main/MovieList/MovieList';
 import queryReducer from './reducers/query';
@@ -16,25 +17,27 @@ const App = () => {
     movies,
     hasMore,
   } = useMovieSearch(queryOptions, pageNumber);
-  const movieListCss = cn('MovieList');
 
   return (
-    <MoviesContext.Provider
-      value={
-        {
-          isLoading,
-          movies,
-          error,
-          dispatch,
-          setPageNumber,
-          hasMore,
+    <BrowserRouter>
+      <MoviesContext.Provider
+        value={
+          {
+            isLoading,
+            movies,
+            error,
+            dispatch,
+            setPageNumber,
+            hasMore,
+          }
         }
-      }
-    >
-      <Header />
-      <MovieMenu />
-      <MovieList cls={movieListCss} />
-    </MoviesContext.Provider>
+      >
+        <Header />
+        <Route path="/movie/:movieId" component={MoviePage} />
+        <Route path="/" component={MovieMenu} exact />
+        <Route path="/" component={MovieList} exact />
+      </MoviesContext.Provider>
+    </BrowserRouter>
   );
 };
 

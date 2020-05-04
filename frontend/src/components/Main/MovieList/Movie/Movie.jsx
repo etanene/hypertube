@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { cn } from '@bem-react/classname';
 import './Movie.css';
 
@@ -14,21 +15,23 @@ const Movie = ({
 
   return (
     <li className={cls('Item')} ref={last ? lastMovieRef : null}>
-      <div className={movieCss()}>
-        <img src={movie.large_cover_image} alt="Movie poster" className={movieCss('Image')} />
-        <div className={movieCss('Rating')}>
-          { movie.rating }
-          /10
+      <Link to={`/movie/${movie.imdb_code}`} className={movieCss('Link')}>
+        <div className={movieCss()}>
+          <img src={movie.large_cover_image} alt="Movie poster" className={movieCss('Image')} />
+          <div className={movieCss('Rating')}>
+            { movie.rating }
+            /10
+          </div>
+          <div className={(overlayCss())}>
+            <i className={iconCss({}, ['PlayIcon'])}>
+              play_circle_outline
+            </i>
+          </div>
+          <h1 className={movieCss('Title')}>
+            {`${movie.title} (${movie.year})`}
+          </h1>
         </div>
-        <div className={(overlayCss())}>
-          <i className={iconCss({}, ['PlayIcon'])}>
-            play_circle_outline
-          </i>
-        </div>
-        <h1 className={movieCss('Title')}>
-          {`${movie.title} (${movie.year})`}
-        </h1>
-      </div>
+      </Link>
     </li>
   );
 };

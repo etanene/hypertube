@@ -1,10 +1,11 @@
 import React, { useCallback, useContext, useRef } from 'react';
+import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
 import Movie from './Movie/Movie';
 import MovieContext from '../../../context/moviesContext';
 import './MovieList.css';
 
-const MovieList = (props) => {
+const MovieList = () => {
   const {
     isLoading,
     error,
@@ -13,7 +14,7 @@ const MovieList = (props) => {
     hasMore,
   } = useContext(MovieContext);
   const { t } = useTranslation();
-  const { cls } = props;
+  const movieListCss = cn('MovieList');
 
   const observer = useRef();
   const lastMovieRef = useCallback((node) => {
@@ -28,18 +29,18 @@ const MovieList = (props) => {
 
   return (
     <div>
-      <ul className={cls()}>
+      <ul className={movieListCss()}>
         {movies.map((movie, index) => (
           <Movie
-            cls={cls}
+            cls={movieListCss}
             key={movie.id}
             movie={movie}
             last={movies.length === index + 1}
             lastMovieRef={lastMovieRef}
           />
         ))}
-        {isLoading && <li className={cls('Message')}>{t('main.movieList.loading')}</li>}
-        {error && <li className={cls('Message')}>{t('main.movieList.error')}</li>}
+        {isLoading && <li className={movieListCss('Message')}>{t('main.movieList.loading')}</li>}
+        {error && <li className={movieListCss('Message')}>{t('main.movieList.error')}</li>}
       </ul>
     </div>
   );

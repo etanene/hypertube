@@ -1,0 +1,12 @@
+.MovieInfo-MovieCast {
+    margin-left: 5%;
+}
+
+.MovieCast-Title {
+    margin: 0;
+}
+
+.MovieCast-Genre {
+    font-weight: lighter;
+    font-size: var(--font-size-xl);
+}
