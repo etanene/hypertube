@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
-import MoviesContext from '../../../context/moviesContext';
+import MovieSearchContext from '../../../context/movieSearchContext';
 
 const SearchForm = (props) => {
   const searchCss = cn('Search');
   const { cls } = props;
   const [search, setSearch] = useState('');
-  const { dispatch } = useContext(MoviesContext);
+  const { dispatch } = useContext(MovieSearchContext);
   const { t } = useTranslation();
 
   const applySearch = (e) => {

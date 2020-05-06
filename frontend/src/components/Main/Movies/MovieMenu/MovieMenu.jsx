@@ -5,7 +5,7 @@ import GenreSearch from './GenreSearch/GenreSearch';
 import ShowWatched from './ShowWatched/ShowWatched';
 import GenreList from './GenreList/GenreList';
 import './MovieMenu.css';
-import GenresContext from '../../../context/genresContext';
+import GenresContext from '../../../../context/genresContext';
 
 const MovieMenu = () => {
   const movieMenuCss = cn('MovieMenu');

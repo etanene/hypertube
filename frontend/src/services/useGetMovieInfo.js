@@ -14,7 +14,7 @@ export default function useGetMovieInfo(movieID) {
       try {
         setIsLoading(true);
         setError(false);
-        const response = await request.get(url).query({ i: movieID, apikey: OMDB_API_KEY });
+        const response = await request.get(url).query({ i: movieID, apikey: OMDB_API_KEY, plot: 'full' });
         console.log(response);
         if (!response.body.Error) {
           const data = response.body;

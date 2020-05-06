@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import Genre from './Genre/Genre';
 import './GenreList.css';
-import GenresContext from '../../../../context/genresContext';
+import GenresContext from '../../../../../context/genresContext';
 
 const GenreList = (props) => {
   const { cls } = props;

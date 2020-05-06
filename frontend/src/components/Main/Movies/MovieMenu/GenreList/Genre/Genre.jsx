@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { cn } from '@bem-react/classname';
 import './Genre.css';
-import MoviesContext from '../../../../../context/moviesContext';
-import GenresContext from '../../../../../context/genresContext';
+import GenresContext from '../../../../../../context/genresContext';
+import MovieSearchContext from '../../../../../../context/movieSearchContext';
 
 const Genre = (props) => {
   const { genre, index } = props;
   const { type, name } = genre;
-  const { dispatch } = useContext(MoviesContext);
+  const { dispatch } = useContext(MovieSearchContext);
   const { setVisible, setGenreIndex } = useContext(GenresContext);
   const genreCss = cn('Genre');
   const handleChooseGenre = () => {

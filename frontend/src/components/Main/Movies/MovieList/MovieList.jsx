@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useRef } from 'react';
 import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
 import Movie from './Movie/Movie';
-import MovieContext from '../../../context/moviesContext';
+import MovieContext from '../../../../context/moviesContext';
 import './MovieList.css';
 
 const MovieList = () => {

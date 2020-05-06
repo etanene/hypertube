@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { cn } from '@bem-react/classname';
 import './GenreSearch.css';
-import GenresContext from '../../../../context/genresContext';
-import MoviesContext from '../../../../context/moviesContext';
+import MovieSearchContext from '../../../../../context/movieSearchContext';
+import GenresContext from '../../../../../context/genresContext';
 
 const GenreSearch = (props) => {
   const { cls } = props;
@@ -13,7 +13,7 @@ const GenreSearch = (props) => {
     genreIndex,
     setGenreIndex,
   } = useContext(GenresContext);
-  const { dispatch } = useContext(MoviesContext);
+  const { dispatch } = useContext(MovieSearchContext);
   const { t } = useTranslation();
   const genres = t('main.menu.genres', { returnObjects: true });
   const showGenreCss = cn('ShowGenre');
