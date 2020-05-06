@@ -12,15 +12,10 @@ const App = () => {
 
   return (
     <MovieSearchContext.Provider
-      value={
-        {
-          movies,
-          dispatch,
-        }
-      }
+      value={{ movies, dispatch }}
     >
       <Header />
-      <Route path="/movie/:movieId" component={MoviePage} />
+      <Route path="/movie/:imdbId/:ytsId" component={MoviePage} />
       <Route path="/" exact>
         <Movies queryOptions={queryOptions} setMovies={setMovies} />
       </Route>

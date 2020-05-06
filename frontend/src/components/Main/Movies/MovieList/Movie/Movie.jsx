@@ -15,9 +15,13 @@ const Movie = ({
 
   return (
     <li className={cls('Item')} ref={last ? lastMovieRef : null}>
-      <Link to={`/movie/${movie.imdb_code}`} className={movieCss('Link')}>
+      <Link to={`/movie/${movie.imdb_code}/${movie.id}`} className={movieCss('Link')}>
         <div className={movieCss()}>
-          <img src={movie.large_cover_image} alt="Movie poster" className={movieCss('Image')} />
+          <img
+            src={movie.large_cover_image ? movie.large_cover_image : movie.medium_cover_image}
+            alt="Movie poster"
+            className={movieCss('Image')}
+          />
           <div className={movieCss('Rating')}>
             { movie.rating }
             /10

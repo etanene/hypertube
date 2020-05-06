@@ -7,10 +7,8 @@ import MovieCast from './MovieCast/MovieCast';
 
 const MovieInfo = ({ info, cls, movieTorrent }) => {
   const movieInfoCss = cn('MovieInfo');
-  console.log('API', info);
-  console.log('CONTEXT', movieTorrent);
   return (
-    <div className={cls('MovieInfo', ['MovieInfo', movieInfoCss])}>
+    <div className={cls('MovieInfo', [movieInfoCss])}>
       <div>
         <MoviePoster
           cls={movieInfoCss}

@@ -9,7 +9,7 @@ export default function useMovieSearch(queryOptions, pageNumber) {
   const [hasMore, setHasMore] = useState(false);
   const [movies, dispatch] = useReducer(moviesReducer, []);
 
-  const url = 'https://yts.mx/api/v2/list_movies.jsons';
+  const url = 'https://yts.mx/api/v2/list_movies.json';
 
   useEffect(() => {
     dispatch({ type: 'REMOVE_MOVIES' });
@@ -28,8 +28,6 @@ export default function useMovieSearch(queryOptions, pageNumber) {
         if (response.body.data.movie_count !== 0) {
           const { data } = response.body;
           console.log('RESPONSE', response);
-          console.log('PAGE', pageNumber);
-          console.log('QUERY', queryOptions);
           setHasMore(checkHasMore(data));
           const dataMovies = data.movies;
           dispatch({ type: 'ADD_MOVIES', movies: dataMovies });

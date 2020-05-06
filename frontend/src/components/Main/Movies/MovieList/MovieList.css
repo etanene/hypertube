@@ -12,8 +12,8 @@
 }
 
 .MovieList-Item {
-    cursor: pointer;
-    width: 300px;
-    margin: 2% 1%;
-    background-color: var(--grey);
+     cursor: pointer;
+     width: 300px;
+     margin: 2% 1%;
+     background-color: var(--grey);
 }
