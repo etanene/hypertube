@@ -5,6 +5,7 @@ import useGetMovieInfo from '../../../services/useGetMovieInfo';
 import useGetMovieSuggestions from '../../../services/useGetMovieSuggestions';
 import MovieSearchContext from '../../../context/movieSearchContext';
 import MovieSuggestions from './MovieSuggestions/MovieSuggestions';
+import MovieComments from './MovieComments/MovieComments';
 
 const MoviePage = ({ match }) => {
   const { movies } = useContext(MovieSearchContext);
@@ -25,6 +26,7 @@ const MoviePage = ({ match }) => {
       {error && <div>{error}</div>}
       {movieInfo && <MovieInfo cls={moviePageCss} info={movieInfo} movieTorrent={movieTorrent} />}
       {movieSuggestions && <MovieSuggestions movies={movieSuggestions} />}
+      {movieInfo && <MovieComments title={movieInfo.Title} />}
     </div>
   );
 };

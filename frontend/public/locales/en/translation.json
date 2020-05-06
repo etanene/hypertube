@@ -39,6 +39,10 @@
     }
   },
   "movie": {
-    "movieSuggestions": "Recommended movies:"
+    "movieSuggestions": "Recommended movies:",
+    "movieComments": {
+      "leaveComment": "Leave a comment about",
+      "leaveCommentButton": "Add a comment"
+    }
   }
 }

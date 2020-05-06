@@ -39,6 +39,10 @@
     }
   },
   "movie": {
-    "movieSuggestions": "Похожие фильмы:"
+    "movieSuggestions": "Похожие фильмы:",
+    "movieComments": {
+      "leaveComment": "Поделитесь мнением о фильме",
+      "leaveCommentButton": "Добавить комментарий"
+    }
   }
 }
