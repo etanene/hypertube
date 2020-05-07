@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
 import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
+import { scroller } from 'react-scroll';
 import './AddComment.css';
 
 const AddComment = ({ title, dispatch }) => {
   const addCommentCss = cn('AddComment');
   const { t } = useTranslation();
   const [comment, setComment] = useState('');
+  function scrollTo() {
+    scroller.scrollTo('scroll-to-element', {
+      duration: 1000,
+      delay: 0,
+      smooth: 'easeInOutQuart',
+    });
+  }
   const addComment = () => {
     dispatch({
       type: 'ADD_COMMENT',
@@ -18,6 +26,7 @@ const AddComment = ({ title, dispatch }) => {
       },
     });
     setComment('');
+    scrollTo();
   };
   return (
     <div className={addCommentCss()}>
@@ -26,7 +35,7 @@ const AddComment = ({ title, dispatch }) => {
       <div className={addCommentCss('TextareaBox')}>
         <textarea
           value={comment}
-          onInput={(e) => setComment(e.target.value)}
+          onChange={(e) => setComment(e.target.value)}
           className={addCommentCss('Textarea')}
           name="comment"
         />

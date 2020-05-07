@@ -10,9 +10,7 @@ const CommentList = ({ comments, cls }) => {
   const compare = (first, second) => (first.time > second.time ? -1 : 1);
   return (
     <div className={cls('CommentList')}>
-      <span
-        className={commentListCss('CommentNumber')}
-      >
+      <span name="scroll-to-element" className={commentListCss('CommentNumber')}>
         {`${t('movie.movieComments.comments')} (${comments.length})`}
       </span>
       {comments.sort(compare).map((comment) => (

@@ -1,5 +1,6 @@
 import React, { useCallback, useContext, useRef } from 'react';
 import { cn } from '@bem-react/classname';
+import { animateScroll as scroll } from 'react-scroll';
 import { useTranslation } from 'react-i18next';
 import Movie from './Movie/Movie';
 import MovieContext from '../../../../context/moviesContext';
@@ -15,7 +16,8 @@ const MovieList = () => {
   } = useContext(MovieContext);
   const { t } = useTranslation();
   const movieListCss = cn('MovieList');
-
+  const scrollUpCss = cn('ScrollUp');
+  const iconCss = cn('material-icons');
   const observer = useRef();
   const lastMovieRef = useCallback((node) => {
     if (observer.current) observer.current.disconnect();
@@ -26,9 +28,25 @@ const MovieList = () => {
     });
     if (node) observer.current.observe(node);
   }, [hasMore, setPageNumber]);
-
   return (
-    <div>
+    <div className={movieListCss('Container')}>
+      <div
+        className={scrollUpCss()}
+        tabIndex={0}
+        role="button"
+        onClick={() => {
+          scroll.scrollToTop();
+        }}
+        onKeyDown={(e) => {
+          if (e.code === 'KeyW') {
+            scroll.scrollToTop();
+          }
+        }}
+      >
+        <span className={iconCss({}, ['ScrollUp-Icon'])}>
+          double_arrow
+        </span>
+      </div>
       <ul className={movieListCss()}>
         {movies.map((movie, index) => (
           <Movie
