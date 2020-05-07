@@ -1,0 +1,35 @@
+.Comment {
+    width: 75%;
+    display: flex;
+    margin-bottom: 5%;
+}
+
+.Comment-Block {
+    width: 100%;
+}
+
+.Comment-Username {
+    font-size: var(--font-size-l);
+    margin-right: 100px;
+}
+
+.Comment-Info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.Comment-Avatar {
+    margin-right: 20px;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+}
+
+.Comment-Text {
+    font-size: var(--font-size-m);
+}
+
+.Comment-Timestamp {
+    font-size: var(--font-size-m);
+}
