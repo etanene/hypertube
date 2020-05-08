@@ -3,8 +3,7 @@
     flex-wrap: wrap;
     list-style: none;
     justify-content: space-between;
-    padding-left: 5%;
-    padding-right: 10%;
+    padding: 0 7%;
 }
 
 .MovieList-Message {
@@ -17,27 +16,4 @@
      width: 300px;
      margin: 2% 1%;
      background-color: var(--grey);
-}
-
-.MovieList-Container {
-    display: flex;
-}
-
-.ScrollUp {
-    outline: none;
-    cursor: pointer;
-    min-width: 5%;
-    transition: 0.5s ease-in-out;
-}
-
-.ScrollUp:hover {
-    background-color: var(--light-grey);
-}
-
-.ScrollUp-Icon {
-    position: sticky;
-    top: 150px;
-    z-index: 1000;
-    transform: rotate(270deg);
-    margin: 0 33%;
 }
