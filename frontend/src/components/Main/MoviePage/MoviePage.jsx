@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { cn } from '@bem-react/classname';
+import { useParams } from 'react-router-dom';
 import { animateScroll as scroll } from 'react-scroll';
 import MovieInfo from './MovieInfo/MovieInfo';
 import useGetMovieInfo from '../../../services/useGetMovieInfo';
@@ -8,9 +9,9 @@ import MovieSearchContext from '../../../context/movieSearchContext';
 import MovieSuggestions from './MovieSuggestions/MovieSuggestions';
 import MovieComments from './MovieComments/MovieComments';
 
-const MoviePage = ({ match }) => {
+const MoviePage = () => {
   const { movies } = useContext(MovieSearchContext);
-  const { imdbId, ytsId } = match.params;
+  const { imdbId, ytsId } = useParams();
   const movieTorrent = movies.filter((movie) => movie.imdb_code === imdbId)[0];
   const moviePageCss = cn('MoviePage');
   useEffect(() => {

@@ -9,6 +9,7 @@ const MovieList = () => {
   const {
     error,
     movies,
+    isLoading,
     setPageNumber,
     hasMore,
   } = useContext(MovieContext);
@@ -36,7 +37,7 @@ const MovieList = () => {
             lastMovieRef={lastMovieRef}
           />
         ))}
-        <li className={movieListCss('Message')}>{t('main.movieList.loading')}</li>
+        {isLoading && <li className={movieListCss('Message')}>{t('main.movieList.loading')}</li>}
         {error && <li className={movieListCss('Message')}>{t('main.movieList.error')}</li>}
       </ul>
     </div>
