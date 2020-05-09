@@ -18,6 +18,9 @@ const Movie = ({
       <Link to={`/movie/${movie.imdb_code}/${movie.id}`} className={movieCss('Link')}>
         <div className={movieCss()}>
           <img
+            onError={(e) => {
+              e.target.src = './image.png';
+            }}
             src={movie.large_cover_image ? movie.large_cover_image : movie.medium_cover_image}
             alt="Movie poster"
             className={movieCss('Image')}
