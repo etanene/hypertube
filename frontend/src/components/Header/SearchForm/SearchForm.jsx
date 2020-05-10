@@ -33,7 +33,9 @@ const SearchForm = (props) => {
           placeholder={t('header.search')}
           value={search}
           onChange={(e) => {
-            setSearch(e.target.value);
+            if (e.target.value !== '<' && e.target.value !== '>') {
+              setSearch(e.target.value);
+            }
           }}
         />
         <button
