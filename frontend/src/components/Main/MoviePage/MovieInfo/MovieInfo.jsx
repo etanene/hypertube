@@ -14,7 +14,7 @@ const MovieInfo = ({ info, cls, movieTorrent }) => {
           cls={movieInfoCss}
           poster={movieTorrent ? movieTorrent.large_cover_image : info.Poster}
         />
-        <MovieRating rating={info.imdbRating} />
+        {info.imdbRating !== 'N/A' && <MovieRating rating={info.imdbRating} />}
       </div>
       <MovieCast info={info} cls={movieInfoCss} />
     </div>

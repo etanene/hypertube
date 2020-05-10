@@ -4,6 +4,7 @@ import './MovieCast.css';
 
 const MovieCast = ({ info, cls }) => {
   const movieCastCss = cn('MovieCast');
+  const isAvailable = (param) => param !== 'N/A';
   return (
     <div className={cls('MovieCast', ['MovieCast'])}>
       <h2 className={movieCastCss('Title')}>
@@ -19,10 +20,10 @@ const MovieCast = ({ info, cls }) => {
         {`Main cast: ${info.Actors}`}
       </h4>
       <h4 className={movieCastCss('Genre')}>
-        {info.Plot}
+        {isAvailable(info.Plot) && info.Plot}
       </h4>
       <h4 className={movieCastCss('Genre')}>
-        {info.Runtime}
+        {isAvailable(info.Runtime) && info.Runtime}
       </h4>
     </div>
   );
