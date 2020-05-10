@@ -1,0 +1,32 @@
+@import url('../../App.css');
+
+.reg-form-modal {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  max-height: 500px;
+  position: absolute;
+  border: 1px solid gray;
+  box-sizing: border-box;
+  background-color: #fefefe;
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+}
+
+/* элементы */
+.reg-form-form-name {
+  margin: 10px auto;
+}
+.reg-form-input {
+  margin: 5px 0;
+}
+.reg-form-submit {
+  margin: 5px 0;
+}
+
+.reg-form-close-button {
+  position: absolute;
+  left: 90%;
+}

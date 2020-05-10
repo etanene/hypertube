@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS users
   first_name varchar(255) NOT NULL,
   last_name varchar(255) NOT NULL,
   passwd varchar(255) NOT NULL,
-  photo varchar(255) NOT NULL,
+  photo varchar(1000),
   info varchar(10000),
   validate BOOLEAN DEFAULT FALSE,
   unique_link varchar(255)

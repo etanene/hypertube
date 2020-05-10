@@ -15,8 +15,7 @@ function parseError(error, status) {
 
 async function fetchHelper(url, options) {
   const response = await fetch(url, options);
-
-  const text = response.text();
+  const text = await response.text();
   let result;
   if (text) {
     result = JSON.parse(text);
@@ -63,7 +62,6 @@ async function post(url, payload) {
     body: JSON.stringify(payload),
   };
   const fullUrl = url;
-
   const result = await fetchHelper(fullUrl, options);
   return result;
 }

@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
 const uuid = require('uuid/v4');
+const path = require('path');
+const fs = require('fs').promises;
 
 const { userModel } = require('../models');
 const { AuthException } = require('../errors');
@@ -7,11 +9,6 @@ const validateService = require('./validateService');
 // const mailService = require('./mailService');
 // const { HOST_URL } = require('../config');
 
-function swapDayMonth(date) {
-  const splittedDate = date.split('.');
-  [splittedDate[0], splittedDate[1]] = [splittedDate[1], splittedDate[0]];
-  return splittedDate.join('/');
-}
 const signup = async (data) => {
   const user = data;
   const checkLogin = await userModel.getUser({ login: user.username });
@@ -22,16 +19,19 @@ const signup = async (data) => {
   if (checkEmail.length) {
     throw new AuthException('Email already exists!');
   }
-  user.birthday = swapDayMonth(user.birthday);
   user.password = await bcrypt.hash(user.password, 1);
   user.unique = uuid();
+  const filename = uuid();
+  user.photo = filename;
+  const base64 = user.photo.replace(/data:image.*?;base64,/, '');
+  await fs.writeFile(path.resolve('/app/public/photo', filename), base64, 'base64');
   await userModel.addUser(user);
 
   // const link = `<a href="${HOST_URL}/api/auth/verify/${user.unique}">Click me</a>`;
   // await mailService.sendMail(
   //   user.email,
-  //   'Matcha email verification',
-  //   `Please, verify your matcha account ${link}`,
+  //   'Hypertube email verification',
+  //   `Please, verify your hypertube account ${link}`,
   // );
   return (user);
 };

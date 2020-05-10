@@ -3,10 +3,10 @@ const { db, dbUtils } = require('../db');
 const addUser = async (user) => {
   await db.query(`
     INSERT INTO
-      users (email, login, first_name, last_name, birthday, passwd, unique_link)
+      users (email, login, first_name, last_name, passwd, unique_link, photo)
     VALUES
       ($1, $2, $3, $4, $5, $6, $7)
-  `, [user.email, user.username, user.first_name, user.last_name, user.birthday, user.password, user.unique]);
+  `, [user.email, user.username, user.first_name, user.last_name, user.password, user.unique, user.photo]);
 };
 
 const getUser = async (data, without) => {
@@ -17,7 +17,6 @@ const getUser = async (data, without) => {
       users
     ${dbUtils.getInCondition(data, without, 0)}
   `, dbUtils.spreadValues(data));
-
   return (res.rows);
 };
 

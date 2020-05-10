@@ -21,7 +21,7 @@ const resetPwUser = async (email) => {
   const link = `<a href="${HOST_URL}/changepw/${uniqueLink}">Click me</a>`;
   await mailService.sendMail(
     email,
-    'Matcha reset password',
+    'Hypertube reset password',
     `Please, use link to reset password ${link}`,
   );
 };
