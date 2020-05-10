@@ -1,14 +1,15 @@
 :root {
   --font-size-xs: 12px;
   --font-size-s: 14px;
-  --font-size-m: 16px;
-  --font-size-l: 18px;
-  --font-size-xl: 20px;
+  --font-size-m: 18px;
+  --font-size-l: 22px;
+  --font-size-xl: 24px;
+  --font-size-xxl: 28px;
 
   /* размеры текста */
   --note-font-size: var(--font-size-xs);
   --description-font-size: var(--font-size-s);
   --default-font-size: var(--font-size-m);
   --title-font-size: var(--font-size-l);
-  --head-font-size: var(--font-size-xl);  
+  --head-font-size: var(--font-size-xxl);
 }

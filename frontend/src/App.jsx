@@ -1,31 +1,30 @@
-import React from 'react';
-import { cn } from '@bem-react/classname';
-import {
-  Route,
-  Switch,
-} from 'react-router-dom';
-
-import Header from './components/Header';
-import Main from './components/Main';
-import Footer from './components/Footer';
+import React, { useReducer, useState } from 'react';
+import { Route } from 'react-router-dom';
+import MovieSearchContext from './context/movieSearchContext';
+import Header from './components/Header/Header';
+import Movies from './components/Main/Movies/Movies';
 import RegForm from './components/RegForm';
-import './App.css';
+import MoviePage from './components/Main/MoviePage/MoviePage';
+import queryReducer from './reducers/query';
 
-const appCss = cn('app');
+const App = () => {
+  const [queryOptions, dispatch] = useReducer(queryReducer, {});
+  const [movies, setMovies] = useState([]);
 
-function App() {
   return (
-    <div className={appCss()}>
+    <MovieSearchContext.Provider
+      value={{ movies, dispatch }}
+    >
       <Header />
-      <Switch>
-        <Route path="/signup">
-          <RegForm />
-        </Route>
-      </Switch>
-      <Main />
-      <Footer />
-    </div>
+      <Route path="/movie/:imdbId/:ytsId" component={MoviePage} />
+      <Route path="/" exact>
+        <Movies queryOptions={queryOptions} setMovies={setMovies} />
+      </Route>
+      <Route path="/signup">
+        <RegForm />
+      </Route>
+    </MovieSearchContext.Provider>
   );
-}
+};
 
 export default App;

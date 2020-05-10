@@ -1,0 +1,33 @@
+.MovieSort {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    font-size: var(--font-size-l);
+    background-color: var(--grey);
+}
+
+.MovieMenu-MovieSort {
+    padding: 0;
+    margin: 2% 8%;
+}
+
+.MovieSort-Item {
+    outline: none;
+    cursor: pointer;
+    height: 60px;
+    width: 300px;
+    display: flex;
+    border-bottom: var(--dark-grey) 3px solid;
+}
+
+.MovieSort-SortBy {
+    margin: auto;
+    text-align: center;
+}
+
+.MovieSort-Icon {
+    margin: auto;
+    text-align: center;
+    font-size: 48px;
+}

@@ -1,3 +1,89 @@
-.header {
-  
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family: "Roboto", Arial, sans-serif;
+    background-color: var(--dark-grey);
+    color: var(--white);
+    font-size: var(--head-font-size);
+}
+
+.Header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: black;
+}
+
+.Nav {
+    display: flex;
+    justify-content: space-between;
+    min-height: 100px;
+}
+
+.Nav-Logo, .Nav-Login, .Nav-Register {
+    display: flex;
+    width: 10.5%
+}
+
+.Nav-Logo {
+    margin-left: 1%;
+}
+
+.Nav-Lang {
+    display: flex;
+    width: 5%;
+    outline: none;
+}
+
+.NavList-NavItem2 {
+    width: 52%;
+}
+
+.Nav-Search {
+    width: 51.5%;
+    height: 60px;
+    padding: 20px;
+}
+
+.Search-Form {
+    background-color: var(--grey);
+    display: flex;
+    height: 60px;
+    padding: 0 20px;
+}
+
+.Search-Input {
+    outline: none;
+    width: 100%;
+    border:none;
+    color: var(--white);
+    background-color: var(--grey);
+    font-size: var(--head-font-size);
+}
+
+.Search-Input::placeholder {
+    color: var(--white);
+}
+
+.Search-Button {
+    cursor: pointer;
+    outline: none;
+    color: var(--white);
+    background: var(--grey);
+    border: none;
+}
+
+.Lang, .Login-Link, .Register-Link, .Logo-Link  {
+    margin: auto;
+    text-align: center;
+}
+
+.Lang {
+    cursor: pointer;
+}
+
+.Link {
+    text-decoration: none;
+    color: var(--white);
 }

@@ -1,0 +1,49 @@
+{
+  "header": {
+    "login": "Login",
+    "register": "Register",
+    "lang": "RU",
+    "search": "Movie search"
+  },
+  "main": {
+    "menu": {
+      "showWatched": "Show watched",
+      "genreSearch": "Genre search",
+      "movieSort": [
+        {"type": "date_added", "name": "date_added"},
+        {"type": "year", "name": "year"},
+        {"type": "rating", "name": "rating"},
+        {"type": "title", "name": "title"}
+      ],
+      "genres":  [
+        {"type": "Comedy", "name":  "Comedy"},
+        {"type": "Horror", "name":  "Horror"},
+        {"type": "Sci-fi", "name":  "Sci-fi"},
+        {"type": "Romantic", "name":  "Romantic"},
+        {"type": "Action", "name":  "Action"},
+        {"type": "Thriller", "name":  "Thriller"},
+        {"type": "Drama", "name":  "Drama"},
+        {"type": "Fantasy", "name":  "Fantasy"},
+        {"type": "Adventures", "name":  "Adventures"},
+        {"type": "Crime", "name":  "Crime"},
+        {"type": "War", "name":  "War"},
+        {"type": "Sport", "name":  "Sport"},
+        {"type": "Mystery", "name":  "Mystery"},
+        {"type": "Family", "name":  "Family"},
+        {"type": "Documentary", "name":  "Documentary"}
+      ]
+    },
+    "movieList": {
+      "loading": "Loading...",
+      "error": "An error occurred. Please refresh the page"
+    }
+  },
+  "movie": {
+    "movieSuggestions": "Recommended movies:",
+    "movieComments": {
+      "leaveComment": "Leave a comment about",
+      "leaveCommentButton": "Add a comment",
+      "comments": "Comments "
+    }
+  }
+}

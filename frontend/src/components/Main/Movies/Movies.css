@@ -1,0 +1,7 @@
+.MovieBox {
+    display: flex;
+}
+
+.MovieBox-Container {
+    width: 100%;
+}

@@ -1,9 +1,11 @@
 :root {
-  --black: #0E0E0E;
+  --black: #000000;
+  --dark-grey: #0E0E0E;
   --grey: #343434;
-  --white: #FFFFFF;
+  --light-grey: #5a5a5a;
+  --white: #B9B9B9;
 
   --primary-text-color: var(--white);
-  --primary-bg-color: var(--black);
-  --secondary-bg-color: var(--grey);
+  --primary-bg-color: var(--dark-grey);
+  --secondary-bg-color: var(--black);
 }
