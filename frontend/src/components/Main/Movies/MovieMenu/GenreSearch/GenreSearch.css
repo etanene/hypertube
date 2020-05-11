@@ -2,7 +2,7 @@
     cursor: pointer;
     display: flex;
     outline: none;
-    width: 300px;
+    min-width: 300px;
     height: 60px;
     font-size: var(--font-size-l);
     background-color: var(--grey);
@@ -16,7 +16,7 @@
 .ShowGenre-Icon {
     margin: auto;
     text-align: center;
-    font-size: 48px;
+    font-size: 40px;
 }
 
 .ShowGenre-RemoveGenreIcon {
@@ -30,4 +30,12 @@
     display: flex;
     text-align: center;
     margin: auto;
+}
+
+@media screen and (max-width: 420px) {
+    .ShowGenre {
+        min-width: 240px;
+        height: 40px;
+        font-size: var(--font-size-m);
+    }
 }

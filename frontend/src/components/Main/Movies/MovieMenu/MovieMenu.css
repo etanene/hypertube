@@ -1,4 +1,11 @@
 .MovieMenu {
+    flex-wrap: wrap;
     display: flex;
     justify-content: space-between;
+}
+
+@media screen and (max-width: 720px) {
+    .MovieMenu {
+        justify-content: center;
+    }
 }

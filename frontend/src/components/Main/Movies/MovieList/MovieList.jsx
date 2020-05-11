@@ -26,7 +26,7 @@ const MovieList = () => {
     if (node) observer.current.observe(node);
   }, [hasMore, setPageNumber]);
   return (
-    <div>
+    <div className={movieListCss('Container')}>
       <ul className={movieListCss()}>
         {movies.map((movie, index) => (
           <Movie

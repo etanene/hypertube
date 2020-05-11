@@ -27,3 +27,13 @@
 .ShowWatched-Icon {
     font-size: 20px;
 }
+
+@media screen and (max-width: 720px) {
+    .ShowWatched {
+        margin: 20px auto;
+        width: 240px;
+    }
+    .ShowWatched-Text {
+        font-size: 16px;
+    }
+}

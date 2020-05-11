@@ -3,7 +3,6 @@ import { cn } from '@bem-react/classname';
 import SearchForm from './SearchForm/SearchForm';
 import Logo from './Logo/Logo';
 import LangSwitcher from './LangSwitcher/LangSwitcher';
-import Register from './Register/Register';
 import Login from './Login/Login';
 import './Header.css';
 
@@ -17,7 +16,6 @@ const Header = () => {
         <Logo cls={navCss('Logo')} />
         <SearchForm cls={navCss('Search')} />
         <LangSwitcher cls={navCss('Lang')} />
-        <Register cls={navCss('Register')} />
         <Login cls={navCss('Login')} />
       </nav>
     </header>

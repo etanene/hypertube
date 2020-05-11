@@ -26,8 +26,8 @@ const MovieMenu = () => {
         <MovieSort cls={movieMenuCss} />
         <GenreSearch cls={movieMenuCss} />
       </div>
-      <ShowWatched cls={movieMenuCss} />
       <GenreList cls={genreListCss} />
+      <ShowWatched cls={movieMenuCss} />
     </GenresContext.Provider>
   );
 };

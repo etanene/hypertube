@@ -9,6 +9,7 @@ body {
 }
 
 .Header {
+    width: 100%;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -23,21 +24,22 @@ body {
 
 .Nav-Logo, .Nav-Login, .Nav-Register {
     display: flex;
-    width: 10.5%
+    width: 10.5%;
+    outline: none;
 }
 
 .Nav-Logo {
-    margin-left: 1%;
+    margin: 0 2%;
+}
+
+.Nav-Login {
+    margin-right: 4%;
 }
 
 .Nav-Lang {
     display: flex;
     width: 5%;
     outline: none;
-}
-
-.NavList-NavItem2 {
-    width: 52%;
 }
 
 .Nav-Search {
@@ -79,6 +81,10 @@ body {
     text-align: center;
 }
 
+.Logo-Link::after {
+    content: "Hypertube";
+}
+
 .Lang {
     cursor: pointer;
 }
@@ -86,4 +92,78 @@ body {
 .Link {
     text-decoration: none;
     color: var(--white);
+}
+
+@media screen and (max-width: 720px) {
+
+    .Nav {
+        justify-content: center;
+    }
+
+    .Nav-Search {
+        width: 60%;
+        padding: 20px 10px;
+    }
+
+    .Search-Input {
+        font-size: var(--font-size-l);
+    }
+
+    .Logo-Link::after {
+        content: none;
+    }
+
+    .Nav-Lang {
+        width: 10%;
+    }
+
+    .Nav-Logo {
+        background-size: 60%;
+        background-image: url("/Logo.png");
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .Lang {
+        font-size: var(--font-size-l);
+    }
+
+    .Login-Link {
+        font-size: var(--font-size-l);
+    }
+
+    .Logo-Link {
+        width: 100%;
+        height: 100%;
+    }
+
+    .Login-Icon {
+        font-size: var(--font-size-xl);
+    }
+
+    .Nav-Register {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .Header {
+        position: static;
+    }
+    .Nav {
+        justify-content: space-between;
+        min-height: 60px;
+        height: 60px;
+    }
+    .Search-Input, .Lang {
+        font-size: var(--font-size-s);
+    }
+    .Nav-Search {
+        width: 50%;
+        padding: 10px 0;
+    }
+    .Search-Form {
+        height: 40px;
+        padding: 0 5px;
+    }
 }

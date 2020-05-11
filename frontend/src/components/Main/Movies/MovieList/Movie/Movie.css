@@ -55,3 +55,17 @@
     top: 5%;
     right: 0;
 }
+
+@media screen and (max-width: 420px) {
+    .Movie-Image {
+        width: 240px;
+        height: 360px;
+    }
+    .Overlay {
+        display: none;
+    }
+    .Movie-Title {
+        font-size: var(--font-size-m);
+        padding: 5px
+    }
+}

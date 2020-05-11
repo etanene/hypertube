@@ -10,3 +10,9 @@
 .GenreList-Item {
     margin: 1.4%;
 }
+
+@media screen and (max-width: 720px) {
+    .GenreList {
+        justify-content: center;
+    }
+}
