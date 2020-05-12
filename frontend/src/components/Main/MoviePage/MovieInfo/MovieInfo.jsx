@@ -8,8 +8,8 @@ import MovieCast from './MovieCast/MovieCast';
 const MovieInfo = ({ info, cls, movieTorrent }) => {
   const movieInfoCss = cn('MovieInfo');
   return (
-    <div className={cls('MovieInfo', [movieInfoCss])}>
-      <div>
+    <div className={cls('MovieInfo')}>
+      <div className={cls('PosterContainer')}>
         <MoviePoster
           cls={movieInfoCss}
           poster={movieTorrent ? movieTorrent.large_cover_image : info.Poster}

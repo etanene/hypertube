@@ -42,7 +42,7 @@
     "movieSuggestions": "Похожие фильмы:",
     "movieComments": {
       "leaveComment": "Поделитесь мнением о фильме",
-      "leaveCommentButton": "Добавить комментарий",
+      "leaveCommentButton": "Отправить",
       "comments": "Комментарии "
     }
   }

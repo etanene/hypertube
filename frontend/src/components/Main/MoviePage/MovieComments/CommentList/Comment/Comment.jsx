@@ -10,14 +10,14 @@ const Comment = ({ comment }) => {
   const date = moment.unix(comment.time).locale(i18n.language).format('D MMMM YYYY HH:mm');
   return (
     <div className={commentCss()}>
-      <div>
+      <div className={commentCss('Header')}>
         <img className={commentCss('Avatar')} src={comment.avatar} alt="user avatar" />
-      </div>
-      <div className={commentCss('Block')}>
-        <div className={commentCss('Info')}>
+        <div className={commentCss('UserInfo')}>
           <span className={commentCss('Username')}>{comment.username}</span>
           <span className={commentCss('Timestamp')}>{date}</span>
         </div>
+      </div>
+      <div className={commentCss('Block')}>
         <span className={commentCss('Text')}>{comment.comment}</span>
       </div>
     </div>

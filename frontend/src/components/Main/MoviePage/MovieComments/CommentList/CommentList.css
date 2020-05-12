@@ -2,3 +2,9 @@
     display: block;
     padding: 2% 0 5% 0;
  }
+
+@media screen and (max-width: 720px) {
+    .CommentList-CommentNumber {
+        font-size: var(--font-size-l);
+    }
+}

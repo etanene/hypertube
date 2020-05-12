@@ -8,3 +8,12 @@
     text-decoration: underline;
     font-size: var(--font-size-xl);
 }
+
+@media screen and (max-width: 720px) {
+    .MovieSuggestions {
+        padding: 20px 0;
+    }
+    .MovieSuggestions-Message {
+        font-size: var(--font-size-m);
+    }
+}

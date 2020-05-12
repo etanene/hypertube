@@ -32,10 +32,13 @@
     margin: auto;
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 500px) {
     .ShowGenre {
         min-width: 240px;
         height: 40px;
-        font-size: var(--font-size-m);
+        font-size: var(--font-size-s);
+    }
+    .ShowGenre-Icon {
+        margin-left: 50px;
     }
 }

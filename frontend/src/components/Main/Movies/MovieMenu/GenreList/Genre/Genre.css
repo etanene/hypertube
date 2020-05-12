@@ -16,3 +16,9 @@
     font-size: var(--font-size-xl);
     text-decoration: underline;
 }
+
+@media screen and (max-width: 500px) {
+    .Genre-Title {
+        font-size: var(--font-size-m);
+    }
+}

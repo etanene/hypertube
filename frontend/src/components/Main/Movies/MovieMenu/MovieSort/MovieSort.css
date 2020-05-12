@@ -32,11 +32,11 @@
     font-size: 40px;
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 500px) {
     .MovieSort {
         margin-top: 15px;
         width: 240px;
-        font-size: var(--font-size-m);
+        font-size: var(--font-size-s);
     }
     .MovieSort-Item {
         width: 240px;

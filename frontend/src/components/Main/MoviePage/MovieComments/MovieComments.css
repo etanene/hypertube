@@ -5,3 +5,15 @@
 .MovieComments-CommentList {
     margin: 5%;
 }
+
+@media screen and (max-width: 720px) {
+    .MovieComments {
+        margin: 40px;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .MovieComments {
+        margin: 10px;
+    }
+}
