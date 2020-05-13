@@ -1,0 +1,12 @@
+.Nav-Login {
+    display: flex;
+    width: 10%;
+    outline: none;
+    margin-right: 4%;
+}
+
+@media screen and (max-width: 720px) {
+    .Login-Icon {
+        font-size: var(--font-size-xl);
+    }
+}

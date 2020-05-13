@@ -41,4 +41,10 @@
     .ShowGenre-Icon {
         margin-left: 50px;
     }
+    .ShowGenre-Text {
+        margin: 10px auto auto;
+    }
+    .ShowGenre-RemoveGenreIcon {
+        font-size: 18px;
+    }
 }

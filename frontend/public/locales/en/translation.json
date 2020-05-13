@@ -2,13 +2,13 @@
   "header": {
     "login": "Login",
     "register": "Register",
-    "lang": "RU",
+    "lang": "EN",
     "search": "Movie search"
   },
   "main": {
     "menu": {
       "showWatched": "Show watched",
-      "genreSearch": "Genre search",
+      "genreSearch": "Choose genre",
       "movieSort": [
         {"type": "date_added", "name": "date_added"},
         {"type": "year", "name": "year"},

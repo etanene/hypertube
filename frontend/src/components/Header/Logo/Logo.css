@@ -1,0 +1,23 @@
+.Nav-Logo {
+    display: flex;
+    width: 10%;
+    outline: none;
+    margin: 0 2%;
+}
+
+.Logo-Link::after {
+    content: "Hypertube";
+}
+
+@media screen and (max-width: 720px) {
+    .Logo-Link::after {
+        content: none;
+    }
+
+    .Nav-Logo {
+        background-size: 60%;
+        background-image: url("/Logo.png");
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}

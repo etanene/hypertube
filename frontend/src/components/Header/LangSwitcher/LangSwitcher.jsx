@@ -1,6 +1,7 @@
 import React from 'react';
 import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
+import './LangSwitcher.css';
 
 const LangSwitcher = (props) => {
   const { cls } = props;

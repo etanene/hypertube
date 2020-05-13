@@ -2,6 +2,7 @@ import React from 'react';
 import { cn } from '@bem-react/classname';
 import { Link } from 'react-router-dom';
 import { animateScroll as scroll } from 'react-scroll';
+import './Logo.css';
 
 const Logo = (props) => {
   const { cls } = props;

@@ -2,6 +2,7 @@ import React from 'react';
 import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
 import useWindowDimensions from '../../../lib/useWindowDimensions';
+import './Login.css';
 
 const Login = (props) => {
   const { cls } = props;

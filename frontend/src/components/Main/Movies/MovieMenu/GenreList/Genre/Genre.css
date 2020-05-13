@@ -14,7 +14,6 @@
     margin: 5px auto 0;
     text-align: center;
     font-size: var(--font-size-xl);
-    text-decoration: underline;
 }
 
 @media screen and (max-width: 500px) {

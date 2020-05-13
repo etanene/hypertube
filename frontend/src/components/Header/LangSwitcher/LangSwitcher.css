@@ -1,0 +1,15 @@
+.Nav-Lang {
+    display: flex;
+    width: 10%;
+    outline: none;
+}
+
+.Lang {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 500px) {
+    .Lang {
+        font-size: var(--font-size-s);
+    }
+}
