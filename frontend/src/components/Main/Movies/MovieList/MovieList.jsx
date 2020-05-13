@@ -39,6 +39,7 @@ const MovieList = () => {
         ))}
         {isLoading && <li className={movieListCss('Message')}>{t('main.movieList.loading')}</li>}
         {error && <li className={movieListCss('Message')}>{t('main.movieList.error')}</li>}
+        {!isLoading && !error && !movies.length && <li className={movieListCss('Message')}>{t('main.movieList.notFound')}</li>}
       </ul>
     </div>
   );

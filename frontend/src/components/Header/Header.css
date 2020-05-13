@@ -28,6 +28,10 @@ body {
     text-align: center;
 }
 
+.Lang:hover, .Login-Link:hover, .Logo-Link:hover  {
+    color: #8e8e8e;
+}
+
 .Link {
     text-decoration: none;
     color: var(--white);

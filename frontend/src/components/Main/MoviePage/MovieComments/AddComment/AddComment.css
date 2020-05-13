@@ -42,18 +42,27 @@
     background-color: var(--light-grey);
 }
 
+.AddComment-Button:disabled {
+    color: var(--grey);
+    cursor: auto;
+    background-color: var(--dark-grey);
+}
+
 @media screen and (max-width: 720px) {
     .AddComment-Message {
         font-size: var(--font-size-m);
     }
+
     .AddComment-TextareaBox {
         display: flex;
         flex-direction: column;
     }
+
     .AddComment-Textarea {
         font-size: var(--font-size-m);
         height: 120px;
     }
+
     .AddComment-Button {
         height: 50px;
         margin: 15px auto 0;

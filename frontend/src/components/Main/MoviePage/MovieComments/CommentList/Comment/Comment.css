@@ -37,7 +37,9 @@
 .Comment-Avatar {
     margin-right: 20px;
     width: 75px;
+    min-width: 75px;
     height: 75px;
+    min-height: 75px;
     border-radius: 50%;
 }
 
@@ -56,6 +58,8 @@
     }
     .Comment-Avatar {
         width: 60px;
+        min-width: 60px;
+        min-height: 60px;
         height: 60px;
     }
     .Comment-Username {

@@ -2,9 +2,9 @@
     cursor: pointer;
     display: flex;
     outline: none;
-    min-width: 300px;
-    height: 60px;
-    font-size: var(--font-size-l);
+    min-width: 240px;
+    height: 50px;
+    font-size: var(--font-size-m);
     background-color: var(--grey);
 }
 
@@ -30,6 +30,10 @@
     display: flex;
     text-align: center;
     margin: auto;
+}
+
+.ShowGenre:hover {
+    color: #8e8e8e;
 }
 
 @media screen and (max-width: 500px) {

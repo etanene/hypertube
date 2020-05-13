@@ -2,8 +2,8 @@
     list-style: none;
     display: flex;
     flex-direction: column;
-    width: 300px;
-    font-size: var(--font-size-l);
+    width: 240px;
+    font-size: var(--font-size-m);
     background-color: var(--grey);
 }
 
@@ -15,8 +15,8 @@
 .MovieSort-Item {
     outline: none;
     cursor: pointer;
-    height: 60px;
-    width: 300px;
+    height: 50px;
+    width: 240px;
     display: flex;
     border-bottom: var(--dark-grey) 3px solid;
 }
@@ -30,6 +30,10 @@
     margin: auto;
     text-align: center;
     font-size: 40px;
+}
+
+.MovieSort-Item:hover {
+    color: #8e8e8e;
 }
 
 @media screen and (max-width: 500px) {

@@ -1,5 +1,5 @@
 .Nav-Search {
-    width: 51.5%;
+    width: 50%;
     height: 60px;
     padding: 10px;
 }
@@ -17,7 +17,7 @@
     border:none;
     color: var(--white);
     background-color: var(--grey);
-    font-size: var(--head-font-size);
+    font-size: var(--font-size-l);
 }
 
 .Search-Input::placeholder {
@@ -36,10 +36,6 @@
     .Nav-Search {
         width: 60%;
         padding: 20px 10px;
-    }
-
-    .Search-Input {
-        font-size: var(--font-size-l);
     }
 }
 
