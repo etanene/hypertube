@@ -2,7 +2,7 @@
   "header": {
     "login": "Войти",
     "register": "Регистрация",
-    "lang": "EN",
+    "lang": "RU",
     "search": "Поиск фильмов"
   },
   "main": {
@@ -34,6 +34,7 @@
       ]
     },
     "movieList": {
+      "notFound": "По вашему запросу ничего не найдено",
       "loading": "Загрузка...",
       "error": "Произошла ошибка. Пожалуйста, перезагрузите страницу"
     }
@@ -42,7 +43,7 @@
     "movieSuggestions": "Похожие фильмы:",
     "movieComments": {
       "leaveComment": "Поделитесь мнением о фильме",
-      "leaveCommentButton": "Добавить комментарий",
+      "leaveCommentButton": "Отправить",
       "comments": "Комментарии "
     }
   },

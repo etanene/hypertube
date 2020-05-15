@@ -3,6 +3,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
 import MovieSearchContext from '../../../context/movieSearchContext';
+import './SearchForm.css';
 
 const SearchForm = (props) => {
   const searchCss = cn('Search');

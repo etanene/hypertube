@@ -2,3 +2,18 @@
     height: 450px;
     width: 300px;
 }
+
+@media screen and (max-width: 720px) {
+    .MoviePoster {
+        height: 360px;
+        width: 240px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .MoviePoster {
+        margin: auto;
+        height: 360px;
+        width: 240px;
+    }
+}

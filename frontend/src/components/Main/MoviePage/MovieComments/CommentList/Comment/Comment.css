@@ -2,13 +2,28 @@
     width: 75%;
     display: flex;
     margin-bottom: 5%;
+    flex-direction: column;
+}
+
+.Comment-Header {
+    display: flex;
 }
 
 .Comment-Block {
+    padding: 10px;
     width: 100%;
 }
 
+.Comment-UserInfo {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
 .Comment-Username {
+    vertical-align: top;
+    max-width: 200px;
+    word-wrap: break-word;
     font-size: var(--font-size-l);
     margin-right: 100px;
 }
@@ -22,7 +37,9 @@
 .Comment-Avatar {
     margin-right: 20px;
     width: 75px;
+    min-width: 75px;
     height: 75px;
+    min-height: 75px;
     border-radius: 50%;
 }
 
@@ -31,5 +48,29 @@
 }
 
 .Comment-Timestamp {
+    vertical-align: top;
     font-size: var(--font-size-m);
+}
+
+@media screen and (max-width: 720px) {
+    .Comment {
+        width: 100%;
+    }
+    .Comment-Avatar {
+        width: 60px;
+        min-width: 60px;
+        min-height: 60px;
+        height: 60px;
+    }
+    .Comment-Username {
+        max-width: 150px;
+        margin-right: 20%;
+    }
+    .Comment-Timestamp {
+        margin-top: 5px;
+        font-size: 12px;
+    }
+    .Comment-Text {
+        line-height: 12px;
+    }
 }

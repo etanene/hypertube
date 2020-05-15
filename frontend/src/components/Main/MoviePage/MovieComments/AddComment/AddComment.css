@@ -9,22 +9,25 @@
     font-size: var(--font-size-l);
     border: none;
     outline: none;
-    width: 100%;
+    margin: auto;
+    width: 80%;
     height: 200px;
     min-height: 100px;
     resize: vertical;
 }
 
 .AddComment-TextareaBox {
+    display: flex;
+    flex-direction: column;
     margin: 25px 0;
-    padding: 5%;
+    padding: 20px 3%;
     background-color: black;
 }
 
 .AddComment-Button {
-    margin-top: 30px;
+    margin: 20px auto;
     cursor: pointer;
-    width: 300px;
+    width: 33%;
     outline: none;
     height: 60px;
     background-color: var(--white);
@@ -37,4 +40,41 @@
 
 .AddComment-Button:hover {
     background-color: var(--light-grey);
+}
+
+.AddComment-Button:disabled {
+    color: var(--grey);
+    cursor: auto;
+    background-color: var(--dark-grey);
+}
+
+@media screen and (max-width: 720px) {
+    .AddComment-Message {
+        font-size: var(--font-size-m);
+    }
+
+    .AddComment-TextareaBox {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .AddComment-Textarea {
+        font-size: var(--font-size-m);
+        height: 120px;
+    }
+
+    .AddComment-Button {
+        height: 50px;
+        margin: 15px auto 0;
+        font-size: var(--font-size-m);
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .AddComment-Button {
+        width: 120px;
+        height: 40px;
+        font-size: var(--font-size-s);
+    }
 }

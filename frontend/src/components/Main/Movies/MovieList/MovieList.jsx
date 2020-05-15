@@ -26,7 +26,7 @@ const MovieList = () => {
     if (node) observer.current.observe(node);
   }, [hasMore, setPageNumber]);
   return (
-    <div>
+    <div className={movieListCss('Container')}>
       <ul className={movieListCss()}>
         {movies.map((movie, index) => (
           <Movie
@@ -39,6 +39,7 @@ const MovieList = () => {
         ))}
         {isLoading && <li className={movieListCss('Message')}>{t('main.movieList.loading')}</li>}
         {error && <li className={movieListCss('Message')}>{t('main.movieList.error')}</li>}
+        {!isLoading && !error && !movies.length && <li className={movieListCss('Message')}>{t('main.movieList.notFound')}</li>}
       </ul>
     </div>
   );

@@ -13,7 +13,23 @@
 
 .MovieList-Item {
      cursor: pointer;
-     width: 300px;
+     width: 240px;
      margin: 2% 1%;
      background-color: var(--grey);
+}
+
+@media screen and (max-width: 720px) {
+    .MovieList {
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .MovieList-Item {
+        margin-top: 20px;
+        width: 240px;
+    }
+    .MovieList-Message {
+        font-size: var(--font-size-m);
+    }
 }

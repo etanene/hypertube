@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import './services/i18n';
 import App from './App';
+import './App.css';
 import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Suspense fallback="loading">
-        <App />
+        <App className="app" />
       </Suspense>
     </BrowserRouter>
   </React.StrictMode>,

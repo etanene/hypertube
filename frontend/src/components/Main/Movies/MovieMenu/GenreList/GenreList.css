@@ -10,3 +10,13 @@
 .GenreList-Item {
     margin: 1.4%;
 }
+
+.GenreList-Item:hover .Genre-Title {
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 720px) {
+    .GenreList {
+        justify-content: center;
+    }
+}

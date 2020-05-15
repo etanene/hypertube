@@ -39,7 +39,7 @@ const AddComment = ({ title, dispatch }) => {
           className={addCommentCss('Textarea')}
           name="comment"
         />
-        <button onClick={addComment} className={addCommentCss('Button')}>{t('movie.movieComments.leaveCommentButton')}</button>
+        <button disabled={comment === ''} onClick={addComment} className={addCommentCss('Button')}>{t('movie.movieComments.leaveCommentButton')}</button>
       </div>
     </div>
   );

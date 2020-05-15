@@ -16,3 +16,9 @@
     transform: rotate(270deg);
     margin: 0 33%;
 }
+
+@media screen and (max-width: 720px) {
+    .ScrollUp {
+        display:none;
+    }
+}

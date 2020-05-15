@@ -2,13 +2,13 @@
   "header": {
     "login": "Login",
     "register": "Register",
-    "lang": "RU",
+    "lang": "EN",
     "search": "Movie search"
   },
   "main": {
     "menu": {
       "showWatched": "Show watched",
-      "genreSearch": "Genre search",
+      "genreSearch": "Choose genre",
       "movieSort": [
         {"type": "date_added", "name": "date_added"},
         {"type": "year", "name": "year"},
@@ -34,6 +34,7 @@
       ]
     },
     "movieList": {
+      "notFound": "No results were found for your request",
       "loading": "Loading...",
       "error": "An error occurred. Please refresh the page"
     }
@@ -42,7 +43,7 @@
     "movieSuggestions": "Recommended movies:",
     "movieComments": {
       "leaveComment": "Leave a comment about",
-      "leaveCommentButton": "Add a comment",
+      "leaveCommentButton": "Add comment",
       "comments": "Comments "
     }
   },

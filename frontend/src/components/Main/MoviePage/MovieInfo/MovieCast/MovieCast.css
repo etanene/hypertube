@@ -6,7 +6,20 @@
     margin: 0;
 }
 
-.MovieCast-Genre {
+.MovieCast-Info {
     font-weight: lighter;
     font-size: var(--font-size-xl);
+}
+
+@media screen and (max-width: 720px) {
+    .MovieInfo-MovieCast {
+        margin-top: 30px;
+    }
+    .MovieCast-Info {
+        font-size: var(--font-size-m);
+    }
+    .MovieCast-Title {
+        text-align: center;
+        font-size: var(--font-size-l);
+    }
 }

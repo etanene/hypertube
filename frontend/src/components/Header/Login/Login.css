@@ -1,0 +1,85 @@
+.Nav-Login {
+    position:relative;
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+    outline: none;
+    margin-right: 4%;
+}
+
+.Login-Icon {
+    outline: none;
+    cursor: pointer;
+    margin: auto;
+    text-align: center;
+    font-size: 36px;
+}
+
+.Login-List {
+    padding: 0;
+    margin: 0;
+    background-color: black;
+    position: absolute;
+    width: 100%;
+    min-width: 110px;
+    top: 80px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+}
+
+.LoginList-Item {
+    outline: none;
+    cursor: pointer;
+    min-height: 50px;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    border-bottom: var(--dark-grey) 4px solid;
+}
+
+.LoginList-Item:hover {
+    color: #8e8e8e;
+}
+
+.LoginList-ItemTitle {
+    font-size: var(--font-size-l);
+    margin: auto;
+    text-align: center;
+}
+
+@media screen and (max-width: 720px) {
+    .Nav-Login {
+        position: static;
+    }
+    .Login-Icon {
+        font-size: 30px;
+    }
+    .Login-List {
+        right: 30px;
+        width: 100px;
+        min-width: 100px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .Nav-Login {
+        position: relative;
+    }
+    .Login-Icon {
+        font-size: 26px;
+    }
+    .Login-List {
+        top: 60px;
+        right: 0;
+    }
+    .LoginList-Item {
+        width: 100px;
+        height: 40px;
+        min-height: 40px;
+    }
+    .LoginList-ItemTitle {
+        font-size: var(--font-size-m);
+    }
+}

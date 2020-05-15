@@ -9,6 +9,7 @@ body {
 }
 
 .Header {
+    width: 100%;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -18,72 +19,47 @@ body {
 .Nav {
     display: flex;
     justify-content: space-between;
-    min-height: 100px;
+    min-height: 80px;
+    height: 80px;
 }
 
-.Nav-Logo, .Nav-Login, .Nav-Register {
-    display: flex;
-    width: 10.5%
-}
-
-.Nav-Logo {
-    margin-left: 1%;
-}
-
-.Nav-Lang {
-    display: flex;
-    width: 5%;
-    outline: none;
-}
-
-.NavList-NavItem2 {
-    width: 52%;
-}
-
-.Nav-Search {
-    width: 51.5%;
-    height: 60px;
-    padding: 20px;
-}
-
-.Search-Form {
-    background-color: var(--grey);
-    display: flex;
-    height: 60px;
-    padding: 0 20px;
-}
-
-.Search-Input {
-    outline: none;
-    width: 100%;
-    border:none;
-    color: var(--white);
-    background-color: var(--grey);
-    font-size: var(--head-font-size);
-}
-
-.Search-Input::placeholder {
-    color: var(--white);
-}
-
-.Search-Button {
-    cursor: pointer;
-    outline: none;
-    color: var(--white);
-    background: var(--grey);
-    border: none;
-}
-
-.Lang, .Login-Link, .Register-Link, .Logo-Link  {
+.Lang, .Login-Link, .Logo-Link  {
     margin: auto;
     text-align: center;
 }
 
-.Lang {
-    cursor: pointer;
+.Lang:hover, .Login-Icon:hover, .Logo-Link:hover  {
+    color: #8e8e8e;
 }
 
 .Link {
     text-decoration: none;
     color: var(--white);
+}
+
+@media screen and (max-width: 720px) {
+    .Nav {
+        justify-content: center;
+    }
+
+    .Login-Link {
+        font-size: var(--font-size-l);
+    }
+
+    .Logo-Link {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .Header {
+        position: static;
+    }
+
+    .Nav {
+        justify-content: space-between;
+        min-height: 60px;
+        height: 60px;
+    }
 }
