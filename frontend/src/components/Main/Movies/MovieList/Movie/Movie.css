@@ -56,7 +56,7 @@
     right: 0;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     .Movie-Title {
         font-size: var(--font-size-m);
         padding: 5px

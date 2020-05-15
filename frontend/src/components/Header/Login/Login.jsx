@@ -1,27 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { cn } from '@bem-react/classname';
-import { useTranslation } from 'react-i18next';
-import useWindowDimensions from '../../../lib/useWindowDimensions';
 import './Login.css';
 
 const Login = (props) => {
   const { cls } = props;
-  const linkCss = cn('Link');
   const loginCss = cn('Login');
-  const { t } = useTranslation();
-  const { width } = useWindowDimensions();
+  const listCss = cn('LoginList');
+  const [visible, setVisible] = useState(false);
+  const handleClickLogin = () => {
+    setVisible((prevState) => !prevState);
+  };
 
   return (
     <div className={cls}>
-      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-      <a href="#" className={loginCss('Link', [linkCss()])}>
-        {width > 720 ? t('header.login')
-          : (
-            <span className={loginCss('Icon', ['material-icons'])}>
-              person
-            </span>
-          )}
-      </a>
+      <span
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.code === 'KeyL') {
+            handleClickLogin();
+          }
+        }}
+        onClick={handleClickLogin}
+        className={loginCss('Icon', ['material-icons'])}
+      >
+        person
+      </span>
+      {visible
+      && (
+        <ul className={loginCss('List')}>
+          <li className={listCss('Item')}>
+            <span className={listCss('ItemTitle')}>Profile</span>
+          </li>
+          <li className={listCss('Item')}>
+            <span className={listCss('ItemTitle')}>Logout</span>
+          </li>
+        </ul>
+      )}
     </div>
   );
 };

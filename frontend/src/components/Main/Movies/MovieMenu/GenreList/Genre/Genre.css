@@ -16,7 +16,7 @@
     font-size: var(--font-size-xl);
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     .Genre-Title {
         font-size: var(--font-size-m);
     }

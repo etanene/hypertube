@@ -9,15 +9,21 @@
     content: "Hypertube";
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 800px) {
     .Logo-Link::after {
         content: none;
     }
 
     .Nav-Logo {
-        background-size: 60%;
+        background-size: 45%;
         background-image: url("/Logo.png");
         background-repeat: no-repeat;
         background-position: center;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .Nav-Logo {
+        background-size: 60%;
     }
 }
