@@ -1,57 +1,59 @@
 import React, { useEffect } from 'react';
 import { cn } from '@bem-react/classname';
+import { useTranslation } from 'react-i18next';
 // import { useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 
 import { useForm } from '../../hooks';
 import { apiService } from '../../services';
 import { REGEX } from '../../constants';
 
 import Input from '../common/Input';
+import NavLink from '../common/NavLink';
 import PhotoInput from '../common/PhotoInput';
 import Button from '../common/Button';
-import CloseButton from '../common/CloseButton';
 import './RegForm.css';
 
 const regFormCss = cn('reg-form');
 const inputCss = regFormCss('input');
 
-const formSchema = {
-  photo: {
-    message: 'Required field.',
-  },
-  username: {
-    // доступны: большие/маленькие буквы, цифры
-    // длина: 4 - 12
-    regex: REGEX.USERNAME,
-    message: 'You can use a-z, A-Z, 0-9. Length from 4 to 12.',
-  },
-  email: {
-    // доступны: любые символы
-    // обязательно: @ и точка
-    regex: REGEX.EMAIL,
-    message: 'Invalid email layout.',
-  },
-  first_name: {
-    message: 'Required field.',
-  },
-  last_name: {
-    message: 'Required field.',
-  },
-  password: {
-    // доступны: большие/маленькие буквы, цифры
-    // обязательно: большая и маленькая буква, цифра
-    // длина: 4 - 12
-    regex: REGEX.PASSWORD,
-    message: 'Password must contain upper and lower letter, number. Length from 4 to 12.',
-  },
-  confirm_password: {
-    message: 'Passwords do not match.',
-  },
-};
 
 const RegForm = React.memo((props) => {
   const { className } = props;
+  const { t } = useTranslation();
+
+  const formSchema = {
+    photo: {
+      message: t('regform.photo.error'),
+    },
+    username: {
+      // доступны: большие/маленькие буквы, цифры
+      // длина: 4 - 12
+      regex: REGEX.USERNAME,
+      message: t('regform.username.error'),
+    },
+    email: {
+      // доступны: любые символы
+      // обязательно: @ и точка
+      regex: REGEX.EMAIL,
+      message: t('regform.email.error'),
+    },
+    first_name: {
+      message: t('regform.firstname.error'),
+    },
+    last_name: {
+      message: t('regform.lastname.error'),
+    },
+    password: {
+      // доступны: большие/маленькие буквы, цифры
+      // обязательно: большая и маленькая буква, цифра
+      // длина: 4 - 12
+      regex: REGEX.PASSWORD,
+      message: t('regform.password.error'),
+    },
+    confirm_password: {
+      message: t('regform.confirmpassword.error'),
+    },
+  };
 
   const submitForm = async (data) => {
     await apiService.post('/api/auth/signup', data);
@@ -69,7 +71,7 @@ const RegForm = React.memo((props) => {
       name: 'email',
       value: state.email.value,
       field: 'email',
-      message: 'Email already exists!',
+      message: t('regform.email.errorexist'),
       error: state.email.error,
       exists: true,
     });
@@ -80,24 +82,27 @@ const RegForm = React.memo((props) => {
       name: 'username',
       value: state.username.value,
       field: 'login',
-      message: 'Login already exists!',
+      message: t('regform.username.errorexist'),
       error: state.username.error,
       exists: true,
     });
   }, [state.username.value, state.username.error, fetchUser]);
-  function close() {
-    return (<Redirect to="/" />);
-  }
   return (
     <div className={regFormCss('modal')}>
-      <CloseButton onClick={close} className={regFormCss('close-button')}> </CloseButton>
-      <form onSubmit={handleSubmit} className={regFormCss({}, [className])}>
-        <span className={regFormCss('form-name')}>Sign Up</span>
+      <form autoComplete="off" onSubmit={handleSubmit} className={regFormCss({}, [className])}>
+        <div className={regFormCss('links')}>
+          <NavLink to="/signup" className={regFormCss('link')}>
+            {t('regform.links.register')}
+          </NavLink>
+          <NavLink to="/login" className={regFormCss('link')}>
+            {t('regform.links.login')}
+          </NavLink>
+        </div>
         <PhotoInput name="photo" error={state.photo.error} onChange={handleChangeFile} className={regFormCss('photo')}> </PhotoInput>
         <Input
           type="text"
           name="username"
-          placeholder="Username"
+          placeholder={t('regform.username.placeholder')}
           value={state.username.value}
           error={state.username.error}
           onChange={handleChange}
@@ -108,7 +113,7 @@ const RegForm = React.memo((props) => {
         <Input
           type="text"
           name="email"
-          placeholder="Email"
+          placeholder={t('regform.email.placeholder')}
           value={state.email.value}
           error={state.email.error}
           onChange={handleChange}
@@ -119,7 +124,7 @@ const RegForm = React.memo((props) => {
         <Input
           type="text"
           name="first_name"
-          placeholder="First name"
+          placeholder={t('regform.firstname.placeholder')}
           value={state.first_name.value}
           error={state.first_name.error}
           onChange={handleChange}
@@ -130,7 +135,7 @@ const RegForm = React.memo((props) => {
         <Input
           type="text"
           name="last_name"
-          placeholder="Last name"
+          placeholder={t('regform.lastname.placeholder')}
           value={state.last_name.value}
           error={state.last_name.error}
           onChange={handleChange}
@@ -141,7 +146,7 @@ const RegForm = React.memo((props) => {
         <Input
           type="password"
           name="password"
-          placeholder="Password"
+          placeholder={t('regform.password.placeholder')}
           value={state.password.value}
           error={state.password.error}
           onChange={handleChange}
@@ -152,7 +157,7 @@ const RegForm = React.memo((props) => {
         <Input
           type="password"
           name="confirm_password"
-          placeholder="Confirm password"
+          placeholder={t('regform.confirmpassword.placeholder')}
           value={state.confirm_password.value}
           error={state.confirm_password.error}
           onChange={handleChange}
@@ -160,7 +165,7 @@ const RegForm = React.memo((props) => {
         >
           {state.confirm_password.message}
         </Input>
-        <Button type="submit" className={regFormCss('submit')}>Sign up</Button>
+        <Button type="submit" className={regFormCss('submit')}>{t('regform.button')}</Button>
       </form>
     </div>
   );

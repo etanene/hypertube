@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { cn } from '@bem-react/classname';
+import { useTranslation } from 'react-i18next';
 
 import CloseButton from '../CloseButton';
 import Icon from '../Icon';
@@ -17,6 +18,7 @@ function PhotoInput(props) {
   } = props;
 
   const [file, setFile] = useState();
+  const { t } = useTranslation();
 
 
   function handleChange(event) {
@@ -43,7 +45,7 @@ function PhotoInput(props) {
   ) : (
     <div className={photoInputCss('card')}>
       <Icon fill="grey" size="l" viewBox="0 0 315 315" icon={ICONS.ADD} />
-      <span>Add photo</span>
+      <span>{t('regform.photo.placeholder')}</span>
       <input id={photoInputCss('file-input')} type="file" name={name} onChange={handleChange} className={photoInputCss('input')} />
     </div>
   );

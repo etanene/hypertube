@@ -2,17 +2,29 @@
 
 .reg-form-modal {
   display: flex;
-  flex-direction: column;
-  max-width: 300px;
-  max-height: 500px;
-  position: absolute;
-  border: 1px solid gray;
-  box-sizing: border-box;
-  background-color: #fefefe;
-  left: 0;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
+  right: 0;
+  left: 0;
+  bottom: 0;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.7);
+  /* z-index: '9999'; */
+  opacity: 1;
+}
+
+.reg-form {
+  width: 500px;
+  /* height: 100%; */
+  max-height: 560px;
+  display: flex;
+  flex-direction: column;
+  margin: 100px;
+  padding: 30px;
+  /* box-sizing: border-box; */
+  background-color: var(--grey);;
 }
 
 /* элементы */
@@ -29,4 +41,13 @@
 .reg-form-close-button {
   position: absolute;
   left: 90%;
+}
+
+.reg-form-photo {
+  margin: 5px auto;
+}
+
+.reg-form-links {
+  display: flex;
+  justify-content: space-between;
 }

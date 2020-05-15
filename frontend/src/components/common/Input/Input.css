@@ -7,17 +7,20 @@
 
 /* элементы */
 .input-input-tag {
+  outline: none;
   width: 100%;
-  border: 1px solid #dddddd;
-  border-radius: 8px;
+  border:none;
+  color: var(--white);
+  background-color: var(--dark-grey);
   box-sizing: border-box;
   padding: 5px;
 }
 .input-input-tag::placeholder {
-  color:#bbbbbb;;
+  color: var(--white);
 }
+
 .input-message {
-  font-size: 15px;
+  font-size: 12px;
   color: #ff6666;
 }
 

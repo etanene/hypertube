@@ -45,5 +45,43 @@
       "leaveCommentButton": "Добавить комментарий",
       "comments": "Комментарии "
     }
+  },
+  "regform": {
+    "photo": {
+      "placeholder": "Добавить фото",
+      "error": "Обязательно к заполнению."
+    },
+    "title": "Регистрация",
+    "username":  {
+      "placeholder": "Имя пользователя",
+      "error": "Используйте a-z, A-Z, 0-9. Длинна от 4 до 12 символов.",
+      "errorexist": "Такой логин уже есть!"
+    },
+    "email":  {
+      "placeholder": "Email",
+      "error": "Непрвильно указан Email",
+      "errorexist": "Такой Email уже есть!"
+    },
+    "firstname":  {
+      "placeholder": "Имя",
+      "error": "Обязательно к заполнению."
+    },
+    "lastname":  {
+      "placeholder": "Фамилия",
+      "error": "Обязательно к заполнению."
+    },
+    "password":  {
+      "placeholder": "Пароль",
+      "error": "Пароль должен содержать заглавную букву, строчну и цифру. Длинна от 4 до 12 символов."
+    },
+    "confirmpassword": {
+      "placeholder": "Подтверждение пароля",
+      "error": "Пароли не совпадают."
+    },
+    "button": "Зарегистрироваться",
+    "links": {
+      "register": "Регистрация",
+      "login": "Войти"
+    }
   }
 }

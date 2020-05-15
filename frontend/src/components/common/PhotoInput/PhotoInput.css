@@ -1,9 +1,9 @@
 @import url('../../../App.css');
 
 .photo-input {
-  width: 180px;
-  background-color: #6b6b6b;
-  border: 1px solid #dddddd;
+  width: 130px;
+  background-color: var(--dark-grey);
+  border: 1px solid var(--dark-grey);
   color: #bbbbbb;
   font-size: 24px;
   cursor: pointer;
@@ -30,6 +30,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 .photo-input-photo {
   width: 100%;

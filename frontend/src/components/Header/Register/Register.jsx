@@ -11,7 +11,7 @@ const Register = (props) => {
   return (
     <div className={cls}>
       {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-      <a href="#" className={registerCss('Link', [linkCss()])}>
+      <a href="/signup" className={registerCss('Link', [linkCss()])}>
         {t('header.register')}
       </a>
     </div>

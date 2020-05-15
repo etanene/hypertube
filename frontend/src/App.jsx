@@ -1,5 +1,5 @@
 import React, { useReducer, useState } from 'react';
-import { Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import MovieSearchContext from './context/movieSearchContext';
 import Header from './components/Header/Header';
 import Movies from './components/Main/Movies/Movies';
@@ -16,13 +16,15 @@ const App = () => {
       value={{ movies, dispatch }}
     >
       <Header />
-      <Route path="/movie/:imdbId/:ytsId" component={MoviePage} />
-      <Route path="/" exact>
-        <Movies queryOptions={queryOptions} setMovies={setMovies} />
-      </Route>
-      <Route path="/signup">
-        <RegForm />
-      </Route>
+      <Switch>
+        <Route path="/movie/:imdbId/:ytsId" component={MoviePage} />
+        <Route path="/">
+          <Movies queryOptions={queryOptions} setMovies={setMovies} />
+          <Route path="/signup">
+            <RegForm />
+          </Route>
+        </Route>
+      </Switch>
     </MovieSearchContext.Provider>
   );
 };
