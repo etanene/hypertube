@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { cn } from '@bem-react/classname';
 import './MovieSort.css';
 import MovieSearchContext from '../../../../../context/movieSearchContext';
+import MoviesContext from '../../../../../context/moviesContext';
 
 const MovieSort = (props) => {
   const { cls } = props;
@@ -13,6 +14,7 @@ const MovieSort = (props) => {
   const [sortByIndex, setSortByIndex] = useState(0);
   const [visible, setVisible] = useState(false);
   const { dispatch } = useContext(MovieSearchContext);
+  const { setPageNumber } = useContext(MoviesContext);
 
   const handleShowList = () => {
     setVisible((prevVisible) => !prevVisible);
@@ -47,12 +49,14 @@ const MovieSort = (props) => {
               className={movieSortCss('Item')}
               onClick={() => {
                 setSortByIndex(index);
+                setPageNumber(1);
                 dispatch({ type: 'ADD_QUERY', query: { sort_by: sortByParam.type } });
                 setVisible(false);
               }}
               onKeyDown={(e) => {
                 if (e.code === 'KeyT') {
                   setSortByIndex(index);
+                  setPageNumber(1);
                   dispatch({ type: 'ADD_QUERY', query: { sort_by: sortByParam.type } });
                   setVisible(false);
                 }
