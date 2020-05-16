@@ -2,28 +2,28 @@ import React from 'react';
 import { cn } from '@bem-react/classname';
 import './MovieCast.css';
 
-const MovieCast = ({ info, cls }) => {
+const MovieCast = ({ OMDBInfo, YTSInfo, cls }) => {
   const movieCastCss = cn('MovieCast');
   const isAvailable = (param) => param !== 'N/A';
   return (
     <div className={cls('MovieCast', ['MovieCast'])}>
       <h2 className={movieCastCss('Title')}>
-        {`${info.Title} (${info.Year})`}
+        {YTSInfo.title_long}
       </h2>
       <h4 className={movieCastCss('Info')}>
-        {info.Genre}
+        {OMDBInfo.Genre}
       </h4>
       <h4 className={movieCastCss('Info')}>
-        {`Director: ${info.Director}`}
+        {`Director: ${OMDBInfo.Director}`}
       </h4>
       <h4 className={movieCastCss('Info')}>
-        {`Main cast: ${info.Actors}`}
+        {`Main cast: ${OMDBInfo.Actors}`}
       </h4>
       <h4 className={movieCastCss('Info')}>
-        {isAvailable(info.Plot) && info.Plot}
+        {isAvailable(OMDBInfo.Plot) && OMDBInfo.Plot}
       </h4>
       <h4 className={movieCastCss('Info')}>
-        {isAvailable(info.Runtime) && info.Runtime}
+        {isAvailable(OMDBInfo.Runtime) && OMDBInfo.Runtime}
       </h4>
     </div>
   );
