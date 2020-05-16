@@ -20,9 +20,10 @@
 }
 
 .ShowGenre-RemoveGenreIcon {
+    outline: none;
     margin: auto;
     text-align: center;
-    font-size: 24px;
+    font-size: 22px;
     padding-left: 5px;
 }
 
