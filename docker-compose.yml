@@ -3,12 +3,6 @@ version: '3'
 services:
   backend:
     build: ./backend
-    environment:
-      - PGUSER=hypertube
-      - PGHOST=postgres
-      - PGPASSWORD=Hypertube12345
-      - PGDATABASE=hypertubedb
-      - PGPORT=5432
     ports:
       - '8000:8000'
     volumes:
@@ -32,7 +26,7 @@ services:
     image: postgres:12.2
     environment:
       - POSTGRES_USER=hypertube
-      - POSTGRES_PASSWORD=Hypertube12345
+      - POSTGRES_PASSWORD=root
       - POSTGRES_DB=hypertubedb
       - PGDATA=/var/lib/postgresql/data/pgdata
     ports:
