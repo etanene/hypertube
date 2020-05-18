@@ -11,15 +11,17 @@
     font-size: var(--font-size-xl);
 }
 
-@media screen and (max-width: 720px) {
-    .MovieInfo-MovieCast {
-        margin-top: 30px;
-    }
+@media screen and (max-width: 800px) {
     .MovieCast-Info {
         font-size: var(--font-size-m);
     }
     .MovieCast-Title {
         text-align: center;
         font-size: var(--font-size-l);
+    }
+}
+@media screen and (max-width: 600px) {
+    .MovieInfo-MovieCast {
+        margin-top: 30px;
     }
 }

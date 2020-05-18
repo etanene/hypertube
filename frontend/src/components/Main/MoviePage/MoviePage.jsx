@@ -8,6 +8,7 @@ import useGetMovieSuggestions from '../../../services/useGetMovieSuggestions';
 import MovieSuggestions from './MovieSuggestions/MovieSuggestions';
 import MovieComments from './MovieComments/MovieComments';
 import useGetMovieTorrents from '../../../services/useGetMovieTorrents';
+import MovieVideo from './MovieVideo/MovieVideo';
 
 const MoviePage = () => {
   const { imdbId, ytsId } = useParams();
@@ -25,6 +26,7 @@ const MoviePage = () => {
       {errorSuggestions && <div>Error suggestions</div>}
       {isError && <div>An error occurred. Please refresh the page</div>}
       {isReady && <MovieInfo cls={moviePageCss} OMDBInfo={OMDBInfo} YTSInfo={YTSInfo} />}
+      {isReady && <MovieVideo cls={moviePageCss} YTSInfo={YTSInfo} />}
       {isReady && <MovieSuggestions movies={movieSuggestions} />}
       {isReady && <MovieComments title={OMDBInfo.Title} />}
     </div>
