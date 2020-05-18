@@ -1,4 +1,4 @@
-import db from '../db';
+const db = require('../db');
 
 async function getComments(params) {
   const comments = await db.Comment.findAll({

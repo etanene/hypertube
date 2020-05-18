@@ -1,6 +1,6 @@
-import { CustomError } from '../errors';
+const { CustomError } = require('../errors');
 
-import commentService from '../services/comment';
+const commentService = require('../services/comment');
 
 async function getComments(req, res) {
   try {
