@@ -1,0 +1,11 @@
+.MoviePage-Trailer {
+    margin: 3% 11%;
+    display: flex;
+    justify-content: space-around;
+}
+
+@media screen and (max-width: 720px) {
+    .MoviePage-Trailer {
+        margin: 20px;
+    }
+}

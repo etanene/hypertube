@@ -15,8 +15,12 @@ export default function useMovieSearch(queryOptions, pageNumber) {
     dispatch({ type: 'REMOVE_MOVIES' });
   }, [queryOptions]);
 
-  // eslint-disable-next-line max-len
-  const checkHasMore = (data) => data.movie_count > data.limit * (data.page_number - 1) + data.movies.length;
+  const checkHasMore = (data) => {
+    if (data.movies.length < data.limit) {
+      return false;
+    }
+    return data.movie_count > data.limit * (data.page_number - 1) + data.movies.length;
+  };
 
   useEffect(() => {
     async function searchMovies() {

@@ -4,8 +4,8 @@ const request = require('superagent');
 
 export default function useGetMovieInfo(movieID) {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [movieInfo, setMovieInfo] = useState(null);
+  const [errorOMDB, setErrorOMDB] = useState(false);
+  const [OMDBInfo, setOMDBInfo] = useState(null);
   const OMDB_API_KEY = '69855aa7';
   const url = 'http://www.omdbapi.com/';
 
@@ -13,20 +13,20 @@ export default function useGetMovieInfo(movieID) {
     async function getMovieInfo() {
       try {
         setIsLoading(true);
-        setError(false);
+        setErrorOMDB(false);
         const response = await request.get(url).query({ i: movieID, apikey: OMDB_API_KEY, plot: 'full' });
-        console.log(response);
+        console.log('RESPONSE OMDB', response);
         if (!response.body.Error) {
           const data = response.body;
-          setMovieInfo(data);
+          setOMDBInfo(data);
           setIsLoading(false);
         } else {
           setIsLoading(false);
-          setError(response.body.Error);
+          setErrorOMDB(response.body.Error);
         }
       } catch (e) {
         setIsLoading(false);
-        setError(true);
+        setErrorOMDB(true);
         console.log(e);
       }
     }
@@ -34,7 +34,7 @@ export default function useGetMovieInfo(movieID) {
   }, [movieID]);
   return {
     isLoading,
-    error,
-    movieInfo,
+    errorOMDB,
+    OMDBInfo,
   };
 }
