@@ -41,6 +41,9 @@
   },
   "movie": {
     "movieSuggestions": "Recommended movies:",
+    "moviePlayer": {
+      "params": ["Trailer", "Movie"]
+    },
     "movieComments": {
       "leaveComment": "Leave a comment about",
       "leaveCommentButton": "Add comment",

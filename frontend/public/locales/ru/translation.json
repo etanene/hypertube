@@ -41,6 +41,9 @@
   },
   "movie": {
     "movieSuggestions": "Похожие фильмы:",
+    "moviePlayer": {
+      "params": ["Трейлер", "Фильм"]
+    },
     "movieComments": {
       "leaveComment": "Поделитесь мнением о фильме",
       "leaveCommentButton": "Отправить",
