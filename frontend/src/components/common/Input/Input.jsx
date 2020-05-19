@@ -28,6 +28,7 @@ function Input(props) {
         className={inputCss('input-tag', { size, error })}
         onChange={onChange}
       />
+      { !error && <span className={inputCss('message')}> </span> }
       { error && <span className={inputCss('message')}>{children}</span> }
     </div>
   );

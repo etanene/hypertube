@@ -11,8 +11,8 @@
   bottom: 0;
   padding: 1rem;
   background-color: rgba(0, 0, 0, 0.7);
-  /* z-index: '9999'; */
   opacity: 1;
+  z-index: 2000;
 }
 
 .reg-form {
@@ -21,10 +21,10 @@
   max-height: 560px;
   display: flex;
   flex-direction: column;
-  margin: 100px;
   padding: 30px;
   /* box-sizing: border-box; */
-  background-color: var(--grey);;
+  background-color: var(--grey);
+  border-radius: 3px;
 }
 
 /* элементы */
@@ -36,18 +36,25 @@
 }
 .reg-form-submit {
   margin: 5px 0;
-}
-
-.reg-form-close-button {
-  position: absolute;
-  left: 90%;
+  width: 150px;
 }
 
 .reg-form-photo {
-  margin: 5px auto;
+  margin: 15px auto;
 }
 
 .reg-form-links {
   display: flex;
   justify-content: space-between;
+  font-size: var(--font-size-m);
+}
+
+.reg-form-loginandlang {
+  display: flex;
+  flex-direction: row;
+}
+
+.reg-form-lang {
+  margin-right: 10px;
+  font-size: var(--font-size-m);
 }

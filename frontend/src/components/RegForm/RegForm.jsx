@@ -11,6 +11,7 @@ import Input from '../common/Input';
 import NavLink from '../common/NavLink';
 import PhotoInput from '../common/PhotoInput';
 import Button from '../common/Button';
+import LangSwitcher from '../Header/LangSwitcher/LangSwitcher';
 import './RegForm.css';
 
 const regFormCss = cn('reg-form');
@@ -94,9 +95,12 @@ const RegForm = React.memo((props) => {
           <NavLink to="/signup" className={regFormCss('link')}>
             {t('regform.links.register')}
           </NavLink>
-          <NavLink to="/login" className={regFormCss('link')}>
-            {t('regform.links.login')}
-          </NavLink>
+          <div className={regFormCss('loginandlang')}>
+            <LangSwitcher cls={regFormCss('lang')} />
+            <NavLink to="/login" className={regFormCss('link')}>
+              {t('regform.links.login')}
+            </NavLink>
+          </div>
         </div>
         <PhotoInput name="photo" error={state.photo.error} onChange={handleChangeFile} className={regFormCss('photo')}> </PhotoInput>
         <Input

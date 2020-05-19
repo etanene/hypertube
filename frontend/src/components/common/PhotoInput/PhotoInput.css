@@ -1,17 +1,17 @@
 @import url('../../../App.css');
 
 .photo-input {
-  width: 130px;
+  width: 80px;
   background-color: var(--dark-grey);
   border: 1px solid var(--dark-grey);
-  color: #bbbbbb;
-  font-size: 24px;
+  color: var(--white);
+  font-size: var(--font-size-s);
   cursor: pointer;
 }
 
 /* цвет карточки */
 .photo-input_error {
-  border: 1px solid #ff6666;
+  border: 1px solid var(--red);
 }
 
 /* элементы */
