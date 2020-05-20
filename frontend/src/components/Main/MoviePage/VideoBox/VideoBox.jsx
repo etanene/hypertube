@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import './VideoBox.css';
 import { cn } from '@bem-react/classname';
 import MovieTrailer from './MovieTrailer/MovieTrailer';
+import MovieVideo from './MovieVideo/MovieVideo';
 
 const VideoBox = ({ cls }) => {
   const movieVideoCss = cn('VideoBox');
@@ -44,6 +45,7 @@ const VideoBox = ({ cls }) => {
         </div>
       </div>
       <MovieTrailer hidden={playerParam !== playerParams[0]} cls={movieVideoCss} />
+      <MovieVideo hidden={playerParam !== playerParams[1]} cls={movieVideoCss} />
     </div>
   );
 };

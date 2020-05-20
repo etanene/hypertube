@@ -1,0 +1,13 @@
+.VideoBox-Movie {
+    display: flex;
+    justify-content: space-around;
+}
+
+.VideoBox-Movie_hidden {
+    display: none;
+}
+
+.VideoBox-Video {
+    outline: none;
+    cursor: pointer;
+}
