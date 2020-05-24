@@ -20,13 +20,15 @@ const MoviePage = () => {
   const { errorYTS, YTSInfo } = useGetMovieTorrents(ytsId);
   const isReady = OMDBInfo && YTSInfo && movieSuggestions.length > 0;
   const isError = errorOMDB || errorYTS;
+
+  console.log('info', OMDBInfo);
   return (
     <div>
       {errorSuggestions && <div>Error suggestions</div>}
       {isError && <div>An error occurred. Please refresh the page</div>}
       {isReady && <MovieInfo cls={moviePageCss} OMDBInfo={OMDBInfo} YTSInfo={YTSInfo} />}
       {isReady && <MovieSuggestions movies={movieSuggestions} />}
-      {isReady && <MovieComments title={OMDBInfo.Title} />}
+      {isReady && <MovieComments title={OMDBInfo.Title} imdbID={OMDBInfo.imdbID} />}
     </div>
   );
 };

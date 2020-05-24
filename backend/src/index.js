@@ -4,7 +4,7 @@ const cors = require('cors');
 const session = require('express-session');
 const path = require('path');
 
-const db = require('./db');
+const db = require('./models');
 const router = require('./routes');
 
 const app = express();

@@ -1,46 +1,39 @@
-const Sequelize = require('sequelize');
-
-module.exports = (sequelize) => {
-  class User extends Sequelize.Model {}
-  User.init({
-    userId: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define('users', {
     email: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
     username: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
     firstName: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     lastName: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     password: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     photo: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     uuid: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
-  }, {
-    sequelize,
-    modelName: 'users',
-  });
+  }, {});
+
+  User.associate = (models) => {
+    User.hasMany(models.comments, { foreignKey: 'userId' });
+  };
 
   return User;
 };

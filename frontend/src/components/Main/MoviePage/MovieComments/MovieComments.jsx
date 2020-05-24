@@ -1,22 +1,33 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import { cn } from '@bem-react/classname';
+import superagent from 'superagent';
 import CommentList from './CommentList/CommentList';
 import AddComment from './AddComment/AddComment';
-import commentsReducer from '../../../../reducers/comments';
+import commentsReducer, { setComments } from '../../../../reducers/comments';
 import './MovieComments.css';
 
-const MovieComments = ({ title }) => {
-  const comment = {
-    username: 'Max',
-    time: '1588843759',
-    comment: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."',
-    avatar: '/image.png',
-  };
+const MovieComments = ({ title, imdbID }) => {
   const movieCommentsCss = cn('MovieComments');
-  const [comments, dispatch] = useReducer(commentsReducer, [comment]);
+  const [comments, dispatch] = useReducer(commentsReducer, []);
+
+  useEffect(() => {
+    async function getComments() {
+      const response = await superagent.get('/api/comment').query({ movieId: imdbID });
+      console.log('response', response);
+      const newComments = response.body.map((item) => ({
+        username: item.user.username,
+        avatar: `/api/public/photo/${item.user.photo}`,
+        comment: item.text,
+        time: new Date(item.createdAt),
+      }));
+      dispatch(setComments(newComments));
+    }
+    getComments();
+  }, []);
+
   return (
     <div className={movieCommentsCss()}>
-      <AddComment title={title} dispatch={dispatch} />
+      <AddComment title={title} dispatch={dispatch} imdbID={imdbID} />
       <CommentList comments={comments} cls={movieCommentsCss} />
     </div>
   );
