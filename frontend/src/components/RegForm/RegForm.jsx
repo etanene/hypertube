@@ -25,37 +25,40 @@ const RegForm = React.memo((props) => {
   const formSchema = {
     photo: {
       message: t('regform.photo.error'),
+      validate: (value) => value === '',
     },
     username: {
       // доступны: большие/маленькие буквы, цифры
       // длина: 4 - 12
-      regex: REGEX.USERNAME,
       message: t('regform.username.error'),
+      validate: (value) => !(REGEX.USERNAME.test(value)),
     },
     email: {
       // доступны: любые символы
       // обязательно: @ и точка
-      regex: REGEX.EMAIL,
       message: t('regform.email.error'),
+      validate: (value) => !REGEX.EMAIL.test(value),
     },
     first_name: {
       message: t('regform.firstname.error'),
+      validate: (value) => value === '',
     },
     last_name: {
       message: t('regform.lastname.error'),
+      validate: (value) => value === '',
     },
     password: {
       // доступны: большие/маленькие буквы, цифры
       // обязательно: большая и маленькая буква, цифра
       // длина: 4 - 12
-      regex: REGEX.PASSWORD,
       message: t('regform.password.error'),
+      validate: (value) => (!REGEX.PASSWORD.test(value)),
     },
     confirm_password: {
       message: t('regform.confirmpassword.error'),
+      validate: (value, userObj) => (value !== userObj.password.value),
     },
   };
-
   const submitForm = async (data) => {
     await apiService.post('/api/auth/signup', data);
   };

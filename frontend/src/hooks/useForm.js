@@ -4,14 +4,6 @@ import { apiService } from '../services';
 
 const useForm = (formSchema, submit) => {
   const [state, setState] = useState(formSchema);
-  console.log('state', state);
-
-  const validateField = (name, value) => {
-    if (name === 'confirm_password') {
-      return (value !== state.password.value);
-    }
-    return ((formSchema[name].regex && !formSchema[name].regex.test(value)) || value === '');
-  };
 
   const validateForm = () => {
     const names = Object.keys(state);
@@ -37,7 +29,7 @@ const useForm = (formSchema, submit) => {
       ...prevState,
       [name]: {
         ...prevState[name],
-        error: validateField(name, value),
+        error: formSchema[name].validate(value, prevState),
         message: formSchema[name].message,
         value,
         name,
