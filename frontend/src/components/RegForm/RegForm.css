@@ -9,7 +9,8 @@
   right: 0;
   left: 0;
   bottom: 0;
-  padding: 1rem;
+  padding: 10px;
+  overflow-y: auto;
   background-color: rgba(0, 0, 0, 0.7);
   opacity: 1;
   z-index: 2000;
@@ -17,12 +18,10 @@
 
 .reg-form {
   width: 500px;
-  /* height: 100%; */
   max-height: 560px;
   display: flex;
   flex-direction: column;
   padding: 30px;
-  /* box-sizing: border-box; */
   background-color: var(--grey);
   border-radius: 3px;
 }
@@ -49,7 +48,7 @@
   font-size: var(--font-size-m);
 }
 
-.reg-form-loginandlang {
+.reg-form-controls {
   display: flex;
   flex-direction: row;
 }
@@ -57,4 +56,13 @@
 .reg-form-lang {
   margin-right: 10px;
   font-size: var(--font-size-m);
+}
+
+.reg-form-link {
+  text-decoration: none;
+  color: var(--white);
+}
+
+.reg-form-link-selected {
+  text-decoration: underline;
 }

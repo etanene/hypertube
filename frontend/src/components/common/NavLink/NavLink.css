@@ -1,8 +1,0 @@
-.nav-link {
-  text-decoration: none;
-  color: var(--white);
-}
-
-.nav-link_cls_active {
-  text-decoration: underline;
-}

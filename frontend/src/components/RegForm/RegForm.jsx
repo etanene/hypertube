@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
+import { NavLink } from 'react-router-dom';
 // import { useSelector } from 'react-redux';
 
 import { useForm } from '../../hooks';
@@ -8,7 +9,6 @@ import { apiService } from '../../services';
 import { REGEX } from '../../constants';
 
 import Input from '../common/Input';
-import NavLink from '../common/NavLink';
 import PhotoInput from '../common/PhotoInput';
 import Button from '../common/Button';
 import LangSwitcher from '../Header/LangSwitcher/LangSwitcher';
@@ -61,7 +61,6 @@ const RegForm = React.memo((props) => {
   };
   const {
     state,
-    handleChangeFile,
     handleChange,
     handleSubmit,
     fetchUser,
@@ -92,17 +91,17 @@ const RegForm = React.memo((props) => {
     <div className={regFormCss('modal')}>
       <form autoComplete="off" onSubmit={handleSubmit} className={regFormCss({}, [className])}>
         <div className={regFormCss('links')}>
-          <NavLink to="/signup" className={regFormCss('link')}>
+          <NavLink to="/signup" className={regFormCss('link')} activeClassName={regFormCss('link-selected')}>
             {t('regform.links.register')}
           </NavLink>
-          <div className={regFormCss('loginandlang')}>
+          <div className={regFormCss('controls')}>
             <LangSwitcher cls={regFormCss('lang')} />
-            <NavLink to="/login" className={regFormCss('link')}>
+            <NavLink to="/login" className={regFormCss('link')} activeClassName={regFormCss('link-selected')}>
               {t('regform.links.login')}
             </NavLink>
           </div>
         </div>
-        <PhotoInput name="photo" error={state.photo.error} onChange={handleChangeFile} className={regFormCss('photo')}> </PhotoInput>
+        <PhotoInput name="photo" error={state.photo.error} onChange={handleChange} className={regFormCss('photo')}> </PhotoInput>
         <Input
           type="text"
           name="username"

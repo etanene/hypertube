@@ -4,6 +4,7 @@ import { apiService } from '../services';
 
 const useForm = (formSchema, submit) => {
   const [state, setState] = useState(formSchema);
+  console.log('state', state);
 
   const validateField = (name, value) => {
     if (name === 'confirm_password') {
@@ -31,11 +32,7 @@ const useForm = (formSchema, submit) => {
     return (result);
   };
 
-  const handleChange = (event) => {
-    event.persist();
-
-    const { name, value } = event.target;
-
+  const handleChange = (name, value) => {
     setState((prevState) => ({
       ...prevState,
       [name]: {
@@ -43,18 +40,7 @@ const useForm = (formSchema, submit) => {
         error: validateField(name, value),
         message: formSchema[name].message,
         value,
-      },
-    }));
-  };
-
-  const handleChangeFile = (name, value) => {
-    setState((prevState) => ({
-      ...prevState,
-      [name]: {
-        ...prevState[name],
-        error: validateField(name, value),
-        message: formSchema[name].message,
-        value,
+        name,
       },
     }));
   };
@@ -62,17 +48,15 @@ const useForm = (formSchema, submit) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const data = Object.values(event.target).reduce((obj, current) => {
+    const data = Object.values(state).reduce((obj, current) => {
       let mergeObj = {};
 
-      if (current.nodeName === 'INPUT' && current.name !== 'photo') {
-        mergeObj = { [current.name]: current.value };
-      }
-      if (current.nodeName === 'INPUT' && current.name === 'photo') {
-        mergeObj = { [current.name]: current.src };
-      }
+      mergeObj = { [current.name]: current.value };
+
       return (Object.assign(obj, mergeObj));
     }, {});
+
+    console.log('data', data);
 
     if (validateForm()) {
       try {
@@ -107,7 +91,6 @@ const useForm = (formSchema, submit) => {
 
   return {
     state,
-    handleChangeFile,
     handleChange,
     handleSubmit,
     fetchUser,
