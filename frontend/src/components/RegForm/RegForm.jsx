@@ -17,48 +17,41 @@ import './RegForm.css';
 const regFormCss = cn('reg-form');
 const inputCss = regFormCss('input');
 
+const formSchema = {
+  photo: {
+    validate: (value) => value === '',
+  },
+  username: {
+    // доступны: большие/маленькие буквы, цифры
+    // длина: 4 - 12
+    validate: (value) => !(REGEX.USERNAME.test(value)),
+  },
+  email: {
+    // доступны: любые символы
+    // обязательно: @ и точка
+    validate: (value) => !REGEX.EMAIL.test(value),
+  },
+  first_name: {
+    validate: (value) => value === '',
+  },
+  last_name: {
+    validate: (value) => value === '',
+  },
+  password: {
+    // доступны: большие/маленькие буквы, цифры
+    // обязательно: большая и маленькая буква, цифра
+    // длина: 4 - 12
+    validate: (value) => (!REGEX.PASSWORD.test(value)),
+  },
+  confirm_password: {
+    validate: (value, userObj) => (value !== userObj.password.value),
+  },
+};
 
 const RegForm = React.memo((props) => {
   const { className } = props;
   const { t } = useTranslation();
 
-  const formSchema = {
-    photo: {
-      message: t('regform.photo.error'),
-      validate: (value) => value === '',
-    },
-    username: {
-      // доступны: большие/маленькие буквы, цифры
-      // длина: 4 - 12
-      message: t('regform.username.error'),
-      validate: (value) => !(REGEX.USERNAME.test(value)),
-    },
-    email: {
-      // доступны: любые символы
-      // обязательно: @ и точка
-      message: t('regform.email.error'),
-      validate: (value) => !REGEX.EMAIL.test(value),
-    },
-    first_name: {
-      message: t('regform.firstname.error'),
-      validate: (value) => value === '',
-    },
-    last_name: {
-      message: t('regform.lastname.error'),
-      validate: (value) => value === '',
-    },
-    password: {
-      // доступны: большие/маленькие буквы, цифры
-      // обязательно: большая и маленькая буква, цифра
-      // длина: 4 - 12
-      message: t('regform.password.error'),
-      validate: (value) => (!REGEX.PASSWORD.test(value)),
-    },
-    confirm_password: {
-      message: t('regform.confirmpassword.error'),
-      validate: (value, userObj) => (value !== userObj.password.value),
-    },
-  };
   const submitForm = async (data) => {
     await apiService.post('/api/auth/signup', data);
   };
@@ -111,66 +104,60 @@ const RegForm = React.memo((props) => {
           placeholder={t('regform.username.placeholder')}
           value={state.username.value}
           error={state.username.error}
+          message={state.username.message || t('regform.username.error')}
           onChange={handleChange}
           className={inputCss}
-        >
-          {state.username.message}
-        </Input>
+        />
         <Input
           type="text"
           name="email"
           placeholder={t('regform.email.placeholder')}
           value={state.email.value}
           error={state.email.error}
+          message={state.email.message || t('regform.email.error')}
           onChange={handleChange}
           className={inputCss}
-        >
-          {state.email.message}
-        </Input>
+        />
         <Input
           type="text"
           name="first_name"
           placeholder={t('regform.firstname.placeholder')}
           value={state.first_name.value}
           error={state.first_name.error}
+          message={t('regform.firstname.error')}
           onChange={handleChange}
           className={inputCss}
-        >
-          {state.first_name.message}
-        </Input>
+        />
         <Input
           type="text"
           name="last_name"
           placeholder={t('regform.lastname.placeholder')}
           value={state.last_name.value}
-          error={state.last_name.error}
+          error={state.last_name.error && t('regform.lastname.error')}
+          message={t('regform.firstname.error')}
           onChange={handleChange}
           className={inputCss}
-        >
-          {state.last_name.message}
-        </Input>
+        />
         <Input
           type="password"
           name="password"
           placeholder={t('regform.password.placeholder')}
           value={state.password.value}
           error={state.password.error}
+          message={t('regform.password.error')}
           onChange={handleChange}
           className={inputCss}
-        >
-          {state.password.message}
-        </Input>
+        />
         <Input
           type="password"
           name="confirm_password"
           placeholder={t('regform.confirmpassword.placeholder')}
           value={state.confirm_password.value}
           error={state.confirm_password.error}
+          message={t('regform.confirmpassword.error')}
           onChange={handleChange}
           className={inputCss}
-        >
-          {state.confirm_password.message}
-        </Input>
+        />
         <Button type="submit" className={regFormCss('submit')}>{t('regform.button')}</Button>
       </form>
     </div>

@@ -30,7 +30,6 @@ const useForm = (formSchema, submit) => {
       [name]: {
         ...prevState[name],
         error: formSchema[name].validate(value, prevState),
-        message: formSchema[name].message,
         value,
         name,
       },

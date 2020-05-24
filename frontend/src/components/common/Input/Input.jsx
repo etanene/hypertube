@@ -12,9 +12,9 @@ function Input(props) {
     name,
     placeholder,
     value = '',
-    children,
     error,
     className,
+    message,
     onChange = () => {},
   } = props;
 
@@ -34,7 +34,7 @@ function Input(props) {
         className={inputCss('input-tag', { size, error })}
         onChange={handleChange}
       />
-      <span className={inputCss('message')}>{error && children}</span>
+      <span className={inputCss('message')}>{error && message}</span>
     </div>
   );
 }
