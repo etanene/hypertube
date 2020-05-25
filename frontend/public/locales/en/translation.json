@@ -49,5 +49,43 @@
       "leaveCommentButton": "Add comment",
       "comments": "Comments "
     }
+  },
+  "regform": {
+    "photo": {
+      "placeholder": "Add photo",
+      "error": "Required field."
+    },
+    "title": "Registration",
+    "username":  {
+      "placeholder": "Username",
+      "error": "You can use a-z, A-Z, 0-9. Length from 4 to 12.",
+      "errorexist": "Login already exists!"
+    },
+    "email":  {
+      "placeholder": "Email",
+      "error": "Invalid email layout.",
+      "errorexist": "Email already exists!"
+    },
+    "firstname":  {
+      "placeholder": "First name",
+      "error": "Required field."
+    },
+    "lastname":  {
+      "placeholder": "Last name",
+      "error": "Required field."
+    },
+    "password":  {
+      "placeholder": "Password",
+      "error": "Password must contain upper and lower letter, number. Length from 4 to 12."
+    },
+    "confirmpassword": {
+      "placeholder": "Confirm password",
+      "error": "Passwords do not match."
+    },
+    "button": "Register",
+    "links": {
+      "register": "Register",
+      "login": "Login"
+    }
   }
 }

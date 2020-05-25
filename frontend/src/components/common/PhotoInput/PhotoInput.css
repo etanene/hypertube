@@ -1,0 +1,57 @@
+@import url('../../../App.css');
+
+.photo-input {
+  width: 80px;
+  background-color: var(--dark-grey);
+  border: 1px solid var(--dark-grey);
+  color: var(--white);
+  font-size: var(--font-size-s);
+  cursor: pointer;
+}
+
+/* цвет карточки */
+.photo-input_error {
+  border: 1px solid var(--red);
+}
+
+/* элементы */
+.photo-input-layer {
+  width: 100%;
+  padding: 55% 0;
+  position: relative;
+}
+.photo-input-card {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.photo-input-photo {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.photo-input-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.photo-input-input {
+  width: 100%;
+  box-sizing: border-box;
+  display: none;
+}
+
+.photo-input-close-button {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+}

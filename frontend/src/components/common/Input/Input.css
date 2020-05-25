@@ -1,0 +1,42 @@
+@import url('../../../App.css');
+
+.input {
+  display: flex;
+  flex-direction: column;
+}
+
+/* элементы */
+.input-input-tag {
+  outline: none;
+  width: 100%;
+  border:none;
+  color: var(--white);
+  background-color: var(--dark-grey);
+  box-sizing: border-box;
+  padding: 5px;
+  padding-left: 10px;
+  margin: 1px;
+}
+.input-input-tag::placeholder {
+  color: var(--white);
+}
+
+.input-message {
+  font-size: var(--font-size-xxs);
+  color: var(--red);
+  height: 15px;
+  padding-left: 2px;
+}
+
+/* размеры инпута */
+.input-input-tag_size_s {
+  font-size: 15px;
+}
+.input-input-tag_size_m {
+  font-size: 20px;
+}
+.input-input-tag_size_l {
+  font-size: 25px;
+}
+
+/* цвет инпута */
