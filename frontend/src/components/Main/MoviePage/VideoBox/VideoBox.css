@@ -1,0 +1,47 @@
+.MoviePage-VideoBox {
+    margin: 5% 11%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.VideoBox-Menu {
+    display: flex;
+}
+
+.VideoBox-MenuItem {
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    margin: 20px;
+    width: 150px;
+    height: 50px;
+    background-color: black;
+}
+
+.VideoBox-MenuItem:hover {
+    color: #8e8e8e;
+}
+.VideoBox-MenuItem_active {
+    border: 2px solid #8e8e8e;
+}
+
+.VideoBox-MenuText {
+    margin: auto;
+    text-align: center;
+}
+
+@media screen and (max-width: 720px) {
+    .MoviePage-VideoBox {
+        margin: 20px;
+    }
+    .VideoBox-MenuItem {
+        width: 120px;
+        height: 40px;
+        font-size: var(--font-size-m);
+    }
+    .VideoBox-Menu {
+        margin-left: 25px;
+    }
+}
