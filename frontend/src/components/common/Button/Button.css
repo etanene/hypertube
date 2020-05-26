@@ -1,4 +1,4 @@
-.button {
+.Button {
   font-size: var(--button-font-size);
   background: var(--button-background-color);
   color: var(--button-text-color);

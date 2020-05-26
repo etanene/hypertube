@@ -14,8 +14,8 @@ import Button from '../common/Button';
 import LangSwitcher from '../Header/LangSwitcher/LangSwitcher';
 import './RegForm.css';
 
-const regFormCss = cn('reg-form');
-const inputCss = regFormCss('input');
+const regFormCss = cn('RegForm');
+const inputCss = regFormCss('Input');
 
 const formSchema = {
   photo: {
@@ -84,21 +84,22 @@ const RegForm = React.memo((props) => {
     });
   }, [state.username.value, state.username.error, fetchUser]);
   return (
-    <div className={regFormCss('modal')}>
+    <div className={regFormCss('Modal')}>
       <form autoComplete="off" onSubmit={handleSubmit} className={regFormCss({}, [className])}>
-        <div className={regFormCss('links')}>
-          <NavLink to="/signup" className={regFormCss('link')} activeClassName={regFormCss('link-selected')}>
+        <div className={regFormCss('Links')}>
+          <NavLink to="/signup" className={regFormCss('Link')} activeClassName={regFormCss('Link_link_selected')}>
             {t('regform.links.register')}
           </NavLink>
-          <div className={regFormCss('controls')}>
-            <LangSwitcher cls={regFormCss('lang')} />
-            <NavLink to="/login" className={regFormCss('link')} activeClassName={regFormCss('link-selected')}>
+          <div className={regFormCss('Controls')}>
+            <LangSwitcher cls={regFormCss('Lang')} />
+            <NavLink to="/login" className={regFormCss('Link')} activeClassName={regFormCss('Link_link_selected')}>
               {t('regform.links.login')}
             </NavLink>
           </div>
         </div>
-        <PhotoInput name="photo" error={state.photo.error} onChange={handleChange} className={regFormCss('photo')}> </PhotoInput>
+        <PhotoInput name="photo" error={state.photo.error} onChange={handleChange} className={regFormCss('Photo')} />
         <Input
+          size="m"
           type="text"
           name="username"
           placeholder={t('regform.username.placeholder')}
@@ -109,6 +110,7 @@ const RegForm = React.memo((props) => {
           className={inputCss}
         />
         <Input
+          size="m"
           type="text"
           name="email"
           placeholder={t('regform.email.placeholder')}
@@ -119,6 +121,7 @@ const RegForm = React.memo((props) => {
           className={inputCss}
         />
         <Input
+          size="m"
           type="text"
           name="first_name"
           placeholder={t('regform.firstname.placeholder')}
@@ -129,6 +132,7 @@ const RegForm = React.memo((props) => {
           className={inputCss}
         />
         <Input
+          size="m"
           type="text"
           name="last_name"
           placeholder={t('regform.lastname.placeholder')}
@@ -139,6 +143,7 @@ const RegForm = React.memo((props) => {
           className={inputCss}
         />
         <Input
+          size="m"
           type="password"
           name="password"
           placeholder={t('regform.password.placeholder')}
@@ -149,6 +154,7 @@ const RegForm = React.memo((props) => {
           className={inputCss}
         />
         <Input
+          size="m"
           type="password"
           name="confirm_password"
           placeholder={t('regform.confirmpassword.placeholder')}
@@ -158,7 +164,7 @@ const RegForm = React.memo((props) => {
           onChange={handleChange}
           className={inputCss}
         />
-        <Button type="submit" className={regFormCss('submit')}>{t('regform.button')}</Button>
+        <Button type="submit" className={regFormCss('Submit')}>{t('regform.button')}</Button>
       </form>
     </div>
   );

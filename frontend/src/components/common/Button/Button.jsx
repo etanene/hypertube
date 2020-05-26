@@ -3,7 +3,7 @@ import { cn } from '@bem-react/classname';
 
 import './Button.css';
 
-const buttonCss = cn('button');
+const buttonCss = cn('Button');
 
 function Button(props) {
   const {

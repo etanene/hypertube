@@ -3,7 +3,7 @@ import { cn } from '@bem-react/classname';
 
 import './Input.css';
 
-const inputCss = cn('input');
+const inputCss = cn('Input');
 
 function Input(props) {
   const {
@@ -20,7 +20,6 @@ function Input(props) {
 
   function handleChange(event) {
     const { name: targetName, value: targetValue } = event.target;
-
     onChange(targetName, targetValue);
   }
 
@@ -31,10 +30,10 @@ function Input(props) {
         name={name}
         placeholder={placeholder}
         value={value}
-        className={inputCss('input-tag', { size, error })}
+        className={inputCss('InputTag', { size, error })}
         onChange={handleChange}
       />
-      <span className={inputCss('message')}>{error && message}</span>
+      <span className={inputCss('Message')}>{error && message}</span>
     </div>
   );
 }
