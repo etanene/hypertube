@@ -1,4 +1,4 @@
 import apiService from './apiService';
+import userService from './userService';
 
-// eslint-disable-next-line
-export { apiService };
+export { apiService, userService };
