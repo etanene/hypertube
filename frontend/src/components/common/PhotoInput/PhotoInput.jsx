@@ -7,7 +7,7 @@ import Icon from '../Icon';
 import { ICONS } from '../../../constants';
 import './PhotoInput.css';
 
-const photoInputCss = cn('photo-input');
+const photoInputCss = cn('PhotoInput');
 
 function PhotoInput(props) {
   const {
@@ -37,23 +37,23 @@ function PhotoInput(props) {
   }
 
   const content = file ? (
-    <div className={photoInputCss('photo')}>
-      <CloseButton onClick={handleDelete} className={photoInputCss('close-button')} />
-      <img name={name} src={file} alt="img" className={photoInputCss('img')} />
-      <input id={photoInputCss('file-input')} src={file} type="file" name={name} onChange={handleChange} className={photoInputCss('input')} />
+    <div className={photoInputCss('Photo')}>
+      <CloseButton onClick={handleDelete} className={photoInputCss('CloseButton')} />
+      <img name={name} src={file} alt="img" className={photoInputCss('Img')} />
+      <input id={photoInputCss('FileInput')} src={file} type="file" name={name} onChange={handleChange} className={photoInputCss('Input')} />
     </div>
   ) : (
-    <div className={photoInputCss('card')}>
+    <div className={photoInputCss('Card')}>
       <Icon fill="grey" size="l" viewBox="0 0 315 315" icon={ICONS.ADD} />
       <span>{t('regform.photo.placeholder')}</span>
-      <input id={photoInputCss('file-input')} type="file" name={name} onChange={handleChange} className={photoInputCss('input')} />
+      <input id={photoInputCss('FileInput')} type="file" name={name} onChange={handleChange} className={photoInputCss('Input')} />
     </div>
   );
 
   return (
     <div className={photoInputCss({ error: !file && error }, [className])}>
-      <label htmlFor={photoInputCss('file-input')}>
-        <div className={photoInputCss('layer')}>
+      <label htmlFor={photoInputCss('FileInput')}>
+        <div className={photoInputCss('Layer')}>
           {content}
         </div>
       </label>

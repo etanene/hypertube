@@ -1,12 +1,12 @@
 @import url('../../../App.css');
 
-.input {
+.Input {
   display: flex;
   flex-direction: column;
 }
 
 /* элементы */
-.input-input-tag {
+.Input-InputTag {
   outline: none;
   width: 100%;
   border:none;
@@ -17,11 +17,11 @@
   padding-left: 10px;
   margin: 1px;
 }
-.input-input-tag::placeholder {
+.Input-InputTag::placeholder {
   color: var(--white);
 }
 
-.input-message {
+.Input-Message {
   font-size: var(--font-size-xxs);
   color: var(--red);
   height: 15px;
@@ -29,14 +29,14 @@
 }
 
 /* размеры инпута */
-.input-input-tag_size_s {
-  font-size: 15px;
+.Input-InputTag_size_s {
+  font-size: var(--font-size-s);
 }
-.input-input-tag_size_m {
-  font-size: 20px;
+.Input-InputTag_size_m {
+  font-size: var(--font-size-m);
 }
-.input-input-tag_size_l {
-  font-size: 25px;
+.Input-InputTag_size_l {
+  font-size: var(--font-size-xl);
 }
 
 /* цвет инпута */
