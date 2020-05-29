@@ -9,13 +9,13 @@
 }
 
 @media screen and (max-width: 720px) {
-    .Lang {
+    .Nav-Lang {
         font-size: var(--font-size-l);
     }
 }
 
 @media screen and (max-width: 500px) {
-    .Lang {
+    .Nav-Lang {
         font-size: var(--font-size-m);
     }
 }

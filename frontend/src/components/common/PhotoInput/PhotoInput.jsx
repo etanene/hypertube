@@ -44,7 +44,7 @@ function PhotoInput(props) {
     </div>
   ) : (
     <div className={photoInputCss('Card')}>
-      <Icon fill="grey" size="l" viewBox="0 0 315 315" icon={ICONS.ADD} />
+      <Icon fill="grey" size="m" viewBox="0 0 315 315" icon={ICONS.ADD} />
       <span>{t('regform.photo.placeholder')}</span>
       <input id={photoInputCss('FileInput')} type="file" name={name} onChange={handleChange} className={photoInputCss('Input')} />
     </div>
