@@ -6,6 +6,7 @@ import Movies from './components/Main/Movies/Movies';
 import RegForm from './components/RegForm';
 import MoviePage from './components/Main/MoviePage/MoviePage';
 import queryReducer from './reducers/query';
+import Profile from './components/Main/Profile/Profile';
 
 const App = () => {
   const [queryOptions, dispatch] = useReducer(queryReducer, {});
@@ -17,6 +18,7 @@ const App = () => {
     >
       <Header />
       <Switch>
+        <Route path="/profile" component={Profile} />
         <Route path="/movie/:imdbId/:ytsId" component={MoviePage} />
         <Route path="/">
           <Movies queryOptions={queryOptions} setMovies={setMovies} />
