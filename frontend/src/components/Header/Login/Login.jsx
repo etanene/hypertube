@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { cn } from '@bem-react/classname';
 import './Login.css';
+
+import { userService } from '../../../services';
+import AuthContext from '../../../context/authContext';
 
 const Login = (props) => {
   const { cls } = props;
   const loginCss = cn('Login');
   const listCss = cn('LoginList');
   const [visible, setVisible] = useState(false);
+  const { authDispatch } = useContext(AuthContext);
+
   const handleClickLogin = () => {
     setVisible((prevState) => !prevState);
+  };
+  const handleLogout = () => {
+    userService.delUser();
+    authDispatch({ type: 'LOGIN_LOGOUT' });
   };
 
   return (
@@ -33,7 +42,19 @@ const Login = (props) => {
             <span className={listCss('ItemTitle')}>Profile</span>
           </li>
           <li className={listCss('Item')}>
-            <span className={listCss('ItemTitle')}>Logout</span>
+            <span
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.code === 'KeyL') {
+                  handleLogout();
+                }
+              }}
+              className={listCss('ItemTitle')}
+              onClick={handleLogout}
+            >
+              Logout
+            </span>
           </li>
         </ul>
       )}

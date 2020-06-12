@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 
 import { useForm } from '../../hooks';
-import { apiService } from '../../services';
+import { apiService, userService } from '../../services';
 
 import Input from '../common/Input';
 import Button from '../common/Button';
 import LangSwitcher from '../Header/LangSwitcher/LangSwitcher';
 import './LoginForm.css';
+import AuthContext from '../../context/authContext';
 
 const loginFormCss = cn('LoginForm');
 const inputCss = loginFormCss('Input');
@@ -26,12 +27,34 @@ const formSchema = {
 function LoginForm(props) {
   const { className } = props;
   const { t } = useTranslation();
+  const { stateAuthReducer, authDispatch } = useContext(AuthContext);
 
   const submitForm = async (data) => {
-    await apiService.post('/api/auth/login', data);
+    console.log('data submit', data);
+    const { username, password } = data;
+    try {
+      const { token } = await apiService.post('/api/auth/login', { username, password });
+      if (token) {
+        userService.setUser({ username, token });
+        authDispatch({ type: 'LOGIN', payload: { username, token } });
+      }
+    } catch (e) {
+      authDispatch({ type: 'LOGIN_ERROR', payload: e.message });
+    }
+    console.log('getUser', userService.getUser());
   };
 
+  useEffect(() => (
+    () => {
+      authDispatch({ type: 'USER_RESET_ERROR' });
+    }
+  ), [authDispatch]);
+
   const { state, handleChange, handleSubmit } = useForm(formSchema, submitForm);
+
+  if (stateAuthReducer.isAuth) {
+    return (<Redirect to="/" />);
+  }
 
   return (
     <div className={loginFormCss('Modal')}>
