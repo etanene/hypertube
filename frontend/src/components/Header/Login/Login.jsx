@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { cn } from '@bem-react/classname';
+import { Link } from 'react-router-dom';
 import './Login.css';
-import {Link} from "react-router-dom";
 
 const Login = (props) => {
   const { cls } = props;
