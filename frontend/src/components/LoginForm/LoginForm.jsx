@@ -93,7 +93,7 @@ function LoginForm(props) {
           className={inputCss}
         />
         <div className={loginFormCss('ResetLink')}>
-          <NavLink to="#" className={loginFormCss('Link')} activeClassName={loginFormCss('Link_link_selected')}>
+          <NavLink to="/reset" className={loginFormCss('Link')} activeClassName={loginFormCss('Link_link_selected')}>
             {t('loginform.links.reset')}
           </NavLink>
         </div>

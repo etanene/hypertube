@@ -6,6 +6,8 @@ import Header from './components/Header/Header';
 import Movies from './components/Main/Movies/Movies';
 import RegForm from './components/RegForm';
 import LoginForm from './components/LoginForm';
+import ResetpwForm from './components/ResetpwForm';
+import ChangepwForm from './components/ChangepwForm';
 import MoviePage from './components/Main/MoviePage/MoviePage';
 import queryReducer from './reducers/query';
 import authReducer from './reducers/auth';
@@ -35,13 +37,19 @@ const App = () => {
         <Switch>
           <Route path="/movie/:imdbId/:ytsId" component={MoviePage} />
           <Route path="/">
-            {stateAuthReducer.isAuth ? <Movies queryOptions={queryOptions} setMovies={setMovies} /> : <Redirect to="/login" />}
+            <Movies queryOptions={queryOptions} setMovies={setMovies} />
             <Switch>
               <Route path="/signup">
                 {stateAuthReducer.isAuth ? <Redirect to="/" /> : <RegForm />}
               </Route>
               <Route path="/login">
                 {stateAuthReducer.isAuth ? <Redirect to="/" /> : <LoginForm />}
+              </Route>
+              <Route path="/reset">
+                {stateAuthReducer.isAuth ? <Redirect to="/" /> : <ResetpwForm />}
+              </Route>
+              <Route path="/changepw/:uuid">
+                <ChangepwForm />
               </Route>
             </Switch>
           </Route>
