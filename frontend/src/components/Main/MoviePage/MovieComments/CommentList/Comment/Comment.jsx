@@ -3,8 +3,9 @@ import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
 import './Comment.css';
 import moment from 'moment';
+import ReplyComment from './ReplyComment/ReplyComment';
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, dispatch }) => {
   const commentCss = cn('Comment');
   const { i18n } = useTranslation();
   const date = moment.unix(comment.time).locale(i18n.language).format('D MMMM YYYY HH:mm');
@@ -18,28 +19,18 @@ const Comment = ({ comment }) => {
           <span className={commentCss('Timestamp')}>{date}</span>
         </div>
       </div>
-      <div>test</div>
       <div className={commentCss('Block')}>
         <span className={commentCss('Text')}>{comment.comment}</span>
       </div>
-      <button onClick={() => {
-        setHiddenReplyField(false);
-      }}
-      >
-        Ответить
-      </button>
-      {!hiddenReplyField
-      && (
-      <div>
-        reply field
-        <button onClick={() => {
-          setHiddenReplyField(true);
+      <button
+        className={commentCss('ReplyButton')}
+        onClick={() => {
+          setHiddenReplyField((isHidden) => !isHidden);
         }}
-        >
-          Отменить
-        </button>
-      </div>
-      )}
+      >
+        {hiddenReplyField ? 'Ответить' : 'Скрыть'}
+      </button>
+      {!hiddenReplyField && <ReplyComment cls={commentCss} dispatch={dispatch} />}
     </div>
   );
 };

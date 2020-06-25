@@ -17,7 +17,7 @@ const MovieComments = ({ title }) => {
   return (
     <div className={movieCommentsCss()}>
       <AddComment title={title} dispatch={dispatch} />
-      <CommentList comments={comments} cls={movieCommentsCss} />
+      <CommentList comments={comments} cls={movieCommentsCss} dispatch={dispatch} />
     </div>
   );
 };

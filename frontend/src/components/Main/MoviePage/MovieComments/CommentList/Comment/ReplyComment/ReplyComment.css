@@ -1,0 +1,36 @@
+.Comment-ReplyComment {
+    display: flex;
+    align-items: center;
+    background-color: var(--black);
+    padding: 20px;
+}
+
+.ReplyComment-Textarea {
+    padding: 20px;
+    background-color: var(--dark-grey);
+    color: var(--white);
+    font-size: var(--font-size-m);
+    border: none;
+    outline: none;
+    margin: auto;
+    width: 80%;
+    height: 60px;
+    min-height: 60px;
+    resize: vertical;
+}
+
+.ReplyComment-Button {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--dark-grey);
+    color: var(--white);
+    border: none;
+}
+
+.ReplyComment-Button:disabled {
+    color: var(--grey);
+    cursor: auto;
+    background-color: var(--dark-grey);
+}

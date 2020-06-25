@@ -4,7 +4,7 @@ import { cn } from '@bem-react/classname';
 import Comment from './Comment/Comment';
 import './CommentList.css';
 
-const CommentList = ({ comments, cls }) => {
+const CommentList = ({ comments, cls, dispatch }) => {
   const { t } = useTranslation();
   const commentListCss = cn('CommentList');
   const compare = (first, second) => (first.time > second.time ? -1 : 1);
@@ -14,7 +14,7 @@ const CommentList = ({ comments, cls }) => {
         {`${t('movie.movieComments.comments')} (${comments.length})`}
       </span>
       {comments.sort(compare).map((comment) => (
-        <Comment comment={comment} key={comment.time} />))}
+        <Comment comment={comment} key={comment.time} dispatch={dispatch} />))}
     </div>
   );
 };

@@ -52,6 +52,17 @@
     font-size: var(--font-size-m);
 }
 
+.Comment-ReplyButton {
+    cursor: pointer;
+    width: 120px;
+    height: 40px;
+    background-color: var(--dark-grey);
+    color: var(--white);
+    font-size: var(--font-size-m);
+    border: none;
+    outline: none;
+}
+
 @media screen and (max-width: 720px) {
     .Comment {
         width: 100%;
