@@ -3,6 +3,7 @@ const path = require('path');
 
 module.exports = {
   entry: './src/index.jsx',
+  watch: true,
   output: {
     path: path.join(__dirname, '/build/'),
     publicPath: '/',
@@ -49,6 +50,10 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   devServer: {
+    watchOptions: {
+      aggregateTimeout: 500, // delay before reloading
+      poll: 1000,
+    },
     host: '0.0.0.0',
     port: '3000',
     historyApiFallback: true,
