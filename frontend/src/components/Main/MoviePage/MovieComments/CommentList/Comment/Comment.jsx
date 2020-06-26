@@ -35,11 +35,6 @@ const Comment = ({ comment, hidden = false }) => {
           <button className={commentCss('ReplyButton')} onClick={changeHiddenReply}>
             {hiddenReplyField ? 'Ответить' : 'Скрыть форму'}
           </button>
-          {comment.children[0] && (
-            <button className={commentCss('ReplyButton')} onClick={changeHiddenTree}>
-              {hiddenTree ? 'Показать' : 'Скрыть ветвь'}
-            </button>
-          )}
           {!hiddenReplyField && (
             <ReplyComment
               setHidden={setHiddenReplyField}
@@ -48,10 +43,15 @@ const Comment = ({ comment, hidden = false }) => {
               parentId={comment.id}
             />
           )}
+          {comment.children[0] && (
+            <button className={commentCss('ReplyButton')} onClick={changeHiddenTree}>
+              {hiddenTree ? `Показать комментарии (${comment.children.length})` : 'Скрыть ветвь'}
+            </button>
+          )}
           {!hiddenTree && comment.children[0] && (
             <div className={commentCss('TreeBox')}>
               <HideTreeButton cls={commentCss} hideTree={setHiddenTree} />
-              <div>
+              <div className={commentCss('Tree')}>
                 {comment.children.map((childComment) => (
                   <Comment comment={childComment} key={childComment.id} />
                 ))}

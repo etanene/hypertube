@@ -26,6 +26,10 @@
     justify-content: space-between;
 }
 
+.Comment-Tree {
+    width: 100%;
+}
+
 .Comment-Username {
     vertical-align: top;
     max-width: 200px;
