@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
 import { scroller } from 'react-scroll';
+import CommentsContext from '../../../../../context/commentsContext';
 import './AddComment.css';
 
-const AddComment = ({ title, dispatch }) => {
+const AddComment = ({ title }) => {
   const addCommentCss = cn('AddComment');
+  const { dispatch } = useContext(CommentsContext);
   const { t } = useTranslation();
   const [comment, setComment] = useState('');
   function scrollTo() {
@@ -19,6 +21,7 @@ const AddComment = ({ title, dispatch }) => {
     dispatch({
       type: 'ADD_COMMENT',
       comment: {
+        parentId: null,
         username: 'Maxik',
         time: Date.now() / 1000,
         comment,

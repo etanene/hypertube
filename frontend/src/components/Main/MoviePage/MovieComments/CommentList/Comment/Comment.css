@@ -1,8 +1,14 @@
 .Comment {
-    width: 75%;
+    padding-left: 25px;
+    width: 100%;
     display: flex;
-    margin-bottom: 5%;
+    padding-bottom: 20px;
+    padding-top: 20px;
     flex-direction: column;
+}
+
+.Comment-Box, .Comment-TreeBox {
+    display: flex;
 }
 
 .Comment-Header {
@@ -54,7 +60,7 @@
 
 .Comment-ReplyButton {
     cursor: pointer;
-    width: 120px;
+    width: 150px;
     height: 40px;
     background-color: var(--dark-grey);
     color: var(--white);

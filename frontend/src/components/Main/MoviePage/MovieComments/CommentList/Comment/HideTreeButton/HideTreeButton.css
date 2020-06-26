@@ -1,0 +1,16 @@
+.Comment-HideTree {
+    outline: none;
+    background-color: var(--light-grey);
+    width: 3px;
+    height: 100%;
+}
+
+.Comment-HideTreeBox {
+    width: 6px;
+}
+
+.Comment-HideTree:hover {
+    cursor: pointer;
+    width: 5px;
+    background-color: #838383;
+}

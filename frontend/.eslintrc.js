@@ -24,5 +24,7 @@ module.exports = {
   rules: {
     'react/prop-types': 'off',
     'react/button-has-type': 'off',
+    'jsx-a11y/control-has-associated-label': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
   },
 };
