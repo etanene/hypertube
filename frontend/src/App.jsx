@@ -36,23 +36,24 @@ const App = () => {
         <Header />
         <Switch>
           <Route path="/movie/:imdbId/:ytsId" component={MoviePage} />
-          <Route path="/">
-            <Movies queryOptions={queryOptions} setMovies={setMovies} />
-            <Switch>
-              <Route path="/signup">
-                {stateAuthReducer.isAuth ? <Redirect to="/" /> : <RegForm />}
-              </Route>
-              <Route path="/login">
-                {stateAuthReducer.isAuth ? <Redirect to="/" /> : <LoginForm />}
-              </Route>
-              <Route path="/reset">
-                {stateAuthReducer.isAuth ? <Redirect to="/" /> : <ResetpwForm />}
-              </Route>
-              <Route path="/changepw/:uuid">
-                <ChangepwForm />
-              </Route>
-            </Switch>
+          <Route exact path="/">
+            {stateAuthReducer.isAuth
+              ? <Movies queryOptions={queryOptions} setMovies={setMovies} /> : <Redirect to="/login" />}
           </Route>
+          <Switch>
+            <Route path="/signup">
+              {stateAuthReducer.isAuth ? <Redirect to="/" /> : <RegForm />}
+            </Route>
+            <Route path="/login">
+              {stateAuthReducer.isAuth ? <Redirect to="/" /> : <LoginForm />}
+            </Route>
+            <Route path="/reset">
+              {stateAuthReducer.isAuth ? <Redirect to="/" /> : <ResetpwForm />}
+            </Route>
+            <Route path="/changepw/:uuid">
+              <ChangepwForm />
+            </Route>
+          </Switch>
         </Switch>
       </MovieSearchContext.Provider>
     </AuthContext.Provider>
