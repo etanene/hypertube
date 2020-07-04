@@ -43,6 +43,10 @@
     color: #8e8e8e;
 }
 
+.LoginList-Link:hover {
+    color: #8e8e8e;
+}
+
 .LoginList-ItemTitle {
     font-size: var(--font-size-l);
     margin: auto;

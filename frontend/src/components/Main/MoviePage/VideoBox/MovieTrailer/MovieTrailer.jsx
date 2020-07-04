@@ -6,6 +6,10 @@ import useWindowDimensions from '../../../../../lib/useWindowDimensions';
 import MovieInfoContext from '../../../../../context/MovieInfoContext';
 import './MovieTrailer.css';
 
+window.YTConfig = {
+  host: 'http://www.youtube.com',
+};
+
 const MovieTrailer = ({ cls, hidden }) => {
   const { height, width } = useWindowDimensions();
   const { YTSInfo } = useContext(MovieInfoContext);

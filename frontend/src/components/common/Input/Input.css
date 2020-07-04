@@ -7,6 +7,7 @@
 
 /* элементы */
 .Input-InputTag {
+  height: 40px;
   outline: none;
   width: 100%;
   border:none;
@@ -17,6 +18,7 @@
   padding-left: 10px;
   margin: 1px;
 }
+
 .Input-InputTag::placeholder {
   color: var(--white);
 }
@@ -25,18 +27,37 @@
   font-size: var(--font-size-xxs);
   color: var(--red);
   height: 15px;
-  padding-left: 2px;
+  padding-left: 10px;
+  margin: 5px 0;
 }
 
 /* размеры инпута */
 .Input-InputTag_size_s {
   font-size: var(--font-size-s);
 }
+
 .Input-InputTag_size_m {
   font-size: var(--font-size-m);
 }
+
 .Input-InputTag_size_l {
   font-size: var(--font-size-xl);
 }
 
-/* цвет инпута */
+@media screen and (max-height: 800px) {
+  .Input-InputTag {
+    font-size: var(--font-size-s);
+    height: 30px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .Input-InputTag {
+    font-size: var(--font-size-s);
+    height: 30px;
+  }
+
+  .Input-Message {
+    margin: 2px 0;
+  }
+}

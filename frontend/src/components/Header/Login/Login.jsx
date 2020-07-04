@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { cn } from '@bem-react/classname';
+import { Link } from 'react-router-dom';
 import './Login.css';
 
 import { userService } from '../../../services';
@@ -39,7 +40,11 @@ const Login = (props) => {
       && (
         <ul className={loginCss('List')}>
           <li className={listCss('Item')}>
-            <span className={listCss('ItemTitle')}>Profile</span>
+            <span className={listCss('ItemTitle')}>
+              <Link className={listCss('Link', ['Link'])} to="/profile">
+                Profile
+              </Link>
+            </span>
           </li>
           <li className={listCss('Item')}>
             <span
