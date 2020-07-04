@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx nodemon src/index.js --exec 'npm run lint && node'",
+    "start": "npx nodemon -L src/index.js --exec 'npm run lint && node'",
     "dev": "npm install && npm run migrate && npm start",
     "lint": "npx eslint src",
     "migrate": "node src/db/setup.js"
