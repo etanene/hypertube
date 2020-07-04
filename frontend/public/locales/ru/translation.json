@@ -87,5 +87,50 @@
       "register": "Регистрация",
       "login": "Войти"
     }
+  },
+  "loginform": {
+    "username":  {
+      "placeholder": "Имя пользователя",
+      "error": "Обязательно к заполнению."
+    },
+    "password":  {
+      "placeholder": "Пароль",
+      "error": "Обязательно к заполнению."
+    },
+    "button": "Войти",
+    "links": {
+      "register": "Регистрация",
+      "login": "Войти",
+      "reset": "Забыли пароль?"
+    }
+  },
+  "resetpwform": {
+    "email":  {
+      "placeholder": "Email",
+      "error": "Непрвильно указан Email",
+      "errorexist": "Такого Email нет!"
+    },
+    "button": "Сброс пароля",
+    "links": {
+      "register": "Регистрация",
+      "login": "Войти",
+      "reset": "Забыли пароль?"
+    }
+  },
+  "changepwform": {
+    "password":  {
+      "placeholder": "Пароль",
+      "error": "Пароль должен содержать заглавную букву, строчну и цифру. Длинна от 4 до 12 символов."
+    },
+    "confirmpassword": {
+      "placeholder": "Подтверждение пароля",
+      "error": "Пароли не совпадают."
+    },
+    "button": "Изменить пароль",
+    "links": {
+      "register": "Регистрация",
+      "login": "Войти",
+      "reset": "Забыли пароль?"
+    }
   }
 }

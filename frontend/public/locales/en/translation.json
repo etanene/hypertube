@@ -87,5 +87,50 @@
       "register": "Register",
       "login": "Login"
     }
+  },
+  "loginform": {
+    "username":  {
+      "placeholder": "Username",
+      "error": "Required field."
+    },
+    "password":  {
+      "placeholder": "Password",
+      "error": "Required field."
+    },
+    "button": "Login",
+    "links": {
+      "register": "Register",
+      "login": "Login",
+      "reset": "Forgot password?"
+    }
+  },
+  "resetpwform": {
+    "email":  {
+      "placeholder": "Email",
+      "error": "Invalid email layout.",
+      "errorexist": "Email does not exists!"
+    },
+    "button": "Reset password",
+    "links": {
+      "register": "Register",
+      "login": "Login",
+      "reset": "Forgot password?"
+    }
+  },
+  "changepwform": {
+    "password":  {
+      "placeholder": "Password",
+      "error": "Password must contain upper and lower letter, number. Length from 4 to 12."
+    },
+    "confirmpassword": {
+      "placeholder": "Confirm password",
+      "error": "Passwords do not match."
+    },
+    "button": "Change password",
+    "links": {
+      "register": "Register",
+      "login": "Login",
+      "reset": "Forgot password?"
+    }
   }
 }

@@ -1,0 +1,73 @@
+@import url('../../App.css');
+
+.ChangepwForm-Modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 1;
+  z-index: 2000;
+}
+
+.ChangepwForm {
+  width: 40%;
+  max-height: 80%;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  background-color: var(--grey);
+  border-radius: 3px;
+}
+
+.ChangepwForm-Input {
+  margin: 5px 0;
+}
+
+.ChangepwForm-Submit {
+  cursor: pointer;
+  height: 35px;
+  border-radius: 3px;
+  margin: 5px 0;
+  width: 150px;
+}
+
+.ChangepwForm-Links {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-m);
+}
+
+.ChangepwForm-Controls {
+  width: 100px;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+}
+
+.ChangepwForm-Lang {
+  outline: none;
+  margin-right: 10px;
+  font-size: var(--font-size-m);
+}
+
+.ChangepwForm-Link {
+  text-decoration: none;
+  color: var(--white);
+  font-size: var(--font-size-m);
+}
+
+.ChangepwForm-Link:hover {
+  color: #8e8e8e;
+}
+
+.ChangepwForm-Link_link_selected {
+  text-decoration: underline;
+}

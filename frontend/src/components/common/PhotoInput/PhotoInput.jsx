@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
 
@@ -14,26 +14,33 @@ function PhotoInput(props) {
     name = '',
     className = null,
     error = false,
+    photo,
     onChange = () => {},
   } = props;
 
-  const [file, setFile] = useState();
+  const [file, setFile] = useState(photo);
   const { t } = useTranslation();
-
+  useEffect(() => {
+    setFile(photo);
+  }, [photo]);
 
   function handleChange(event) {
+    const { target } = event;
     const reader = new FileReader();
-    const inputFile = event.target.files[0];
+    const inputFile = target.files[0];
 
     reader.onloadend = () => {
       setFile(reader.result);
       onChange(name, reader.result);
     };
     reader.readAsDataURL(inputFile);
+    target.value = '';
   }
 
-  function handleDelete() {
+  function handleDelete(event) {
+    event.preventDefault();
     setFile(null);
+    onChange(name, '');
   }
 
   const content = file ? (
