@@ -8,7 +8,7 @@ router.get('/get', userController.get);
 
 router.post('/resetpw', userController.resetpw);
 
-router.post('/changepw', userController.changepw);
+router.post('/changepw/:uuid', userController.changepw);
 
 router.post('/changeUserpw', authController.isAuth, userController.changeUserpw);
 

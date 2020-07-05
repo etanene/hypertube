@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
 import { NavLink, Redirect } from 'react-router-dom';
@@ -26,9 +26,11 @@ function ResetpwForm(props) {
   const { className } = props;
   const { t } = useTranslation();
   const { stateAuthReducer } = useContext(AuthContext);
+  const [redirect, setRedirect] = useState(false);
 
   const submitForm = async (data) => {
     await apiService.post('/api/user/resetpw', data);
+    setRedirect(true);
   };
 
   const {
@@ -49,7 +51,7 @@ function ResetpwForm(props) {
     });
   }, [state.email.value, state.email.error, fetchUser]);
 
-  if (stateAuthReducer.isAuth) {
+  if (stateAuthReducer.isAuth || redirect) {
     return (<Redirect to="/" />);
   }
 

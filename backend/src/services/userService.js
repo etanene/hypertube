@@ -26,9 +26,10 @@ const resetPwUser = async (email) => {
   );
 };
 
-const changePwUser = async (password, userData) => {
+const changePwUser = async (password, ulink) => {
   const hashPassword = await bcrypt.hash(password, 1);
-  const res = await userModel.updateUser({ passwd: hashPassword }, userData);
+  const res = await userModel.updateUser({ passwd: hashPassword, unique_link: null },
+    { unique_link: ulink });
 
   if (!res) {
     throw new UserException('Can not find user!');

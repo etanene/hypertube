@@ -39,6 +39,8 @@ const signup = async (data) => {
 const login = async (data) => {
   const loginData = validateService.getLoginData(data.username);
   const users = await userModel.getUser(loginData);
+  // const ppl = await userModel.getUser([{ id: 1 }, { id: 2 }]);
+  console.log('ppl', loginData);
   if (!users.length) {
     throw new AuthException('Invalid username or password!');
   }

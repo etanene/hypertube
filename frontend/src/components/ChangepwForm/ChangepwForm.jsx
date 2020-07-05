@@ -35,7 +35,8 @@ function ChangepwForm(props) {
 
   const submitForm = async (data) => {
     try {
-      await apiService.post(`/api/user/changepw?unique_link=${uuid}`, data);
+      await apiService.post(`/api/user/changepw/${uuid}`, data);
+      setRedirect(true);
     } catch (e) {
       console.log(e.message);
     }

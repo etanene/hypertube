@@ -30,10 +30,12 @@ const resetpw = async (req, res) => {
 
 const changepw = async (req, res) => {
   try {
-    validateService.validatePasswords(req.body.password, req.body.confirm_password);
-    await userService.changePwUser(req.body.password, req.params);
+    if (req.params) {
+      validateService.validatePasswords(req.body.password, req.body.confirm_password);
+      await userService.changePwUser(req.body.password, req.params.uuid);
 
-    res.send({ message: 'Password changed' });
+      res.send({ message: 'Password changed' });
+    }
   } catch (e) {
     if (e instanceof Error) {
       res.status(e.status || 500).send(new InternalError());
