@@ -6,7 +6,7 @@ const fs = require('fs').promises;
 const { userModel } = require('../models');
 const { AuthException } = require('../errors');
 const validateService = require('./validateService');
-// const mailService = require('./mailService');
+// const mailService = require('./mailServicчe');
 // const { HOST_URL } = require('../config');
 
 const signup = async (data) => {
@@ -48,9 +48,9 @@ const login = async (data) => {
   if (!validPasswd) {
     throw new AuthException('Invalid username or password!');
   }
-  if (!user.validate) {
-    throw new AuthException('Please, validate your account on email');
-  }
+  // if (!user.validate) {
+  //   throw new AuthException('Please, validate your account on email');
+  // }
 };
 
 const verify = async (ulink) => {
