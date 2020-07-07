@@ -3,7 +3,6 @@ const cors = require('cors');
 const session = require('express-session');
 const path = require('path');
 const http = require('http');
-
 const router = require('./routes');
 
 const app = express();

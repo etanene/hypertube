@@ -1,8 +1,11 @@
+const escape = require('escape-html');
 const { ValidateException } = require('../errors');
+// const { getCommentById } = require('./commentService');
 
 const REGEXP_USERNAME = /^[A-Za-z\d]{4,12}$/;
 const REGEXP_EMAIL = /^\S+@\S+\.\S+$/;
 const REGEXP_PASSWORD = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{4,12}$/;
+const REGEXP_MOVIE_ID = /^[t]{2}\d{3,10}$/;
 
 const validateUsername = (username) => {
   if (!(username && REGEXP_USERNAME.test(username))) {
@@ -35,6 +38,30 @@ const validateUser = (user) => {
   validatePasswords(user.password, user.confirm_password);
 };
 
+const validateMovieId = (movieId) => {
+  if (!REGEXP_MOVIE_ID.test(movieId)) {
+    throw new ValidateException('Invalid movie Id');
+  }
+};
+
+const validateComment = async (comment) => {
+  console.log('test');
+  // eslint-disable-next-line no-param-reassign
+  comment.text = escape(comment.text);
+  // eslint-disable-next-line no-param-reassign
+  comment.created_at = Date.now() / 1000;
+  if (!comment.text) {
+    throw new ValidateException('Comment text is required');
+  } else if (comment.text.length > 500) {
+    throw new ValidateException('Comment cannot be more than 500 symbols');
+  }
+  validateMovieId(comment.movie_id);
+  // if (comment.parent_id) {
+  //   const res = await getCommentById(comment.parent_id);
+  //   console.log(res);
+  // }
+};
+
 const getLoginData = (user) => {
   if (user && REGEXP_EMAIL.test(user)) {
     return ({ email: user });
@@ -48,4 +75,6 @@ module.exports = {
   validateUsername,
   validateEmail,
   validatePasswords,
+  validateMovieId,
+  validateComment,
 };
