@@ -1,5 +1,4 @@
 const getTreeFromArray = (arr) => {
-  console.log(arr);
   const mappedArr = {};
   let comment;
   const tree = [];

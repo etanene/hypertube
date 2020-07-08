@@ -1,6 +1,6 @@
 const escape = require('escape-html');
+const moment = require('moment-timezone');
 const { ValidateException } = require('../errors');
-// const { getCommentById } = require('./commentService');
 
 const REGEXP_USERNAME = /^[A-Za-z\d]{4,12}$/;
 const REGEXP_EMAIL = /^\S+@\S+\.\S+$/;
@@ -45,21 +45,14 @@ const validateMovieId = (movieId) => {
 };
 
 const validateComment = async (comment) => {
-  console.log('test');
-  // eslint-disable-next-line no-param-reassign
   comment.text = escape(comment.text);
-  // eslint-disable-next-line no-param-reassign
-  comment.created_at = Date.now() / 1000;
+  comment.created_at = moment().unix();
   if (!comment.text) {
     throw new ValidateException('Comment text is required');
   } else if (comment.text.length > 500) {
     throw new ValidateException('Comment cannot be more than 500 symbols');
   }
   validateMovieId(comment.movie_id);
-  // if (comment.parent_id) {
-  //   const res = await getCommentById(comment.parent_id);
-  //   console.log(res);
-  // }
 };
 
 const getLoginData = (user) => {

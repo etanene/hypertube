@@ -15,7 +15,7 @@ const MovieComments = ({ title, imdbId }) => {
     dispatch({ type: 'LOAD_COMMENTS', comments: comment });
   }, [comment]);
   return (
-    <CommentsContext.Provider value={{ dispatch, comments }}>
+    <CommentsContext.Provider value={{ dispatch, comments, imdbId }}>
       <div className={movieCommentsCss()}>
         <AddComment title={title} />
         <CommentList cls={movieCommentsCss} />

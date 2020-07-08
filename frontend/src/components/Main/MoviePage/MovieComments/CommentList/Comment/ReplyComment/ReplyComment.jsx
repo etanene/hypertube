@@ -20,11 +20,11 @@ const ReplyComment = (
     dispatch({
       type: 'ADD_COMMENT',
       comment: {
-        username: 'Maxik',
+        login: 'Maxik',
         time: Date.now() / 1000,
-        comment,
-        avatar: '/image.png',
-        parentId,
+        text: comment,
+        photo: '/image.png',
+        parent_id: parentId,
       },
     });
     setComment('');

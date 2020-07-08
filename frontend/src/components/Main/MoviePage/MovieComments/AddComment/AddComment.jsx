@@ -3,11 +3,16 @@ import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
 import { scroller } from 'react-scroll';
 import CommentsContext from '../../../../../context/commentsContext';
+import AuthContext from '../../../../../context/authContext';
 import './AddComment.css';
+
+const superagent = require('superagent');
 
 const AddComment = ({ title }) => {
   const addCommentCss = cn('AddComment');
-  const { dispatch } = useContext(CommentsContext);
+  const { dispatch, imdbId } = useContext(CommentsContext);
+  const { stateAuthReducer } = useContext(AuthContext);
+  console.log('user', stateAuthReducer);
   const { t } = useTranslation();
   const [comment, setComment] = useState('');
   function scrollTo() {
@@ -21,13 +26,19 @@ const AddComment = ({ title }) => {
     dispatch({
       type: 'ADD_COMMENT',
       comment: {
-        parentId: null,
-        username: 'Maxik',
+        parent_id: null,
+        login: 'Maxik',
         time: Date.now() / 1000,
-        comment,
-        avatar: '/image.png',
+        text: comment,
+        photo: '/image.png',
       },
     });
+    superagent.post('/api/comment/add').send({
+      user_id: 1,
+      text: comment,
+      movie_id: imdbId,
+      parent_id: null,
+    }).catch((e) => console.log(e));
     setComment('');
     scrollTo();
   };
