@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { cn } from '@bem-react/classname';
+import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 import { scroller } from 'react-scroll';
 import CommentsContext from '../../../../../context/commentsContext';
@@ -12,7 +13,6 @@ const AddComment = ({ title }) => {
   const addCommentCss = cn('AddComment');
   const { dispatch, imdbId } = useContext(CommentsContext);
   const { stateAuthReducer } = useContext(AuthContext);
-  console.log('user', stateAuthReducer);
   const { t } = useTranslation();
   const [comment, setComment] = useState('');
   function scrollTo() {
@@ -27,8 +27,8 @@ const AddComment = ({ title }) => {
       type: 'ADD_COMMENT',
       comment: {
         parent_id: null,
-        login: 'Maxik',
-        time: Date.now() / 1000,
+        login: stateAuthReducer.user.username,
+        created_at: moment(),
         text: comment,
         photo: '/image.png',
       },
