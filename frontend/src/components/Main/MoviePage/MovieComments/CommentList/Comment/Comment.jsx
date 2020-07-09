@@ -8,7 +8,7 @@ import './Comment.css';
 
 const Comment = ({ comment, hidden = false }) => {
   const commentCss = cn('Comment');
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const date = moment(comment.created_at).locale(i18n.language).format('D MMMM YYYY HH:mm');
   const [hiddenReplyField, setHiddenReplyField] = useState(true);
   const [hiddenTree, setHiddenTree] = useState(false);
@@ -31,7 +31,7 @@ const Comment = ({ comment, hidden = false }) => {
             <span className={commentCss('Text')}>{comment.text}</span>
           </div>
           <button className={commentCss('ReplyButton')} onClick={changeHiddenReply}>
-            {hiddenReplyField ? 'Ответить' : 'Скрыть форму'}
+            {hiddenReplyField ? t('movie.movieComments.replyComment') : t('movie.movieComments.hideForm')}
           </button>
           {!hiddenReplyField && (
             <ReplyComment
@@ -42,7 +42,7 @@ const Comment = ({ comment, hidden = false }) => {
           )}
           {comment.children[0] && (
             <button className={commentCss('ReplyButton')} onClick={changeHiddenTree}>
-              {hiddenTree ? `Показать комментарии (${comment.children.length})` : 'Скрыть ветвь'}
+              {hiddenTree ? `${t('movie.movieComments.showBranch')} (${comment.children.length})` : `${t('movie.movieComments.hideBranch')}`}
             </button>
           )}
           {!hiddenTree && comment.children[0] && (

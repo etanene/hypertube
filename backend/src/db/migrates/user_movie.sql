@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS user_movie
+(
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER NOT NULL,
+  movie_id INTEGER NOT NULL,
+  created_at TIMESTAMP NOT NULL
+);

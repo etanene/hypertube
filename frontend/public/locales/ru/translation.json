@@ -7,7 +7,7 @@
   },
   "main": {
     "menu": {
-      "showWatched": "Показывать просмотренные",
+      "showWatched": "Вы просматривали этот фильм",
       "genreSearch": "Поиск по жанру",
       "movieSort": [
         {"type":  "date_added", "name": "По дате добавления"},
@@ -45,6 +45,10 @@
       "params": ["Трейлер", "Фильм"]
     },
     "movieComments": {
+      "hideForm": "Скрыть",
+      "replyComment": "Ответить",
+      "showBranch": "Показать комментарии",
+      "hideBranch": "Скрыть ветвь",
       "leaveComment": "Поделитесь мнением о фильме",
       "leaveCommentButton": "Отправить",
       "comments": "Комментарии "
