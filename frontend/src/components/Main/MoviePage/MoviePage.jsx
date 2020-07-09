@@ -29,7 +29,7 @@ const MoviePage = () => {
       {isReady && <MovieInfo cls={moviePageCss} />}
       {isReady && <MovieVideo cls={moviePageCss} />}
       {isReady && <MovieSuggestions movies={movieSuggestions} />}
-      {isReady && <MovieComments title={OMDBInfo.Title} />}
+      {isReady && <MovieComments title={OMDBInfo.Title} imdbId={imdbId} />}
     </MovieInfoContext.Provider>
   );
 };

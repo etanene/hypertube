@@ -1,17 +1,15 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import ReplyComment from './ReplyComment/ReplyComment';
 import HideTreeButton from './HideTreeButton/HideTreeButton';
-import CommentsContext from '../../../../../../context/commentsContext';
 import './Comment.css';
 
 const Comment = ({ comment, hidden = false }) => {
   const commentCss = cn('Comment');
   const { i18n } = useTranslation();
-  const { dispatch } = useContext(CommentsContext);
-  const date = moment.unix(comment.time).locale(i18n.language).format('D MMMM YYYY HH:mm');
+  const date = moment(comment.created_at).locale(i18n.language).format('D MMMM YYYY HH:mm');
   const [hiddenReplyField, setHiddenReplyField] = useState(true);
   const [hiddenTree, setHiddenTree] = useState(false);
   const changeHiddenReply = () => setHiddenReplyField((hiddenField) => !hiddenField);
@@ -21,16 +19,16 @@ const Comment = ({ comment, hidden = false }) => {
       {!hidden && (
         <div className={commentCss()}>
           <div className={commentCss('Header')}>
-            <img className={commentCss('Avatar')} src={comment.avatar} alt="user avatar" />
+            <img className={commentCss('Avatar')} src={comment.photo} alt="user avatar" />
             <div className={commentCss('UserInfo')}>
               <span className={commentCss('Username')}>
-                {comment.username}
+                {comment.login}
               </span>
               <span className={commentCss('Timestamp')}>{date}</span>
             </div>
           </div>
           <div className={commentCss('Block')}>
-            <span className={commentCss('Text')}>{comment.comment}</span>
+            <span className={commentCss('Text')}>{comment.text}</span>
           </div>
           <button className={commentCss('ReplyButton')} onClick={changeHiddenReply}>
             {hiddenReplyField ? 'Ответить' : 'Скрыть форму'}
@@ -39,7 +37,6 @@ const Comment = ({ comment, hidden = false }) => {
             <ReplyComment
               setHidden={setHiddenReplyField}
               cls={commentCss}
-              dispatch={dispatch}
               parentId={comment.id}
             />
           )}

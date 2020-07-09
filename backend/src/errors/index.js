@@ -16,6 +16,12 @@ function UserException(message) {
   this.status = 400;
 }
 
+function CommentException(message) {
+  this.message = message;
+  this.name = 'Comment';
+  this.status = 400;
+}
+
 function InternalError(message) {
   this.message = message || 'Internal Error!';
   this.name = 'Internal';
@@ -27,4 +33,5 @@ module.exports = {
   ValidateException,
   UserException,
   InternalError,
+  CommentException,
 };
