@@ -1,6 +1,7 @@
 const {
   validateService,
   authService,
+  userService,
 } = require('../services');
 const { InternalError } = require('../errors');
 
@@ -23,7 +24,8 @@ const loginUser = async (req, res) => {
   try {
     await authService.login(req.body);
     req.session.logged = req.body.username;
-    res.send({ token: req.session.id });
+    const user = await userService.getUser({ login: req.body.username });
+    res.send({ token: req.session.id, userId: user[0].user_id, photo: user[0].photo });
   } catch (e) {
     if (e instanceof Error) {
       res.status(e.status || 500).send(new InternalError());

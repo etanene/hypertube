@@ -30,18 +30,29 @@ function LoginForm(props) {
   const { stateAuthReducer, authDispatch } = useContext(AuthContext);
 
   const submitForm = async (data) => {
-    console.log('data submit', data);
     const { username, password } = data;
     try {
-      const { token } = await apiService.post('/api/auth/login', { username, password });
+      const { token, userId, photo } = await apiService.post('/api/auth/login', { username, password });
       if (token) {
-        userService.setUser({ username, token });
-        authDispatch({ type: 'LOGIN', payload: { username, token } });
+        userService.setUser({
+          username,
+          token,
+          userId,
+          photo,
+        });
+        authDispatch({
+          type: 'LOGIN',
+          payload: {
+            username,
+            token,
+            userId,
+            photo,
+          },
+        });
       }
     } catch (e) {
       authDispatch({ type: 'LOGIN_ERROR', payload: e.message });
     }
-    console.log('getUser', userService.getUser());
   };
 
   useEffect(() => (
