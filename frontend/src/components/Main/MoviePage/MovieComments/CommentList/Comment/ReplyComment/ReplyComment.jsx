@@ -1,17 +1,22 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useContext,
+} from 'react';
 import { cn } from '@bem-react/classname';
+import moment from 'moment';
+import AuthContext from '../../../../../../../context/authContext';
+import CommentsContext from '../../../../../../../context/commentsContext';
 import './ReplyComment.css';
 
-const ReplyComment = (
-  {
-    cls,
-    dispatch,
-    parentId,
-    setHidden,
-  },
-) => {
+const superagent = require('superagent');
+
+const ReplyComment = ({ cls, parentId, setHidden }) => {
   const [comment, setComment] = useState('');
   const commentCss = cn('ReplyComment');
+  const { dispatch, imdbId } = useContext(CommentsContext);
+  const { stateAuthReducer } = useContext(AuthContext);
   const input = useRef(null);
   useEffect(() => {
     input.current.focus();
@@ -20,13 +25,19 @@ const ReplyComment = (
     dispatch({
       type: 'ADD_COMMENT',
       comment: {
-        login: 'Maxik',
-        time: Date.now() / 1000,
-        text: comment,
-        photo: '/image.png',
         parent_id: parentId,
+        login: stateAuthReducer.user.username,
+        created_at: moment(),
+        text: comment,
+        photo: stateAuthReducer.user.photo,
       },
     });
+    superagent.post('/api/comment/add').send({
+      user_id: stateAuthReducer.user.userId,
+      text: comment,
+      movie_id: imdbId,
+      parent_id: parentId,
+    }).catch((e) => console.log(e));
     setComment('');
     setHidden(true);
   };

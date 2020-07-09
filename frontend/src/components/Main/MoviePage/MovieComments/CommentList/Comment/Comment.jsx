@@ -1,16 +1,14 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import ReplyComment from './ReplyComment/ReplyComment';
 import HideTreeButton from './HideTreeButton/HideTreeButton';
-import CommentsContext from '../../../../../../context/commentsContext';
 import './Comment.css';
 
 const Comment = ({ comment, hidden = false }) => {
   const commentCss = cn('Comment');
   const { i18n } = useTranslation();
-  const { dispatch } = useContext(CommentsContext);
   const date = moment(comment.created_at).locale(i18n.language).format('D MMMM YYYY HH:mm');
   const [hiddenReplyField, setHiddenReplyField] = useState(true);
   const [hiddenTree, setHiddenTree] = useState(false);
@@ -39,7 +37,6 @@ const Comment = ({ comment, hidden = false }) => {
             <ReplyComment
               setHidden={setHiddenReplyField}
               cls={commentCss}
-              dispatch={dispatch}
               parentId={comment.id}
             />
           )}

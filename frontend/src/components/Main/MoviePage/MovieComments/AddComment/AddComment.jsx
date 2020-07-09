@@ -30,11 +30,11 @@ const AddComment = ({ title }) => {
         login: stateAuthReducer.user.username,
         created_at: moment(),
         text: comment,
-        photo: '/image.png',
+        photo: stateAuthReducer.user.photo,
       },
     });
     superagent.post('/api/comment/add').send({
-      user_id: 1,
+      user_id: stateAuthReducer.user.userId,
       text: comment,
       movie_id: imdbId,
       parent_id: null,
