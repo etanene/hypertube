@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { cn } from '@bem-react/classname';
 import MovieSort from './MovieSort/MovieSort';
 import GenreSearch from './GenreSearch/GenreSearch';
-import ShowWatched from './ShowWatched/ShowWatched';
 import GenreList from './GenreList/GenreList';
 import './MovieMenu.css';
 import GenresContext from '../../../../context/genresContext';
@@ -27,7 +26,6 @@ const MovieMenu = () => {
         <GenreSearch cls={movieMenuCss} />
       </div>
       <GenreList cls={genreListCss} />
-      <ShowWatched cls={movieMenuCss} />
     </GenresContext.Provider>
   );
 };

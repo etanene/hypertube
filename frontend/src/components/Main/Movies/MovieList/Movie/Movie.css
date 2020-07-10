@@ -21,6 +21,15 @@
     left: 34%;
 }
 
+.WatchedMovie {
+    top: -7%;
+    left: -12%;
+    font-size: 60px;
+    position: absolute;
+    color: #551A8B;
+    opacity: 85%;
+}
+
 .Movie-Image {
     width: 240px;
     height: 360px;

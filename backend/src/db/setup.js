@@ -7,6 +7,7 @@ const client = new Client();
 const users = fs.readFileSync(path.join(__dirname, '/migrates/users.sql')).toString();
 const root = fs.readFileSync(path.join(__dirname, '/migrates/root.sql')).toString();
 const comments = fs.readFileSync(path.join(__dirname, '/migrates/comments.sql')).toString();
+const userMovie = fs.readFileSync(path.join(__dirname, '/migrates/user_movie.sql')).toString();
 
 (async () => {
   await client.connect();
@@ -17,7 +18,11 @@ const comments = fs.readFileSync(path.join(__dirname, '/migrates/comments.sql'))
 
   // Создаем таблицу comments
   await client.query(comments);
-  console.log('Comments created');
+  console.log('Table comments created');
+
+  // Создаем таблицу comments
+  await client.query(userMovie);
+  console.log('Table user_movie created');
 
   // Создаем в users рута
   await client.query(root);

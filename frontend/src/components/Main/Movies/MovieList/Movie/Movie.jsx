@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { cn } from '@bem-react/classname';
+import ReactTooltip from 'react-tooltip';
+import { useTranslation } from 'react-i18next';
 import './Movie.css';
 
 const Movie = ({
@@ -8,10 +10,12 @@ const Movie = ({
   last,
   lastMovieRef,
   cls,
+  watched,
 }) => {
   const movieCss = cn('Movie');
   const overlayCss = cn('Overlay');
   const iconCss = cn('material-icons');
+  const { t } = useTranslation();
 
   return (
     <li className={cls('Item')} ref={last ? lastMovieRef : null}>
@@ -25,6 +29,16 @@ const Movie = ({
             alt="Movie poster"
             className={movieCss('Image')}
           />
+          {watched && (
+            <div className="WatchedMovie" data-tip="test" data-for="tip">
+              <ReactTooltip id="tip" place="top" effect="solid">
+                {t('main.menu.showWatched')}
+              </ReactTooltip>
+              <i className={iconCss({}, ['WatchedMovie'])}>
+                visibility
+              </i>
+            </div>
+          )}
           <div className={movieCss('Rating')}>
             { movie.rating }
             /10

@@ -1,9 +1,9 @@
 const { InternalError } = require('../errors');
-const { commentService } = require('../services');
+const { userMovieService } = require('../services');
 
-const addComment = async (req, res) => {
+const addUserMovie = async (req, res) => {
   try {
-    const response = await commentService.addComment(req.body);
+    const response = await userMovieService.addUserMovie(req.body);
     res.send(response);
   } catch (e) {
     if (e instanceof Error) {
@@ -14,10 +14,10 @@ const addComment = async (req, res) => {
   }
 };
 
-const getComments = async (req, res) => {
+const getUserMovie = async (req, res) => {
   try {
-    const comments = await commentService.getComments(req.body.movie_id);
-    res.send(comments);
+    const userMovies = await userMovieService.getUserMovie(req.body.user_id);
+    res.send(userMovies);
   } catch (e) {
     if (e instanceof Error) {
       res.status(e.status || 500).send(new InternalError());
@@ -28,6 +28,6 @@ const getComments = async (req, res) => {
 };
 
 module.exports = {
-  addComment,
-  getComments,
+  addUserMovie,
+  getUserMovie,
 };
