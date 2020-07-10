@@ -1,21 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { cn } from '@bem-react/classname';
 import MovieMenu from './MovieMenu/MovieMenu';
 import MovieList from './MovieList/MovieList';
-import useMovieSearch from '../../../services/useMovieSearch';
-import MoviesContext from '../../../context/moviesContext';
 import MovieScrollUp from './MovieScrollUp/MovieScrollUp';
+import useMovieSearch from '../../../services/useMovieSearch';
+import useGetUserMovies from '../../../services/useGetUserMovies';
+import MoviesContext from '../../../context/moviesContext';
+import AuthContext from '../../../context/authContext';
 import './Movies.css';
 
 const Movies = ({ queryOptions, setMovies }) => {
   const [pageNumber, setPageNumber] = useState(1);
   const movieBoxCss = cn('MovieBox');
+  const { stateAuthReducer } = useContext(AuthContext);
   const {
     isLoading,
     error,
     movies,
     hasMore,
   } = useMovieSearch(queryOptions, pageNumber);
+  const { userMovies } = useGetUserMovies(stateAuthReducer.user.userId);
   useEffect(() => {
     setMovies(movies);
   }, [movies]);
@@ -23,6 +27,7 @@ const Movies = ({ queryOptions, setMovies }) => {
     <MoviesContext.Provider
       value={{
         isLoading,
+        userMovies,
         error,
         movies,
         hasMore,

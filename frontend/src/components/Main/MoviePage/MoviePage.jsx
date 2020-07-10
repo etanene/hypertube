@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { cn } from '@bem-react/classname';
 import { useParams } from 'react-router-dom';
 import { animateScroll as scroll } from 'react-scroll';
 import MovieInfo from './MovieInfo/MovieInfo';
 import useGetMovieInfo from '../../../services/useGetMovieInfo';
 import useGetMovieSuggestions from '../../../services/useGetMovieSuggestions';
+import useSetUserMovie from '../../../services/useSetUserMovie';
 import MovieSuggestions from './MovieSuggestions/MovieSuggestions';
 import MovieComments from './MovieComments/MovieComments';
 import useGetMovieTorrents from '../../../services/useGetMovieTorrents';
 import MovieVideo from './VideoBox/VideoBox';
 import MovieInfoContext from '../../../context/MovieInfoContext';
+import AuthContext from '../../../context/authContext';
 
 const MoviePage = () => {
   const { imdbId, ytsId } = useParams();
@@ -17,11 +19,13 @@ const MoviePage = () => {
   useEffect(() => {
     scroll.scrollToTop();
   }, [imdbId]);
+  const { stateAuthReducer } = useContext(AuthContext);
   const { errorOMDB, OMDBInfo } = useGetMovieInfo(imdbId);
   const { errorSuggestions, movieSuggestions } = useGetMovieSuggestions(ytsId);
   const { errorYTS, YTSInfo } = useGetMovieTorrents(ytsId);
   const isReady = OMDBInfo && YTSInfo && movieSuggestions.length > 0;
   const isError = errorOMDB || errorYTS;
+  useSetUserMovie(stateAuthReducer.user.userId, imdbId);
   return (
     <MovieInfoContext.Provider value={{ YTSInfo, OMDBInfo }}>
       {errorSuggestions && <div>Error suggestions</div>}

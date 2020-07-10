@@ -10,6 +10,7 @@ const Movie = ({
   last,
   lastMovieRef,
   cls,
+  watched,
 }) => {
   const movieCss = cn('Movie');
   const overlayCss = cn('Overlay');
@@ -28,14 +29,16 @@ const Movie = ({
             alt="Movie poster"
             className={movieCss('Image')}
           />
-          <div className="WatchedMovie" data-tip="test" data-for="tip">
-            <ReactTooltip id="tip" place="top" effect="solid">
-              {t('main.menu.showWatched')}
-            </ReactTooltip>
-            <i className={iconCss({}, ['WatchedMovie'])}>
-              visibility
-            </i>
-          </div>
+          {watched && (
+            <div className="WatchedMovie" data-tip="test" data-for="tip">
+              <ReactTooltip id="tip" place="top" effect="solid">
+                {t('main.menu.showWatched')}
+              </ReactTooltip>
+              <i className={iconCss({}, ['WatchedMovie'])}>
+                visibility
+              </i>
+            </div>
+          )}
           <div className={movieCss('Rating')}>
             { movie.rating }
             /10

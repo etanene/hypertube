@@ -12,6 +12,7 @@ const MovieList = () => {
     isLoading,
     setPageNumber,
     hasMore,
+    userMovies,
   } = useContext(MovieContext);
   const { t } = useTranslation();
   const movieListCss = cn('MovieList');
@@ -25,6 +26,13 @@ const MovieList = () => {
     });
     if (node) observer.current.observe(node);
   }, [hasMore, setPageNumber]);
+  const isMovieWatched = (imdbId) => {
+    let watched = false;
+    userMovies.forEach((movie) => {
+      if (movie.movie_id === imdbId) watched = true;
+    });
+    return watched;
+  };
   return (
     <div className={movieListCss('Container')}>
       <ul className={movieListCss()}>
@@ -35,6 +43,7 @@ const MovieList = () => {
             movie={movie}
             last={movies.length === index + 1}
             lastMovieRef={lastMovieRef}
+            watched={isMovieWatched(movie.imdb_code)}
           />
         ))}
         {isLoading && <li className={movieListCss('Message')}>{t('main.movieList.loading')}</li>}
