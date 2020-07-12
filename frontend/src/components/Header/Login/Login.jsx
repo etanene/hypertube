@@ -11,13 +11,14 @@ const Login = (props) => {
   const loginCss = cn('Login');
   const listCss = cn('LoginList');
   const [visible, setVisible] = useState(false);
-  const { authDispatch } = useContext(AuthContext);
-
+  const { authDispatch, stateAuthReducer } = useContext(AuthContext);
+  const profileUrl = stateAuthReducer.user ? `/profile/${stateAuthReducer.user.userId}` : '/login';
   const handleClickLogin = () => {
     setVisible((prevState) => !prevState);
   };
   const handleLogout = () => {
     userService.delUser();
+    handleClickLogin();
     authDispatch({ type: 'LOGIN_LOGOUT' });
   };
 
@@ -26,22 +27,16 @@ const Login = (props) => {
       <span
         role="button"
         tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.code === 'KeyL') {
-            handleClickLogin();
-          }
-        }}
         onClick={handleClickLogin}
         className={loginCss('Icon', ['material-icons'])}
       >
         person
       </span>
-      {visible
-      && (
+      {visible && (
         <ul className={loginCss('List')}>
           <li className={listCss('Item')}>
             <span className={listCss('ItemTitle')}>
-              <Link className={listCss('Link', ['Link'])} to="/profile">
+              <Link onClick={handleClickLogin} className={listCss('Link', ['Link'])} to={profileUrl}>
                 Profile
               </Link>
             </span>
@@ -50,11 +45,6 @@ const Login = (props) => {
             <span
               role="button"
               tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.code === 'KeyL') {
-                  handleLogout();
-                }
-              }}
               className={listCss('ItemTitle')}
               onClick={handleLogout}
             >
