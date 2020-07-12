@@ -12,6 +12,8 @@ const addComment = async (comment) => {
 };
 
 const getComments = async (movieId) => {
+  console.log('service');
+  console.log('test');
   validateService.validateMovieId(movieId);
   const res = await commentModel.getCommentsByMovieId(movieId);
   return res;
