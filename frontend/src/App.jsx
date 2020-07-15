@@ -6,7 +6,7 @@ import Header from './components/Header/Header';
 import Movies from './components/Main/Movies/Movies';
 import RegForm from './components/RegForm';
 import LoginForm from './components/LoginForm';
-import Profile from './components/Main/Profile/Profile';
+import Profile from './components/Profile/Profile';
 import ResetpwForm from './components/ResetpwForm';
 import ChangepwForm from './components/ChangepwForm';
 import MoviePage from './components/Main/MoviePage/MoviePage';

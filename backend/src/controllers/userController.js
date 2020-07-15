@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const { userService, validateService } = require('../services');
 const { InternalError } = require('../errors');
 
@@ -74,10 +75,49 @@ const changeUserEmail = async (req, res) => {
   }
 };
 
+const updateUser = async (req, res) => {
+  try {
+    const data = {};
+    const {
+      userId,
+      email,
+      login,
+      password,
+      confirmPassword,
+    } = req.body;
+    await validateService.validateUserId(userId);
+    if (email) {
+      validateService.validateEmail(email);
+      data.email = email;
+    }
+    if (login) {
+      validateService.validateUsername(login);
+      data.login = login;
+    }
+    if (password || confirmPassword) {
+      validateService.validatePasswords(password, confirmPassword);
+      data.password = await bcrypt.hash(password, 1);
+    }
+    await userService.updateUser(data, userId);
+    res.send({ message: 'User updated' });
+  } catch (e) {
+    if (e instanceof Error) {
+      console.error(e);
+      console.error('');
+      res.status(e.status || 500).send(new InternalError());
+    } else {
+      console.error(e);
+      console.error('');
+      res.status(e.status || 500).send(e);
+    }
+  }
+};
+
 module.exports = {
   get,
   resetpw,
   changepw,
   changeUserpw,
   changeUserEmail,
+  updateUser,
 };

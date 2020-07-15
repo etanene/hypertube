@@ -1,0 +1,117 @@
+.Profile {
+    display: flex;
+}
+
+.Profile-Box {
+    padding-top: 50px;
+    margin: auto;
+    text-align: center;
+}
+
+.Profile-Avatar {
+    width: 120px;
+    min-width: 120px;
+    height: 120px;
+    min-height: 120px;
+    border-radius: 50%;
+}
+
+.Profile-Login {
+    font-size: 36px;
+    margin: 10px;
+    color: #6b379a;
+}
+
+.Profile-Info {
+    font-size: var(--font-size-m);
+    margin: auto;
+    width: 40%;
+}
+
+.Profile-ChangeButton {
+    border: none;
+    background-color: var(--white);
+    margin: 15px auto;
+    display: flex;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 150px;
+    height: 50px;
+    font-size: var(--font-size-l);
+}
+
+.Profile-ButtonText {
+    display: flex;
+    margin: auto;
+}
+
+.Profile-ChangeButton:hover {
+    background-color: #8e8e8e;
+}
+
+.Profile-Input {
+    margin-left: 60px;
+    margin-right: 30px;
+    border-radius: 5px;
+    width: 250px;
+    height: 40px;
+    outline: none;
+    border:none;
+    color: var(--white);
+    background-color: var(--grey);
+    font-size: var(--font-size-l);
+}
+
+.Profile-Input[placeholder] {
+    padding-left: 10px;
+}
+
+.Profile-InputButton {
+    outline: none;
+    padding-left: 5px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--grey);
+    color: var(--white);
+    border: none;
+}
+
+.Profile-InputError {
+    color: #b16262;
+    font-size: var(--font-size-l);
+}
+
+@media screen and (max-width: 720px) {
+    .Profile-Avatar {
+        width: 60px;
+        min-width: 60px;
+        height: 60px;
+        min-height: 60px;
+    }
+    .Profile-Login {
+        font-size: var(--font-size-xl);
+    }
+    .Profile-ChangeButton {
+        width: 85px;
+        height: 50px;
+        font-size: var(--font-size-m);
+    }
+    .Profile-Input {
+        height: 30px;
+        width: 140px;
+        font-size: var(--font-size-m);
+    }
+    .Profile-Input[placeholder] {
+        font-size: 14px;
+    }
+    .Profile-InputButton {
+        width: 30px;
+        height: 30px;
+    }
+    .Profile-InputError {
+        font-size: var(--font-size-s);
+    }
+}

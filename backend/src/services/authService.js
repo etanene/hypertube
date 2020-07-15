@@ -22,9 +22,9 @@ const signup = async (data) => {
   user.password = await bcrypt.hash(user.password, 1);
   user.unique = uuid();
   const filename = uuid();
-  user.photo = filename;
   const base64 = user.photo.replace(/data:image.*?;base64,/, '');
   await fs.writeFile(path.resolve('/app/public/photo', filename), base64, 'base64');
+  user.photo = filename;
   await userModel.addUser(user);
 
   // const link = `<a href="${HOST_URL}/api/auth/verify/${user.unique}">Click me</a>`;
@@ -32,7 +32,7 @@ const signup = async (data) => {
   //   user.email,
   //   'Hypertube email verification',
   //   `Please, verify your hypertube account ${link}`,
-  // );
+  // ); вавилова 19
   return (user);
 };
 
@@ -51,6 +51,14 @@ const login = async (data) => {
   // if (!user.validate) {
   //   throw new AuthException('Please, validate your account on email');
   // }
+};
+
+const validatePassword = async (data) => {
+  if (!data.user_id) throw new AuthException('User id is required');
+  const user = await userModel.getUser({ user_id: data.user_id });
+  if (!user[0]) throw new AuthException('Can not find user!');
+  const validPasswd = await bcrypt.compare(data.password, user[0].passwd);
+  return validPasswd;
 };
 
 const verify = async (ulink) => {
@@ -89,4 +97,5 @@ module.exports = {
   login,
   verify,
   isAuth,
+  validatePassword,
 };

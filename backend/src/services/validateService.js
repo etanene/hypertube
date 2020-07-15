@@ -1,5 +1,6 @@
 const escape = require('escape-html');
 const moment = require('moment-timezone');
+const { getUser } = require('./userService');
 const { ValidateException } = require('../errors');
 
 const REGEXP_USERNAME = /^[A-Za-z\d]{4,12}$/;
@@ -55,6 +56,12 @@ const validateComment = async (comment) => {
   validateMovieId(comment.movie_id);
 };
 
+const validateUserId = async (userId) => {
+  if (!userId) throw new ValidateException('User id is required');
+  const user = await getUser({ user_id: userId });
+  if (!user[0]) throw new ValidateException('User with given ID does not exist');
+};
+
 const getLoginData = (user) => {
   if (user && REGEXP_EMAIL.test(user)) {
     return ({ email: user });
@@ -63,6 +70,7 @@ const getLoginData = (user) => {
 };
 
 module.exports = {
+  validateUserId,
   validateUser,
   getLoginData,
   validateUsername,
