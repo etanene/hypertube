@@ -81,22 +81,30 @@ const updateUser = async (req, res) => {
     const {
       userId,
       email,
-      login,
+      username,
       password,
-      confirmPassword,
+      first_name,
+      last_name,
+      confirm_password,
     } = req.body;
     await validateService.validateUserId(userId);
     if (email) {
       validateService.validateEmail(email);
       data.email = email;
     }
-    if (login) {
-      validateService.validateUsername(login);
-      data.login = login;
+    if (username) {
+      validateService.validateUsername(username);
+      data.login = username;
     }
-    if (password || confirmPassword) {
-      validateService.validatePasswords(password, confirmPassword);
-      data.password = await bcrypt.hash(password, 1);
+    if (password || confirm_password) {
+      validateService.validatePasswords(password, confirm_password);
+      data.passwd = await bcrypt.hash(password, 1);
+    }
+    if (first_name) {
+      data.first_name = first_name;
+    }
+    if (last_name) {
+      data.last_name = last_name;
     }
     await userService.updateUser(data, userId);
     res.send({ message: 'User updated' });

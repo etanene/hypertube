@@ -18,7 +18,7 @@
 
 .Profile-Login {
     font-size: 36px;
-    margin: 10px;
+    margin: 20px 10px;
     color: #6b379a;
 }
 
@@ -31,7 +31,7 @@
 .Profile-ChangeButton {
     border: none;
     background-color: var(--white);
-    margin: 15px auto;
+    margin: 35px auto;
     display: flex;
     outline: none;
     cursor: pointer;

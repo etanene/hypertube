@@ -1,0 +1,8 @@
+.Profile-UpdateInput {
+    border-radius: 5px;
+    background-color: var(--grey);
+}
+
+.Profile-UpdateInputBox {
+    background-color: var(--dark-grey);
+}

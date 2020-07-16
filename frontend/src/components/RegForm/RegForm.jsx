@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
-
 import { useForm } from '../../hooks';
 import { apiService } from '../../services';
 import { REGEX } from '../../constants';
@@ -19,31 +17,38 @@ const inputCss = regFormCss('Input');
 
 const formSchema = {
   photo: {
+    required: true,
     validate: (value) => value === '',
   },
   username: {
     // доступны: большие/маленькие буквы, цифры
     // длина: 4 - 12
+    required: true,
     validate: (value) => !(REGEX.USERNAME.test(value)),
   },
   email: {
     // доступны: любые символы
     // обязательно: @ и точка
+    required: true,
     validate: (value) => !REGEX.EMAIL.test(value),
   },
   first_name: {
+    required: true,
     validate: (value) => value === '',
   },
   last_name: {
+    required: true,
     validate: (value) => value === '',
   },
   password: {
     // доступны: большие/маленькие буквы, цифры
     // обязательно: большая и маленькая буква, цифра
     // длина: 4 - 12
+    required: true,
     validate: (value) => (!REGEX.PASSWORD.test(value)),
   },
   confirm_password: {
+    required: true,
     validate: (value, userObj) => (value !== userObj.password.value),
   },
 };

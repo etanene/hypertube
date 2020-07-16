@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { apiService } from '../services';
 
-const useForm = (formSchema, submit) => {
+const useForm = (formSchema, submit, userId = null) => {
   const [state, setState] = useState(formSchema);
 
   const validateForm = () => {
@@ -10,7 +10,7 @@ const useForm = (formSchema, submit) => {
     let result = true;
 
     for (let i = 0; i < names.length; i += 1) {
-      if (state[names[i]].error || !state[names[i]].value) {
+      if (state[names[i]].error || (!state[names[i]].value && state[names[i]].required)) {
         result = false;
         setState((prevState) => ({
           ...prevState,
@@ -41,8 +41,7 @@ const useForm = (formSchema, submit) => {
 
     const data = Object.values(state).reduce((obj, current) => {
       let mergeObj = {};
-
-      mergeObj = { [current.name]: current.value };
+      if (current.name) mergeObj = { [current.name]: current.value };
 
       return (Object.assign(obj, mergeObj));
     }, {});
@@ -64,8 +63,7 @@ const useForm = (formSchema, submit) => {
     }
     try {
       const data = await apiService.get(`/api/user/get?${params.field}=${params.value}`);
-
-      if (Boolean(data.length) === params.exists) {
+      if (Boolean(data.length) === params.exists && data[0].user_id !== userId) {
         setState((prevState) => ({
           ...prevState,
           [params.name]: {

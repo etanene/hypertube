@@ -17,8 +17,9 @@ const Profile = () => {
   const [hiddenInput, setHiddenInput] = useState(false);
   const changeHiddenInput = () => setHiddenInput((hidden) => !hidden);
   const [passwdInput, setPasswdInput] = useState('');
-  const [passwdCheck, setPasswdCheck] = useState(0);
-  const checkPassword = () => {
+  const [passwdCheck, setPasswdCheck] = useState(2);
+  const checkPassword = (e) => {
+    e.preventDefault();
     superagent.post('/api/auth/validatePass').send({
       user_id: stateAuthReducer.user.userId,
       password: passwdInput,
@@ -30,7 +31,7 @@ const Profile = () => {
           setPasswdCheck(2);
         }
       })
-      .catch((e) => console.log(e));
+      .catch((err) => console.log(err));
   };
   return (
     <div className={profileCss()}>
@@ -62,7 +63,7 @@ const Profile = () => {
                       setPasswdInput(e.target.value);
                     }}
                   />
-                  <button onClick={checkPassword} className={profileCss('InputButton')}>
+                  <button onClick={(e) => checkPassword(e)} className={profileCss('InputButton')}>
                     <span className="material-icons">
                       arrow_right_alt
                     </span>
@@ -73,7 +74,7 @@ const Profile = () => {
             )}
           </div>
         )}
-        {passwdCheck === 2 && <UpdateProfile />}
+        {passwdCheck === 2 && <UpdateProfile cls={profileCss} user={user} />}
       </div>
     </div>
   );
