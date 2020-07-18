@@ -1,4 +1,5 @@
 import React, { useEffect, useContext } from 'react';
+import he from 'he';
 import { useTranslation } from 'react-i18next';
 import { REGEX } from '../../../constants';
 import { useForm } from '../../../hooks';
@@ -13,6 +14,7 @@ const UpdateProfile = ({ cls, user }) => {
   const formSchema = {
     photo: {
       validate: (value) => value === '',
+      value: user.photo,
       required: false,
     },
     username: {
@@ -34,6 +36,11 @@ const UpdateProfile = ({ cls, user }) => {
       validate: (value) => value === '',
       value: user.last_name,
       required: true,
+    },
+    info: {
+      validate: (value) => value.length > 250,
+      value: he.decode(user.info),
+      required: false,
     },
     password: {
       required: false,
@@ -91,7 +98,7 @@ const UpdateProfile = ({ cls, user }) => {
   return (
     <div>
       <form name="scroll-to-element" autoComplete="off" onSubmit={handleSubmit}>
-        <PhotoInput name="photo" error={state.photo.error} />
+        <PhotoInput photo={state.photo.value} name="photo" error={state.photo.error} />
         <Input
           size="m"
           type="text"
@@ -135,6 +142,18 @@ const UpdateProfile = ({ cls, user }) => {
           placeholder={t('regform.lastname.placeholder')}
           value={state.last_name.value}
           error={state.last_name.error && t('regform.lastname.error')}
+          message={t('regform.firstname.error')}
+          onChange={handleChange}
+          className={cls('UpdateInputBox')}
+          inputClassName={cls('UpdateInput')}
+        />
+        <Input
+          size="m"
+          type="text"
+          name="info"
+          placeholder={t('regform.lastname.placeholder')}
+          value={state.info.value}
+          error={state.info.error && t('regform.lastname.error')}
           message={t('regform.firstname.error')}
           onChange={handleChange}
           className={cls('UpdateInputBox')}

@@ -1,3 +1,4 @@
+const escape = require('escape-html');
 const bcrypt = require('bcrypt');
 const { userService, validateService } = require('../services');
 const { InternalError } = require('../errors');
@@ -79,6 +80,7 @@ const updateUser = async (req, res) => {
   try {
     const data = {};
     const {
+      info,
       userId,
       email,
       username,
@@ -95,6 +97,10 @@ const updateUser = async (req, res) => {
     if (username) {
       validateService.validateUsername(username);
       data.login = username;
+    }
+    if (info) {
+      validateService.validateInfo(info);
+      data.info = escape(info);
     }
     if (password || confirm_password) {
       validateService.validatePasswords(password, confirm_password);

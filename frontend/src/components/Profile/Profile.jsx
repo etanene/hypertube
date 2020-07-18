@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import he from 'he';
 import { cn } from '@bem-react/classname';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -52,7 +53,7 @@ const Profile = () => {
           <div>
             {user.photo && <img className={profileCss('Avatar')} src={`/api/public/photo/${user.photo}`} alt="User" />}
             <div className={profileCss('Login')}>{user.login}</div>
-            {user.info && (<div className={profileCss('Info')}>{user.info}</div>)}
+            {user.info && (<div className={profileCss('Info')}>{he.decode(user.info)}</div>)}
           </div>
         )}
         {user && isUserProfile && (

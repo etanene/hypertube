@@ -62,6 +62,10 @@ const validateUserId = async (userId) => {
   if (!user[0]) throw new ValidateException('User with given ID does not exist');
 };
 
+const validateInfo = (info) => {
+  if (info.length > 250) throw new ValidateException('Profile info is too long');
+};
+
 const getLoginData = (user) => {
   if (user && REGEXP_EMAIL.test(user)) {
     return ({ email: user });
@@ -70,6 +74,7 @@ const getLoginData = (user) => {
 };
 
 module.exports = {
+  validateInfo,
   validateUserId,
   validateUser,
   getLoginData,
