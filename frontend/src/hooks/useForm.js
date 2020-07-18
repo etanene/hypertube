@@ -48,7 +48,7 @@ const useForm = (formSchema, submit, userId = null) => {
 
     console.log('data', data);
 
-    if (validateForm()) {
+    if (validateForm() && Object.getOwnPropertyNames(data).length > 0) {
       try {
         submit(data);
       } catch (e) {

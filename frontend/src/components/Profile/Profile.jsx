@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { cn } from '@bem-react/classname';
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { scroller } from 'react-scroll';
 import AuthContext from '../../context/authContext';
 import useGetUserInfo from '../../services/useGetUserInfo';
 import './Profile.css';
@@ -17,7 +19,15 @@ const Profile = () => {
   const [hiddenInput, setHiddenInput] = useState(false);
   const changeHiddenInput = () => setHiddenInput((hidden) => !hidden);
   const [passwdInput, setPasswdInput] = useState('');
-  const [passwdCheck, setPasswdCheck] = useState(2);
+  const [passwdCheck, setPasswdCheck] = useState(0);
+  const { t } = useTranslation();
+  function scrollTo() {
+    scroller.scrollTo('scroll-to-element', {
+      duration: 1000,
+      delay: 0,
+      smooth: 'easeInOutQuart',
+    });
+  }
   const checkPassword = (e) => {
     e.preventDefault();
     superagent.post('/api/auth/validatePass').send({
@@ -29,6 +39,7 @@ const Profile = () => {
           setPasswdCheck(1);
         } else {
           setPasswdCheck(2);
+          scrollTo();
         }
       })
       .catch((err) => console.log(err));
@@ -47,13 +58,15 @@ const Profile = () => {
         {user && isUserProfile && (
           <div>
             <button onClick={changeHiddenInput} className={profileCss('ChangeButton')}>
-              <span className={profileCss('ButtonText')}>Edit profile</span>
+              <span className={profileCss('ButtonText')}>{t('profile.edit')}</span>
               <span className={profileCss('ButtonText', ['material-icons'])}>lock</span>
             </button>
             {hiddenInput && (
               <div>
                 <form>
                   <input
+                    /* eslint-disable-next-line jsx-a11y/no-autofocus */
+                    autoFocus
                     autoComplete="password"
                     className={profileCss('Input')}
                     type="password"
@@ -69,7 +82,7 @@ const Profile = () => {
                     </span>
                   </button>
                 </form>
-                {passwdCheck === 1 && <div className={profileCss('InputError')}>Wrong password</div>}
+                {passwdCheck === 1 && <div className={profileCss('InputError')}>{t('profile.passwordError')}</div>}
               </div>
             )}
           </div>

@@ -136,5 +136,10 @@
       "login": "Login",
       "reset": "Forgot password?"
     }
+  },
+  "profile": {
+    "edit": "Edit profile",
+    "passwordError": "Wrong password",
+    "update": "Update"
   }
 }

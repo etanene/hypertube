@@ -58,10 +58,8 @@ const UpdateProfile = ({ cls, user }) => {
   const submitForm = async (data) => {
     // eslint-disable-next-line no-param-reassign
     data.userId = stateAuthReducer.user.userId;
-    console.log('data is', data);
     await apiService.post('/api/user/updateUser', data);
   };
-  console.log('USER', user);
   const {
     state,
     handleChange,
@@ -92,7 +90,7 @@ const UpdateProfile = ({ cls, user }) => {
   }, [state.username.value, state.username.error, fetchUser]);
   return (
     <div>
-      <form autoComplete="off" onSubmit={handleSubmit}>
+      <form name="scroll-to-element" autoComplete="off" onSubmit={handleSubmit}>
         <PhotoInput name="photo" error={state.photo.error} />
         <Input
           size="m"
@@ -166,7 +164,7 @@ const UpdateProfile = ({ cls, user }) => {
           className={cls('UpdateInputBox')}
           inputClassName={cls('UpdateInput')}
         />
-        <Button type="submit">{t('regform.button')}</Button>
+        <Button className={cls('UpdateButton')} type="submit">{t('profile.update')}</Button>
       </form>
     </div>
   );
