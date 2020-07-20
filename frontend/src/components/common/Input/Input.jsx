@@ -1,6 +1,5 @@
 import React from 'react';
 import { cn } from '@bem-react/classname';
-
 import './Input.css';
 
 const inputCss = cn('Input');
@@ -14,6 +13,7 @@ function Input(props) {
     value = '',
     error,
     className,
+    inputClassName,
     message,
     onChange = () => {},
   } = props;
@@ -30,7 +30,7 @@ function Input(props) {
         name={name}
         placeholder={placeholder}
         value={value}
-        className={inputCss('InputTag', { size, error })}
+        className={inputCss('InputTag', [inputClassName], { size, error })}
         onChange={handleChange}
       />
       <span className={inputCss('Message')}>{error && message}</span>

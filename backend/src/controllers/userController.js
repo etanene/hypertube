@@ -1,3 +1,8 @@
+const escape = require('escape-html');
+const bcrypt = require('bcrypt');
+const uuid = require('uuid/v4');
+const path = require('path');
+const fs = require('fs').promises;
 const { userService, validateService } = require('../services');
 const { InternalError } = require('../errors');
 
@@ -74,10 +79,69 @@ const changeUserEmail = async (req, res) => {
   }
 };
 
+const updateUser = async (req, res) => {
+  try {
+    const data = {};
+    const {
+      info,
+      userId,
+      email,
+      username,
+      password,
+      first_name,
+      last_name,
+      confirm_password,
+      photo,
+    } = req.body;
+    await validateService.validateUserId(userId);
+    if (email) {
+      validateService.validateEmail(email);
+      data.email = email;
+    }
+    if (username) {
+      validateService.validateUsername(username);
+      data.login = username;
+    }
+    if (info) {
+      validateService.validateInfo(info);
+      data.info = escape(info);
+    }
+    if (password || confirm_password) {
+      validateService.validatePasswords(password, confirm_password);
+      data.passwd = await bcrypt.hash(password, 1);
+    }
+    if (first_name) {
+      data.first_name = first_name;
+    }
+    if (last_name) {
+      data.last_name = last_name;
+    }
+    if (photo) {
+      const filename = uuid();
+      const base64 = photo.replace(/data:image.*?;base64,/, '');
+      await fs.writeFile(path.resolve('/app/public/photo', filename), base64, 'base64');
+      data.photo = filename;
+    }
+    await userService.updateUser(data, userId);
+    res.send({ message: 'User updated' });
+  } catch (e) {
+    if (e instanceof Error) {
+      console.error(e);
+      console.error('');
+      res.status(e.status || 500).send(new InternalError());
+    } else {
+      console.error(e);
+      console.error('');
+      res.status(e.status || 500).send(e);
+    }
+  }
+};
+
 module.exports = {
   get,
   resetpw,
   changepw,
   changeUserpw,
   changeUserEmail,
+  updateUser,
 };

@@ -19,9 +19,9 @@ const getCommentById = async (commentId) => {
 
 const getCommentsByMovieId = async (movieId) => {
   const res = await db.query(`
-    SELECT u.login, u.photo, id, text, created_at, parent_id FROM comments
+    SELECT u.login, u.photo, c.id, c.text, c.created_at, c.parent_id FROM comments c
      LEFT JOIN users u 
-     ON comments.user_id = u.user_id
+     ON c.user_id = u.user_id
      WHERE movie_id=$1
   `, [movieId]);
   return (res.rows);

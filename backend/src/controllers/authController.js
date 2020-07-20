@@ -64,6 +64,19 @@ const verifyUser = async (req, res) => {
   }
 };
 
+const validatePassword = async (req, res) => {
+  try {
+    const isValid = await authService.validatePassword(req.body);
+    res.send({ isValid });
+  } catch (e) {
+    if (e instanceof Error) {
+      res.status(e.status || 500).send(new InternalError());
+    } else {
+      res.status(e.status || 500).send(e);
+    }
+  }
+};
+
 const isAuth = (req, res, next) => {
   try {
     const { authorization } = req.headers;
@@ -80,6 +93,7 @@ const isAuth = (req, res, next) => {
 };
 
 module.exports = {
+  validatePassword,
   signupUser,
   loginUser,
   logoutUser,

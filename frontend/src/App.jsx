@@ -6,6 +6,7 @@ import Header from './components/Header/Header';
 import Movies from './components/Main/Movies/Movies';
 import RegForm from './components/RegForm';
 import LoginForm from './components/LoginForm';
+import Profile from './components/Profile/Profile';
 import ResetpwForm from './components/ResetpwForm';
 import ChangepwForm from './components/ChangepwForm';
 import MoviePage from './components/Main/MoviePage/MoviePage';
@@ -19,11 +20,9 @@ const App = () => {
   const [movies, setMovies] = useState([]);
 
   const user = userService.getUser();
-  console.log('user localeStorage', user);
   if (user && !stateAuthReducer.isAuth) {
     authDispatch({ type: 'LOGIN', payload: user });
   }
-
   console.log('user', stateAuthReducer);
 
   return (
@@ -39,6 +38,9 @@ const App = () => {
           <Route exact path="/">
             {stateAuthReducer.isAuth
               ? <Movies queryOptions={queryOptions} setMovies={setMovies} /> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/profile/:userId">
+            {stateAuthReducer.isAuth ? <Profile /> : <Redirect to="/login" />}
           </Route>
           <Switch>
             <Route path="/signup">

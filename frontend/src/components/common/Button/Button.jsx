@@ -10,6 +10,7 @@ function Button(props) {
     type = 'button',
     children,
     className,
+    disabled = false,
 
     onClick = () => {},
   } = props;
@@ -17,6 +18,7 @@ function Button(props) {
   return (
     <button
       type={type}
+      disabled={disabled}
       className={buttonCss(null, [className])}
 
       onClick={onClick}

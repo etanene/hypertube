@@ -11,6 +11,11 @@ const getUser = async (params) => {
   return (user);
 };
 
+const updateUser = async (user, userId) => {
+  const res = await userModel.updateUser(user, { user_id: userId });
+  return res;
+};
+
 const resetPwUser = async (email) => {
   const uniqueLink = uuid();
   const res = await userModel.updateUser({ unique_link: uniqueLink }, { email });
@@ -56,6 +61,7 @@ const changeUserEmail = async (newEmail, login) => {
 
 module.exports = {
   getUser,
+  updateUser,
   resetPwUser,
   changePwUser,
   checkPassword,
