@@ -1,5 +1,8 @@
 const escape = require('escape-html');
 const bcrypt = require('bcrypt');
+const uuid = require('uuid/v4');
+const path = require('path');
+const fs = require('fs').promises;
 const { userService, validateService } = require('../services');
 const { InternalError } = require('../errors');
 
@@ -88,6 +91,7 @@ const updateUser = async (req, res) => {
       first_name,
       last_name,
       confirm_password,
+      photo,
     } = req.body;
     await validateService.validateUserId(userId);
     if (email) {
@@ -111,6 +115,12 @@ const updateUser = async (req, res) => {
     }
     if (last_name) {
       data.last_name = last_name;
+    }
+    if (photo) {
+      const filename = uuid();
+      const base64 = photo.replace(/data:image.*?;base64,/, '');
+      await fs.writeFile(path.resolve('/app/public/photo', filename), base64, 'base64');
+      data.photo = filename;
     }
     await userService.updateUser(data, userId);
     res.send({ message: 'User updated' });

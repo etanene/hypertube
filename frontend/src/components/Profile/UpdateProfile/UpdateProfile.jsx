@@ -1,5 +1,6 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import he from 'he';
+import { scroller } from 'react-scroll';
 import { useTranslation } from 'react-i18next';
 import { REGEX } from '../../../constants';
 import { useForm } from '../../../hooks';
@@ -11,10 +12,18 @@ import Input from '../../common/Input';
 import Button from '../../common/Button';
 
 const UpdateProfile = ({ cls, user }) => {
+  const [updated, setUpdated] = useState(false);
+  function scrollTo() {
+    scroller.scrollTo('scroll-to-update', {
+      duration: 1000,
+      delay: 0,
+      smooth: 'easeInOutQuart',
+    });
+  }
   const formSchema = {
     photo: {
       validate: (value) => value === '',
-      value: user.photo,
+      value: `/api/public/photo/${user.photo}`,
       required: false,
     },
     username: {
@@ -66,6 +75,8 @@ const UpdateProfile = ({ cls, user }) => {
     // eslint-disable-next-line no-param-reassign
     data.userId = stateAuthReducer.user.userId;
     await apiService.post('/api/user/updateUser', data);
+    setUpdated(true);
+    scrollTo();
   };
   const {
     state,
@@ -98,7 +109,13 @@ const UpdateProfile = ({ cls, user }) => {
   return (
     <div>
       <form name="scroll-to-element" autoComplete="off" onSubmit={handleSubmit}>
-        <PhotoInput photo={state.photo.value} name="photo" error={state.photo.error} />
+        <PhotoInput
+          className={cls('UpdatePhoto')}
+          onChange={handleChange}
+          photo={state.photo.value}
+          name="photo"
+          error={state.photo.error}
+        />
         <Input
           size="m"
           type="text"
@@ -151,10 +168,10 @@ const UpdateProfile = ({ cls, user }) => {
           size="m"
           type="text"
           name="info"
-          placeholder={t('regform.lastname.placeholder')}
+          placeholder={t('regform.info.placeholder')}
           value={state.info.value}
-          error={state.info.error && t('regform.lastname.error')}
-          message={t('regform.firstname.error')}
+          error={state.info.error && t('regform.info.error')}
+          message={t('regform.info.error')}
           onChange={handleChange}
           className={cls('UpdateInputBox')}
           inputClassName={cls('UpdateInput')}
@@ -184,6 +201,7 @@ const UpdateProfile = ({ cls, user }) => {
           inputClassName={cls('UpdateInput')}
         />
         <Button className={cls('UpdateButton')} type="submit">{t('profile.update')}</Button>
+        {updated && <div name="scroll-to-update" className={cls('UpdateMessage')}>{t('profile.updateMessage')}</div>}
       </form>
     </div>
   );

@@ -21,6 +21,13 @@
     background-color: #2a2a2a;
 }
 
+.Profile-UpdateMessage {
+    color: #551A8B;
+    font-size: var(--font-size-l);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .Profile-UpdateButton:disabled {
     cursor: auto;
     background-color: #797979;
