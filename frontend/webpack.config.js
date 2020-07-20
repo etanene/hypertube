@@ -60,4 +60,5 @@ module.exports = {
     contentBase: path.join(__dirname, 'public'),
     publicPath: '/',
   },
+  devtool: 'inline-source-map',
 };
