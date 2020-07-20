@@ -6,10 +6,6 @@ import useWindowDimensions from '../../../../../lib/useWindowDimensions';
 import MovieInfoContext from '../../../../../context/MovieInfoContext';
 import './MovieTrailer.css';
 
-window.YTConfig = {
-  host: 'http://www.youtube.com',
-};
-
 const MovieTrailer = ({ cls, hidden }) => {
   const { height, width } = useWindowDimensions();
   const { YTSInfo } = useContext(MovieInfoContext);
@@ -21,6 +17,7 @@ const MovieTrailer = ({ cls, hidden }) => {
       color: 'white',
       modestbranding: 1,
       rel: 0,
+      origin: 'http://192.168.99.104:8080',
     },
   };
   return (
