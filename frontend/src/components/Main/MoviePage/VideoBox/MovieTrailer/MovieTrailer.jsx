@@ -17,7 +17,7 @@ const MovieTrailer = ({ cls, hidden }) => {
       color: 'white',
       modestbranding: 1,
       rel: 0,
-      origin: 'http://192.168.99.104:8080',
+      origin: `http://${document.location.host}`,
     },
   };
   return (

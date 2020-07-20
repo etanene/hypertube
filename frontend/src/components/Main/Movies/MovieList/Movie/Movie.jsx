@@ -23,7 +23,7 @@ const Movie = ({
         <div className={movieCss()}>
           <img
             onError={(e) => {
-              e.target.src = 'http://192.168.99.104:8080/image.png';
+              e.target.src = `http://${document.location.host}/image.png`;
             }}
             src={movie.large_cover_image ? movie.large_cover_image : movie.medium_cover_image}
             alt="Movie poster"
