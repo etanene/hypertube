@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { cn } from '@bem-react/classname';
-import './MovieSort.css';
 import MovieSearchContext from '../../../../../context/movieSearchContext';
 import MoviesContext from '../../../../../context/moviesContext';
+import './MovieSort.css';
 
 const MovieSort = (props) => {
   const { cls } = props;

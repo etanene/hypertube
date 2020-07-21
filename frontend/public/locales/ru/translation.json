@@ -10,9 +10,10 @@
       "showWatched": "Вы просматривали этот фильм",
       "genreSearch": "Поиск по жанру",
       "movieSort": [
+        {"type":  "seeds", "name": "По популярности"},
+        {"type":  "rating", "name": "По рейтингу"},
         {"type":  "date_added", "name": "По дате добавления"},
         {"type":  "year", "name": "Сначала новые"},
-        {"type":  "rating", "name": "По рейтингу"},
         {"type":  "title", "name": "По названию"}
       ],
       "genres":  [
