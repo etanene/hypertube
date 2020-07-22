@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import YouTube from 'react-youtube';
 import useGetMovieTrailer from '../../../../../services/useGetMovieTrailer';
 import getVideoDimensions from '../../../../../lib/getVideoDimensions';
 import useWindowDimensions from '../../../../../lib/useWindowDimensions';
@@ -11,18 +10,19 @@ const MovieTrailer = ({ cls, hidden }) => {
   const { YTSInfo } = useContext(MovieInfoContext);
   const { trailerId } = useGetMovieTrailer(YTSInfo.title_long);
   const trailerDimensions = getVideoDimensions(height, width);
-  const trailerOptions = {
-    ...trailerDimensions,
-    playerVars: {
-      color: 'white',
-      modestbranding: 1,
-      rel: 0,
-      origin: `http://${document.location.host}`,
-    },
-  };
   return (
     <div className={cls('Trailer', { hidden })}>
-      {trailerId && <YouTube videoId={trailerId} opts={trailerOptions} />}
+      {trailerId && (
+        <iframe
+          width={trailerDimensions.width}
+          height={trailerDimensions.height}
+          src={`https://www.youtube.com/embed/${trailerId}`}
+          frameBorder="0"
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+          title="video"
+        />
+      )}
     </div>
   );
 };
