@@ -1,0 +1,94 @@
+.player {
+    width: 640px;
+    height: 360px;
+}
+
+.player_empty {
+    margin: 20px;
+    position: relative;
+    background: #000;
+    cursor: pointer;
+}
+
+.player__button,
+.player__errors {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.player__errors {
+    color: #fff;
+}
+
+.player_empty:hover .player__button {
+    opacity: .8;
+}
+
+.player__button_play {
+    border-radius: 50%;
+    border: 2px #ccc solid;
+    width: 50px;
+    height: 50px;
+}
+
+.player__button_play:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-35%, -50%);
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 12.5px 0 12.5px 25px;
+    border-color: transparent transparent transparent #fff;
+}
+
+.player__button_loading {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+}
+
+.player__button_loading div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 4px solid #fff;
+    border-radius: 50%;
+    animation: player__button_loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #fff transparent transparent transparent;
+}
+
+.player__button_loading div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+
+.player__button_loading div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+
+.player__button_loading div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+
+@keyframes player__button_loading {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

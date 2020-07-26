@@ -19,7 +19,7 @@ const Comment = ({ comment, hidden = false }) => {
       {!hidden && (
         <div className={commentCss()}>
           <div className={commentCss('Header')}>
-            <img className={commentCss('Avatar')} src={comment.photo} alt="user avatar" />
+            <img className={commentCss('Avatar')} src={`/api/public/photo/${comment.photo}`} alt="user avatar" />
             <div className={commentCss('UserInfo')}>
               <span className={commentCss('Username')}>
                 {comment.login}
