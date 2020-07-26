@@ -9,12 +9,13 @@ const TorrentClient = require('./TorrentClient/TorrentClient');
 const Stream = require('./Stream/Stream');
 
 const app = express();
+app.use(cors());
 const port = process.env.PORT || 8000;
 const server = http.createServer(app);
 const io = sock(server);
 app.use('/public', express.static(path.resolve(__dirname, '../public')));
 app.use('/video', express.static(path.resolve(__dirname, '../video')));
-app.use(cors());
+
 app.use(session({
   secret: 'hypertube',
   saveUninitialized: false,

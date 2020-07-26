@@ -3,10 +3,11 @@ import io from 'socket.io-client';
 import './Video.css';
 
 const Video = () => {
+  console.log(document.location.hostname);
   const [showVideo, setShowVideo] = useState(false);
   const streaming = (stream) => {
     console.log(stream);
-    const path = `http://192.168.99.104:8080/api/video/${stream.path.substring(stream.path.indexOf('video/') + 'video/'.length)}`;
+    const path = `http://${document.location.host}:8080/api/video/${stream.path.substring(stream.path.indexOf('video/') + 'video/'.length)}`;
     setShowVideo(true);
     // eslint-disable-next-line no-undef
     const hls = new Hls();
@@ -17,7 +18,7 @@ const Video = () => {
     hls.on(Hls.Events.ERROR, (event, data) => console.log(event, data));
   };
 
-  const socket = io('http://192.168.99.104:8000', { query: { movie: window.location.pathname, torrentFile: 'public/torrent-files/forrest-gump.torrent' } });
+  const socket = io(`${document.location.hostname}:8000`, { query: { movie: window.location.pathname, torrentFile: 'public/torrent-files/forrest-gump.torrent' } });
   console.log(socket);
   socket.on('stream', (stream) => {
     streaming(stream);
