@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { cn } from '@bem-react/classname';
 import { useParams } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 import { animateScroll as scroll } from 'react-scroll';
 import MovieInfo from './MovieInfo/MovieInfo';
 import useGetMovieInfo from '../../../services/useGetMovieInfo';
@@ -12,6 +13,7 @@ import useGetMovieTorrents from '../../../services/useGetMovieTorrents';
 import MovieVideo from './VideoBox/VideoBox';
 import MovieInfoContext from '../../../context/MovieInfoContext';
 import AuthContext from '../../../context/authContext';
+import './MoviePage.css';
 
 const MoviePage = () => {
   const { imdbId, ytsId } = useParams();
@@ -30,6 +32,13 @@ const MoviePage = () => {
     <MovieInfoContext.Provider value={{ YTSInfo, OMDBInfo }}>
       {errorSuggestions && <div>Error suggestions</div>}
       {isError && <div>An error occurred. Please refresh the page</div>}
+      {!isReady && (
+        <div className={moviePageCss('LoaderBox')}>
+          <div className={moviePageCss('Loader')}>
+            <Loader type="Circles" color="#551A8B" />
+          </div>
+        </div>
+      )}
       {isReady && <MovieInfo cls={moviePageCss} />}
       {isReady && <MovieVideo cls={moviePageCss} />}
       {isReady && <MovieSuggestions movies={movieSuggestions} />}

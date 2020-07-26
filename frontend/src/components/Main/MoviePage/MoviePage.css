@@ -1,0 +1,8 @@
+.MoviePage-Loader {
+    margin:auto;
+}
+
+.MoviePage-LoaderBox {
+    height: 200px;
+    display: flex;
+}

@@ -1,4 +1,5 @@
 import React, { useCallback, useContext, useRef } from 'react';
+import Loader from 'react-loader-spinner';
 import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
 import Movie from './Movie/Movie';
@@ -46,7 +47,13 @@ const MovieList = () => {
             watched={isMovieWatched(movie.imdb_code)}
           />
         ))}
-        {isLoading && <li className={movieListCss('Message')}>{t('main.movieList.loading')}</li>}
+        {isLoading && (
+          <li className={movieListCss('Loader')}>
+            <div className={movieListCss('LoaderBox')}>
+              <Loader type="Circles" color="#551A8B" />
+            </div>
+          </li>
+        )}
         {error && <li className={movieListCss('Message')}>{t('main.movieList.error')}</li>}
         {!isLoading && !error && !movies.length && <li className={movieListCss('Message')}>{t('main.movieList.notFound')}</li>}
       </ul>
