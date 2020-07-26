@@ -54,7 +54,7 @@ module.exports = class {
             this.ready = false;
             this.restart = true;
             this.downloaded = 0;
-            this.slowConversion = false;
+            this.slowConversion = true;
 
             const movies = this.downloads.filter(file => file.match(this.settings.patterns.movies))
             if (!movies.length) return reject('NKNWNFRMT');

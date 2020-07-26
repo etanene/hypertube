@@ -3,11 +3,10 @@ import io from 'socket.io-client';
 import './Video.css';
 
 const Video = () => {
-  console.log(document.location.hostname);
   const [showVideo, setShowVideo] = useState(false);
   const streaming = (stream) => {
-    console.log(stream);
-    const path = `http://${document.location.host}:8080/api/video/${stream.path.substring(stream.path.indexOf('video/') + 'video/'.length)}`;
+    const path = `http://${document.location.host}/api/video/${stream.path.substring(stream.path.indexOf('video/') + 'video/'.length)}`;
+    console.log(path);
     setShowVideo(true);
     // eslint-disable-next-line no-undef
     const hls = new Hls();
