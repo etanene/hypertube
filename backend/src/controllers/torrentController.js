@@ -7,14 +7,15 @@ const download = async (req, res) => {
   try {
     const torrent = req.body;
     validateService.validateTorrent(torrent);
-    const file = fs.createWriteStream(`./public/torrent-files/${torrent.name}_${torrent.movie_id}_${torrent.quality}.torrent`);
+    const name = `${torrent.name}_${torrent.movie_id}_${torrent.quality}.torrent`;
+    const file = fs.createWriteStream(`./public/torrent-files/${name}`);
     https.get(torrent.url, (response) => {
       response.pipe(file);
     }).on('error', (e) => {
-      fs.unlink('./public/torrent-files/test.torrent');
+      fs.unlink(`./public/torrent-files/${name}`);
       res.send(e.message);
     });
-    res.send('ok');
+    res.send({ name });
   } catch (e) {
     if (e instanceof Error) {
       console.log(e);

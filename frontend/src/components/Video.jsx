@@ -5,6 +5,8 @@ import io from 'socket.io-client';
 import './Video.css';
 import Loader from "react-loader-spinner";
 
+const superagent = require('superagent');
+
 const Video = () => {
   const [showVideo, setShowVideo] = useState(false);
   const [showPlay, setShowPlay] = useState(true);
@@ -20,15 +22,28 @@ const Video = () => {
     hls.on(Hls.Events.ERROR, (event, data) => console.log(event, data));
   };
   const playVideo = () => {
-    const socket = io(`${document.location.hostname}:8000`, { query: { movie: window.location.pathname, torrentFile: 'public/torrent-files/forrest-gump.torrent' } });
-    if (!sendPlay) socket.emit('play');
-    setSendPlay(true);
-    setShowPlay(false);
-    setIsLoading(true);
-    socket.on('stream', (stream) => {
-      streaming(stream);
-      socket.off('stream');
-    });
+    // const url = 'https://yts.mx/torrent/download/5E915039C619366E490D08DB3FFED21F3A3AE84A';
+    // const quality = '720p';
+    // const name = 'Godfather';
+    // console.log(`http://${document.location.hostname}:8080/api/torrent/download`);
+    // superagent.post(`http://${document.location.hostname}:8080/api/torrent/download`).send({
+    //   movie_id: 'tt041094',
+    //   name,
+    //   quality,
+    //   url,
+    // }).then((res) => {
+    //   const torrentName = res.body.name;
+      const socket = io(`${document.location.hostname}:8000`, { query: { movie: window.location.pathname, torrentFile: `public/torrent-files/forrest-gump.torrent` } });
+      if (!sendPlay) socket.emit('play');
+      setSendPlay(true);
+      setShowPlay(false);
+
+      setIsLoading(true);
+      socket.on('stream', (stream) => {
+        streaming(stream);
+        socket.off('stream');
+      });
+    // }).catch((e) => console.log(e));
   };
   return (
       <div
