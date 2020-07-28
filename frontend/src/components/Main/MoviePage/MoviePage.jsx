@@ -10,7 +10,7 @@ import useSetUserMovie from '../../../services/useSetUserMovie';
 import MovieSuggestions from './MovieSuggestions/MovieSuggestions';
 import MovieComments from './MovieComments/MovieComments';
 import useGetMovieTorrents from '../../../services/useGetMovieTorrents';
-import MovieVideo from './VideoBox/VideoBox';
+import VideoBox from './VideoBox/VideoBox';
 import MovieInfoContext from '../../../context/MovieInfoContext';
 import AuthContext from '../../../context/authContext';
 import './MoviePage.css';
@@ -29,7 +29,7 @@ const MoviePage = () => {
   const isError = errorOMDB || errorYTS;
   useSetUserMovie(stateAuthReducer.user.userId, imdbId);
   return (
-    <MovieInfoContext.Provider value={{ YTSInfo, OMDBInfo }}>
+    <MovieInfoContext.Provider value={{ YTSInfo, OMDBInfo, imdbId }}>
       {errorSuggestions && <div>Error suggestions</div>}
       {isError && <div>An error occurred. Please refresh the page</div>}
       {!isReady && (
@@ -40,7 +40,7 @@ const MoviePage = () => {
         </div>
       )}
       {isReady && <MovieInfo cls={moviePageCss} />}
-      {isReady && <MovieVideo cls={moviePageCss} />}
+      {isReady && <VideoBox cls={moviePageCss} />}
       {isReady && <MovieSuggestions movies={movieSuggestions} />}
       {isReady && <MovieComments title={OMDBInfo.Title} imdbId={imdbId} />}
     </MovieInfoContext.Provider>

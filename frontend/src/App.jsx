@@ -7,7 +7,7 @@ import Movies from './components/Main/Movies/Movies';
 import RegForm from './components/RegForm';
 import LoginForm from './components/LoginForm';
 import Profile from './components/Profile/Profile';
-import Video from './components/Video';
+import Video from './components/Main/MoviePage/VideoBox/Video/Video';
 import ResetpwForm from './components/ResetpwForm';
 import ChangepwForm from './components/ChangepwForm';
 import MoviePage from './components/Main/MoviePage/MoviePage';
