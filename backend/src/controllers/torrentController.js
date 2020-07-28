@@ -11,11 +11,15 @@ const download = async (req, res) => {
     const file = fs.createWriteStream(`./public/torrent-files/${name}`);
     https.get(torrent.url, (response) => {
       response.pipe(file);
+      file.on('finish', () => {
+        file.close(() => {
+          res.send({ name });
+        });
+      });
     }).on('error', (e) => {
       fs.unlink(`./public/torrent-files/${name}`);
       res.send(e.message);
     });
-    res.send({ name });
   } catch (e) {
     if (e instanceof Error) {
       console.log(e);

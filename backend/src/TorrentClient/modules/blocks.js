@@ -4,53 +4,53 @@
 // We need both to track lost pieces/blocks
 
 module.exports = class {
-    constructor( parser ) {
-        this.parser = parser;
-        // blocks we requested
-        this.requested = [];
-        // blocks we received
-        this.received = [];
-        // if we requested and never received something this will be set to true
-        this.lost = [];
-        // currently requesting
-        this.first = null;
-    }
+  constructor( parser ) {
+    this.parser = parser;
+    // blocks we requested
+    this.requested = [];
+    // blocks we received
+    this.received = [];
+    // if we requested and never received something this will be set to true
+    this.lost = [];
+    // currently requesting
+    this.first = null;
+  }
 
-    initialize(filesWritten) {
-        this.received = filesWritten.map( blocks => blocks.slice() );
-        this.requested = filesWritten.map( blocks => blocks.slice() );
-        this.lost = [];
-    }
+  initialize(filesWritten) {
+    this.received = filesWritten.map( blocks => blocks.slice() );
+    this.requested = filesWritten.map( blocks => blocks.slice() );
+    this.lost = [];
+  }
 
-    // check if we need this piece or block
-    needed(pindex, bindex = null) {
-        if (bindex !== null)
-            return !this.requested[pindex][bindex];
-        return !this.requested[pindex].every(block => block);
-    }
+  // check if we need this piece or block
+  needed(pindex, bindex = null) {
+    if (bindex !== null)
+      return !this.requested[pindex][bindex];
+    return !this.requested[pindex].every(block => block);
+  }
 
-    complete() {
-        // check if we received every block
-        if ( this.received.every( blocks => blocks.every( block => block) ) )
-            return true;
+  complete() {
+    // check if we received every block
+    if ( this.received.every( blocks => blocks.every( block => block) ) )
+      return true;
 
-        // check if we requested every block
-        if ( this.requested.every( blocks => blocks.every( block => block) ) ) {
-            // reset requested to received
-            this.requested = this.received.map( blocks => blocks.slice() );
-        }
-        return false;
+    // check if we requested every block
+    if ( this.requested.every( blocks => blocks.every( block => block) ) ) {
+      // reset requested to received
+      this.requested = this.received.map( blocks => blocks.slice() );
     }
-    
-    // get all missing pieces
-    missing() {
-        const missing = [];
-        this.received.forEach(
-            (blocks, index) => {
-                if ( !blocks.every(block => block) )
-                    missing.push(index);
-            }
-        );
-        return missing;
-    }
+    return false;
+  }
+
+  // get all missing pieces
+  missing() {
+    const missing = [];
+    this.received.forEach(
+      (blocks, index) => {
+        if ( !blocks.every(block => block) )
+          missing.push(index);
+      }
+    );
+    return missing;
+  }
 };

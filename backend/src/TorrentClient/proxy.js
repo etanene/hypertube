@@ -1,4 +1,3 @@
-/* eslint-disable */
 module.exports.host = 'proxy.secureconnect.me';
 module.exports.port = 1085;
 module.exports.username = 'aleksander.antropov@gmail.com';
