@@ -3,7 +3,7 @@ import { cn } from '@bem-react/classname';
 import { Link } from 'react-router-dom';
 import './Login.css';
 
-import { userService } from '../../../services';
+import { userService, apiService } from '../../../services';
 import AuthContext from '../../../context/authContext';
 
 const Login = (props) => {
@@ -19,6 +19,7 @@ const Login = (props) => {
   const handleLogout = () => {
     userService.delUser();
     authDispatch({ type: 'LOGIN_LOGOUT' });
+    apiService.get('/api/auth/logout');
   };
 
   return (

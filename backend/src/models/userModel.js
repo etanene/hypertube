@@ -31,8 +31,20 @@ const updateUser = async (data, condition) => {
   return (res.rows);
 };
 
+const getUserByLogin = async (login) => {
+  const res = await db.query(`SELECT * from users where email = '${login}'`);
+  return res.rows[0];
+};
+
+const getUserById = async (id) => {
+  const res = await db.query(`SELECT * from users where id = ${id}`);
+  return res.rows[0];
+};
+
 module.exports = {
   addUser,
   getUser,
   updateUser,
+  getUserByLogin,
+  getUserById,
 };

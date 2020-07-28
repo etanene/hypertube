@@ -22,9 +22,9 @@ const signup = async (data) => {
   user.password = await bcrypt.hash(user.password, 1);
   user.unique = uuid();
   const filename = uuid();
-  user.photo = filename;
   const base64 = user.photo.replace(/data:image.*?;base64,/, '');
   await fs.writeFile(path.resolve('/app/public/photo', filename), base64, 'base64');
+  user.photo = filename;
   await userModel.addUser(user);
 
   // const link = `<a href="${HOST_URL}/api/auth/verify/${user.unique}">Click me</a>`;
