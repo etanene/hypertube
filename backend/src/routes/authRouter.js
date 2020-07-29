@@ -1,10 +1,15 @@
 const express = require('express');
+const passport = require('passport');
 
 const { authController } = require('../controllers');
 
 const router = express.Router();
 
-router.post('/login', authController.loginUser);
+router.post('/login', passport.authenticate('local'),
+  (req, res) => {
+    req.session.logged = req.body.username;
+    res.send({ token: req.session.id, userId: req.user.user_id, photo: req.user.photo });
+  });
 
 router.post('/signup', authController.signupUser);
 

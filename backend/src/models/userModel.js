@@ -32,7 +32,7 @@ const updateUser = async (data, condition) => {
 };
 
 const getUserByLogin = async (login) => {
-  const res = await db.query(`SELECT * from users where email = '${login}'`);
+  const res = await db.query(`SELECT * from users where login = '${login}'`);
   return res.rows[0];
 };
 

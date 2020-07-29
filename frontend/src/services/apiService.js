@@ -1,3 +1,5 @@
+import userService from './userService';
+
 function parseError(error, status) {
   if (error && error.message) {
     throw new Error(error.message);
@@ -28,9 +30,12 @@ async function fetchHelper(url, options) {
 }
 
 async function get(url, params) {
+  const user = userService.getUser();
+  console.log('user in get api', user);
   const headers = new Headers();
   headers.append('Accept', 'application/json');
   headers.append('Accept-Charset', 'utf-8');
+  headers.append('Authorization', `Bearer ${user && user.token}`);
 
   const options = {
     method: 'GET',

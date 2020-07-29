@@ -1,9 +1,7 @@
-const passport = require('passport');
-
 const {
   validateService,
   authService,
-  // userService,
+  userService,
 } = require('../services');
 const { InternalError } = require('../errors');
 
@@ -22,15 +20,19 @@ const signupUser = async (req, res) => {
   }
 };
 
-const loginUser = async (req, res, next) => {
-  passport.authenticate('local', (err, user) => {
-    if (err || !user) { return next(err); }
-    req.logIn(user, (error) => {
-      if (error) { return next(error); }
-      return res.send(user);
-    });
-    return next(err);
-  })(req, res, next);
+const loginUser = async (req, res) => {
+  try {
+    await authService.login(req.body);
+    req.session.logged = req.body.username;
+    const user = await userService.getUser({ login: req.body.username });
+    res.send({ token: req.session.id, userId: user[0].user_id, photo: user[0].photo });
+  } catch (e) {
+    if (e instanceof Error) {
+      res.status(e.status || 500).send(new InternalError());
+    } else {
+      res.status(e.status || 500).send(e);
+    }
+  }
 };
 
 const logoutUser = (req, res) => {
@@ -65,7 +67,7 @@ const verifyUser = async (req, res) => {
 const isAuth = (req, res, next) => {
   try {
     const { authorization } = req.headers;
-    console.log('auth', authorization);
+    console.log('auth', req.headers);
 
     authService.isAuth(authorization, req.session.id);
     next();
