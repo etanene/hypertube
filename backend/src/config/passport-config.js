@@ -7,14 +7,17 @@ const bcrypt = require('bcrypt');
 const userModel = require('../models/userModel');
 
 const localStrategy = new LocalStrategy(
-  (username, password, done) => {
-    const user = userModel.getUserByLogin(username);
+  async (username, password, done) => {
+    const user = await userModel.getUserByLogin(username);
     if (user == null) {
       return done(null, false, { message: 'No user with that username' });
     }
     try {
-      if (bcrypt.compare(password, user.password)) {
-        return done(null, user);
+      if (await bcrypt.compare(password, user.passwd)) {
+        if (user.validate) {
+          return done(null, user);
+        }
+        return done(null, false, { message: 'Account not validated' });
       }
       return done(null, false, { message: 'Password incorrect' });
     } catch (e) {
