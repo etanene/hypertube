@@ -10,16 +10,16 @@ const localStrategy = new LocalStrategy(
   async (username, password, done) => {
     const user = await userModel.getUserByLogin(username);
     if (user == null) {
-      return done(null, false, { message: 'No user with that username' });
+      return done({ message: 'No user with that username' }, false);
     }
     try {
       if (await bcrypt.compare(password, user.passwd)) {
         if (user.validate) {
           return done(null, user);
         }
-        return done(null, false, { message: 'Account not validated' });
+        return done({ message: 'Account is not validated' }, false);
       }
-      return done(null, false, { message: 'Password incorrect' });
+      return done({ message: 'Password incorrect' }, false);
     } catch (e) {
       return done(e);
     }
