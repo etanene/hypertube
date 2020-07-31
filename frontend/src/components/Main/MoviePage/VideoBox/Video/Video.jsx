@@ -19,6 +19,26 @@ const Video = ({ hidden }) => {
   const [torrentInfo, setTorrentInfo] = useState(false);
   const { YTSInfo, imdbId } = useContext(MovieInfoContext);
   const { t } = useTranslation();
+
+  superagent.post(`http://${document.location.hostname}:8080/api/torrent/download`)
+    .send(torrentInfo)
+    .then((res) => {
+      const torrentName = res.body.name;
+      const socket = io(`${document.location.hostname}:8000`, {
+        query: {
+          movie: window.location.pathname,
+          torrentFile: `public/torrent-files/${torrentName}`
+        }
+      });
+
+      socket.on( 'errors', err => console.log(err) );
+
+      socket.on('stream', (stream) => {
+        streaming(stream);
+        socket.off('stream');
+      });
+    }).catch((e) => console.log(e));
+
   useEffect(() => {
     const torrent = getTorrentInfo(YTSInfo, imdbId, YTSInfo.title_long);
     if (torrent.error) {
@@ -27,7 +47,9 @@ const Video = ({ hidden }) => {
       setTorrentInfo(torrent);
     }
   }, []);
+
   const playerCss = cn('Player');
+
   const streaming = (stream) => {
     const path = `http://${document.location.host}/api/video/${stream.path.substring(stream.path.indexOf('video/') + 'video/'.length)}`;
     setShowVideo(true);
@@ -36,29 +58,17 @@ const Video = ({ hidden }) => {
     hls.attachMedia(video);
     hls.on(Hls.Events.ERROR, (event, data) => console.log(event, data));
   };
-  const playVideo = () => {
-    console.log(torrentInfo);
-    superagent.post(`http://${document.location.hostname}:8080/api/torrent/download`)
-      .send(torrentInfo)
-      .then((res) => {
-      const torrentName = res.body.name;
-      const socket = io(`${document.location.hostname}:8000`, {
-        query: {
-          movie: window.location.pathname,
-          torrentFile: `public/torrent-files/${torrentName}`
-        }
-      });
-      if (!sendPlay) socket.emit('play');
-      setSendPlay(true);
-      setShowPlay(false);
 
-      setIsLoading(true);
-      socket.on('stream', (stream) => {
-        streaming(stream);
-        socket.off('stream');
-      });
-    }).catch((e) => console.log(e));
-  };
+  const playVideo = () => {
+    if (sendPlay) return ;
+    
+    socket.emit('play');
+    setSendPlay(true);
+    setShowPlay(false);
+
+    setIsLoading(true);
+  }
+
   return (
     <div>
       {torrentError && !hidden && (
@@ -76,9 +86,9 @@ const Video = ({ hidden }) => {
         >
           {showPlay && (
             <div className={playerCss('PlayBox')}>
-          <span className={playerCss('PlayIcon', ['material-icons'])}>
+            <span className={playerCss('PlayIcon', ['material-icons'])}>
             play_circle_outline
-          </span>
+            </span>
             </div>
           )}
           {isLoading && !showVideo && (
