@@ -116,6 +116,15 @@ function LoginForm(props) {
           </NavLink>
         </div>
         <Button type="submit" className={loginFormCss('Submit')}>{t('loginform.button')}</Button>
+        <NavLink to="/api/auth/login/google" target="_blank" className={loginFormCss('Link')}>
+          Google
+        </NavLink>
+        <NavLink to="/api/auth/login/42" target="_blank" className={loginFormCss('Link')}>
+          42
+        </NavLink>
+        <NavLink to="/api/auth/login/github" target="_blank" className={loginFormCss('Link')}>
+          GitHub
+        </NavLink>
       </form>
     </div>
   );

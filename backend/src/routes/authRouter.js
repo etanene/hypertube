@@ -1,4 +1,3 @@
-/* eslint-disable */
 const express = require('express');
 const passport = require('passport');
 
@@ -6,10 +5,8 @@ const { authController } = require('../controllers');
 
 const router = express.Router();
 
-router.post('/login', function(req, res, next) {
-  passport.authenticate('local', function(err, user, info) {
-    console.log('error is ', err);
-    console.log('user is ', user);
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', (err, user) => {
     if (err) {
       res.send(err.message);
     }
@@ -19,6 +16,30 @@ router.post('/login', function(req, res, next) {
     }
   })(req, res, next);
 });
+
+router.get('/login/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+router.get('/login/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),
+  (req, res) => {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
+router.get('/login/42', passport.authenticate('42'));
+
+router.get('/login/42/callback', passport.authenticate('42', { failureRedirect: '/login' }),
+  (req, res) => {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
+router.get('/login/github', passport.authenticate('github'));
+
+router.get('/login/github/callback', passport.authenticate('github', { failureRedirect: '/login' }),
+  (req, res) => {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 router.post('/signup', authController.signupUser);
 

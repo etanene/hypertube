@@ -41,10 +41,55 @@ const getUserById = async (id) => {
   return res.rows[0];
 };
 
+const getUserBySourceId = async (provider, id) => {
+  if (provider === 'google') {
+    const res = await db.query(`SELECT * from users where googleId = '${id}'`);
+    return res.rows[0];
+  }
+  if (provider === '42') {
+    const res = await db.query(`SELECT * from users where fortytwoId = '${id}'`);
+    return res.rows[0];
+  }
+  if (provider === 'github') {
+    const res = await db.query(`SELECT * from users where githubId = '${id}'`);
+    return res.rows[0];
+  }
+  return null;
+};
+
+const createUserBySource = async (provider, profile) => {
+  if (provider === 'google') {
+    await db.query(`
+    INSERT INTO
+      users (email, login, first_name, last_name, googleId)
+    VALUES
+      ($1, $2, $3, $4, $5)
+  `, [profile.emails[0].value, profile.displayName, profile.name.givenName, profile.name.familyName, profile.id]);
+  }
+  if (provider === '42') {
+    await db.query(`
+    INSERT INTO
+      users (email, login, first_name, last_name, fortytwoId)
+    VALUES
+      ($1, $2, $3, $4, $5)
+  `, [profile.emails[0].value, profile.username, profile.name.givenName, profile.name.familyName, profile.id]);
+  }
+  if (provider === 'github') {
+    await db.query(`
+    INSERT INTO
+      users (login, photo, githubId)
+    VALUES
+      ($1, $2, $3)
+  `, [profile.username, profile.photos[0].value, profile.id]);
+  }
+};
+
 module.exports = {
   addUser,
   getUser,
   updateUser,
   getUserByLogin,
   getUserById,
+  getUserBySourceId,
+  createUserBySource,
 };

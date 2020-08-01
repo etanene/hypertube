@@ -5,9 +5,17 @@ const passport = require('passport');
 const path = require('path');
 const http = require('http');
 const router = require('./routes');
-const { localStrategy } = require('./config/passport-config');
+const {
+  localStrategy,
+  googleStrategy,
+  fortytwoStrategy,
+  githubStrategy,
+} = require('./config/passport-config');
 
 passport.use('local', localStrategy);
+passport.use('google', googleStrategy);
+passport.use('42', fortytwoStrategy);
+passport.use('github', githubStrategy);
 const app = express();
 const port = process.env.PORT || 8000;
 const server = http.createServer(app);
