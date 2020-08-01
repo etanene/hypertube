@@ -2,6 +2,5 @@ FROM    node:12.16.2
 
 WORKDIR /app
 COPY    * ./
-RUN apt update
-RUN apt install -y ffmpeg
+COPY    ffmpeg/ffmpeg /usr/bin
 CMD     ["npm", "run", "dev"]

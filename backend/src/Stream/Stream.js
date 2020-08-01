@@ -140,11 +140,10 @@ module.exports = class {
 		});
 	}
 	
-	async convertVideo() {
-		console.log('Stream: Converting video ' + this.files.movie);
-		
+	async convertVideo() {		
 		if (this.converted) this.events.emit('manifest-created');
 		else if (this.status == 'idle' && this.downloaded > this.settings.ffmpeg.downloadThreshold) {
+			console.log('Stream: Converting video ' + this.files.movie);
 			this.status = 'converting';
 			
 			let offset, entries, discontinuity;
@@ -158,7 +157,7 @@ module.exports = class {
 				'-i', this.path + this.files.movie,
 				'-ss', offset,
 				'-r', 24, // framerate
-				'-g', 48, // group pictures
+				'-g', 96, // group pictures
 				'-keyint_min', 24, // insert a key frame every 24 frames
 				'-c:v', 'libx264',
 				'-b:v', '1000k',
@@ -181,8 +180,8 @@ module.exports = class {
 				this.checkManifest();
 			});
 			
-			// this.process.stderr.setEncoding('utf8'); // debug
-			// this.process.stderr.on('data', data => console.log(data) ); // debug
+			this.process.stderr.setEncoding('utf8'); // debug
+			this.process.stderr.on('data', data => console.log(data) ); // debug
 			
 			this.process.on('close', (code, signal) => {
 				console.log('Stream: End converting video');
@@ -198,8 +197,7 @@ module.exports = class {
 			});
 			
 		} else if (this.restart)
-		this.videoTimer = setTimeout(() => this.convertVideo(), 5000);
-		
+			this.videoTimer = setTimeout(() => this.convertVideo(), 5000);
 	}
 	
 	close() {
