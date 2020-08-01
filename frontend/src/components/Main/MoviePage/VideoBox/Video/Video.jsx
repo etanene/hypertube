@@ -12,6 +12,8 @@ const superagent = require('superagent');
 
 const Video = ({ hidden }) => {
   const [showVideo, setShowVideo] = useState(false);
+  const [subtitles, setSubtitles] = useState(false);
+  const [socket, setSocket] = useState(false);
   const [showPlay, setShowPlay] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [sendPlay, setSendPlay] = useState(false);
@@ -20,38 +22,39 @@ const Video = ({ hidden }) => {
   const { YTSInfo, imdbId } = useContext(MovieInfoContext);
   const { t } = useTranslation();
 
-  superagent.post(`http://${document.location.hostname}:8080/api/torrent/download`)
-    .send(torrentInfo)
-    .then((res) => {
-      const torrentName = res.body.name;
-      const socket = io(`${document.location.hostname}:8000`, {
-        query: {
-          movie: window.location.pathname,
-          torrentFile: `public/torrent-files/${torrentName}`
-        }
-      });
-
-      socket.on( 'errors', err => console.log(err) );
-
-      socket.on('stream', (stream) => {
-        streaming(stream);
-        socket.off('stream');
-      });
-    }).catch((e) => console.log(e));
-
   useEffect(() => {
     const torrent = getTorrentInfo(YTSInfo, imdbId, YTSInfo.title_long);
     if (torrent.error) {
       setTorrentError(torrent.error);
     } else {
       setTorrentInfo(torrent);
+      superagent.post(`http://${document.location.hostname}:8080/api/torrent/download`)
+        .send(torrent)
+        .then((res) => {
+          const torrentName = res.body.name;
+          const sockets = io(`${document.location.hostname}:8000`, {
+            query: {
+              movie: window.location.pathname,
+              torrentFile: `public/torrent-files/${torrentName}`
+            }
+          });
+          sockets.on('errors', err => console.log(err) );
+          setSocket(sockets);
+
+          sockets.on('stream', (stream) => {
+            streaming(stream);
+            sockets.off('stream');
+          });
+        }).catch((e) => console.log(e));
     }
   }, []);
 
   const playerCss = cn('Player');
 
   const streaming = (stream) => {
+    console.log('stream', stream);
     const path = `http://${document.location.host}/api/video/${stream.path.substring(stream.path.indexOf('video/') + 'video/'.length)}`;
+    if (stream.subtitles) setSubtitles(path + stream.subtitles);
     setShowVideo(true);
     const hls = new Hls();
     hls.loadSource(path + stream.playlist);
@@ -61,11 +64,9 @@ const Video = ({ hidden }) => {
 
   const playVideo = () => {
     if (sendPlay) return ;
-    
     socket.emit('play');
     setSendPlay(true);
     setShowPlay(false);
-
     setIsLoading(true);
   }
 
@@ -86,9 +87,9 @@ const Video = ({ hidden }) => {
         >
           {showPlay && (
             <div className={playerCss('PlayBox')}>
-            <span className={playerCss('PlayIcon', ['material-icons'])}>
-            play_circle_outline
-            </span>
+              <span className={playerCss('PlayIcon', ['material-icons'])}>
+                play_circle_outline
+              </span>
             </div>
           )}
           {isLoading && !showVideo && (
@@ -97,7 +98,11 @@ const Video = ({ hidden }) => {
             </div>
           )}
           {showVideo && (
-            <video id="video" className={playerCss('Movie')} controls width="640" height="360" />
+            <video id="video" className={playerCss('Movie')} controls width="640" height="360">
+              {subtitles && (
+                <track src={subtitles} label="English" />
+              )}
+            </video>
           )}
         </div>
       )}
