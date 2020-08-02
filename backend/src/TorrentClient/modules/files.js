@@ -163,7 +163,7 @@ module.exports = class {
             readable.on('error', () => reject('CNTRD'));
             readable.on('end', () => {
               fs.unlink(this.path + filename + '(temp)', err => {
-                if (err) return reject('CNTDL');
+                if (err) return reject('CNTDLT');
                 file.fd = fd;
                 resolve();
               });
