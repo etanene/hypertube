@@ -1,0 +1,31 @@
+.Player {
+    outline: none;
+    display: flex;
+    margin: 20px;
+    width: 640px;
+    height: 360px;
+    position: relative;
+    background: #000;
+    cursor: pointer;
+}
+
+.Player-PlayBox {
+    margin:auto;
+}
+
+.Player-PlayIcon {
+    font-size: 70px;
+}
+
+.Player-Video {
+    outline: none;
+}
+
+.player__button,
+.player__errors {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

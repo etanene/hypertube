@@ -7,7 +7,6 @@ const REGEXP_USERNAME = /^[A-Za-z\d]{4,12}$/;
 const REGEXP_EMAIL = /^\S+@\S+\.\S+$/;
 const REGEXP_PASSWORD = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{4,12}$/;
 const REGEXP_MOVIE_ID = /^[t]{2}\d{3,10}$/;
-const REGEXP_TORRENT_URL = /^(https:).{4}(yts.mx).{2}(torrent).{2}(download)/;
 
 const validateUsername = (username) => {
   if (!(username && REGEXP_USERNAME.test(username))) {
@@ -75,9 +74,6 @@ const getLoginData = (user) => {
 };
 
 const validateTorrent = (torrent) => {
-  if (!(torrent.url && REGEXP_TORRENT_URL.test(torrent.url))) {
-    throw new ValidateException('Invalid URL');
-  }
   if (!torrent.name) {
     throw new ValidateException('Invalid name');
   }

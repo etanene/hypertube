@@ -7,6 +7,7 @@ import Movies from './components/Main/Movies/Movies';
 import RegForm from './components/RegForm';
 import LoginForm from './components/LoginForm';
 import Profile from './components/Profile/Profile';
+import Video from './components/Main/MoviePage/VideoBox/Video/Video';
 import ResetpwForm from './components/ResetpwForm';
 import ChangepwForm from './components/ChangepwForm';
 import MoviePage from './components/Main/MoviePage/MoviePage';
@@ -35,6 +36,7 @@ const App = () => {
         <Header />
         <Switch>
           <Route path="/movie/:imdbId/:ytsId" component={MoviePage} />
+          <Route path="/video" component={Video} />
           <Route exact path="/">
             {stateAuthReducer.isAuth
               ? <Movies queryOptions={queryOptions} setMovies={setMovies} /> : <Redirect to="/login" />}
