@@ -40,7 +40,7 @@ const Video = ({ hidden }) => {
       streaming(stream);
       sockets.off('stream');
     });
-  }
+  };
 
   useEffect(() => {
     const torrent = getTorrentInfo(YTSInfo, imdbId, YTSInfo.title_long);
@@ -59,7 +59,7 @@ const Video = ({ hidden }) => {
     initSocket.current = () => {};
     if (hls.current) hls.current.destroy();
     if (currentSocket.current) currentSocket.current.close();
-  }, [])
+  }, []);
 
   const playerCss = cn('Player');
 
@@ -80,7 +80,7 @@ const Video = ({ hidden }) => {
     setSendPlay(true);
     setShowPlay(false);
     setIsLoading(true);
-  }
+  };
 
   return (
     <div>
