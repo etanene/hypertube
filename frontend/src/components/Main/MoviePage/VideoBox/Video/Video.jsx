@@ -20,9 +20,27 @@ const Video = ({ hidden }) => {
   const [playError, setPlayError] = useState(false);
   const [torrentInfo, setTorrentInfo] = useState(false);
   const currentSocket = useRef(false);
+  const initSocket = useRef(false);
   const hls = useRef(false);
   const { YTSInfo, imdbId } = useContext(MovieInfoContext);
   const { t } = useTranslation();
+
+  initSocket.current = (res) => {
+    const torrentName = res.body.name;
+    const sockets = io(`${document.location.hostname}:8000`, {
+      query: {
+        movie: window.location.pathname,
+        torrentFile: `public/torrent-files/${torrentName}`
+      }
+    });
+    sockets.on('errors', err => setPlayError(err) );
+    currentSocket.current = sockets;
+
+    sockets.on('stream', (stream) => {
+      streaming(stream);
+      sockets.off('stream');
+    });
+  }
 
   useEffect(() => {
     const torrent = getTorrentInfo(YTSInfo, imdbId, YTSInfo.title_long);
@@ -32,26 +50,13 @@ const Video = ({ hidden }) => {
       setTorrentInfo(torrent);
       superagent.post(`http://${document.location.hostname}:8080/api/torrent/download`)
         .send(torrent)
-        .then((res) => {
-          const torrentName = res.body.name;
-          const sockets = io(`${document.location.hostname}:8000`, {
-            query: {
-              movie: window.location.pathname,
-              torrentFile: `public/torrent-files/${torrentName}`
-            }
-          });
-          sockets.on('errors', err => setPlayError(err) );
-          currentSocket.current = sockets;
-
-          sockets.on('stream', (stream) => {
-            streaming(stream);
-            sockets.off('stream');
-          });
-        }).catch((e) => console.log(e));
+        .then((res) => initSocket.current(res))
+        .catch((e) => console.log(e));
     }
   }, []);
 
   useEffect(() => () => {
+    initSocket.current = () => {};
     if (hls.current) hls.current.destroy();
     if (currentSocket.current) currentSocket.current.close();
   }, [])
