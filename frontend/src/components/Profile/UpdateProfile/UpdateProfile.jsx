@@ -48,7 +48,7 @@ const UpdateProfile = ({ cls, user }) => {
     },
     info: {
       validate: (value) => value.length > 250,
-      value: he.decode(user.info),
+      value: (user.info && he.decode(user.info)) || '',
       required: false,
     },
     password: {
