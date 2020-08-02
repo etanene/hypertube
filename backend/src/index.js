@@ -83,6 +83,7 @@ io.on('connection', async (socket) => {
   });
 
   socket.on('disconnect', () => {
+    console.log('disconnected');
     let roomie;
     const room = io.sockets.adapter.rooms[movie];
 
