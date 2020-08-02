@@ -50,8 +50,7 @@ const Video = ({ hidden }) => {
   }, []);
 
   useEffect(() => () => {
-    console.log('disconnect', currentSocket.current);
-    currentSocket.current.close();
+    if (currentSocket.current) currentSocket.current.close();
   }, [])
 
   const playerCss = cn('Player');
