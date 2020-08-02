@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import Loader from 'react-loader-spinner';
 import { cn } from '@bem-react/classname';
@@ -13,12 +13,12 @@ const superagent = require('superagent');
 const Video = ({ hidden }) => {
   const [showVideo, setShowVideo] = useState(false);
   const [subtitles, setSubtitles] = useState(false);
-  const [socket, setSocket] = useState(false);
   const [showPlay, setShowPlay] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [sendPlay, setSendPlay] = useState(false);
   const [torrentError, setTorrentError] = useState(false);
   const [torrentInfo, setTorrentInfo] = useState(false);
+  const currentSocket = useRef(false);
   const { YTSInfo, imdbId } = useContext(MovieInfoContext);
   const { t } = useTranslation();
 
@@ -39,7 +39,7 @@ const Video = ({ hidden }) => {
             }
           });
           sockets.on('errors', err => console.log(err) );
-          setSocket(sockets);
+          currentSocket.current = sockets;
 
           sockets.on('stream', (stream) => {
             streaming(stream);
@@ -48,6 +48,11 @@ const Video = ({ hidden }) => {
         }).catch((e) => console.log(e));
     }
   }, []);
+
+  useEffect(() => () => {
+    console.log('disconnect', currentSocket.current);
+    currentSocket.current.close();
+  }, [])
 
   const playerCss = cn('Player');
 
@@ -64,7 +69,7 @@ const Video = ({ hidden }) => {
 
   const playVideo = () => {
     if (sendPlay) return ;
-    socket.emit('play');
+    currentSocket.current.emit('play');
     setSendPlay(true);
     setShowPlay(false);
     setIsLoading(true);
