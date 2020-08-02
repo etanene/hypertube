@@ -41,7 +41,8 @@
     }
   },
   "movie": {
-    "movieError": "Can't find seeders to download movie. Please try another one.",
+    "playError": "Wrong torrent file, could not download movie. Please try again later",
+    "movieError": "Can't find seeders to download movie. Please try again later.",
     "movieSuggestions": "Recommended movies:",
     "moviePlayer": {
       "params": ["Trailer", "Movie"]

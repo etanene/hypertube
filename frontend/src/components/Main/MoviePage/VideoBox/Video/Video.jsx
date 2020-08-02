@@ -17,6 +17,7 @@ const Video = ({ hidden }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [sendPlay, setSendPlay] = useState(false);
   const [torrentError, setTorrentError] = useState(false);
+  const [playError, setPlayError] = useState(false);
   const [torrentInfo, setTorrentInfo] = useState(false);
   const currentSocket = useRef(false);
   const hls = useRef(false);
@@ -39,7 +40,7 @@ const Video = ({ hidden }) => {
               torrentFile: `public/torrent-files/${torrentName}`
             }
           });
-          sockets.on('errors', err => console.log(err) );
+          sockets.on('errors', err => setPlayError(err) );
           currentSocket.current = sockets;
 
           sockets.on('stream', (stream) => {
@@ -83,7 +84,12 @@ const Video = ({ hidden }) => {
           {t('movie.movieError')}
         </div>
       )}
-      {torrentInfo && !hidden && (
+      {playError && (
+        <div>
+          {t('movie.playError')}
+        </div>
+      )}
+      {!playError && torrentInfo && !hidden && (
         <div
           tabIndex={0}
           role="button"
