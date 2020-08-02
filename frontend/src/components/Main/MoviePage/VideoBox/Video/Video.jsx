@@ -19,6 +19,7 @@ const Video = ({ hidden }) => {
   const [torrentError, setTorrentError] = useState(false);
   const [torrentInfo, setTorrentInfo] = useState(false);
   const currentSocket = useRef(false);
+  const hls = useRef(false);
   const { YTSInfo, imdbId } = useContext(MovieInfoContext);
   const { t } = useTranslation();
 
@@ -50,6 +51,7 @@ const Video = ({ hidden }) => {
   }, []);
 
   useEffect(() => () => {
+    if (hls.current) hls.current.destroy();
     if (currentSocket.current) currentSocket.current.close();
   }, [])
 
@@ -60,10 +62,10 @@ const Video = ({ hidden }) => {
     const path = `http://${document.location.host}/api/video/${stream.path.substring(stream.path.indexOf('video/') + 'video/'.length)}`;
     if (stream.subtitles) setSubtitles(path + stream.subtitles);
     setShowVideo(true);
-    const hls = new Hls();
-    hls.loadSource(path + stream.playlist);
-    hls.attachMedia(video);
-    hls.on(Hls.Events.ERROR, (event, data) => console.log(event, data));
+    hls.current = new Hls();
+    hls.current.loadSource(path + stream.playlist);
+    hls.current.attachMedia(video);
+    hls.current.on(Hls.Events.ERROR, (event, data) => console.log(event, data));
   };
 
   const playVideo = () => {
