@@ -86,7 +86,8 @@ const Video = ({ hidden }) => {
       )}
       {playError && (
         <div>
-          {t('movie.playError')}
+          {playError === 'CNTCNNCT' && t('movie.unavailable')}
+          {playError !== 'CNTCNNCT' && t('movie.playError')}
         </div>
       )}
       {!playError && torrentInfo && !hidden && (
