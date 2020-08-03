@@ -23,8 +23,9 @@ module.exports = class {
 				subtitles: /.srt|.webvtt|.ass/
 			},
 			ffmpeg: {
-				downloadThreshold: 3000000,
-				hls_time: 4,
+				timeout: 5000,
+				downloadThreshold: 10000000,
+				hls_time: 8,
 				entriesThreshold: 10,
 				discontinuityThreshold: 3,
 				patterns: {
@@ -91,11 +92,10 @@ module.exports = class {
 	}
 	
 	finalizeManifest() {
-		fs.readFile(this.path + this.settings.manifest, (err, data) => {
+		fs.readFile(this.path + this.settings.manifest, 'utf8', (err, data) => {
 			if (!err) {
-				data = data.toString();
 				data += '#EXT-X-ENDLIST\n';
-				fs.writeFile(this.path + this.settings.manifest, data, (err) => {});
+				fs.writeFile(this.path + this.settings.manifest, data, err => {});
 			}
 		});
 	}
@@ -145,6 +145,8 @@ module.exports = class {
 		else if (this.status == 'idle' && this.downloaded > this.settings.ffmpeg.downloadThreshold) {
 			console.log('Stream: Converting video ' + this.files.movie);
 			this.status = 'converting';
+			// reset value to relaunch converting next time the downloaded size exceeds download threshold
+			this.downloaded = 0;
 			
 			let offset, entries, discontinuity;
 			[offset, entries, discontinuity] = await this.parseManifest().catch(() => {});
@@ -156,9 +158,9 @@ module.exports = class {
 			let options = [
 				'-i', this.path + this.files.movie,
 				'-ss', offset,
-				'-r', 24, // framerate
-				'-g', 96, // group pictures
+				'-g', 48, // group pictures
 				'-keyint_min', 24, // insert a key frame every 24 frames
+				'-filter:v', 'fps=fps=24',
 				'-c:v', 'libx264',
 				'-b:v', '1000k',
 				'-c:a', 'aac',
@@ -180,8 +182,8 @@ module.exports = class {
 				this.checkManifest();
 			});
 			
-			// this.process.stderr.setEncoding('utf8'); // debug
-			// this.process.stderr.on('data', data => console.log(data) ); // debug
+			this.process.stderr.setEncoding('utf8'); // debug
+			this.process.stderr.on('data', data => console.log(data) ); // debug
 			
 			this.process.on('close', (code, signal) => {
 				console.log('Stream: End converting video');
@@ -189,7 +191,7 @@ module.exports = class {
 				
 				if (this.restart) {
 					this.status = 'idle';
-					this.videoTimer = setTimeout(() => this.convertVideo(), 5000);
+					this.videoTimer = setTimeout(() => this.convertVideo(), this.settings.ffmpeg.timeout);
 				} else {
 					this.status = 'finished';
 					this.finalizeManifest();
@@ -197,7 +199,7 @@ module.exports = class {
 			});
 			
 		} else if (this.restart)
-			this.videoTimer = setTimeout(() => this.convertVideo(), 5000);
+			this.videoTimer = setTimeout(() => this.convertVideo(), this.settings.ffmpeg.timeout);
 	}
 	
 	close() {
