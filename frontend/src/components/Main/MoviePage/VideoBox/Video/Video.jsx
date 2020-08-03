@@ -51,7 +51,7 @@ const Video = ({ hidden }) => {
       superagent.post(`http://${document.location.hostname}:8080/api/torrent/download`)
         .send(torrent)
         .then((res) => initSocket.current(res))
-        .catch((e) => console.log(e));
+        .catch((e) => setPlayError(true));
     }
   }, []);
 

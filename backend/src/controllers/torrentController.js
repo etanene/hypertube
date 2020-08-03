@@ -17,7 +17,7 @@ const download = async (req, res) => {
         });
       });
     }).on('error', (e) => {
-      fs.unlink(`./public/torrent-files/${name}`);
+      fs.unlink(`./public/torrent-files/${name}`, () => {});
       res.send(e.message);
     });
   } catch (e) {
