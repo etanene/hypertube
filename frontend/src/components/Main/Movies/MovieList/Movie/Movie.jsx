@@ -16,7 +16,6 @@ const Movie = ({
   const overlayCss = cn('Overlay');
   const iconCss = cn('material-icons');
   const { t } = useTranslation();
-  console.log(movie);
 
   return (
     <li className={cls('Item')} ref={last ? lastMovieRef : null}>
