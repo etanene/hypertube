@@ -63,7 +63,6 @@ io.on('connection', async (socket) => {
         })
         .then(() => {
           torrents[movie].events.removeAllListeners('piece-written');
-          streams[movie].slowConversion = false;
           streams[movie].restart = false;
         })
         .catch((error) => {

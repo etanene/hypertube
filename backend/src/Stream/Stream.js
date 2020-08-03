@@ -49,7 +49,6 @@ module.exports = class {
 			this.ready = false;
 			this.restart = true;
 			this.downloaded = 0;
-			this.slowConversion = false;
 			this.process = null;
 			
 			const movies = this.downloads.filter(file => file.match(this.settings.patterns.movies))
@@ -144,7 +143,7 @@ module.exports = class {
 			
 			const offset = await this.parseManifest().catch(() => {}		);
 			
-			console.log('Stream: Converting video ' + this.files.movie + ' (', this.slowConversion, ')');
+			console.log('Stream: Converting video ' + this.files.movie);
 
 			let options = [
 				'-i', this.path + this.files.movie,
@@ -167,8 +166,6 @@ module.exports = class {
 				'-hls_flags', 'append_list+omit_endlist',
 				this.path + this.settings.manifest
 			];
-			
-			if (this.slowConversion) options.unshift('-re');
 			
 			this.process = spawn('ffmpeg', options);
 			this.process.stderr.on('data', () => {
