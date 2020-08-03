@@ -39,7 +39,7 @@ const Movie = ({
               </i>
             </div>
           )}
-          {movie.rating && (
+          {movie.rating !== 0 && (
             <div className={movieCss('Rating')}>
               {`${movie.rating}\\10`}
             </div>
