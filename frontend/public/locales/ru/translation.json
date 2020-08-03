@@ -25,7 +25,7 @@
         {"type": "Thriller", "name":  "Триллер"},
         {"type": "Drama", "name":  "Драма"},
         {"type": "Fantasy", "name":  "Фэнтези"},
-        {"type": "Adventures", "name":  "Приключения"},
+        {"type": "Adventure", "name":  "Приключения"},
         {"type": "Crime", "name":  "Криминал"},
         {"type": "War", "name":  "Война"},
         {"type": "Sport", "name":  "Спорт"},
