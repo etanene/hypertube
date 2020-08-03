@@ -13,6 +13,36 @@
     background-color: var(--dark-grey);
 }
 
+.Overlay-Info {
+    line-height: 22px;
+    font-weight: bold;
+    font-size: var(--font-size-xs);
+    color: var(--white);
+    word-break: break-word;
+}
+
+.Overlay-Genres {
+    line-height: 20px;
+    font-size: var(--font-size-m);
+    color: #551A8B;
+    word-break: break-word;
+}
+
+.Overlay-InfoBox {
+    margin: 10px;
+}
+
+.Overlay-TimeBox {
+    margin: 10px;
+    display: flex;
+    font-size: var(--font-size-m);
+    color: var(--white);
+}
+
+.Overlay-Time, .Overlay-Icon {
+    vertical-align: middle;
+}
+
 .PlayIcon {
     position: absolute;
     font-size: 100px;
@@ -36,7 +66,7 @@
 }
 
 .Movie:hover .Overlay {
-    opacity: 0.75;
+    opacity: 0.9;
 }
 
 .Movie-Title {

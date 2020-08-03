@@ -16,6 +16,7 @@ const Movie = ({
   const overlayCss = cn('Overlay');
   const iconCss = cn('material-icons');
   const { t } = useTranslation();
+  console.log(movie);
 
   return (
     <li className={cls('Item')} ref={last ? lastMovieRef : null}>
@@ -41,14 +42,36 @@ const Movie = ({
           )}
           {movie.rating && (
             <div className={movieCss('Rating')}>
-              { movie.rating }
-              /10
+              {`${movie.rating}\\10`}
             </div>
           )}
           <div className={(overlayCss())}>
-            <i className={iconCss({}, ['PlayIcon'])}>
-              play_circle_outline
-            </i>
+            {movie.genres.length && (
+              <div className={overlayCss('InfoBox')}>
+                <div className={overlayCss('Genres')}>
+                  {movie.genres.map((genre, index) => (index < 3 ? `${genre} ` : ''))}
+                </div>
+              </div>
+            )}
+            {movie.summary && (
+              <div className={overlayCss('InfoBox')}>
+                <div className={overlayCss('Info')}>
+                  {movie.summary.length > 400 ? `${movie.summary.substring(0, 400)}...` : movie.summary}
+                </div>
+              </div>
+            )}
+            {movie.runtime !== 0 && (
+              <div className={overlayCss('TimeBox')}>
+                <div className={overlayCss('Info')}>
+                  <span className={overlayCss('Icon', ['material-icons'])}>
+                    schedule
+                  </span>
+                  <span className={overlayCss('Time')}>
+                    {` ${movie.runtime} min`}
+                  </span>
+                </div>
+              </div>
+            )}
           </div>
           <h1 className={movieCss('Title')}>
             {`${movie.title} (${movie.year})`}
