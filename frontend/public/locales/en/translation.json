@@ -20,7 +20,7 @@
         {"type": "Comedy", "name":  "Comedy"},
         {"type": "Horror", "name":  "Horror"},
         {"type": "Sci-fi", "name":  "Sci-fi"},
-        {"type": "Romantic", "name":  "Romantic"},
+        {"type": "Romance", "name":  "Romantic"},
         {"type": "Action", "name":  "Action"},
         {"type": "Thriller", "name":  "Thriller"},
         {"type": "Drama", "name":  "Drama"},

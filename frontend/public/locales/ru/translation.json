@@ -20,7 +20,7 @@
         {"type": "Comedy", "name":  "Комедия"},
         {"type": "Horror", "name":  "Ужасы"},
         {"type": "Sci-fi", "name":  "Научная фантастика"},
-        {"type": "Romantic", "name":  "Романтика"},
+        {"type": "Romance", "name":  "Романтика"},
         {"type": "Action", "name":  "Боевик"},
         {"type": "Thriller", "name":  "Триллер"},
         {"type": "Drama", "name":  "Драма"},
