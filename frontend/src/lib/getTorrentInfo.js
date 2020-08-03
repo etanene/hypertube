@@ -4,8 +4,10 @@ const getTorrentInfo = (yts, movieId, name) => {
   let url;
   let quality;
   torrents.forEach((torrent) => {
-    if (torrent.peers > maxPeers) {
-      maxPeers = torrent.peers;
+    let { peers } = torrent;
+    if (torrent.quality === '720p') peers *= 2;
+    if (peers > maxPeers) {
+      maxPeers = peers;
       url = torrent.url;
       quality = torrent.quality;
     }

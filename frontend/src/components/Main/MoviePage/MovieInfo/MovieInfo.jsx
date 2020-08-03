@@ -16,7 +16,7 @@ const MovieInfo = ({ cls }) => {
           cls={movieInfoCss}
           poster={YTSInfo.large_cover_image}
         />
-        <MovieRating rating={YTSInfo.rating} />
+        {YTSInfo.rating !== 0 && <MovieRating rating={YTSInfo.rating} />}
       </div>
       <MovieCast OMDBInfo={OMDBInfo} cls={movieInfoCss} YTSInfo={YTSInfo} />
     </div>
