@@ -26,11 +26,8 @@ module.exports = class {
 				timeout: 5000,
 				downloadThreshold: 10000000,
 				hls_time: 8,
-				entriesThreshold: 10,
-				discontinuityThreshold: 3,
 				patterns: {
 					duration: /#EXTINF:(?<duration>\d+\.\d+)/g,
-					discontinuity: /#EXT-X-DISCONTINUITY/g
 				}
 			}
 		}
@@ -143,26 +140,23 @@ module.exports = class {
 	async convertVideo() {		
 		if (this.converted) this.events.emit('manifest-created');
 		else if (this.status == 'idle' && this.downloaded > this.settings.ffmpeg.downloadThreshold) {
-			console.log('Stream: Converting video ' + this.files.movie);
 			this.status = 'converting';
-			// reset value to relaunch converting next time the downloaded size exceeds download threshold
-			this.downloaded = 0;
 			
-			let offset, entries, discontinuity;
-			[offset, entries, discontinuity] = await this.parseManifest().catch(() => {});
-			// If there are a lot of underconverted pieces (usually because of slow download rate)
-			// Then enable 're' mode that slows down conversion
-			if (this.slowConversion == false && entries <= this.settings.ffmpeg.entriesThreshold && discontinuity >= this.settings.ffmpeg.discontinuityThreshold)
-			this.slowConversion = true;
+			const offset = await this.parseManifest().catch(() => {}		);
 			
+			console.log('Stream: Converting video ' + this.files.movie + ' (', this.slowConversion, ')');
+
 			let options = [
 				'-i', this.path + this.files.movie,
 				'-ss', offset,
-				'-g', 48, // group pictures
-				'-keyint_min', 24, // insert a key frame every 24 frames
-				'-filter:v', 'fps=fps=24',
+				'-g', 60, // group pictures
+				'-keyint_min', 30, // insert a key frame every 30 frames
+				'-filter:v', 'fps=fps=30',
 				'-c:v', 'libx264',
 				'-b:v', '1000k',
+				'-preset', 'veryfast',
+				'-tune', 'film',
+				'-crf', 24,
 				'-c:a', 'aac',
 				'-b:a', '128k',
 				'-movflags', 'frag_keyframe+empty_moov',
@@ -186,6 +180,9 @@ module.exports = class {
 			this.process.stderr.on('data', data => console.log(data) ); // debug
 			
 			this.process.on('close', (code, signal) => {
+				// reset value to relaunch converting next time the downloaded size exceeds download threshold
+				this.downloaded = 0;
+
 				console.log('Stream: End converting video');
 				if (signal == 'SIGTERM'|| code == 255) return;
 				
@@ -213,10 +210,9 @@ module.exports = class {
 	parseManifest() {
 		return new Promise(resolve => {
 			fs.exists(this.path + this.settings.manifest, exists => {
-				if (!exists) return resolve( [0, 0, 0] );
+				if (!exists) return resolve( 0 );
 				
 				const data = fs.readFileSync(this.path + this.settings.manifest).toString();
-				const discontinuityMatch = [ ...data.matchAll( this.settings.ffmpeg.patterns.discontinuity ) ];
 				const durationMatch = [ ...data.matchAll( this.settings.ffmpeg.patterns.duration ) ];
 				
 				let duration = 0;
@@ -224,7 +220,7 @@ module.exports = class {
 					duration += parseFloat(durationMatch[i][1]);
 				}
 				
-				resolve( [duration, i, discontinuityMatch.length] );
+				resolve( duration );
 			});
 		});
 	}
