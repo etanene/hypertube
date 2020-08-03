@@ -39,10 +39,12 @@ const Movie = ({
               </i>
             </div>
           )}
-          <div className={movieCss('Rating')}>
-            { movie.rating }
-            /10
-          </div>
+          {movie.rating && (
+            <div className={movieCss('Rating')}>
+              { movie.rating }
+              /10
+            </div>
+          )}
           <div className={(overlayCss())}>
             <i className={iconCss({}, ['PlayIcon'])}>
               play_circle_outline

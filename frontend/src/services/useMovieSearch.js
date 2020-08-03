@@ -1,5 +1,6 @@
 import { useEffect, useReducer, useState } from 'react';
 import moviesReducer from '../reducers/movies';
+import getTorrentInfo from '../lib/getTorrentInfo';
 
 const request = require('superagent');
 
@@ -22,6 +23,11 @@ export default function useMovieSearch(queryOptions, pageNumber) {
     return data.movie_count > data.limit * (data.page_number - 1) + data.movies.length;
   };
 
+  const hasPeers = (movie) => {
+    const info = getTorrentInfo(movie);
+    return !info.error;
+  };
+
   useEffect(() => {
     async function searchMovies() {
       try {
@@ -34,7 +40,8 @@ export default function useMovieSearch(queryOptions, pageNumber) {
           console.log('RESPONSE', response);
           setHasMore(checkHasMore(data));
           const dataMovies = data.movies;
-          dispatch({ type: 'ADD_MOVIES', movies: dataMovies });
+          const filteredMovies = dataMovies.filter((movie) => hasPeers(movie));
+          dispatch({ type: 'ADD_MOVIES', movies: filteredMovies });
         }
         setIsLoading(false);
       } catch (e) {
