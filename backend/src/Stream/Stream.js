@@ -24,7 +24,7 @@ module.exports = class {
 			},
 			ffmpeg: {
 				timeout: 5000,
-				downloadThreshold: 10000000,
+				downloadThreshold: 1000000,
 				hls_time: 8,
 				patterns: {
 					duration: /#EXTINF:(?<duration>\d+\.\d+)/g,
@@ -120,7 +120,7 @@ module.exports = class {
 	// at the moment handles only 1 subtitle file
 	convertSubtitles() {
 		return new Promise(resolve => {
-			if (!this.files.subtitles.length) resolve();
+			if (!this.files.subtitles.length) return resolve();
 			
 			const temp = this.files.subtitles[0];
 			let options = [
@@ -173,8 +173,8 @@ module.exports = class {
 				this.checkManifest();
 			});
 			
-			this.process.stderr.setEncoding('utf8'); // debug
-			this.process.stderr.on('data', data => console.log(data) ); // debug
+			// this.process.stderr.setEncoding('utf8'); // debug
+			// this.process.stderr.on('data', data => console.log(data) ); // debug
 			
 			this.process.on('close', (code, signal) => {
 				// reset value to relaunch converting next time the downloaded size exceeds download threshold

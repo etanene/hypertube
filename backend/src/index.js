@@ -73,8 +73,9 @@ io.on('connection', async (socket) => {
           // for some reason socket.in doesn't send to self
           socket.emit('errors', error);
         });
-    } else if (streams[movie].ready) socket.emit('stream', { path: streams[movie].path, playlist: streams[movie].playlist, subtitles: streams[movie].subtitles });
-    else {
+    } else if (streams[movie].ready) {
+        socket.emit('stream', { path: streams[movie].path, playlist: streams[movie].playlist, subtitles: streams[movie].subtitles });
+    } else {
       streams[movie].events.on('manifest-created', () => {
         socket.emit('stream', { path: streams[movie].path, playlist: streams[movie].playlist, subtitles: streams[movie].subtitles });
       });
