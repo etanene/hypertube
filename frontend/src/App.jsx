@@ -9,7 +9,6 @@ import LoginForm from './components/LoginForm';
 import Profile from './components/Profile/Profile';
 import ResetpwForm from './components/ResetpwForm';
 import ChangepwForm from './components/ChangepwForm';
-import Spinner from './components/common/Spinner';
 import MoviePage from './components/Main/MoviePage/MoviePage';
 import queryReducer from './reducers/query';
 import authReducer from './reducers/auth';
@@ -76,8 +75,8 @@ const App = () => {
             {stateAuthReducer.isAuth ? <MoviePage /> : <Redirect to="/login" />}
           </Route>
           <Route exact path="/">
-            {loading
-              ? <Spinner /> : <Movies queryOptions={queryOptions} setMovies={setMovies} />}
+            {stateAuthReducer.isAuth
+              ? <Movies queryOptions={queryOptions} setMovies={setMovies} /> : <Redirect to="/login" />}
           </Route>
           <Route path="/profile/:userId">
             {stateAuthReducer.isAuth ? <Profile /> : <Redirect to="/login" />}

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Redirect } from 'react-router-dom';
 import { cn } from '@bem-react/classname';
 import MovieMenu from './MovieMenu/MovieMenu';
 import MovieList from './MovieList/MovieList';
@@ -21,11 +20,8 @@ const Movies = ({ queryOptions, setMovies }) => {
     hasMore,
   } = useMovieSearch(queryOptions, pageNumber);
 
-  if (!stateAuthReducer.isAuth) {
-    return (<Redirect to="/login" />);
-  }
-
   const { userMovies } = useGetUserMovies(stateAuthReducer.user.userId);
+
   useEffect(() => {
     setMovies(movies);
   }, [movies]);
