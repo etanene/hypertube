@@ -1,4 +1,5 @@
 import React, { useCallback, useContext, useRef } from 'react';
+import Loader from 'react-loader-spinner';
 import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
 import Movie from './Movie/Movie';
@@ -12,6 +13,7 @@ const MovieList = () => {
     isLoading,
     setPageNumber,
     hasMore,
+    userMovies,
   } = useContext(MovieContext);
   const { t } = useTranslation();
   const movieListCss = cn('MovieList');
@@ -25,6 +27,13 @@ const MovieList = () => {
     });
     if (node) observer.current.observe(node);
   }, [hasMore, setPageNumber]);
+  const isMovieWatched = (imdbId) => {
+    let watched = false;
+    userMovies.forEach((movie) => {
+      if (movie.movie_id === imdbId) watched = true;
+    });
+    return watched;
+  };
   return (
     <div className={movieListCss('Container')}>
       <ul className={movieListCss()}>
@@ -35,9 +44,16 @@ const MovieList = () => {
             movie={movie}
             last={movies.length === index + 1}
             lastMovieRef={lastMovieRef}
+            watched={isMovieWatched(movie.imdb_code)}
           />
         ))}
-        {isLoading && <li className={movieListCss('Message')}>{t('main.movieList.loading')}</li>}
+        {isLoading && (
+          <li className={movieListCss('Loader')}>
+            <div className={movieListCss('LoaderBox')}>
+              <Loader type="Circles" color="#551A8B" />
+            </div>
+          </li>
+        )}
         {error && <li className={movieListCss('Message')}>{t('main.movieList.error')}</li>}
         {!isLoading && !error && !movies.length && <li className={movieListCss('Message')}>{t('main.movieList.notFound')}</li>}
       </ul>

@@ -32,7 +32,7 @@ const signup = async (data) => {
   //   user.email,
   //   'Hypertube email verification',
   //   `Please, verify your hypertube account ${link}`,
-  // );
+  // ); вавилова 19
   return (user);
 };
 
@@ -51,6 +51,14 @@ const login = async (data) => {
   // if (!user.validate) {
   //   throw new AuthException('Please, validate your account on email');
   // }
+};
+
+const validatePassword = async (data) => {
+  if (!data.user_id) throw new AuthException('User id is required');
+  const user = await userModel.getUser({ user_id: data.user_id });
+  if (!user[0]) throw new AuthException('Can not find user!');
+  const validPasswd = await bcrypt.compare(data.password, user[0].passwd);
+  return validPasswd;
 };
 
 const verify = async (ulink) => {
@@ -89,4 +97,5 @@ module.exports = {
   login,
   verify,
   isAuth,
+  validatePassword,
 };

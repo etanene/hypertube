@@ -9,6 +9,10 @@ const commentsReducer = (state, action) => {
         ...state,
         action.comment,
       ];
+    case 'LOAD_COMMENTS':
+      return [
+        ...action.comments,
+      ];
     default:
       return state;
   }

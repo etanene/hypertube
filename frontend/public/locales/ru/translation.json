@@ -7,24 +7,25 @@
   },
   "main": {
     "menu": {
-      "showWatched": "Показывать просмотренные",
+      "showWatched": "Вы просматривали этот фильм",
       "genreSearch": "Поиск по жанру",
       "movieSort": [
+        {"type":  "seeds", "name": "По популярности"},
+        {"type":  "rating", "name": "По рейтингу"},
         {"type":  "date_added", "name": "По дате добавления"},
         {"type":  "year", "name": "Сначала новые"},
-        {"type":  "rating", "name": "По рейтингу"},
         {"type":  "title", "name": "По названию"}
       ],
       "genres":  [
         {"type": "Comedy", "name":  "Комедия"},
         {"type": "Horror", "name":  "Ужасы"},
         {"type": "Sci-fi", "name":  "Научная фантастика"},
-        {"type": "Romantic", "name":  "Романтика"},
+        {"type": "Romance", "name":  "Романтика"},
         {"type": "Action", "name":  "Боевик"},
         {"type": "Thriller", "name":  "Триллер"},
         {"type": "Drama", "name":  "Драма"},
         {"type": "Fantasy", "name":  "Фэнтези"},
-        {"type": "Adventures", "name":  "Приключения"},
+        {"type": "Adventure", "name":  "Приключения"},
         {"type": "Crime", "name":  "Криминал"},
         {"type": "War", "name":  "Война"},
         {"type": "Sport", "name":  "Спорт"},
@@ -40,17 +41,28 @@
     }
   },
   "movie": {
+    "playError": "Не удалось загрузить фильм. Пожалуйста, попробуйте позже",
+    "unavailable": "Видео не доступно, пожалуйста, попробуйте позже",
+    "movieError": "Не удалось найти пиров для загрузки фильма. Пожалуйста, попробуйте позже.",
     "movieSuggestions": "Похожие фильмы:",
     "moviePlayer": {
       "params": ["Трейлер", "Фильм"]
     },
     "movieComments": {
+      "hideForm": "Скрыть",
+      "replyComment": "Ответить",
+      "showBranch": "Показать комментарии",
+      "hideBranch": "Скрыть ветвь",
       "leaveComment": "Поделитесь мнением о фильме",
       "leaveCommentButton": "Отправить",
       "comments": "Комментарии "
     }
   },
   "regform": {
+    "info": {
+      "placeholder": "Расскажите о себе",
+      "error": "Длина не может быть больше 250"
+    },
     "photo": {
       "placeholder": "Добавить фото",
       "error": "Обязательно к заполнению."
@@ -58,7 +70,7 @@
     "title": "Регистрация",
     "username":  {
       "placeholder": "Имя пользователя",
-      "error": "Используйте a-z, A-Z, 0-9. Длинна от 4 до 12 символов.",
+      "error": "Используйте a-z, A-Z, 0-9. Длина от 4 до 12 символов.",
       "errorexist": "Такой логин уже есть!"
     },
     "email":  {
@@ -76,7 +88,7 @@
     },
     "password":  {
       "placeholder": "Пароль",
-      "error": "Пароль должен содержать заглавную букву, строчну и цифру. Длинна от 4 до 12 символов."
+      "error": "Пароль должен содержать заглавную и строчную букву, цифру. Длина от 4 до 12 символов."
     },
     "confirmpassword": {
       "placeholder": "Подтверждение пароля",
@@ -108,7 +120,7 @@
   "resetpwform": {
     "email":  {
       "placeholder": "Email",
-      "error": "Непрвильно указан Email",
+      "error": "Неправильно указан Email",
       "errorexist": "Такого Email нет!"
     },
     "button": "Сброс пароля",
@@ -121,7 +133,7 @@
   "changepwform": {
     "password":  {
       "placeholder": "Пароль",
-      "error": "Пароль должен содержать заглавную букву, строчну и цифру. Длинна от 4 до 12 символов."
+      "error": "Пароль должен содержать заглавную и строчную букву, цифру. Длина от 4 до 12 символов."
     },
     "confirmpassword": {
       "placeholder": "Подтверждение пароля",
@@ -133,5 +145,11 @@
       "login": "Войти",
       "reset": "Забыли пароль?"
     }
+  },
+  "profile": {
+    "edit": "Редактировать",
+    "passwordError": "Неправильный пароль",
+    "update": "Изменить",
+    "updateMessage": "Ваш профиль успешно изменен"
   }
 }

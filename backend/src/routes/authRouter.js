@@ -75,6 +75,7 @@ router.get('/logout', (req, res) => {
     }
   }
 });
+router.post('/validatePass', authController.validatePassword);
 
 router.get('/verify/:uuid', authController.verifyUser);
 

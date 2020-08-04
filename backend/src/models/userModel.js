@@ -21,6 +21,7 @@ const getUser = async (data, without) => {
 };
 
 const updateUser = async (data, condition) => {
+  console.log('data', data);
   const res = await db.query(`
     UPDATE
       users

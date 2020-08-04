@@ -6,6 +6,7 @@ import Header from './components/Header/Header';
 import Movies from './components/Main/Movies/Movies';
 import RegForm from './components/RegForm';
 import LoginForm from './components/LoginForm';
+import Profile from './components/Profile/Profile';
 import ResetpwForm from './components/ResetpwForm';
 import ChangepwForm from './components/ChangepwForm';
 import Spinner from './components/common/Spinner';
@@ -71,10 +72,15 @@ const App = () => {
       >
         <Header />
         <Switch>
-          <Route path="/movie/:imdbId/:ytsId" component={MoviePage} />
+          <Route path="/movie/:imdbId/:ytsId">
+            {stateAuthReducer.isAuth ? <MoviePage /> : <Redirect to="/login" />}
+          </Route>
           <Route exact path="/">
             {loading
               ? <Spinner /> : <Movies queryOptions={queryOptions} setMovies={setMovies} />}
+          </Route>
+          <Route path="/profile/:userId">
+            {stateAuthReducer.isAuth ? <Profile /> : <Redirect to="/login" />}
           </Route>
           <Switch>
             <Route path="/signup">

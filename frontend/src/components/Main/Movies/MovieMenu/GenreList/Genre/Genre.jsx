@@ -25,13 +25,8 @@ const Genre = (props) => {
       tabIndex={0}
       className={genreCss()}
       onClick={handleChooseGenre}
-      onKeyDown={(e) => {
-        if (e.code === 'KeyE') {
-          handleChooseGenre();
-        }
-      }}
     >
-      <img src={`/genre_images/${type}.png`} alt="Genre poster" className={genreCss('Image')} />
+      <img src={`/genre_images/${type.toLowerCase()}.png`} alt="Genre poster" className={genreCss('Image')} />
       <span className={genreCss('Title')}>{name}</span>
     </div>
   );

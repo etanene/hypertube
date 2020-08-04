@@ -10,8 +10,8 @@ const getTreeFromArray = (arr) => {
   const arrKeys = Object.keys(mappedArr);
   arrKeys.forEach((id) => {
     comment = mappedArr[id];
-    if (comment.parentId) {
-      mappedArr[comment.parentId].children.push(comment);
+    if (comment.parent_id) {
+      mappedArr[comment.parent_id].children.push(comment);
     } else {
       tree.push(comment);
     }

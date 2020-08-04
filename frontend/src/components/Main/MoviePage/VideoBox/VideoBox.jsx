@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import './VideoBox.css';
 import { cn } from '@bem-react/classname';
 import MovieTrailer from './MovieTrailer/MovieTrailer';
-import MovieVideo from './MovieVideo/MovieVideo';
+import Video from './Video/Video';
+import './VideoBox.css';
 
 const VideoBox = ({ cls }) => {
   const movieVideoCss = cn('VideoBox');
@@ -20,11 +20,6 @@ const VideoBox = ({ cls }) => {
           onClick={() => {
             setPlayerParam(playerParams[0]);
           }}
-          onKeyDown={(e) => {
-            if (e.code === 'keyT') {
-              setPlayerParam(playerParams[0]);
-            }
-          }}
         >
           <span className={movieVideoCss('MenuText')}>{playerParams[0]}</span>
         </div>
@@ -35,17 +30,12 @@ const VideoBox = ({ cls }) => {
           onClick={() => {
             setPlayerParam(playerParams[1]);
           }}
-          onKeyDown={(e) => {
-            if (e.code === 'keyT') {
-              setPlayerParam(playerParams[1]);
-            }
-          }}
         >
           <span className={movieVideoCss('MenuText')}>{playerParams[1]}</span>
         </div>
       </div>
       <MovieTrailer hidden={playerParam !== playerParams[0]} cls={movieVideoCss} />
-      <MovieVideo hidden={playerParam !== playerParams[1]} cls={movieVideoCss} />
+      <Video hidden={playerParam !== playerParams[1]} cls={movieVideoCss} />
     </div>
   );
 };

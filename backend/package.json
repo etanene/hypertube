@@ -14,10 +14,13 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^3.0.7",
+    "bencode": "^2.0.1",
     "cors": "^2.8.5",
+    "escape-html": "^1.0.3",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
-    "moment": "^2.25.3",
+    "moment": "^2.27.0",
+    "moment-timezone": "^0.5.31",
     "nodemailer": "^6.4.1",
     "passport": "^0.4.1",
     "passport-42": "^1.2.6",
@@ -26,6 +29,8 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
     "pg": "^7.12.1",
+    "socket.io": "^2.3.0",
+    "socks5-http-client": "^1.0.4",
     "uuid": "^3.3.3"
   },
   "devDependencies": {
