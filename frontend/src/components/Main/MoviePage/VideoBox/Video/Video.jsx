@@ -47,10 +47,12 @@ const Video = ({ hidden }) => {
     if (torrent.error) {
       setTorrentError(torrent.error);
     } else {
-      setTorrentInfo(torrent);
       superagent.post(`http://${document.location.hostname}:8080/api/torrent/download`)
         .send(torrent)
-        .then((res) => initSocket.current(res))
+        .then((res) => {
+          initSocket.current(res);
+          setTorrentInfo(torrent);
+        })
         .catch((e) => setPlayError(true));
     }
   }, []);
@@ -93,6 +95,11 @@ const Video = ({ hidden }) => {
         <div>
           {playError === 'CNTCNNCT' && t('movie.unavailable')}
           {playError !== 'CNTCNNCT' && t('movie.playError')}
+        </div>
+      )}
+      {!torrentError && !playError && !hidden && !torrentInfo && (
+        <div>
+          <Loader type="Circles" color="#551A8B" />
         </div>
       )}
       {!playError && torrentInfo && !hidden && (
