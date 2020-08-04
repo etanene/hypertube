@@ -37,7 +37,8 @@ const loginUser = async (req, res) => {
 
 const logoutUser = (req, res) => {
   try {
-    req.session.destroy();
+    // req.session.destroy();
+    req.logout();
     res.send({ message: 'user logout!' });
   } catch (e) {
     if (e instanceof Error) {

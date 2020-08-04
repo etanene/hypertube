@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer, useState, useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import MovieSearchContext from './context/movieSearchContext';
 import AuthContext from './context/authContext';
@@ -11,20 +11,50 @@ import ChangepwForm from './components/ChangepwForm';
 import MoviePage from './components/Main/MoviePage/MoviePage';
 import queryReducer from './reducers/query';
 import authReducer from './reducers/auth';
-import { userService } from './services';
+import { userService, apiService } from './services';
 
 const App = () => {
   const [queryOptions, dispatch] = useReducer(queryReducer, {});
   const [stateAuthReducer, authDispatch] = useReducer(authReducer, {});
   const [movies, setMovies] = useState([]);
 
-  const user = userService.getUser();
-  console.log('user localeStorage', user);
-  if (user && !stateAuthReducer.isAuth) {
-    authDispatch({ type: 'LOGIN', payload: user });
-  }
-
-  console.log('user', stateAuthReducer);
+  useEffect(() => {
+    const user = userService.getUser();
+    if (user && !stateAuthReducer.isAuth) {
+      authDispatch({ type: 'LOGIN', payload: user });
+    } else if (!user) {
+      try {
+        const GetUser = async () => {
+          const {
+            username,
+            token,
+            userId,
+            photo,
+          } = await apiService.post('/api/auth/user');
+          if (token) {
+            userService.setUser({
+              username,
+              token,
+              userId,
+              photo,
+            });
+            authDispatch({
+              type: 'LOGIN',
+              payload: {
+                username,
+                token,
+                userId,
+                photo,
+              },
+            });
+          }
+        };
+        GetUser();
+      } catch (e) {
+        console.log('no user');
+      }
+    }
+  }, []);
 
   return (
     <AuthContext.Provider

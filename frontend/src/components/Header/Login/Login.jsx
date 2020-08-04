@@ -17,9 +17,12 @@ const Login = (props) => {
     setVisible((prevState) => !prevState);
   };
   const handleLogout = () => {
-    apiService.get('/api/auth/logout');
-    authDispatch({ type: 'LOGIN_LOGOUT' });
-    userService.delUser();
+    async function logout() {
+      await apiService.get('/api/auth/logout');
+      userService.delUser();
+      authDispatch({ type: 'LOGIN_LOGOUT' });
+    }
+    logout();
   };
 
   return (
