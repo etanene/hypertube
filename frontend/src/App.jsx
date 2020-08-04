@@ -8,6 +8,7 @@ import RegForm from './components/RegForm';
 import LoginForm from './components/LoginForm';
 import ResetpwForm from './components/ResetpwForm';
 import ChangepwForm from './components/ChangepwForm';
+import Spinner from './components/common/Spinner';
 import MoviePage from './components/Main/MoviePage/MoviePage';
 import queryReducer from './reducers/query';
 import authReducer from './reducers/auth';
@@ -17,11 +18,13 @@ const App = () => {
   const [queryOptions, dispatch] = useReducer(queryReducer, {});
   const [stateAuthReducer, authDispatch] = useReducer(authReducer, {});
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const user = userService.getUser();
     if (user && !stateAuthReducer.isAuth) {
       authDispatch({ type: 'LOGIN', payload: user });
+      setLoading(false);
     } else if (!user) {
       try {
         const GetUser = async () => {
@@ -50,11 +53,14 @@ const App = () => {
           }
         };
         GetUser();
+        setLoading(false);
       } catch (e) {
         console.log('no user');
       }
     }
   }, []);
+
+  console.log('loading', loading);
 
   return (
     <AuthContext.Provider
@@ -67,8 +73,8 @@ const App = () => {
         <Switch>
           <Route path="/movie/:imdbId/:ytsId" component={MoviePage} />
           <Route exact path="/">
-            {stateAuthReducer.isAuth
-              ? <Movies queryOptions={queryOptions} setMovies={setMovies} /> : <Redirect to="/login" />}
+            {loading
+              ? <Spinner /> : <Movies queryOptions={queryOptions} setMovies={setMovies} />}
           </Route>
           <Switch>
             <Route path="/signup">

@@ -23,7 +23,7 @@ router.get('/login/google', passport.authenticate('google', { scope: ['profile',
 router.get('/login/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
     // Successful authentication, redirect home.
-    res.redirect('/login');
+    res.redirect('/');
   });
 
 router.get('/login/42', passport.authenticate('42'));
@@ -31,7 +31,7 @@ router.get('/login/42', passport.authenticate('42'));
 router.get('/login/42/callback', passport.authenticate('42', { failureRedirect: '/login' }),
   (req, res) => {
     // Successful authentication, redirect home.
-    res.redirect('/login');
+    res.redirect('/');
   });
 
 router.get('/login/github', passport.authenticate('github'));
@@ -39,7 +39,7 @@ router.get('/login/github', passport.authenticate('github'));
 router.get('/login/github/callback', passport.authenticate('github', { failureRedirect: '/login' }),
   (req, res) => {
     // Successful authentication, redirect home.
-    res.redirect('/login');
+    res.redirect('/');
   });
 
 router.post('/user', (req, res) => {
