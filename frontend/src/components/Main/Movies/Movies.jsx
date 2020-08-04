@@ -20,14 +20,15 @@ const Movies = ({ queryOptions, setMovies }) => {
     movies,
     hasMore,
   } = useMovieSearch(queryOptions, pageNumber);
-  const { userMovies } = useGetUserMovies(stateAuthReducer.user.userId);
-  useEffect(() => {
-    setMovies(movies);
-  }, [movies]);
 
   if (!stateAuthReducer.isAuth) {
     return (<Redirect to="/login" />);
   }
+
+  const { userMovies } = useGetUserMovies(stateAuthReducer.user.userId);
+  useEffect(() => {
+    setMovies(movies);
+  }, [movies]);
 
   return (
     <MoviesContext.Provider
