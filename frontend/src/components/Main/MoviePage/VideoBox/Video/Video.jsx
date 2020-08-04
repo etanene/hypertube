@@ -43,10 +43,11 @@ const Video = ({ hidden }) => {
   };
 
   useEffect(() => {
+    console.log(`imdbId = ${imdbId}, YtsTitle = ${YTSInfo.title_long}`)
     const torrent = getTorrentInfo(YTSInfo, imdbId, YTSInfo.title_long);
     if (torrent.error) {
       setTorrentError(torrent.error);
-    } else {
+    } else if (torrent.name) {
       superagent.post(`http://${document.location.hostname}:8080/api/torrent/download`)
         .send(torrent)
         .then((res) => {
@@ -55,13 +56,13 @@ const Video = ({ hidden }) => {
         })
         .catch((e) => setPlayError(true));
     }
-  }, []);
+  }, [imdbId, YTSInfo]);
 
   useEffect(() => () => {
     initSocket.current = () => {};
     if (hls.current) hls.current.destroy();
     if (currentSocket.current) currentSocket.current.close();
-  }, []);
+  }, [imdbId]);
 
   const playerCss = cn('Player');
 
