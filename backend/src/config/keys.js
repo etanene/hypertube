@@ -11,4 +11,12 @@ module.exports = {
     clientID: '983989843870-2verh1199s15l2lna3s8hvgq04pmh4dd.apps.googleusercontent.com',
     clientSecret: '_Z-a_39p121PGLmaCUnwTg2i',
   },
+  vkApi: {
+    clientID: '7559560',
+    clientSecret: 'JeBvBN4HiEQD6y4Vsx1h',
+  },
+  spotifyApi: {
+    clientID: 'cf372086ea4f431e966e487db030a1a2',
+    clientSecret: '9b0832c5bb854384b71f91db8c23ce74',
+  },
 };

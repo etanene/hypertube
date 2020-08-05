@@ -12,5 +12,7 @@ CREATE TABLE IF NOT EXISTS users
   unique_link varchar(255),
   googleId varchar(255),
   fortytwoId varchar(255),
-  githubId varchar(255)
+  githubId varchar(255),
+  vkId varchar(255),
+  spotifyId varchar(255)
 );

@@ -3,6 +3,8 @@ const bcrypt = require('bcrypt');
 const FortyTwoStrategy = require('passport-42').Strategy;
 const GitHubStrategy = require('passport-github').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const VKontakteStrategy = require('passport-vkontakte').Strategy;
+const SpotifyStrategy = require('passport-spotify').Strategy;
 const keys = require('./keys');
 const userModel = require('../models/userModel');
 
@@ -33,16 +35,11 @@ const googleStrategy = new GoogleStrategy({
 },
 async (accessToken, refreshToken, profile, done) => {
   let user = await userModel.getUserBySourceId(profile.provider, profile.id);
-  console.log('we have user', user);
   if (user == null) {
     await userModel.createUserBySource(profile.provider, profile);
     user = await userModel.getUserBySourceId(profile.provider, profile.id);
-    console.log('user after create by id', user);
     return done(null, user);
   }
-  // console.log('accessToke', accessToken);
-  // console.log('refreshToken', refreshToken);
-  // console.log('google profile', profile);
   return done(null, user);
 });
 
@@ -53,16 +50,11 @@ const fortytwoStrategy = new FortyTwoStrategy({
 },
 async (accessToken, refreshToken, profile, done) => {
   let user = await userModel.getUserBySourceId(profile.provider, profile.id);
-  console.log('we have user', user);
   if (user == null) {
     await userModel.createUserBySource(profile.provider, profile);
     user = await userModel.getUserBySourceId(profile.provider, profile.id);
-    console.log('user after create by id', user);
     return done(null, user);
   }
-  // console.log('accessToke', accessToken);
-  // console.log('refreshToken', refreshToken);
-  // console.log('google profile', profile);
   return done(null, user);
 });
 
@@ -73,11 +65,39 @@ const githubStrategy = new GitHubStrategy({
 },
 async (accessToken, refreshToken, profile, done) => {
   let user = await userModel.getUserBySourceId(profile.provider, profile.id);
-  console.log('we have user', user);
   if (user == null) {
     await userModel.createUserBySource(profile.provider, profile);
     user = await userModel.getUserBySourceId(profile.provider, profile.id);
-    console.log('user after create by id', user);
+    return done(null, user);
+  }
+  return done(null, user);
+});
+
+const vkontakteStrategy = new VKontakteStrategy({
+  clientID: keys.vkApi.clientID,
+  clientSecret: keys.vkApi.clientSecret,
+  callbackURL: 'http://localhost:8080/api/auth/login/vk/callback',
+},
+async (accessToken, refreshToken, profile, done) => {
+  let user = await userModel.getUserBySourceId(profile.provider, profile.id);
+  if (user == null) {
+    await userModel.createUserBySource(profile.provider, profile);
+    user = await userModel.getUserBySourceId(profile.provider, profile.id);
+    return done(null, user);
+  }
+  return done(null, user);
+});
+
+const spotifyStrategy = new SpotifyStrategy({
+  clientID: keys.spotifyApi.clientID,
+  clientSecret: keys.spotifyApi.clientSecret,
+  callbackURL: 'http://localhost:8080/api/auth/login/spotify/callback',
+},
+async (accessToken, refreshToken, profile, done) => {
+  let user = await userModel.getUserBySourceId(profile.provider, profile.id);
+  if (user == null) {
+    await userModel.createUserBySource(profile.provider, profile);
+    user = await userModel.getUserBySourceId(profile.provider, profile.id);
     return done(null, user);
   }
   return done(null, user);
@@ -88,4 +108,6 @@ module.exports = {
   googleStrategy,
   fortytwoStrategy,
   githubStrategy,
+  vkontakteStrategy,
+  spotifyStrategy,
 };

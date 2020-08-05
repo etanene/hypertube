@@ -125,6 +125,12 @@ function LoginForm(props) {
         <NavLink to="/api/auth/login/github" target="_blank" className={loginFormCss('Link')}>
           GitHub
         </NavLink>
+        <NavLink to="/api/auth/login/spotify" target="_blank" className={loginFormCss('Link')}>
+          Spotify
+        </NavLink>
+        <NavLink to="/api/auth/login/vk" target="_blank" className={loginFormCss('Link')}>
+          VK
+        </NavLink>
       </form>
     </div>
   );

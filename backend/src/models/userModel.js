@@ -55,6 +55,14 @@ const getUserBySourceId = async (provider, id) => {
     const res = await db.query(`SELECT * from users where githubId = '${id}'`);
     return res.rows[0];
   }
+  if (provider === 'vkontakte') {
+    const res = await db.query(`SELECT * from users where vkId = '${id}'`);
+    return res.rows[0];
+  }
+  if (provider === 'spotify') {
+    const res = await db.query(`SELECT * from users where spotifyId = '${id}'`);
+    return res.rows[0];
+  }
   return null;
 };
 
@@ -62,26 +70,42 @@ const createUserBySource = async (provider, profile) => {
   if (provider === 'google') {
     await db.query(`
     INSERT INTO
-      users (email, login, first_name, last_name, googleId)
+      users (email, login, first_name, last_name, googleId, photo)
     VALUES
-      ($1, $2, $3, $4, $5)
+      ($1, $2, $3, $4, $5, 'avatar.jpg')
   `, [profile.emails[0].value, profile.displayName, profile.name.givenName, profile.name.familyName, profile.id]);
   }
   if (provider === '42') {
     await db.query(`
     INSERT INTO
-      users (email, login, first_name, last_name, fortytwoId)
+      users (email, login, first_name, last_name, fortytwoId, photo)
     VALUES
-      ($1, $2, $3, $4, $5)
+      ($1, $2, $3, $4, $5, 'avatar.jpg')
   `, [profile.emails[0].value, profile.username, profile.name.givenName, profile.name.familyName, profile.id]);
   }
   if (provider === 'github') {
     await db.query(`
     INSERT INTO
-      users (login, photo, githubId)
+      users (login, githubId, photo)
     VALUES
-      ($1, $2, $3)
-  `, [profile.username, profile.photos[0].value, profile.id]);
+      ($1, $2, 'avatar.jpg')
+  `, [profile.username, profile.id]);
+  }
+  if (provider === 'vkontakte') {
+    await db.query(`
+    INSERT INTO
+      users (login, first_name, last_name, vkId, photo)
+    VALUES
+      ($1, $2, $3, $4, 'avatar.jpg')
+  `, [profile.username, profile.name.givenName, profile.name.familyName, profile.id]);
+  }
+  if (provider === 'spotify') {
+    await db.query(`
+    INSERT INTO
+      users (login, spotifyId, photo)
+    VALUES
+      ($1, $2, 'avatar.jpg')
+  `, [profile.displayName, profile.id]);
   }
 };
 

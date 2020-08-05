@@ -12,6 +12,8 @@ const {
   googleStrategy,
   fortytwoStrategy,
   githubStrategy,
+  vkontakteStrategy,
+  spotifyStrategy,
 } = require('./config/passport-config');
 const TorrentClient = require('./TorrentClient/TorrentClient');
 const Stream = require('./Stream/Stream');
@@ -20,6 +22,8 @@ passport.use('local', localStrategy);
 passport.use('google', googleStrategy);
 passport.use('42', fortytwoStrategy);
 passport.use('github', githubStrategy);
+passport.use('vkontakte', vkontakteStrategy);
+passport.use('spotify', spotifyStrategy);
 const app = express();
 app.use(cors());
 const port = process.env.PORT || 8000;
@@ -110,7 +114,6 @@ io.on('connection', async (socket) => {
     const room = io.sockets.adapter.rooms[movie];
 
     if (room && room.length === 1) {
-      // eslint-disable-next-line prefer-destructuring
       roomie = Object.keys(room.sockets)[0];
     }
 

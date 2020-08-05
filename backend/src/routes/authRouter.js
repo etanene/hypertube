@@ -42,6 +42,22 @@ router.get('/login/github/callback', passport.authenticate('github', { failureRe
     res.redirect('/');
   });
 
+router.get('/login/vk', passport.authenticate('vkontakte'));
+
+router.get('/login/vk/callback', passport.authenticate('vkontakte', { failureRedirect: '/login' }),
+  (req, res) => {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
+router.get('/login/spotify', passport.authenticate('spotify'));
+
+router.get('/login/spotify/callback', passport.authenticate('spotify', { failureRedirect: '/login' }),
+  (req, res) => {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
 router.post('/user', (req, res) => {
   try {
     const { user } = req.session.passport;
