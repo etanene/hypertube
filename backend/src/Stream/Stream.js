@@ -24,7 +24,7 @@ module.exports = class {
 			},
 			ffmpeg: {
 				timeout: 5000,
-				downloadThreshold: 1000000,
+				downloadThreshold: 10000000,
 				hls_time: 8,
 				patterns: {
 					duration: /#EXTINF:(?<duration>\d+\.\d+)/g,
