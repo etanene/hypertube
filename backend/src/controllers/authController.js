@@ -1,7 +1,7 @@
+const passport = require('passport');
 const {
   validateService,
   authService,
-  userService,
 } = require('../services');
 const { InternalError } = require('../errors');
 
@@ -20,12 +20,22 @@ const signupUser = async (req, res) => {
   }
 };
 
-const loginUser = async (req, res) => {
+const loginUser = (req, res, next) => {
+  passport.authenticate('local', (err, user) => {
+    if (err) {
+      res.send(err.message);
+    }
+    if (user) {
+      req.session.logged = req.body.username;
+      res.send({ token: req.session.id, userId: user.user_id, photo: user.photo });
+    }
+  })(req, res, next);
+};
+
+const logoutUser = (req, res) => {
   try {
-    await authService.login(req.body);
-    req.session.logged = req.body.username;
-    const user = await userService.getUser({ login: req.body.username });
-    res.send({ token: req.session.id, userId: user[0].user_id, photo: user[0].photo });
+    req.logout();
+    res.send({ message: 'user logout!' });
   } catch (e) {
     if (e instanceof Error) {
       res.status(e.status || 500).send(new InternalError());
@@ -35,11 +45,15 @@ const loginUser = async (req, res) => {
   }
 };
 
-const logoutUser = (req, res) => {
+const getUser = (req, res) => {
   try {
-    // req.session.destroy();
-    req.logout();
-    res.send({ message: 'user logout!' });
+    const { user } = req.session.passport;
+    res.send({
+      username: user.login,
+      token: req.session.id,
+      userId: user.user_id,
+      photo: user.photo,
+    });
   } catch (e) {
     if (e instanceof Error) {
       res.status(e.status || 500).send(new InternalError());
@@ -81,8 +95,6 @@ const validatePassword = async (req, res) => {
 const isAuth = (req, res, next) => {
   try {
     const { authorization } = req.headers;
-    console.log('auth', req.headers);
-
     authService.isAuth(authorization, req.session.id);
     next();
   } catch (e) {
@@ -101,4 +113,5 @@ module.exports = {
   logoutUser,
   verifyUser,
   isAuth,
+  getUser,
 };

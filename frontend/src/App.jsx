@@ -18,13 +18,11 @@ const App = () => {
   const [queryOptions, dispatch] = useReducer(queryReducer, {});
   const [stateAuthReducer, authDispatch] = useReducer(authReducer, {});
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const user = userService.getUser();
     if (user && !stateAuthReducer.isAuth) {
       authDispatch({ type: 'LOGIN', payload: user });
-      setLoading(false);
     } else if (!user) {
       try {
         const GetUser = async () => {
@@ -53,14 +51,11 @@ const App = () => {
           }
         };
         GetUser();
-        setLoading(false);
       } catch (e) {
         console.log('no user');
       }
     }
   }, []);
-
-  console.log('loading', loading);
 
   return (
     <AuthContext.Provider
