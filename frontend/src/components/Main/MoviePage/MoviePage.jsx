@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import { animateScroll as scroll } from 'react-scroll';
 import MovieInfo from './MovieInfo/MovieInfo';
+import getTorrentInfo from '../../../lib/getTorrentInfo';
 import useGetMovieInfo from '../../../services/useGetMovieInfo';
 import useGetMovieSuggestions from '../../../services/useGetMovieSuggestions';
 import useSetUserMovie from '../../../services/useSetUserMovie';
@@ -21,12 +22,17 @@ const MoviePage = () => {
   useEffect(() => {
     scroll.scrollToTop();
   }, [imdbId]);
+  const hasPeers = (movie) => {
+    const info = getTorrentInfo(movie);
+    return !info.error;
+  };
   const { stateAuthReducer } = useContext(AuthContext);
   const { errorOMDB, OMDBInfo } = useGetMovieInfo(imdbId);
   const { errorSuggestions, movieSuggestions } = useGetMovieSuggestions(ytsId);
   const { errorYTS, YTSInfo } = useGetMovieTorrents(ytsId);
   const isReady = OMDBInfo && YTSInfo && movieSuggestions.length > 0;
   const isError = errorOMDB || errorYTS;
+  const filteredMovies = movieSuggestions.filter((movie) => hasPeers(movie));
   useSetUserMovie(stateAuthReducer.user.userId, imdbId);
   return (
     <MovieInfoContext.Provider value={{ YTSInfo, OMDBInfo, imdbId }}>
@@ -41,7 +47,7 @@ const MoviePage = () => {
       )}
       {isReady && <MovieInfo cls={moviePageCss} />}
       {isReady && <VideoBox cls={moviePageCss} />}
-      {isReady && <MovieSuggestions movies={movieSuggestions} />}
+      {isReady && filteredMovies.length !== 0 && <MovieSuggestions movies={filteredMovies} />}
       {isReady && <MovieComments title={OMDBInfo.Title} imdbId={imdbId} />}
     </MovieInfoContext.Provider>
   );
