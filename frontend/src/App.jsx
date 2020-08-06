@@ -19,11 +19,13 @@ const App = () => {
   const [stateAuthReducer, authDispatch] = useReducer(authReducer, {});
   const [movies, setMovies] = useState([]);
 
+  const user = userService.getUser();
+  if (user && !stateAuthReducer.isAuth) {
+    authDispatch({ type: 'LOGIN', payload: user });
+  }
+
   useEffect(() => {
-    const user = userService.getUser();
-    if (user && !stateAuthReducer.isAuth) {
-      authDispatch({ type: 'LOGIN', payload: user });
-    } else if (!user) {
+    if (!user) {
       try {
         const GetUser = async () => {
           const {
