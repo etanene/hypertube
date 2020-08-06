@@ -1,0 +1,19 @@
+@import url('../../../App.css');
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  animation: spinner-animation 1s linear infinite;
+  border: 3px solid var(--spinner-outer-color);
+  border-top: 3px solid var(--spinner-inner-color);
+}
+
+@keyframes spinner-animation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}

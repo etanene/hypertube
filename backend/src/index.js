@@ -2,13 +2,28 @@
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
-const sock = require('socket.io');
+const passport = require('passport');
 const path = require('path');
 const http = require('http');
+const sock = require('socket.io');
 const router = require('./routes');
+const {
+  localStrategy,
+  googleStrategy,
+  fortytwoStrategy,
+  githubStrategy,
+  vkontakteStrategy,
+  spotifyStrategy,
+} = require('./config/passport-config');
 const TorrentClient = require('./TorrentClient/TorrentClient');
 const Stream = require('./Stream/Stream');
 
+passport.use('local', localStrategy);
+passport.use('google', googleStrategy);
+passport.use('42', fortytwoStrategy);
+passport.use('github', githubStrategy);
+passport.use('vkontakte', vkontakteStrategy);
+passport.use('spotify', spotifyStrategy);
 const app = express();
 app.use(cors());
 const port = process.env.PORT || 8000;
@@ -24,6 +39,17 @@ app.use(session({
 }));
 app.use(express.json({ limit: '50mb', extended: true }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser((user, done) => {
+  console.log('serialize user', user);
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
 
 const torrents = [];
 const streams = [];
@@ -88,7 +114,6 @@ io.on('connection', async (socket) => {
     const room = io.sockets.adapter.rooms[movie];
 
     if (room && room.length === 1) {
-      // eslint-disable-next-line prefer-destructuring
       roomie = Object.keys(room.sockets)[0];
     }
 
