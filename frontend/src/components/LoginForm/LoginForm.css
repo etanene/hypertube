@@ -73,6 +73,11 @@
   color: #8e8e8e;
 }
 
+.LoginForm-OauthBox {
+  display:flex;
+  justify-content: space-between;
+}
+
 .LoginForm-Link_link_selected {
   text-decoration: underline;
 }
