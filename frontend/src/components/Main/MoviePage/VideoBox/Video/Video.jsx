@@ -43,11 +43,11 @@ const Video = ({ hidden }) => {
   };
 
   useEffect(() => {
-    console.log(`imdbId = ${imdbId}, YtsTitle = ${YTSInfo.title_long}`)
     const torrent = getTorrentInfo(YTSInfo, imdbId, YTSInfo.title_long);
     if (torrent.error) {
       setTorrentError(torrent.error);
     } else if (torrent.name) {
+      setTorrentError(false);
       superagent.post(`http://${document.location.hostname}:8080/api/torrent/download`)
         .send(torrent)
         .then((res) => {
@@ -59,6 +59,14 @@ const Video = ({ hidden }) => {
   }, [imdbId, YTSInfo]);
 
   useEffect(() => () => {
+    setShowVideo(false);
+    setSubtitles(false);
+    setShowPlay(true);
+    setIsLoading(false);
+    setSendPlay(false);
+    setTorrentError(false)
+    setPlayError(false);
+    setTorrentInfo(false);
     initSocket.current = () => {};
     if (hls.current) hls.current.destroy();
     if (currentSocket.current) currentSocket.current.close();
@@ -103,7 +111,7 @@ const Video = ({ hidden }) => {
           <Loader type="Circles" color="#551A8B" />
         </div>
       )}
-      {!playError && torrentInfo && !hidden && (
+      {!playError && torrentInfo && !hidden && !torrentError && (
         <div
           tabIndex={0}
           role="button"

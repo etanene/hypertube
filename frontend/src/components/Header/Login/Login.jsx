@@ -3,7 +3,7 @@ import { cn } from '@bem-react/classname';
 import { Link } from 'react-router-dom';
 import './Login.css';
 
-import { userService } from '../../../services';
+import { userService, apiService } from '../../../services';
 import AuthContext from '../../../context/authContext';
 
 const Login = (props) => {
@@ -17,9 +17,12 @@ const Login = (props) => {
     setVisible((prevState) => !prevState);
   };
   const handleLogout = () => {
-    userService.delUser();
-    handleClickLogin();
-    authDispatch({ type: 'LOGIN_LOGOUT' });
+    async function logout() {
+      await apiService.get('/api/auth/logout');
+      userService.delUser();
+      authDispatch({ type: 'LOGIN_LOGOUT' });
+    }
+    logout();
   };
 
   return (

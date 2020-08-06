@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import Loader from 'react-loader-spinner';
 import { animateScroll as scroll } from 'react-scroll';
 import MovieInfo from './MovieInfo/MovieInfo';
+import getTorrentInfo from '../../../lib/getTorrentInfo';
 import useGetMovieInfo from '../../../services/useGetMovieInfo';
 import useGetMovieSuggestions from '../../../services/useGetMovieSuggestions';
 import useSetUserMovie from '../../../services/useSetUserMovie';
@@ -21,17 +22,21 @@ const MoviePage = () => {
   useEffect(() => {
     scroll.scrollToTop();
   }, [imdbId]);
+  const hasPeers = (movie) => {
+    const info = getTorrentInfo(movie);
+    return !info.error;
+  };
   const { stateAuthReducer } = useContext(AuthContext);
-  const { errorOMDB, OMDBInfo } = useGetMovieInfo(imdbId);
+  const { OMDBInfo } = useGetMovieInfo(imdbId);
   const { errorSuggestions, movieSuggestions } = useGetMovieSuggestions(ytsId);
   const { errorYTS, YTSInfo } = useGetMovieTorrents(ytsId);
-  const isReady = OMDBInfo && YTSInfo && movieSuggestions.length > 0;
-  const isError = errorOMDB || errorYTS;
+  const isReady = YTSInfo && movieSuggestions.length > 0;
+  const filteredMovies = movieSuggestions.filter((movie) => hasPeers(movie));
   useSetUserMovie(stateAuthReducer.user.userId, imdbId);
   return (
     <MovieInfoContext.Provider value={{ YTSInfo, OMDBInfo, imdbId }}>
       {errorSuggestions && <div>Error suggestions</div>}
-      {isError && <div>An error occurred. Please refresh the page</div>}
+      {errorYTS && <div>An error occurred. Please refresh the page</div>}
       {!isReady && (
         <div className={moviePageCss('LoaderBox')}>
           <div className={moviePageCss('Loader')}>
@@ -41,8 +46,8 @@ const MoviePage = () => {
       )}
       {isReady && <MovieInfo cls={moviePageCss} />}
       {isReady && <VideoBox cls={moviePageCss} />}
-      {isReady && <MovieSuggestions movies={movieSuggestions} />}
-      {isReady && <MovieComments title={OMDBInfo.Title} imdbId={imdbId} />}
+      {isReady && filteredMovies.length !== 0 && <MovieSuggestions movies={filteredMovies} />}
+      {isReady && <MovieComments imdbId={imdbId} />}
     </MovieInfoContext.Provider>
   );
 };

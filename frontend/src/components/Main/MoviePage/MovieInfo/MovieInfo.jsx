@@ -8,7 +8,7 @@ import MovieInfoContext from '../../../../context/MovieInfoContext';
 
 const MovieInfo = ({ cls }) => {
   const movieInfoCss = cn('MovieInfo');
-  const { YTSInfo, OMDBInfo } = useContext(MovieInfoContext);
+  const { YTSInfo } = useContext(MovieInfoContext);
   return (
     <div className={cls('MovieInfo')}>
       <div className={cls('PosterContainer')}>
@@ -18,7 +18,7 @@ const MovieInfo = ({ cls }) => {
         />
         {YTSInfo.rating !== 0 && <MovieRating rating={YTSInfo.rating} />}
       </div>
-      <MovieCast OMDBInfo={OMDBInfo} cls={movieInfoCss} YTSInfo={YTSInfo} />
+      <MovieCast cls={movieInfoCss} />
     </div>
   );
 };

@@ -108,6 +108,7 @@
       "placeholder": "Password",
       "error": "Required field."
     },
+    "loginError": "Wrong username or password",
     "button": "Login",
     "links": {
       "register": "Register",

@@ -9,4 +9,8 @@
   --primary-text-color: var(--white);
   --primary-bg-color: var(--dark-grey);
   --secondary-bg-color: var(--black);
+
+  /* spinner */
+  --spinner-outer-color: var(--grey-500);
+  --spinner-inner-color: var(--transparent);
 }
