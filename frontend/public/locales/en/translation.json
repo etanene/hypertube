@@ -146,6 +146,9 @@
     }
   },
   "profile": {
+    "passwordPlaceholder": "Enter your password",
+    "userError": "User does not exist",
+    "serverError": "An error occurred, please try again later",
     "edit": "Edit profile",
     "passwordError": "Wrong password",
     "update": "Update",
