@@ -80,7 +80,7 @@ module.exports = class {
             if ( this.peers.connect() == -1) reject('CNTCNNCT');
           });
           this.peers.events.on( 'piece-received', piece => this.files.writeFile(filename, piece).catch( err => reject(err) ) );
-          this.files.events.on( 'finish', () => {
+          this.files.events.once( 'finish', () => {
             this.write('Download complete.');
             this.close();
             resolve();
@@ -101,6 +101,7 @@ module.exports = class {
       this.peers.close();
       this.peers.events.removeAllListeners('peers-added');
       this.peers.events.removeAllListeners('piece-received');
+      this.trackers.events.removeAllListeners('connect-fail');
     }
     if (this.trackers) this.trackers.close();
     if (this.files) this.files.close();

@@ -15,7 +15,6 @@ module.exports = class {
 				"h.264 High": "avc1.64001f",
 				aac: "mp4a.40.2"
 			},
-			subtitles: "subtitles.vtt",
 			manifest: "hls.m3u8",
 			playlist: "playlist.m3u8",
 			patterns: {
@@ -37,7 +36,7 @@ module.exports = class {
 		this.playlist = null;
 		
 		// converted subtitles
-		this.subtitles = null;
+		this.subtitles = [];
 		
 	}
 	
@@ -122,20 +121,29 @@ module.exports = class {
 	
 	// at the moment handles only 1 subtitle file
 	convertSubtitles() {
-		return new Promise(resolve => {
+		return new Promise(async resolve => {
+
 			if (!this.files.subtitles.length) return resolve();
 			
-			const temp = this.files.subtitles[0];
-			let options = [
-				'-y',
-				'-i', this.path + temp,
-				this.path + this.settings.subtitles
-			];
-			this.process = spawn('ffmpeg', options);
-			this.process.on('close', () => {
-				this.subtitles = this.settings.subtitles;
-				resolve();
-			});
+			for (const subtitle of this.files.subtitles) {
+				
+				await new Promise (resolve => {
+					const convertedSubtitles = this.path + subtitle.split('.')[0] + '.vtt';
+					let options = [
+						'-y',
+						'-i', this.path + subtitle,
+						convertedSubtitles
+					];
+					this.process = spawn('ffmpeg', options);
+					this.process.on('close', () => {
+						this.subtitles.push(convertedSubtitles);
+						resolve();
+					});
+				});
+
+			}
+
+			resolve();
 		});
 	}
 	

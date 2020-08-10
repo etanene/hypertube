@@ -72,9 +72,18 @@ io.on('connection', async (socket) => {
         .then(() => streams[movie].initialize(torrents[movie].files.path, torrents[movie].downloads))
         .then(() => streams[movie].createPlaylist())
         .then(() => {
-          const subtitlesFile = streams[movie].files.subtitles.length ? streams[movie].files.subtitles[0] : null;
-          if (subtitlesFile) return torrents[movie].download(subtitlesFile);
-          return Promise.resolve();
+          // const subtitlesFile = streams[movie].files.subtitles.length ? streams[movie].files.subtitles[0] : null;
+          const subtitles = streams[movie].files.subtitles;
+          if (subtitles.length) {
+            return new Promise(async resolve => {
+              for (const subtitle of subtitles) {
+                await torrents[movie].download(subtitle);
+              }
+              resolve();
+            });
+          } else
+            return Promise.resolve();
+          // if (subtitlesFile) return torrents[movie].download(subtitlesFile);
         })
         .then(() => streams[movie].convertSubtitles())
         .then(() => {
