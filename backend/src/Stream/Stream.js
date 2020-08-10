@@ -63,9 +63,12 @@ module.exports = class {
 			// else remove last segment and associated file
 			fs.readFile(this.path + this.settings.manifest, 'utf8', (err, data) => {
 				this.converted = !err && data.match(/#EXT-X-ENDLIST/) !== null;
-
+				
 				const lines = data ? data.split('\n') : [];
 
+				// Update access time of manifest for garbage collection
+				if (!err) fs.utimes(this.path + this.settings.manifest, new Date(), new Date(), () => {});
+				
 				if (!err && !this.converted && lines.length > 5) {
 					let segment = '';
 					data = lines.filter( (line, index) => {
