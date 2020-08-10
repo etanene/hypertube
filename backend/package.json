@@ -21,6 +21,7 @@
     "express-session": "^1.17.0",
     "moment": "^2.27.0",
     "moment-timezone": "^0.5.31",
+    "node-cron": "^2.0.3",
     "nodemailer": "^6.4.1",
     "passport": "^0.4.1",
     "passport-42": "^1.2.6",

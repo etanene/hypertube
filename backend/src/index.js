@@ -17,6 +17,7 @@ const {
 } = require('./config/passport-config');
 const TorrentClient = require('./TorrentClient/TorrentClient');
 const Stream = require('./Stream/Stream');
+const Cron = require('../cron/Cron');
 
 passport.use('local', localStrategy);
 passport.use('google', googleStrategy);
@@ -137,3 +138,6 @@ app.use('/', router);
 server.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
+
+const cron = new Cron('video', 'hls.m3u8');
+cron.cleanUp();
