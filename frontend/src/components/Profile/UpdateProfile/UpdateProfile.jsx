@@ -13,6 +13,7 @@ import Button from '../../common/Button';
 
 const UpdateProfile = ({ cls, user }) => {
   const [updated, setUpdated] = useState(false);
+  const isOauth = user.githubid || user.googleid || user.fortytwoid || user.spotifyid;
   function scrollTo() {
     scroller.scrollTo('scroll-to-update', {
       duration: 1000,
@@ -176,30 +177,35 @@ const UpdateProfile = ({ cls, user }) => {
           className={cls('UpdateInputBox')}
           inputClassName={cls('UpdateInput')}
         />
-        <Input
-          size="m"
-          type="password"
-          name="password"
-          placeholder={t('regform.password.placeholder')}
-          value={state.password.value}
-          error={state.password.error}
-          message={t('regform.password.error')}
-          onChange={handleChange}
-          className={cls('UpdateInputBox')}
-          inputClassName={cls('UpdateInput')}
-        />
-        <Input
-          size="m"
-          type="password"
-          name="confirm_password"
-          placeholder={t('regform.confirmpassword.placeholder')}
-          value={state.confirm_password.value}
-          error={state.confirm_password.error}
-          message={t('regform.confirmpassword.error')}
-          onChange={handleChange}
-          className={cls('UpdateInputBox')}
-          inputClassName={cls('UpdateInput')}
-        />
+        {!isOauth && (
+          <div>
+            <Input
+              size="m"
+              type="password"
+              name="password"
+              placeholder={t('regform.password.placeholder')}
+              value={state.password.value}
+              error={state.password.error}
+              message={t('regform.password.error')}
+              onChange={handleChange}
+              className={cls('UpdateInputBox')}
+              inputClassName={cls('UpdateInput')}
+            />
+            <Input
+              size="m"
+              type="password"
+              name="confirm_password"
+              placeholder={t('regform.confirmpassword.placeholder')}
+              value={state.confirm_password.value}
+              error={state.confirm_password.error}
+              message={t('regform.confirmpassword.error')}
+              onChange={handleChange}
+              className={cls('UpdateInputBox')}
+              inputClassName={cls('UpdateInput')}
+            />
+          </div>
+
+        )}
         <Button className={cls('UpdateButton')} type="submit">{t('profile.update')}</Button>
         {updated && <div name="scroll-to-update" className={cls('UpdateMessage')}>{t('profile.updateMessage')}</div>}
       </form>

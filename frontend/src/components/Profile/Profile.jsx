@@ -18,9 +18,16 @@ const Profile = () => {
   const isUserProfile = Number(userId) === stateAuthReducer.user.userId;
   const { user } = useGetUserInfo(userId, isUserProfile);
   const [hiddenInput, setHiddenInput] = useState(false);
-  const changeHiddenInput = () => setHiddenInput((hidden) => !hidden);
   const [passwdInput, setPasswdInput] = useState('');
   const [passwdCheck, setPasswdCheck] = useState(0);
+  const [isError, setIsError] = useState(false);
+  const changeHiddenInput = () => {
+    if (user.githubid || user.googleid || user.fortytwoid || user.spotifyid) {
+      setPasswdCheck(2);
+    } else {
+      setHiddenInput((hidden) => !hidden);
+    }
+  };
   const { t } = useTranslation();
   function scrollTo() {
     scroller.scrollTo('scroll-to-element', {
@@ -43,12 +50,13 @@ const Profile = () => {
           scrollTo();
         }
       })
-      .catch((err) => console.log(err));
+      .catch(() => setIsError(true));
   };
   return (
     <div className={profileCss()}>
       <div className={profileCss('Box')}>
-        {!user && (<span>User does not exist</span>)}
+        {!user && (<span>{t('profile.userError')}</span>)}
+        {isError && (<span>{t('profile.serverError')}</span>)}
         {user && (
           <div>
             {user.photo && <img className={profileCss('Avatar')} src={`/api/public/photo/${user.photo}`} alt="User" />}
@@ -71,7 +79,7 @@ const Profile = () => {
                     autoComplete="password"
                     className={profileCss('Input')}
                     type="password"
-                    placeholder="Enter your password"
+                    placeholder={t('profile.passwordPlaceholder')}
                     value={passwdInput}
                     onChange={(e) => {
                       setPasswdInput(e.target.value);
