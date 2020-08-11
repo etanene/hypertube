@@ -141,8 +141,6 @@ module.exports = class {
 						this.subtitles.push(convertedSubtitles);
 						resolve();
 					});
-					this.process.stderr.setEncoding('utf8'); // debug
-					this.process.stderr.on('data', data => console.log(data) ); // debug
 				});
 
 			}
