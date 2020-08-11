@@ -114,21 +114,24 @@ class Tracker {
   }
   // send http announce request
   sendHttp(options) {
-    socks5.get(options, response => {
-      if (response.statusCode == 200) {
-        let data = Buffer.alloc(0);
-        // read stream
-        response.on( 'data', chunk => data = Buffer.concat([data, chunk]) );
-        response.on( 'end', () => this.manageHttp( bencode.decode(data) ) );
-        this.failed = false;
-      } else {
+    try {
+      socks5.get(options, response => {
+        if (response.statusCode == 200) {
+          let data = Buffer.alloc(0);
+          // read stream
+          response.on( 'data', chunk => data = Buffer.concat([data, chunk]) );
+          response.on( 'end', () => this.manageHttp( bencode.decode(data) ) );
+          this.failed = false;
+        } else {
+          this.failed = true;
+          this.events.emit('connect-fail');
+        }
+      })
+      .on('error', () => {
         this.failed = true;
         this.events.emit('connect-fail');
-      }
-    }).on('error', () => {
-      this.failed = true;
-      this.events.emit('connect-fail');
-    });
+      });
+    } catch (e) {}
   }
   // manage http response
   manageHttp(data) {
