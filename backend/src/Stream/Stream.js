@@ -37,7 +37,6 @@ module.exports = class {
 		
 		// converted subtitles
 		this.subtitles = [];
-		
 	}
 	
 	initialize(path, downloads) {
@@ -119,11 +118,10 @@ module.exports = class {
 		});
 	}
 	
-	// at the moment handles only 1 subtitle file
 	convertSubtitles() {
 		return new Promise(async resolve => {
-
-			if (!this.files.subtitles.length) return resolve();
+			// if there is no subtitles or subtitles already converted
+			if (!this.files.subtitles.length || this.subtitles.length) return resolve();
 			
 			for (const subtitle of this.files.subtitles) {
 				
