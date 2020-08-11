@@ -126,17 +126,23 @@ module.exports = class {
 			for (const subtitle of this.files.subtitles) {
 				
 				await new Promise (resolve => {
-					const convertedSubtitles = this.path + subtitle.split('.')[0] + '.vtt';
+					let convertedSubtitles = subtitle.split('.');
+					convertedSubtitles.pop();
+					convertedSubtitles = this.path + convertedSubtitles.join('.') + '.vtt';
+
 					let options = [
 						'-y',
 						'-i', this.path + subtitle,
 						convertedSubtitles
 					];
+
 					this.process = spawn('ffmpeg', options);
 					this.process.on('close', () => {
 						this.subtitles.push(convertedSubtitles);
 						resolve();
 					});
+					this.process.stderr.setEncoding('utf8'); // debug
+					this.process.stderr.on('data', data => console.log(data) ); // debug
 				});
 
 			}
