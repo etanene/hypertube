@@ -10,7 +10,6 @@ export default function useGetUserMovies(userId) {
       try {
         const response = await request.post(url).send({ user_id: userId });
         if (response.ok) {
-          console.log('UserMovies', response.body);
           setUserMovies(response.body);
         }
       } catch (e) {

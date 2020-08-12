@@ -46,7 +46,6 @@ const useForm = (formSchema, submit, userId = null) => {
       return (Object.assign(obj, mergeObj));
     }, {});
 
-    console.log('data', data);
 
     if (validateForm() && Object.getOwnPropertyNames(data).length > 0) {
       try {

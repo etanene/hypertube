@@ -10,7 +10,6 @@ export default function useGetComments(imdbId) {
       try {
         const response = await request.post(url).send({ movie_id: imdbId });
         if (response.ok) {
-          console.log('API', response.body);
           setComment(response.body);
         }
       } catch (e) {

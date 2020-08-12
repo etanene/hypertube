@@ -14,7 +14,6 @@ export default function useGetMovieTorrents(movieId) {
         setErrorYTS(false);
         const response = await request.get(url).query({ movie_id: movieId, with_cast: true });
         if (response.body.data) {
-          console.log('YTS', response);
           const data = response.body.data.movie;
           setYTSInfo(data);
         }

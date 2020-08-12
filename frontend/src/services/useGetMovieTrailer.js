@@ -23,7 +23,6 @@ export default function useGetMovieInfo(movieTitle) {
         if (response.ok && response.body.items.length) {
           setTrailerId(response.body.items[0].id.videoId);
         }
-        console.log('YOUTUBE', response);
       } catch (e) {
         console.log(e);
       }

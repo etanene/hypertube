@@ -54,7 +54,7 @@ const App = () => {
         };
         GetUser();
       } catch (e) {
-        console.log('no user');
+        console.log(e);
       }
     }
   }, []);

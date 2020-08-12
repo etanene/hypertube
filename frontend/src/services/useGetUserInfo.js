@@ -10,7 +10,6 @@ export default function useGetUserInfo(userId, isUserProfile) {
       try {
         const response = await request.get(url).query({ user_id: userId });
         if (response.ok) {
-          console.log('User', response.body);
           const userInfo = response.body[0];
           if (!isUserProfile && userInfo) {
             setUser({ login: userInfo.login, photo: userInfo.photo, info: userInfo.info });

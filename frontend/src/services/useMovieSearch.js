@@ -47,7 +47,6 @@ export default function useMovieSearch(queryOptions, pageNumber) {
       } catch (e) {
         setIsLoading(false);
         setError(true);
-        console.log(e);
       }
     }
     searchMovies();

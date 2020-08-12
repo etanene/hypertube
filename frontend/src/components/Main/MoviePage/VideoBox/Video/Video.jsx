@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import MovieInfoContext from '../../../../../context/MovieInfoContext';
 import getTorrentInfo from '../../../../../lib/getTorrentInfo';
 import './Video.css';
+import Movie from "../../../Movies/MovieList/Movie/Movie";
 
 const superagent = require('superagent');
 
@@ -75,14 +76,17 @@ const Video = ({ hidden }) => {
   const playerCss = cn('Player');
 
   const streaming = (stream) => {
-    console.log('stream', stream);
     const path = `http://${document.location.host}/api/video/${stream.path.substring(stream.path.indexOf('video/') + 'video/'.length)}`;
-    if (stream.subtitles) setSubtitles(path + stream.subtitles);
+    if (stream.subtitles) {
+      const subs = stream.subtitles.map((sub) => {
+        return `http://${document.location.host}/api/${sub}`;
+      })
+      setSubtitles(subs);
+    }
     setShowVideo(true);
     hls.current = new Hls();
     hls.current.loadSource(path + stream.playlist);
     hls.current.attachMedia(video);
-    hls.current.on(Hls.Events.ERROR, (event, data) => console.log(event, data));
   };
 
   const playVideo = () => {
@@ -133,9 +137,9 @@ const Video = ({ hidden }) => {
           )}
           {showVideo && (
             <video id="video" className={playerCss('Movie')} controls width="640" height="360">
-              {subtitles && (
-                <track src={subtitles} label="English" />
-              )}
+              {subtitles.length && subtitles.map((sub, index) => (
+                <track key={index} src={sub} label={`${YTSInfo.title_long} ${index}`} />
+              ))}
             </video>
           )}
         </div>
