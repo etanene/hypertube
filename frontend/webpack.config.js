@@ -50,6 +50,7 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   devServer: {
+    clientLogLevel: 'none',
     watchOptions: {
       aggregateTimeout: 500, // delay before reloading
       poll: 1000,
