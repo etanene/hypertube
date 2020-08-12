@@ -37,7 +37,6 @@ export default function useMovieSearch(queryOptions, pageNumber) {
         const response = await request.get(url).query({ ...queryOptions, page: pageNumber });
         if (response.body.data.movie_count !== 0) {
           const { data } = response.body;
-          console.log('RESPONSE', response);
           setHasMore(checkHasMore(data));
           const dataMovies = data.movies;
           const filteredMovies = dataMovies.filter((movie) => hasPeers(movie));
