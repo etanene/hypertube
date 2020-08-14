@@ -56,9 +56,9 @@ const getUser = (req, res) => {
     });
   } catch (e) {
     if (e instanceof Error) {
-      res.status(e.status || 500).send(new InternalError());
+      res.send(new InternalError());
     } else {
-      res.status(e.status || 500).send(e);
+      res.send(e);
     }
   }
 };
