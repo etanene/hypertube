@@ -8,6 +8,8 @@ import MovieInfoContext from '../../../../../context/MovieInfoContext';
 import getTorrentInfo from '../../../../../lib/getTorrentInfo';
 import './Video.css';
 import Movie from "../../../Movies/MovieList/Movie/Movie";
+import useWindowDimensions from "../../../../../lib/useWindowDimensions";
+import getVideoDimensions from "../../../../../lib/getVideoDimensions";
 
 const superagent = require('superagent');
 
@@ -25,6 +27,9 @@ const Video = ({ hidden }) => {
   const hls = useRef(false);
   const { YTSInfo, imdbId } = useContext(MovieInfoContext);
   const { t } = useTranslation();
+  const { height, width } = useWindowDimensions();
+  const trailerDimensions = getVideoDimensions(height, width);
+  const playerStyle = { width: trailerDimensions.width, height: trailerDimensions.height};
 
   initSocket.current = (res) => {
     const torrentName = res.body.name;
@@ -65,7 +70,7 @@ const Video = ({ hidden }) => {
     setShowPlay(true);
     setIsLoading(false);
     setSendPlay(false);
-    setTorrentError(false)
+    setTorrentError(false);
     setPlayError(false);
     setTorrentInfo(false);
     initSocket.current = () => {};
@@ -80,7 +85,7 @@ const Video = ({ hidden }) => {
     if (stream.subtitles) {
       const subs = stream.subtitles.map((sub) => {
         return `http://${document.location.host}/api/${sub}`;
-      })
+      });
       setSubtitles(subs);
     }
     setShowVideo(true);
@@ -121,6 +126,7 @@ const Video = ({ hidden }) => {
           role="button"
           id="container"
           className={playerCss()}
+          style={playerStyle}
           onClick={() => playVideo()}
         >
           {showPlay && (
@@ -136,7 +142,8 @@ const Video = ({ hidden }) => {
             </div>
           )}
           {showVideo && (
-            <video id="video" className={playerCss('Movie')} controls width="640" height="360">
+            <video id="video" className={playerCss('Movie')} controls
+                   width={trailerDimensions.width} height={trailerDimensions.height}>
               {subtitles.length && subtitles.map((sub, index) => (
                 <track key={index} src={sub} label={`${YTSInfo.title_long} ${index}`} />
               ))}

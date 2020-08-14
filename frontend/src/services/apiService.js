@@ -31,7 +31,6 @@ async function fetchHelper(url, options) {
 
 async function get(url, params) {
   const user = userService.getUser();
-  console.log('user in get api', user);
   const headers = new Headers();
   headers.append('Accept', 'application/json');
   headers.append('Accept-Charset', 'utf-8');

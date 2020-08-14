@@ -169,7 +169,7 @@ const RegForm = React.memo((props) => {
           onChange={handleChange}
           className={inputCss}
         />
-        <Button type="submit" className={regFormCss('Submit')}>{t('profile.update')}</Button>
+        <Button type="submit" className={regFormCss('Submit')}>{t('regform.button')}</Button>
       </form>
     </div>
   );

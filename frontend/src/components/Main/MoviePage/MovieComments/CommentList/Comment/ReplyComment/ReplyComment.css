@@ -36,3 +36,19 @@
     cursor: auto;
     background-color: var(--dark-grey);
 }
+
+@media screen and (max-width: 500px) {
+    .Comment-ReplyComment {
+        min-width: 220px;
+    }
+
+    .ReplyComment-Textarea {
+        min-width: 150px;
+        width: 150px;
+    }
+
+    .ReplyComment-Button {
+        width: 40px;
+        height: 40px;
+    }
+}

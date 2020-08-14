@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
@@ -21,9 +22,9 @@ const Comment = ({ comment, hidden = false }) => {
           <div className={commentCss('Header')}>
             <img className={commentCss('Avatar')} src={`/api/public/photo/${comment.photo}`} alt="user avatar" />
             <div className={commentCss('UserInfo')}>
-              <span className={commentCss('Username')}>
+              <Link className={commentCss('Username')} to={`/profile/${comment.user_id}`}>
                 {comment.login}
-              </span>
+              </Link>
               <span className={commentCss('Timestamp')}>{date}</span>
             </div>
           </div>
