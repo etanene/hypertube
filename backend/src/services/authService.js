@@ -32,7 +32,7 @@ const signup = async (data) => {
   //   user.email,
   //   'Hypertube email verification',
   //   `Please, verify your hypertube account ${link}`,
-  // ); вавилова 19
+  // );
   return (user);
 };
 

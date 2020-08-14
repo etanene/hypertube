@@ -16,10 +16,7 @@ const localStrategy = new LocalStrategy(
     }
     try {
       if (await bcrypt.compare(password, user.passwd)) {
-        if (user.validate) {
-          return done(null, user);
-        }
-        return done({ message: 'Account is not validated' }, false);
+        return done(null, user);
       }
       return done({ message: 'Password incorrect' }, false);
     } catch (e) {
