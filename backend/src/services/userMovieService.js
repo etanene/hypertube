@@ -10,6 +10,8 @@ const addUserMovie = async (userMovie) => {
   await validateService.validateMovieId(userMovie.movie_id);
   userMovie.created_at = moment().unix();
   const res = await userMovieModel.addUserMovie(userMovie);
+  console.log(res);
+  console.log(res);
   return res;
 };
 

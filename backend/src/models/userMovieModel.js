@@ -7,6 +7,7 @@ const addUserMovie = async (userMovie) => {
     VALUES
       ($1, $2, (to_timestamp($3)))
   `, [userMovie.movie_id, userMovie.user_id, userMovie.created_at]);
+  return ({ status: 'ok' });
 };
 
 const getUserMovie = async (userId) => {

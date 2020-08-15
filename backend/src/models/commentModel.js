@@ -7,6 +7,7 @@ const addComment = async (comment) => {
     VALUES
       ($1, $2, (to_timestamp($3)), $4, $5)
   `, [comment.text, comment.parent_id, comment.created_at, comment.user_id, comment.movie_id]);
+  return ({ status: 'ok' });
 };
 
 const getCommentById = async (commentId) => {
