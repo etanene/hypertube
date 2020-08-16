@@ -33,14 +33,14 @@ const googleStrategy = new GoogleStrategy({
 },
 async (accessToken, refreshToken, profile, done) => {
   let user = await userModel.getUser({ email: profile.emails[0].value });
-  if (user && user[0].googleid == null) {
+  if (user[0] && !user[0].googleId) {
     const res = await userModel.updateUser({ googleId: profile.id },
       { email: profile.emails[0].value });
     if (!res) {
       throw new UserException('Error add Google ID to user!');
     }
   }
-  if (user == null) {
+  if (!user[0]) {
     await userModel.createUserBySource(profile.provider, profile);
     user = await userModel.getUserBySourceId(profile.provider, profile.id);
     return done(null, user);
