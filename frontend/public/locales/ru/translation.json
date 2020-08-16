@@ -9,6 +9,7 @@
     "menu": {
       "showWatched": "Вы просматривали этот фильм",
       "genreSearch": "Поиск по жанру",
+      "ratingFilter": "Минимальный рейтинг",
       "movieSort": [
         {"type":  "seeds", "name": "По популярности"},
         {"type":  "rating", "name": "По рейтингу"},

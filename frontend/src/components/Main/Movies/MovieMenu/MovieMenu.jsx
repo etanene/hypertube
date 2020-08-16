@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { cn } from '@bem-react/classname';
+import GenresContext from '../../../../context/genresContext';
 import MovieSort from './MovieSort/MovieSort';
 import GenreSearch from './GenreSearch/GenreSearch';
 import GenreList from './GenreList/GenreList';
+import MovieFilter from './MovieFilter/MovieFilter';
 import './MovieMenu.css';
-import GenresContext from '../../../../context/genresContext';
 
 const MovieMenu = () => {
   const movieMenuCss = cn('MovieMenu');
@@ -23,6 +24,7 @@ const MovieMenu = () => {
     >
       <div className={movieMenuCss()}>
         <MovieSort cls={movieMenuCss} />
+        <MovieFilter />
         <GenreSearch cls={movieMenuCss} />
       </div>
       <GenreList cls={genreListCss} />

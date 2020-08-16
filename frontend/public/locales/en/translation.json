@@ -9,6 +9,7 @@
     "menu": {
       "showWatched": "You have watched this film",
       "genreSearch": "Choose genre",
+      "ratingFilter": "Minimal rating",
       "movieSort": [
         {"type":  "seeds", "name": "Popularity"},
         {"type": "rating", "name": "Rating"},

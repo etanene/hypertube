@@ -8,12 +8,10 @@ import './App.css';
 import './index.css';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Suspense fallback={<Loader type="Circles" color="#551A8B" />}>
-        <App className="app" />
-      </Suspense>
-    </BrowserRouter>
-  </React.StrictMode>,
+  <BrowserRouter>
+    <Suspense fallback={<Loader type="Circles" color="#551A8B" />}>
+      <App className="app" />
+    </Suspense>
+  </BrowserRouter>,
   document.getElementById('root'),
 );

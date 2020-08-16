@@ -16,7 +16,7 @@ const SearchForm = (props) => {
 
   const applySearch = (e) => {
     e.preventDefault();
-    dispatch({ type: 'REPLACE_QUERY', query: { query_term: search } });
+    dispatch({ type: 'REPLACE_QUERY', query: { query_term: search, sort_by: 'title', order_by: 'asc' } });
     if (pathname !== '/') {
       history.push('/');
     }
