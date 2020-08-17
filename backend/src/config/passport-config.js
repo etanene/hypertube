@@ -8,6 +8,7 @@ const SpotifyStrategy = require('passport-spotify').Strategy;
 const keys = require('./keys');
 const userModel = require('../models/userModel');
 const { UserException } = require('../errors');
+const authService = require('../services/authService');
 
 const localStrategy = new LocalStrategy(
   async (username, password, done) => {
@@ -41,7 +42,8 @@ async (accessToken, refreshToken, profile, done) => {
     }
   }
   if (!user[0]) {
-    await userModel.createUserBySource(profile.provider, profile);
+    const nickname = await authService.createNickname();
+    await userModel.createUserBySource(profile.provider, profile, nickname);
     user = await userModel.getUserBySourceId(profile.provider, profile.id);
     return done(null, user);
   }
@@ -56,7 +58,8 @@ const fortytwoStrategy = new FortyTwoStrategy({
 async (accessToken, refreshToken, profile, done) => {
   let user = await userModel.getUserBySourceId(profile.provider, profile.id);
   if (user == null) {
-    await userModel.createUserBySource(profile.provider, profile);
+    const nickname = await authService.createNickname();
+    await userModel.createUserBySource(profile.provider, profile, nickname);
     user = await userModel.getUserBySourceId(profile.provider, profile.id);
     return done(null, user);
   }
@@ -71,7 +74,8 @@ const githubStrategy = new GitHubStrategy({
 async (accessToken, refreshToken, profile, done) => {
   let user = await userModel.getUserBySourceId(profile.provider, profile.id);
   if (user == null) {
-    await userModel.createUserBySource(profile.provider, profile);
+    const nickname = await authService.createNickname();
+    await userModel.createUserBySource(profile.provider, profile, nickname);
     user = await userModel.getUserBySourceId(profile.provider, profile.id);
     return done(null, user);
   }
@@ -86,7 +90,8 @@ const vkontakteStrategy = new VKontakteStrategy({
 async (accessToken, refreshToken, profile, done) => {
   let user = await userModel.getUserBySourceId(profile.provider, profile.id);
   if (user == null) {
-    await userModel.createUserBySource(profile.provider, profile);
+    const nickname = await authService.createNickname();
+    await userModel.createUserBySource(profile.provider, profile, nickname);
     user = await userModel.getUserBySourceId(profile.provider, profile.id);
     return done(null, user);
   }
@@ -101,7 +106,8 @@ const spotifyStrategy = new SpotifyStrategy({
 async (accessToken, refreshToken, profile, done) => {
   let user = await userModel.getUserBySourceId(profile.provider, profile.id);
   if (user == null) {
-    await userModel.createUserBySource(profile.provider, profile);
+    const nickname = await authService.createNickname();
+    await userModel.createUserBySource(profile.provider, profile, nickname);
     user = await userModel.getUserBySourceId(profile.provider, profile.id);
     return done(null, user);
   }

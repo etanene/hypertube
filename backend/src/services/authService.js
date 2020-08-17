@@ -42,6 +42,16 @@ const verify = async (ulink) => {
   }
 };
 
+const createNickname = async () => {
+  const random = Math.random().toString(36).substring(7);
+  let nickname = `Hypertube${random}`;
+  const res = await userModel.getUser({ login: nickname });
+  if (res[0]) {
+    nickname = await createNickname();
+  }
+  return (nickname);
+};
+
 const getToken = (data) => {
   try {
     const token = data.split(' ');
@@ -70,4 +80,5 @@ module.exports = {
   verify,
   isAuth,
   validatePassword,
+  createNickname,
 };
