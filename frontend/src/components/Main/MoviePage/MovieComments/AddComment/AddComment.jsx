@@ -23,7 +23,6 @@ const AddComment = ({ title }) => {
     });
   }
   const addComment = () => {
-    console.log(stateAuthReducer);
     dispatch({
       type: 'ADD_COMMENT',
       comment: {
