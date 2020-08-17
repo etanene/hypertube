@@ -23,9 +23,11 @@ const AddComment = ({ title }) => {
     });
   }
   const addComment = () => {
+    console.log(stateAuthReducer);
     dispatch({
       type: 'ADD_COMMENT',
       comment: {
+        user_id: stateAuthReducer.user.userId,
         parent_id: null,
         login: stateAuthReducer.user.username,
         created_at: moment(),

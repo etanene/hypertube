@@ -25,6 +25,7 @@ const ReplyComment = ({ cls, parentId, setHidden }) => {
     dispatch({
       type: 'ADD_COMMENT',
       comment: {
+        user_id: stateAuthReducer.user.userId,
         parent_id: parentId,
         login: stateAuthReducer.user.username,
         created_at: moment(),

@@ -15,6 +15,7 @@ const Comment = ({ comment, hidden = false }) => {
   const [hiddenTree, setHiddenTree] = useState(false);
   const changeHiddenReply = () => setHiddenReplyField((hiddenField) => !hiddenField);
   const changeHiddenTree = () => setHiddenTree((hiddenTreeState) => !hiddenTreeState);
+  console.log(comment);
   return (
     <div className={commentCss('Box')}>
       {!hidden && (
