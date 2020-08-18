@@ -129,18 +129,20 @@ const UpdateProfile = ({ cls, user }) => {
           className={cls('UpdateInputBox')}
           inputClassName={cls('UpdateInput')}
         />
-        <Input
-          size="m"
-          type="text"
-          name="email"
-          placeholder={t('regform.email.placeholder')}
-          value={state.email.value}
-          error={state.email.error}
-          message={state.email.message || t('regform.email.error')}
-          onChange={handleChange}
-          className={cls('UpdateInputBox')}
-          inputClassName={cls('UpdateInput')}
-        />
+        {!isOauth && (
+          <Input
+            size="m"
+            type="text"
+            name="email"
+            placeholder={t('regform.email.placeholder')}
+            value={state.email.value}
+            error={state.email.error}
+            message={state.email.message || t('regform.email.error')}
+            onChange={handleChange}
+            className={cls('UpdateInputBox')}
+            inputClassName={cls('UpdateInput')}
+          />
+        )}
         <Input
           size="m"
           type="text"
