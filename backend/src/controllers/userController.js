@@ -24,7 +24,7 @@ const resetpw = async (req, res) => {
     await validateService.validateEmail(req.body.email);
     const oauth = await authService.checkOauth(req.body.email);
     if (oauth) {
-      res.send({ message: 'Wrong account!' });
+      res.send({ message: 'Oauth' });
     } else {
       await userService.resetPwUser(req.body.email);
       res.send({ status: 'ok' });

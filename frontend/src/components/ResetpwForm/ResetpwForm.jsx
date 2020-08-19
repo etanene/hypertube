@@ -27,9 +27,13 @@ function ResetpwForm(props) {
   const { t } = useTranslation();
   const { stateAuthReducer } = useContext(AuthContext);
   const [redirect, setRedirect] = useState(false);
+  const [error, setError] = useState(false);
 
   const submitForm = async (data) => {
     const { message } = await apiService.post('/api/user/resetpw', data);
+    if (message === 'Oauth') {
+      setError(true);
+    }
     if (!message) {
       setRedirect(true);
     }
@@ -82,6 +86,7 @@ function ResetpwForm(props) {
           onChange={handleChange}
           className={inputCss}
         />
+        {error && <span className={resetpwFormCss('Error')}>This email is registered with Oauth</span>}
         <Button type="submit" className={resetpwFormCss('Submit')}>{t('resetpwform.button')}</Button>
       </form>
     </div>
