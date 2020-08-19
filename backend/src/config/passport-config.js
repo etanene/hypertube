@@ -7,7 +7,6 @@ const VKontakteStrategy = require('passport-vkontakte').Strategy;
 const SpotifyStrategy = require('passport-spotify').Strategy;
 const keys = require('./keys');
 const userModel = require('../models/userModel');
-const { UserException } = require('../errors');
 const authService = require('../services/authService');
 
 const localStrategy = new LocalStrategy(
@@ -33,21 +32,14 @@ const googleStrategy = new GoogleStrategy({
   callbackURL: 'http://localhost:8080/api/auth/login/google/callback',
 },
 async (accessToken, refreshToken, profile, done) => {
-  let user = await userModel.getUser({ email: profile.emails[0].value });
-  if (user[0] && !user[0].googleId) {
-    const res = await userModel.updateUser({ googleId: profile.id },
-      { email: profile.emails[0].value });
-    if (!res) {
-      throw new UserException('Error add Google ID to user!');
-    }
-  }
-  if (!user[0]) {
+  let user = await userModel.getUserBySourceId(profile.provider, profile.id);
+  if (user == null) {
     const nickname = await authService.createNickname();
     await userModel.createUserBySource(profile.provider, profile, nickname);
     user = await userModel.getUserBySourceId(profile.provider, profile.id);
     return done(null, user);
   }
-  return done(null, user[0]);
+  return done(null, user);
 });
 
 const fortytwoStrategy = new FortyTwoStrategy({

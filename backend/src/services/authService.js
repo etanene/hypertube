@@ -2,7 +2,6 @@ const bcrypt = require('bcrypt');
 const uuid = require('uuid/v4');
 const path = require('path');
 const fs = require('fs').promises;
-
 const { userModel } = require('../models');
 const { AuthException } = require('../errors');
 
@@ -52,6 +51,15 @@ const createNickname = async () => {
   return (nickname);
 };
 
+const checkOauth = async (email) => {
+  const user = await userModel.getUser({ email });
+  if (user[0].googleid || user[0].fortytwoid || user[0].githubid
+    || user[0].vkid || user[0].spotifyid) {
+    return (true);
+  }
+  return (false);
+};
+
 const getToken = (data) => {
   try {
     const token = data.split(' ');
@@ -81,4 +89,5 @@ module.exports = {
   isAuth,
   validatePassword,
   createNickname,
+  checkOauth,
 };

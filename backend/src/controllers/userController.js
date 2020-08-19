@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const uuid = require('uuid/v4');
 const path = require('path');
 const fs = require('fs').promises;
-const { userService, validateService } = require('../services');
+const { userService, validateService, authService } = require('../services');
 const { InternalError } = require('../errors');
 
 const get = async (req, res) => {
@@ -21,9 +21,14 @@ const get = async (req, res) => {
 
 const resetpw = async (req, res) => {
   try {
-    validateService.validateEmail(req.body.email);
-    await userService.resetPwUser(req.body.email);
-    res.send({ message: 'reset' });
+    await validateService.validateEmail(req.body.email);
+    const oauth = await authService.checkOauth(req.body.email);
+    if (oauth) {
+      res.send({ message: 'Wrong account!' });
+    } else {
+      await userService.resetPwUser(req.body.email);
+      res.send({ message: 'reset' });
+    }
   } catch (e) {
     if (e instanceof Error) {
       res.status(e.status || 500).send(new InternalError());

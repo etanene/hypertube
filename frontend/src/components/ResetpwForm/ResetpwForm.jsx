@@ -29,8 +29,10 @@ function ResetpwForm(props) {
   const [redirect, setRedirect] = useState(false);
 
   const submitForm = async (data) => {
-    await apiService.post('/api/user/resetpw', data);
-    setRedirect(true);
+    const { message } = await apiService.post('/api/user/resetpw', data);
+    if (!message) {
+      setRedirect(true);
+    }
   };
 
   const {
