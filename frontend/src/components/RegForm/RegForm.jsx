@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { useForm } from '../../hooks';
 import { apiService } from '../../services';
 import { REGEX } from '../../constants';
@@ -56,9 +56,11 @@ const formSchema = {
 const RegForm = React.memo((props) => {
   const { className } = props;
   const { t } = useTranslation();
+  const [redirect, setRedirect] = useState(false);
 
   const submitForm = async (data) => {
     await apiService.post('/api/auth/signup', data);
+    setRedirect(true);
   };
   const {
     state,
@@ -88,6 +90,9 @@ const RegForm = React.memo((props) => {
       exists: true,
     });
   }, [state.username.value, state.username.error, fetchUser]);
+  if (redirect) {
+    return (<Redirect to="/login" />);
+  }
   return (
     <div className={regFormCss('Modal')}>
       <form autoComplete="off" onSubmit={handleSubmit} className={regFormCss({}, [className])}>

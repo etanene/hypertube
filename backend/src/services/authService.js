@@ -2,12 +2,8 @@ const bcrypt = require('bcrypt');
 const uuid = require('uuid/v4');
 const path = require('path');
 const fs = require('fs').promises;
-
 const { userModel } = require('../models');
 const { AuthException } = require('../errors');
-const validateService = require('./validateService');
-// const mailService = require('./mailServicчe');
-// const { HOST_URL } = require('../config');
 
 const signup = async (data) => {
   const user = data;
@@ -26,31 +22,7 @@ const signup = async (data) => {
   await fs.writeFile(path.resolve('/app/public/photo', filename), base64, 'base64');
   user.photo = filename;
   await userModel.addUser(user);
-
-  // const link = `<a href="${HOST_URL}/api/auth/verify/${user.unique}">Click me</a>`;
-  // await mailService.sendMail(
-  //   user.email,
-  //   'Hypertube email verification',
-  //   `Please, verify your hypertube account ${link}`,
-  // );
   return (user);
-};
-
-const login = async (data) => {
-  const loginData = validateService.getLoginData(data.username);
-  const users = await userModel.getUser(loginData);
-  if (!users.length) {
-    throw new AuthException('Invalid username or password!');
-  }
-  const user = users[0];
-
-  const validPasswd = await bcrypt.compare(data.password, user.passwd);
-  if (!validPasswd) {
-    throw new AuthException('Invalid username or password!');
-  }
-  // if (!user.validate) {
-  //   throw new AuthException('Please, validate your account on email');
-  // }
 };
 
 const validatePassword = async (data) => {
@@ -67,6 +39,25 @@ const verify = async (ulink) => {
   if (!res) {
     throw new AuthException('Can not find user!');
   }
+};
+
+const createNickname = async () => {
+  const random = Math.random().toString(36).substring(7);
+  let nickname = `Hypertube${random}`;
+  const res = await userModel.getUser({ login: nickname });
+  if (res[0]) {
+    nickname = await createNickname();
+  }
+  return (nickname);
+};
+
+const checkOauth = async (email) => {
+  const user = await userModel.getUser({ email });
+  if (user[0].googleid || user[0].fortytwoid || user[0].githubid
+    || user[0].vkid || user[0].spotifyid) {
+    return (true);
+  }
+  return (false);
 };
 
 const getToken = (data) => {
@@ -94,8 +85,9 @@ const isAuth = (data, session) => {
 
 module.exports = {
   signup,
-  login,
   verify,
   isAuth,
   validatePassword,
+  createNickname,
+  checkOauth,
 };

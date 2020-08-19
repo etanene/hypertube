@@ -65,22 +65,22 @@ const getUserBySourceId = async (provider, id) => {
   return null;
 };
 
-const createUserBySource = async (provider, profile) => {
+const createUserBySource = async (provider, profile, nickname) => {
   if (provider === 'google') {
     await db.query(`
     INSERT INTO
-      users (email, login, first_name, last_name, googleId, photo)
+      users (login, googleId, photo)
     VALUES
-      ($1, $2, $3, $4, $5, 'avatar.jpg')
-  `, [profile.emails[0].value, profile.displayName + provider, profile.name.givenName, profile.name.familyName, profile.id]);
+      ($1, $2, 'avatar.jpg')
+  `, [nickname, profile.id]);
   }
   if (provider === '42') {
     await db.query(`
     INSERT INTO
-      users (email, login, first_name, last_name, fortytwoId, photo)
+      users (login, fortytwoId, photo)
     VALUES
-      ($1, $2, $3, $4, $5, 'avatar.jpg')
-  `, [profile.emails[0].value, profile.username + provider, profile.name.givenName, profile.name.familyName, profile.id]);
+      ($1, $2, 'avatar.jpg')
+  `, [nickname, profile.id]);
   }
   if (provider === 'github') {
     await db.query(`
@@ -88,15 +88,15 @@ const createUserBySource = async (provider, profile) => {
       users (login, githubId, photo)
     VALUES
       ($1, $2, 'avatar.jpg')
-  `, [profile.username + provider, profile.id]);
+  `, [nickname, profile.id]);
   }
   if (provider === 'vkontakte') {
     await db.query(`
     INSERT INTO
-      users (login, first_name, last_name, vkId, photo)
+      users (login, vkId, photo)
     VALUES
-      ($1, $2, $3, $4, 'avatar.jpg')
-  `, [profile.username + provider, profile.name.givenName, profile.name.familyName, profile.id]);
+      ($1, $2, 'avatar.jpg')
+  `, [nickname, profile.id]);
   }
   if (provider === 'spotify') {
     await db.query(`
@@ -104,7 +104,7 @@ const createUserBySource = async (provider, profile) => {
       users (login, spotifyId, photo)
     VALUES
       ($1, $2, 'avatar.jpg')
-  `, [profile.displayName + provider, profile.id]);
+  `, [nickname, profile.id]);
   }
 };
 
