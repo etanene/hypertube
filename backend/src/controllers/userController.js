@@ -27,7 +27,7 @@ const resetpw = async (req, res) => {
       res.send({ message: 'Wrong account!' });
     } else {
       await userService.resetPwUser(req.body.email);
-      res.send({ message: 'reset' });
+      res.send({ status: 'ok' });
     }
   } catch (e) {
     if (e instanceof Error) {
