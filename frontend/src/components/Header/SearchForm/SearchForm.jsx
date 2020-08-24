@@ -9,14 +9,15 @@ const SearchForm = (props) => {
   const searchCss = cn('Search');
   const { cls } = props;
   const [search, setSearch] = useState('');
-  const { dispatch } = useContext(MovieSearchContext);
+  const { dispatch, setPageNumber } = useContext(MovieSearchContext);
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const history = useHistory();
 
   const applySearch = (e) => {
     e.preventDefault();
-    dispatch({ type: 'REPLACE_QUERY', query: { query_term: search, sort_by: 'title', order_by: 'asc' } });
+    setPageNumber(1);
+    dispatch({ type: 'ADD_QUERY', query: { query_term: search, order_by: 'asc' } });
     if (pathname !== '/') {
       history.push('/');
     }

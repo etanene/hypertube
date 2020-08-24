@@ -22,6 +22,13 @@ const authReducer = (state = initialState, action) => {
         error: '',
         user: null,
       };
+    case 'USER_UPDATE':
+      // eslint-disable-next-line no-case-declarations
+      return {
+        isAuth: true,
+        error: '',
+        user: action.payload,
+      };
     case 'LOGIN_ERROR':
       return {
         isAuth: false,

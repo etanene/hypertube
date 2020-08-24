@@ -13,7 +13,7 @@ import Button from '../../common/Button';
 
 const UpdateProfile = ({ cls, user }) => {
   const [updated, setUpdated] = useState(false);
-  const isOauth = user.githubid || user.googleid || user.fortytwoid || user.spotifyid;
+  const isOauth = user.githubid || user.googleid || user.fortytwoid || user.spotifyid || user.vkid;
   function scrollTo() {
     scroller.scrollTo('scroll-to-update', {
       duration: 1000,
@@ -32,19 +32,14 @@ const UpdateProfile = ({ cls, user }) => {
       value: user.login,
       required: true,
     },
-    email: {
-      validate: (value) => !REGEX.EMAIL.test(value),
-      value: user.email,
-      required: true,
-    },
     first_name: {
       validate: (value) => value === '',
-      value: user.first_name,
+      value: user.first_name || '',
       required: true,
     },
     last_name: {
       validate: (value) => value === '',
-      value: user.last_name,
+      value: user.last_name || '',
       required: true,
     },
     info: {
@@ -52,7 +47,18 @@ const UpdateProfile = ({ cls, user }) => {
       value: (user.info && he.decode(user.info)) || '',
       required: false,
     },
-    password: {
+  };
+  if (!isOauth) {
+    formSchema.email = {
+      validate: (value) => !REGEX.EMAIL.test(value),
+      value: user.email,
+      required: true,
+    };
+    formSchema.confirm_password = {
+      required: false,
+      validate: (value, userObj) => value !== userObj.password.value,
+    };
+    formSchema.password = {
       required: false,
       validate: (value) => {
         if (value) {
@@ -60,24 +66,19 @@ const UpdateProfile = ({ cls, user }) => {
         }
         return false;
       },
-    },
-    confirm_password: {
-      required: false,
-      validate: (value, userObj) => {
-        if (userObj.password.value) {
-          return value !== userObj.password.value;
-        }
-        return false;
-      },
-    },
-  };
-  const { stateAuthReducer } = useContext(AuthContext);
+    };
+  }
+  const { stateAuthReducer, authDispatch } = useContext(AuthContext);
   const submitForm = async (data) => {
     // eslint-disable-next-line no-param-reassign
     data.userId = stateAuthReducer.user.userId;
-    await apiService.post('/api/user/updateUser', data);
-    setUpdated(true);
-    scrollTo();
+    const res = await apiService.post('/api/user/updateUser', data);
+    if (res.message === 'User updated') {
+      res.user.token = stateAuthReducer.user.token;
+      authDispatch({ type: 'USER_UPDATE', payload: res.user });
+      setUpdated(true);
+      scrollTo();
+    }
   };
   const {
     state,
@@ -86,17 +87,18 @@ const UpdateProfile = ({ cls, user }) => {
     fetchUser,
   } = useForm(formSchema, submitForm, user.user_id);
   const { t } = useTranslation();
-  useEffect(() => {
-    fetchUser({
-      name: 'email',
-      value: state.email.value,
-      field: 'email',
-      message: t('regform.email.errorexist'),
-      error: state.email.error,
-      exists: true,
-    });
-  }, [state.email.value, state.email.error, fetchUser]);
-
+  if (!isOauth) {
+    useEffect(() => {
+      fetchUser({
+        name: 'email',
+        value: state.email.value,
+        field: 'email',
+        message: t('regform.email.errorexist'),
+        error: state.email.error,
+        exists: true,
+      });
+    }, [state.email.value, state.email.error, fetchUser]);
+  }
   useEffect(() => {
     fetchUser({
       name: 'username',
@@ -107,6 +109,12 @@ const UpdateProfile = ({ cls, user }) => {
       exists: true,
     });
   }, [state.username.value, state.username.error, fetchUser]);
+  if (state.confirm_password && state.password) {
+    state.confirm_password.error = state.confirm_password.value !== state.password.value;
+    if (!state.password.value && !state.confirm_password.value) {
+      state.confirm_password.error = false;
+    }
+  }
   return (
     <div>
       <form name="scroll-to-element" autoComplete="off" onSubmit={handleSubmit}>
@@ -206,9 +214,16 @@ const UpdateProfile = ({ cls, user }) => {
               inputClassName={cls('UpdateInput')}
             />
           </div>
-
         )}
-        <Button className={cls('UpdateButton')} type="submit">{t('profile.update')}</Button>
+        <Button
+          disabled={(state.confirm_password && state.confirm_password.value
+            && !state.password.value)
+          || (state.password && state.password.value && !state.confirm_password.value)}
+          className={cls('UpdateButton')}
+          type="submit"
+        >
+          {t('profile.update')}
+        </Button>
         {updated && <div name="scroll-to-update" className={cls('UpdateMessage')}>{t('profile.updateMessage')}</div>}
       </form>
     </div>

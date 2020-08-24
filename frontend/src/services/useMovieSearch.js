@@ -34,7 +34,7 @@ export default function useMovieSearch(queryOptions, pageNumber) {
         setIsLoading(true);
         setError(false);
 
-        const response = await request.get(url).query({ ...queryOptions, page: pageNumber });
+        const response = await request.get(url).query({ page: pageNumber, ...queryOptions });
         if (response.body.data.movie_count !== 0) {
           const { data } = response.body;
           setHasMore(checkHasMore(data));

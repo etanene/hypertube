@@ -27,6 +27,11 @@
   border-radius: 3px;
 }
 
+.RegForm-Success {
+  font-size: var(--font-size-xs);
+  color: #0c580c;
+}
+
 /* элементы */
 .RegForm-form-name {
   margin: 10px auto;
@@ -38,9 +43,9 @@
 
 .RegForm-Submit {
   cursor: pointer;
-  height: 35px;
   border-radius: 3px;
   width: 150px;
+  padding: 5px 10px;
 }
 
 .RegForm-Photo {
@@ -83,20 +88,11 @@
   .RegForm {
     min-height: 500px;
   }
-
-  .RegForm-Submit {
-    height: 30px;
-  }
 }
 
 @media screen and (max-width: 900px) {
   .RegForm {
     width: 60%;
-  }
-
-  .RegForm-Submit {
-    height: 35px;
-    width: 90px;
   }
 }
 
@@ -109,8 +105,6 @@
 
   .RegForm-Submit {
     font-size: var(--font-size-s);
-    height: 30px;
-    width: 75px;
   }
 
   .RegForm-Links, .RegForm-Lang {

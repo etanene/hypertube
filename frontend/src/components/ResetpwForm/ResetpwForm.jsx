@@ -1,16 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
-import { NavLink, Redirect } from 'react-router-dom';
-
+import { NavLink } from 'react-router-dom';
 import { useForm } from '../../hooks';
 import { apiService } from '../../services';
-
 import Input from '../common/Input';
 import Button from '../common/Button';
 import LangSwitcher from '../Header/LangSwitcher/LangSwitcher';
 import './ResetpwForm.css';
-import AuthContext from '../../context/authContext';
 import { REGEX } from '../../constants';
 
 const resetpwFormCss = cn('ResetpwForm');
@@ -25,17 +22,17 @@ const formSchema = {
 function ResetpwForm(props) {
   const { className } = props;
   const { t } = useTranslation();
-  const { stateAuthReducer } = useContext(AuthContext);
-  const [redirect, setRedirect] = useState(false);
   const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const submitForm = async (data) => {
     const { message } = await apiService.post('/api/user/resetpw', data);
-    if (message === 'Oauth') {
+    if (message === 'no user') {
+      setSuccess(false);
       setError(true);
-    }
-    if (!message) {
-      setRedirect(true);
+    } else {
+      setSuccess(true);
+      setError(false);
     }
   };
 
@@ -56,10 +53,6 @@ function ResetpwForm(props) {
       exists: false,
     });
   }, [state.email.value, state.email.error, fetchUser]);
-
-  if (stateAuthReducer.isAuth || redirect) {
-    return (<Redirect to="/" />);
-  }
 
   return (
     <div className={resetpwFormCss('Modal')}>
@@ -86,7 +79,8 @@ function ResetpwForm(props) {
           onChange={handleChange}
           className={inputCss}
         />
-        {error && <span className={resetpwFormCss('Error')}>This email is registered with Oauth</span>}
+        {error && <span className={resetpwFormCss('Error')}>{t('resetpwform.error')}</span>}
+        {success && <span className={resetpwFormCss('Success')}>{t('resetpwform.success')}</span>}
         <Button type="submit" className={resetpwFormCss('Submit')}>{t('resetpwform.button')}</Button>
       </form>
     </div>

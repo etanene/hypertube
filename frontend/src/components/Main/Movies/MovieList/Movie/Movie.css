@@ -3,11 +3,14 @@
 }
 
 .Overlay {
+    display: flex;
+    flex-direction: column;
     position: absolute;
+    z-index: 1;
     top: 0;
     left: 0;
-    height: 360px;
-    width: 240px;
+    height: 100%;
+    width: 100%;
     opacity: 0;
     transition: .5s ease-in-out;
     background-color: var(--dark-grey);
@@ -30,6 +33,7 @@
 
 .Overlay-InfoBox {
     margin: 10px;
+    overflow: hidden;
 }
 
 .Overlay-TimeBox {
@@ -61,8 +65,9 @@
 }
 
 .Movie-Image {
-    width: 240px;
-    height: 360px;
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
 .Movie:hover .Overlay {
@@ -93,6 +98,10 @@
     position: absolute;
     top: 5%;
     right: 0;
+}
+
+.Movie-ImageContainer {
+    position: relative;
 }
 
 @media screen and (max-width: 600px) {

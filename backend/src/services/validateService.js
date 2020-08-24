@@ -24,7 +24,7 @@ const validatePasswords = (password, confirmPassword) => {
   if (!(password && REGEXP_PASSWORD.test(password))) {
     throw new ValidateException('Invalid password!');
   } else if (!(confirmPassword && confirmPassword === password)) {
-    throw new ValidateException('Password does not match!');
+    throw new ValidateException('Passwords do not match!');
   }
 };
 

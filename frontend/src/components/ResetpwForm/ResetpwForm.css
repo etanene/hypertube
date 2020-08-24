@@ -32,9 +32,9 @@
 }
 
 .ResetpwForm-Submit {
-  font-size: var(--font-size-m);
+  font-size: var(--font-size-s);
   cursor: pointer;
-  height: 35px;
+  height: 45px;
   border-radius: 5px;
   margin: 5px 0;
   width: 150px;
@@ -62,6 +62,12 @@
 .ResetpwForm-Error {
   font-size: var(--font-size-xs);
   color: var(--red);
+  padding-bottom: 10px;
+}
+
+.ResetpwForm-Success {
+  font-size: var(--font-size-xs);
+  color: #185018;
   padding-bottom: 10px;
 }
 

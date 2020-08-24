@@ -12,7 +12,13 @@ export default function useGetUserInfo(userId, isUserProfile) {
         if (response.ok) {
           const userInfo = response.body[0];
           if (!isUserProfile && userInfo) {
-            setUser({ login: userInfo.login, photo: userInfo.photo, info: userInfo.info });
+            setUser({
+              login: userInfo.login,
+              photo: userInfo.photo,
+              info: userInfo.info,
+              last_name: userInfo.last_name,
+              first_name: userInfo.first_name,
+            });
           } else {
             setUser(userInfo);
           }

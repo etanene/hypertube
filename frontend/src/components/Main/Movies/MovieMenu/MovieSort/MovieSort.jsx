@@ -2,7 +2,6 @@ import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { cn } from '@bem-react/classname';
 import MovieSearchContext from '../../../../../context/movieSearchContext';
-import MoviesContext from '../../../../../context/moviesContext';
 import './MovieSort.css';
 
 const MovieSort = (props) => {
@@ -13,8 +12,7 @@ const MovieSort = (props) => {
   const sortByParams = t('main.menu.movieSort', { returnObjects: true });
   const [sortByIndex, setSortByIndex] = useState(0);
   const [visible, setVisible] = useState(false);
-  const { dispatch } = useContext(MovieSearchContext);
-  const { setPageNumber } = useContext(MoviesContext);
+  const { dispatch, setPageNumber } = useContext(MovieSearchContext);
 
   const handleShowList = () => {
     setVisible((prevVisible) => !prevVisible);

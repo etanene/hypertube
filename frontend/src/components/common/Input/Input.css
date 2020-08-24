@@ -25,8 +25,9 @@
 
 .Input-Message {
   font-size: var(--font-size-xxs);
+  word-break: break-word;
   color: var(--red);
-  height: 15px;
+  height: 20px;
   padding-left: 10px;
   margin: 5px 0;
 }

@@ -4,6 +4,7 @@ import { cn } from '@bem-react/classname';
 import { useTranslation } from 'react-i18next';
 import Movie from './Movie/Movie';
 import MovieContext from '../../../../context/moviesContext';
+import MovieSearchContext from '../../../../context/movieSearchContext';
 import './MovieList.css';
 
 const MovieList = () => {
@@ -11,10 +12,10 @@ const MovieList = () => {
     error,
     movies,
     isLoading,
-    setPageNumber,
     hasMore,
     userMovies,
   } = useContext(MovieContext);
+  const { setPageNumber } = useContext(MovieSearchContext);
   const { t } = useTranslation();
   const movieListCss = cn('MovieList');
   const observer = useRef();

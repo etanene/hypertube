@@ -1,5 +1,6 @@
-import { useState } from 'react';
+/* eslint-disable */
 
+import { useState, useCallback } from 'react';
 import { apiService } from '../services';
 
 const useForm = (formSchema, submit, userId = null) => {
@@ -8,7 +9,6 @@ const useForm = (formSchema, submit, userId = null) => {
   const validateForm = () => {
     const names = Object.keys(state);
     let result = true;
-
     for (let i = 0; i < names.length; i += 1) {
       if (state[names[i]].error || (!state[names[i]].value && state[names[i]].required)) {
         result = false;
@@ -42,11 +42,8 @@ const useForm = (formSchema, submit, userId = null) => {
     const data = Object.values(state).reduce((obj, current) => {
       let mergeObj = {};
       if (current.name) mergeObj = { [current.name]: current.value };
-
       return (Object.assign(obj, mergeObj));
     }, {});
-
-
     if (validateForm() && Object.getOwnPropertyNames(data).length > 0) {
       try {
         submit(data);
@@ -56,13 +53,13 @@ const useForm = (formSchema, submit, userId = null) => {
     }
   };
 
-  const fetchUser = async (params) => {
+  const fetchUser = useCallback(async (params) => {
     if (params.error || !params.value) {
       return;
     }
     try {
       const data = await apiService.get(`/api/user/get?${params.field}=${params.value}`);
-      if (Boolean(data.length) === params.exists && data[0].user_id !== userId) {
+      if (Boolean(data.length) === params.exists && data[0] && data[0].user_id !== userId) {
         setState((prevState) => ({
           ...prevState,
           [params.name]: {
@@ -75,7 +72,7 @@ const useForm = (formSchema, submit, userId = null) => {
     } catch (e) {
       console.log(e.message);
     }
-  };
+  }, []);
 
   return {
     state,

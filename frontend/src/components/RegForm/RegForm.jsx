@@ -21,14 +21,10 @@ const formSchema = {
     validate: (value) => value === '',
   },
   username: {
-    // доступны: большие/маленькие буквы, цифры
-    // длина: 4 - 12
     required: true,
     validate: (value) => !(REGEX.USERNAME.test(value)),
   },
   email: {
-    // доступны: любые символы
-    // обязательно: @ и точка
     required: true,
     validate: (value) => !REGEX.EMAIL.test(value),
   },
@@ -41,9 +37,6 @@ const formSchema = {
     validate: (value) => value === '',
   },
   password: {
-    // доступны: большие/маленькие буквы, цифры
-    // обязательно: большая и маленькая буква, цифра
-    // длина: 4 - 12
     required: true,
     validate: (value) => (!REGEX.PASSWORD.test(value)),
   },
@@ -79,7 +72,6 @@ const RegForm = React.memo((props) => {
       exists: true,
     });
   }, [state.email.value, state.email.error, fetchUser]);
-
   useEffect(() => {
     fetchUser({
       name: 'username',

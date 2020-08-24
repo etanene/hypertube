@@ -14,7 +14,7 @@
         {"type":  "seeds", "name": "По популярности"},
         {"type":  "rating", "name": "По рейтингу"},
         {"type":  "date_added", "name": "По дате добавления"},
-        {"type":  "year", "name": "Сначала новые"},
+        {"type":  "year", "name": "По дате"},
         {"type":  "title", "name": "По названию"}
       ],
       "genres":  [
@@ -96,6 +96,7 @@
       "error": "Пароли не совпадают."
     },
     "button": "Регистрация",
+    "success": "Успешно зарегистрированы! Пожалуйста, войдите",
     "links": {
       "register": "Регистрация",
       "login": "Войти"
@@ -119,6 +120,8 @@
     }
   },
   "resetpwform": {
+    "error": "Email не найден",
+    "success": "На ваш email выслано письмо",
     "email":  {
       "placeholder": "Email",
       "error": "Неправильно указан Email",

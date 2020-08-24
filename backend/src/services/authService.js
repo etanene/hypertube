@@ -42,8 +42,8 @@ const verify = async (ulink) => {
 };
 
 const createNickname = async () => {
-  const random = Math.random().toString(36).substring(7);
-  let nickname = `Hypertube${random}`;
+  const random = Math.random().toString(36).substring(6);
+  let nickname = `Hyper${random}`;
   const res = await userModel.getUser({ login: nickname });
   if (res[0]) {
     nickname = await createNickname();
@@ -53,11 +53,9 @@ const createNickname = async () => {
 
 const checkOauth = async (email) => {
   const user = await userModel.getUser({ email });
-  if (user[0].googleid || user[0].fortytwoid || user[0].githubid
-    || user[0].vkid || user[0].spotifyid) {
-    return (true);
-  }
-  return (false);
+  if (user.length === 0) return false;
+  return (user[0].googleid || user[0].fortytwoid || user[0].githubid
+    || user[0].vkid || user[0].spotifyid);
 };
 
 const getToken = (data) => {

@@ -95,6 +95,7 @@
       "error": "Passwords do not match."
     },
     "button": "Register",
+    "success": "Successfully registered! Please log in now",
     "links": {
       "register": "Register",
       "login": "Login"
@@ -118,6 +119,8 @@
     }
   },
   "resetpwform": {
+    "success": "Please check your email",
+    "error": "Email not found",
     "email":  {
       "placeholder": "Email",
       "error": "Invalid email layout.",

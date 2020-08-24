@@ -30,6 +30,10 @@
     transform: translate(-50%, -50%);
 }
 
+.d-none {
+    display: none;
+}
+
 @media screen and (max-width: 500px) {
     .Player {
         margin: 0;

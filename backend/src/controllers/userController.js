@@ -3,8 +3,9 @@ const bcrypt = require('bcrypt');
 const uuid = require('uuid/v4');
 const path = require('path');
 const fs = require('fs').promises;
-const { userService, validateService, authService } = require('../services');
+const { userService, validateService } = require('../services');
 const { InternalError } = require('../errors');
+const { userModel } = require('../models');
 
 const get = async (req, res) => {
   try {
@@ -22,9 +23,10 @@ const get = async (req, res) => {
 const resetpw = async (req, res) => {
   try {
     await validateService.validateEmail(req.body.email);
-    const oauth = await authService.checkOauth(req.body.email);
-    if (oauth) {
-      res.send({ message: 'Oauth' });
+    const { email } = req.body;
+    const user = await userModel.getUser({ email });
+    if (user.length === 0) {
+      res.send({ message: 'no user' });
     } else {
       await userService.resetPwUser(req.body.email);
       res.send({ status: 'ok' });
@@ -107,7 +109,7 @@ const updateUser = async (req, res) => {
       validateService.validateUsername(username);
       data.login = username;
     }
-    if (info) {
+    if (info !== undefined) {
       validateService.validateInfo(info);
       data.info = escape(info);
     }
@@ -127,16 +129,21 @@ const updateUser = async (req, res) => {
       await fs.writeFile(path.resolve('/app/public/photo', filename), base64, 'base64');
       data.photo = filename;
     }
-    await userService.updateUser(data, userId);
-    res.send({ message: 'User updated' });
+    if (Object.keys(data).length !== 0) {
+      await userService.updateUser(data, userId);
+      const user = await userModel.getUser({ user_id: userId });
+      const { user_id, login } = user[0];
+      const userPhoto = user[0].photo;
+      res.send({ message: 'User updated', user: { userId: user_id, photo: userPhoto, username: login } });
+    } else {
+      res.send({ message: 'No data was updated' });
+    }
   } catch (e) {
     if (e instanceof Error) {
       console.error(e);
-      console.error('');
       res.status(e.status || 500).send(new InternalError());
     } else {
       console.error(e);
-      console.error('');
       res.status(e.status || 500).send(e);
     }
   }

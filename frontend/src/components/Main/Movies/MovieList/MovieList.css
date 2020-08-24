@@ -2,7 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     list-style: none;
-    justify-content: space-between;
+    justify-content: center;
     padding: 0 7%;
 }
 
@@ -27,18 +27,38 @@
      background-color: var(--grey);
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (min-width: 600px) {
     .MovieList {
-        justify-content: center;
+        justify-content: flex-start;
     }
-}
-
-@media screen and (max-width: 600px) {
     .MovieList-Item {
-        margin-top: 20px;
-        width: 240px;
+        width: 48%;
     }
     .MovieList-Message {
         font-size: var(--font-size-m);
+    }
+}
+
+@media (min-width: 900px) {
+    .MovieList-Item {
+        width: 31%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .MovieList-Item {
+        width: 23%;
+    }
+}
+
+@media (min-width: 1600px) {
+    .MovieList-Item {
+        width: 18%;
+    }
+}
+
+@media (min-width: 2560px) {
+    .MovieList-Item {
+        width: 14.66%;
     }
 }

@@ -22,7 +22,7 @@ const Profile = () => {
   const [passwdCheck, setPasswdCheck] = useState(0);
   const [isError, setIsError] = useState(false);
   const changeHiddenInput = () => {
-    if (user.githubid || user.googleid || user.fortytwoid || user.spotifyid) {
+    if (user.githubid || user.googleid || user.fortytwoid || user.spotifyid || user.vkid) {
       setPasswdCheck(2);
     } else {
       setHiddenInput((hidden) => !hidden);
@@ -62,6 +62,7 @@ const Profile = () => {
             {user.photo && <img className={profileCss('Avatar')} src={`/api/public/photo/${user.photo}`} alt="User" />}
             <div className={profileCss('Login')}>{user.login}</div>
             {user.info && (<div className={profileCss('Info')}>{he.decode(user.info)}</div>)}
+            {user.first_name && user.last_name && (<div className={profileCss('Name')}>{`${he.decode(user.first_name)} ${he.decode(user.last_name)}`}</div>)}
           </div>
         )}
         {user && isUserProfile && (
@@ -80,7 +81,7 @@ const Profile = () => {
                     className={profileCss('Input')}
                     type="password"
                     placeholder={t('profile.passwordPlaceholder')}
-                    value={passwdInput}
+                    value={'' || passwdInput}
                     onChange={(e) => {
                       setPasswdInput(e.target.value);
                     }}

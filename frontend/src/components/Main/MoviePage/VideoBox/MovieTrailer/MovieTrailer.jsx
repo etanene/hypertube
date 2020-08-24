@@ -18,7 +18,6 @@ const MovieTrailer = ({ cls, hidden }) => {
           height={trailerDimensions.height}
           src={`https://www.youtube.com/embed/${trailerId}`}
           frameBorder="0"
-          allow="autoplay; encrypted-media"
           allowFullScreen
           title="video"
         />

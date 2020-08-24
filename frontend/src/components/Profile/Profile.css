@@ -3,6 +3,7 @@
 }
 
 .Profile-Box {
+    width: 400px;
     padding-top: 50px;
     margin: auto;
     text-align: center;
@@ -70,6 +71,7 @@
 }
 
 .Profile-Input[placeholder] {
+    font-size: var(--font-size-m);
     padding-left: 10px;
 }
 
@@ -87,7 +89,7 @@
 
 .Profile-InputError {
     color: #b16262;
-    font-size: var(--font-size-l);
+    font-size: var(--font-size-m);
 }
 
 @media screen and (max-width: 720px) {
@@ -96,6 +98,9 @@
         min-width: 60px;
         height: 60px;
         min-height: 60px;
+    }
+    .Profile-Name {
+        font-size: var(--font-size-s);
     }
     .Profile-Login {
         font-size: var(--font-size-xl);

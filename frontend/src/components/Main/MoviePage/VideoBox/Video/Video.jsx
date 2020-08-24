@@ -89,9 +89,21 @@ const Video = ({ hidden }) => {
       setSubtitles(subs);
     }
     setShowVideo(true);
-    hls.current = new Hls();
+    hls.current = new Hls({
+      maxMaxBufferLength: 200
+    });
     hls.current.loadSource(path + stream.playlist);
     hls.current.attachMedia(video);
+    hls.current.on(Hls.Events.MEDIA_ATTACHED, () => {
+      video.oncanplay = () => {
+        video.currentTime = 0;
+        video.oncanplay = null;
+        setTimeout(() => {
+          setIsLoading(false);
+          video.classList.remove('d-none');
+        }, 100);
+      }
+    });
   };
 
   const playVideo = () => {
@@ -136,13 +148,13 @@ const Video = ({ hidden }) => {
               </span>
             </div>
           )}
-          {isLoading && !showVideo && (
+          {isLoading && (
             <div className={playerCss('PlayBox')}>
               <Loader type="Circles" color="#551A8B" />
             </div>
           )}
           {showVideo && (
-            <video id="video" className={playerCss('Movie')} controls
+            <video id="video" className={playerCss('Movie' + ' d-none')} controls
                    width={trailerDimensions.width} height={trailerDimensions.height}>
               {subtitles.length && subtitles.map((sub, index) => (
                 <track key={index} src={sub} label={`${YTSInfo.title_long} ${index}`} />

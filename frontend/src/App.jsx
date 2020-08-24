@@ -16,6 +16,7 @@ import { userService, apiService } from './services';
 
 const App = () => {
   const [queryOptions, dispatch] = useReducer(queryReducer, {});
+  const [pageNumber, setPageNumber] = useState(1);
   const [stateAuthReducer, authDispatch] = useReducer(authReducer, {});
   const [movies, setMovies] = useState([]);
 
@@ -64,7 +65,12 @@ const App = () => {
       value={{ stateAuthReducer, authDispatch }}
     >
       <MovieSearchContext.Provider
-        value={{ movies, dispatch }}
+        value={{
+          movies,
+          dispatch,
+          pageNumber,
+          setPageNumber,
+        }}
       >
         <Header />
         <Switch>

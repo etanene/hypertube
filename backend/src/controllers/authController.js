@@ -9,7 +9,7 @@ const signupUser = async (req, res) => {
   try {
     validateService.validateUser(req.body);
     const { username, email } = await authService.signup(req.body);
-    const message = 'Welcome! Please check your email for account confirm!';
+    const message = 'Success';
     res.send({ username, email, message });
   } catch (e) {
     if (e instanceof Error) {
