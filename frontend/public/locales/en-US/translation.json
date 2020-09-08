@@ -1,0 +1,161 @@
+{
+  "header": {
+    "login": "Login",
+    "register": "Register",
+    "lang": "EN",
+    "search": "Movie search"
+  },
+  "main": {
+    "menu": {
+      "showWatched": "You have watched this film",
+      "genreSearch": "Choose genre",
+      "ratingFilter": "Minimal rating",
+      "movieSort": [
+        {"type":  "seeds", "name": "Popularity"},
+        {"type": "rating", "name": "Rating"},
+        {"type": "date_added", "name": "Date added"},
+        {"type": "year", "name": "Year"},
+        {"type": "title", "name": "Title"}
+      ],
+      "genres":  [
+        {"type": "Comedy", "name":  "Comedy"},
+        {"type": "Horror", "name":  "Horror"},
+        {"type": "Sci-fi", "name":  "Sci-fi"},
+        {"type": "Romance", "name":  "Romantic"},
+        {"type": "Action", "name":  "Action"},
+        {"type": "Thriller", "name":  "Thriller"},
+        {"type": "Drama", "name":  "Drama"},
+        {"type": "Fantasy", "name":  "Fantasy"},
+        {"type": "Adventure", "name":  "Adventures"},
+        {"type": "Crime", "name":  "Crime"},
+        {"type": "War", "name":  "War"},
+        {"type": "Sport", "name":  "Sport"},
+        {"type": "Mystery", "name":  "Mystery"},
+        {"type": "Family", "name":  "Family"},
+        {"type": "Documentary", "name":  "Documentary"}
+      ]
+    },
+    "movieList": {
+      "notFound": "No results were found for your request",
+      "loading": "Loading...",
+      "error": "An error occurred. Please refresh the page"
+    }
+  },
+  "movie": {
+    "playError": "Wrong torrent file, could not download movie. Please try again later",
+    "unavailable": "Unavailable, please try again later",
+    "movieSuggestions": "Recommended movies:",
+    "moviePlayer": {
+      "params": ["Trailer", "Movie"]
+    },
+    "movieComments": {
+      "hideForm": "Hide",
+      "replyComment": "Reply",
+      "showBranch": "Show comments",
+      "hideBranch": "Hide branch",
+      "leaveComment": "Leave a comment about",
+      "leaveCommentButton": "Add comment",
+      "comments": "Comments "
+    }
+  },
+  "regform": {
+    "info": {
+      "placeholder": "Info about you",
+      "error": "Length cannot be more than 250"
+    },
+    "photo": {
+      "placeholder": "Add photo",
+      "error": "Required field."
+    },
+    "title": "Registration",
+    "username":  {
+      "placeholder": "Username",
+      "error": "You can use a-z, A-Z, 0-9. Length from 4 to 12.",
+      "errorexist": "Login already exists!"
+    },
+    "email":  {
+      "placeholder": "Email",
+      "error": "Invalid email layout.",
+      "errorexist": "Email already exists!"
+    },
+    "firstname":  {
+      "placeholder": "First name",
+      "error": "Required field."
+    },
+    "lastname":  {
+      "placeholder": "Last name",
+      "error": "Required field."
+    },
+    "password":  {
+      "placeholder": "Password",
+      "error": "Password must contain upper and lower letter, number. Length from 4 to 12."
+    },
+    "confirmpassword": {
+      "placeholder": "Confirm password",
+      "error": "Passwords do not match."
+    },
+    "button": "Register",
+    "success": "Successfully registered! Please log in now",
+    "links": {
+      "register": "Register",
+      "login": "Login"
+    }
+  },
+  "loginform": {
+    "username":  {
+      "placeholder": "Username",
+      "error": "Required field."
+    },
+    "password":  {
+      "placeholder": "Password",
+      "error": "Required field."
+    },
+    "loginError": "Wrong username or password",
+    "button": "Login",
+    "links": {
+      "register": "Register",
+      "login": "Login",
+      "reset": "Forgot password?"
+    }
+  },
+  "resetpwform": {
+    "success": "Please check your email",
+    "error": "Email not found",
+    "email":  {
+      "placeholder": "Email",
+      "error": "Invalid email layout.",
+      "errorexist": "Email does not exists!"
+    },
+    "button": "Reset password",
+    "links": {
+      "register": "Register",
+      "login": "Login",
+      "reset": "Forgot password?"
+    }
+  },
+  "changepwform": {
+    "password":  {
+      "placeholder": "Password",
+      "error": "Password must contain upper and lower letter, number. Length from 4 to 12."
+    },
+    "confirmpassword": {
+      "placeholder": "Confirm password",
+      "error": "Passwords do not match."
+    },
+    "button": "Change password",
+    "links": {
+      "register": "Register",
+      "login": "Login",
+      "reset": "Forgot password?"
+    }
+  },
+  "profile": {
+    "passwordPlaceholder": "Enter your password",
+    "userError": "User does not exist",
+    "serverError": "An error occurred, please try again later",
+    "edit": "Edit profile",
+    "passwordError": "Wrong password",
+    "update": "Update",
+    "updateMessage": "Your profile successfully updated"
+  }
+}

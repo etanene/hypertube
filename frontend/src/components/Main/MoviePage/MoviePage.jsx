@@ -12,7 +12,6 @@ import MovieSuggestions from './MovieSuggestions/MovieSuggestions';
 import MovieComments from './MovieComments/MovieComments';
 import useGetMovieTorrents from '../../../services/useGetMovieTorrents';
 import VideoBox from './VideoBox/VideoBox';
-import MovieSearchContext from '../../../context/movieSearchContext';
 import MovieInfoContext from '../../../context/MovieInfoContext';
 import AuthContext from '../../../context/authContext';
 import './MoviePage.css';

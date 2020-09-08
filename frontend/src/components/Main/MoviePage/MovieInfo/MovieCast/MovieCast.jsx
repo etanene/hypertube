@@ -13,15 +13,15 @@ const MovieCast = ({ cls }) => {
         {YTSInfo.title_long}
       </h2>
       <h4 className={movieCastCss('Info')}>
-        {OMDBInfo && OMDBInfo.Genre}
-        {!OMDBInfo && YTSInfo.genres.join(' ')}
+        {OMDBInfo && isAvailable(OMDBInfo.Genre) && OMDBInfo.Genre}
+        {(!OMDBInfo || !isAvailable(OMDBInfo.Genre)) && YTSInfo.genres.join(' ')}
       </h4>
-      {OMDBInfo && (
+      {OMDBInfo && isAvailable(OMDBInfo.Director) && (
       <h4 className={movieCastCss('Info')}>
         {`Director: ${OMDBInfo.Director}`}
       </h4>
       )}
-      {OMDBInfo && (
+      {OMDBInfo && isAvailable(OMDBInfo.Actors) && (
       <h4 className={movieCastCss('Info')}>
         {`Main cast: ${OMDBInfo.Actors}`}
       </h4>
@@ -31,9 +31,9 @@ const MovieCast = ({ cls }) => {
         {(!OMDBInfo || !isAvailable(OMDBInfo.Plot)) && YTSInfo.description_full
         && YTSInfo.description_full}
       </h4>
-      {OMDBInfo && (
+      {OMDBInfo && isAvailable(OMDBInfo.Runtime) && (
         <h4 className={movieCastCss('Info')}>
-          {isAvailable(OMDBInfo.Runtime) && OMDBInfo.Runtime}
+          {OMDBInfo.Runtime}
         </h4>
       )}
     </div>
