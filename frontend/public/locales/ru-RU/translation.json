@@ -1,0 +1,162 @@
+{
+  "header": {
+    "login": "Войти",
+    "register": "Регистрация",
+    "lang": "RU",
+    "search": "Поиск фильмов"
+  },
+  "main": {
+    "menu": {
+      "showWatched": "Вы просматривали этот фильм",
+      "genreSearch": "Поиск по жанру",
+      "ratingFilter": "Минимальный рейтинг",
+      "movieSort": [
+        {"type":  "seeds", "name": "По популярности"},
+        {"type":  "rating", "name": "По рейтингу"},
+        {"type":  "date_added", "name": "По дате добавления"},
+        {"type":  "year", "name": "По дате"},
+        {"type":  "title", "name": "По названию"}
+      ],
+      "genres":  [
+        {"type": "Comedy", "name":  "Комедия"},
+        {"type": "Horror", "name":  "Ужасы"},
+        {"type": "Sci-fi", "name":  "Научная фантастика"},
+        {"type": "Romance", "name":  "Романтика"},
+        {"type": "Action", "name":  "Боевик"},
+        {"type": "Thriller", "name":  "Триллер"},
+        {"type": "Drama", "name":  "Драма"},
+        {"type": "Fantasy", "name":  "Фэнтези"},
+        {"type": "Adventure", "name":  "Приключения"},
+        {"type": "Crime", "name":  "Криминал"},
+        {"type": "War", "name":  "Война"},
+        {"type": "Sport", "name":  "Спорт"},
+        {"type": "Mystery", "name":  "Загадочное"},
+        {"type": "Family", "name":  "Семейное"},
+        {"type": "Documentary", "name":  "Документальное"}
+      ]
+    },
+    "movieList": {
+      "notFound": "По вашему запросу ничего не найдено",
+      "loading": "Загрузка...",
+      "error": "Произошла ошибка. Пожалуйста, перезагрузите страницу"
+    }
+  },
+  "movie": {
+    "playError": "Не удалось загрузить фильм. Пожалуйста, попробуйте позже",
+    "unavailable": "Видео не доступно, пожалуйста, попробуйте позже",
+    "movieError": "Не удалось найти пиров для загрузки фильма. Пожалуйста, попробуйте позже.",
+    "movieSuggestions": "Похожие фильмы:",
+    "moviePlayer": {
+      "params": ["Трейлер", "Фильм"]
+    },
+    "movieComments": {
+      "hideForm": "Скрыть",
+      "replyComment": "Ответить",
+      "showBranch": "Показать комментарии",
+      "hideBranch": "Скрыть ветвь",
+      "leaveComment": "Поделитесь мнением о фильме",
+      "leaveCommentButton": "Отправить",
+      "comments": "Комментарии "
+    }
+  },
+  "regform": {
+    "info": {
+      "placeholder": "Расскажите о себе",
+      "error": "Длина не может быть больше 250"
+    },
+    "photo": {
+      "placeholder": "Добавить фото",
+      "error": "Обязательно к заполнению."
+    },
+    "title": "Регистрация",
+    "username":  {
+      "placeholder": "Имя пользователя",
+      "error": "Используйте a-z, A-Z, 0-9. Длина от 4 до 12 символов.",
+      "errorexist": "Такой логин уже есть!"
+    },
+    "email":  {
+      "placeholder": "Email",
+      "error": "Непрвильно указан Email",
+      "errorexist": "Такой Email уже есть!"
+    },
+    "firstname":  {
+      "placeholder": "Имя",
+      "error": "Обязательно к заполнению."
+    },
+    "lastname":  {
+      "placeholder": "Фамилия",
+      "error": "Обязательно к заполнению."
+    },
+    "password":  {
+      "placeholder": "Пароль",
+      "error": "Пароль должен содержать заглавную и строчную букву, цифру. Длина от 4 до 12 символов."
+    },
+    "confirmpassword": {
+      "placeholder": "Подтверждение пароля",
+      "error": "Пароли не совпадают."
+    },
+    "button": "Регистрация",
+    "success": "Успешно зарегистрированы! Пожалуйста, войдите",
+    "links": {
+      "register": "Регистрация",
+      "login": "Войти"
+    }
+  },
+  "loginform": {
+    "username":  {
+      "placeholder": "Имя пользователя",
+      "error": "Обязательно к заполнению."
+    },
+    "password":  {
+      "placeholder": "Пароль",
+      "error": "Обязательно к заполнению."
+    },
+    "loginError": "Неверное имя пользователя или пароль",
+    "button": "Войти",
+    "links": {
+      "register": "Регистрация",
+      "login": "Войти",
+      "reset": "Забыли пароль?"
+    }
+  },
+  "resetpwform": {
+    "error": "Email не найден",
+    "success": "На ваш email выслано письмо",
+    "email":  {
+      "placeholder": "Email",
+      "error": "Неправильно указан Email",
+      "errorexist": "Такого Email нет!"
+    },
+    "button": "Сброс пароля",
+    "links": {
+      "register": "Регистрация",
+      "login": "Войти",
+      "reset": "Забыли пароль?"
+    }
+  },
+  "changepwform": {
+    "password":  {
+      "placeholder": "Пароль",
+      "error": "Пароль должен содержать заглавную и строчную букву, цифру. Длина от 4 до 12 символов."
+    },
+    "confirmpassword": {
+      "placeholder": "Подтверждение пароля",
+      "error": "Пароли не совпадают."
+    },
+    "button": "Изменить пароль",
+    "links": {
+      "register": "Регистрация",
+      "login": "Войти",
+      "reset": "Забыли пароль?"
+    }
+  },
+  "profile": {
+    "passwordPlaceholder": "Введите пароль",
+    "userError": "Пользователь не найден",
+    "serverError": "Произошла ошибка. Пожалуйста, попробуйте позже",
+    "edit": "Редактировать",
+    "passwordError": "Неправильный пароль",
+    "update": "Изменить",
+    "updateMessage": "Ваш профиль успешно изменен"
+  }
+}

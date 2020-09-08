@@ -7,7 +7,7 @@ import MovieSearchContext from '../../../context/movieSearchContext';
 
 const Logo = (props) => {
   const { cls } = props;
-  const { dispatch } = useContext(MovieSearchContext);
+  const { dispatch, setPageNumber } = useContext(MovieSearchContext);
   const linkCss = cn('Link');
   const logoCss = cn('Logo');
 
@@ -17,14 +17,9 @@ const Logo = (props) => {
       tabIndex={0}
       className={cls}
       onClick={() => {
-        dispatch({ type: 'REPLACE_QUERY', query: { query_term: '' } });
+        setPageNumber(1);
+        dispatch({ type: 'REPLACE_QUERY', query: {} });
         scroll.scrollToTop();
-      }}
-      onKeyDown={(e) => {
-        if (e.code === 'KeyW') {
-          dispatch({ type: 'REPLACE_QUERY', query: { query_term: '' } });
-          scroll.scrollToTop();
-        }
       }}
     >
       <Link

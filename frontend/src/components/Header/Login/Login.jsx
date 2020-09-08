@@ -22,6 +22,7 @@ const Login = (props) => {
       userService.delUser();
       authDispatch({ type: 'LOGIN_LOGOUT' });
     }
+    setVisible(false);
     logout();
   };
 

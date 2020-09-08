@@ -40,6 +40,8 @@ export default function useMovieSearch(queryOptions, pageNumber) {
           setHasMore(checkHasMore(data));
           const dataMovies = data.movies;
           const filteredMovies = dataMovies.filter((movie) => hasPeers(movie));
+          // eslint-disable-next-line prefer-destructuring
+          if (!filteredMovies.length) filteredMovies[0] = dataMovies[0];
           dispatch({ type: 'ADD_MOVIES', movies: filteredMovies });
         }
         setIsLoading(false);

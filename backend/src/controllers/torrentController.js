@@ -8,6 +8,7 @@ const download = async (req, res) => {
     const torrent = req.body;
     validateService.validateTorrent(torrent);
     const name = `${torrent.name}_${torrent.movie_id}_${torrent.quality}.torrent`;
+    if (!fs.existsSync('./public/torrent-files')) fs.mkdirSync('./public/torrent-files', { recursive: true });
     const file = fs.createWriteStream(`./public/torrent-files/${name}`);
     https.get(torrent.url, (response) => {
       response.pipe(file);

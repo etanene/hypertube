@@ -17,7 +17,9 @@ const SearchForm = (props) => {
   const applySearch = (e) => {
     e.preventDefault();
     setPageNumber(1);
-    dispatch({ type: 'ADD_QUERY', query: { query_term: search, order_by: 'asc' } });
+    if (search) {
+      dispatch({ type: 'ADD_QUERY', query: { query_term: search, order_by: 'asc' } });
+    }
     if (pathname !== '/') {
       history.push('/');
     }

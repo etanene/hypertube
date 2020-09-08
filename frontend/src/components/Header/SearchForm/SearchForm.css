@@ -47,3 +47,9 @@
         padding: 0 5px;
     }
 }
+
+@media screen and (max-width: 450px) {
+    .Search-Input {
+        width: 85%;
+    }
+}
