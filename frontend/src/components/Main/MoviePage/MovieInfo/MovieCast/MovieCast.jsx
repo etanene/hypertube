@@ -27,7 +27,7 @@ const MovieCast = ({ cls }) => {
       </h4>
       )}
       <h4 className={movieCastCss('Info')}>
-        {OMDBInfo && isAvailable(OMDBInfo) && OMDBInfo.Plot}
+        {OMDBInfo && isAvailable(OMDBInfo.Plot) && OMDBInfo.Plot}
         {(!OMDBInfo || !isAvailable(OMDBInfo.Plot)) && YTSInfo.description_full
         && YTSInfo.description_full}
       </h4>

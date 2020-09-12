@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const request = require('superagent');
+const axios = require('axios');
 
 export default function useGetMovieSuggestions(movieId) {
   const [isLoadingSuggestions, setIsLoadingSuggestions] = useState(false);
@@ -10,22 +10,28 @@ export default function useGetMovieSuggestions(movieId) {
   const url = 'https://yts.mx/api/v2/movie_suggestions.json';
 
   useEffect(() => {
+    let cleanUpFn = false;
+    const signal = axios.CancelToken.source();
     async function getSuggestions() {
       try {
-        setIsLoadingSuggestions(true);
-        setErrorSuggestions(false);
-
-        const response = await request.get(url).query({ movie_id: movieId });
-        if (response.body.data.movie_count !== 0) {
-          setMovieSuggestions(response.body.data.movies);
+        if (!cleanUpFn) setIsLoadingSuggestions(true);
+        if (!cleanUpFn) setErrorSuggestions(false);
+        const response = await axios.get(url,
+          { params: { movie_id: movieId }, cancelToken: signal.token });
+        if (response.data.data.movie_count !== 0) {
+          if (!cleanUpFn) setMovieSuggestions(response.data.data.movies);
         }
-        setIsLoadingSuggestions(false);
+        if (!cleanUpFn) setIsLoadingSuggestions(false);
       } catch (e) {
-        setIsLoadingSuggestions(false);
-        setErrorSuggestions(true);
+        if (!cleanUpFn) setIsLoadingSuggestions(false);
+        if (!cleanUpFn) setErrorSuggestions(true);
       }
     }
-    getSuggestions();
+    if (!cleanUpFn) getSuggestions();
+    return () => {
+      signal.cancel('Api has been canceled');
+      cleanUpFn = true;
+    };
   }, [movieId]);
 
   return {

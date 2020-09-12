@@ -2,7 +2,7 @@ import { useEffect, useReducer, useState } from 'react';
 import moviesReducer from '../reducers/movies';
 import getTorrentInfo from '../lib/getTorrentInfo';
 
-const request = require('superagent');
+const axios = require('axios');
 
 export default function useMovieSearch(queryOptions, pageNumber) {
   const [isLoading, setIsLoading] = useState(false);
@@ -29,28 +29,34 @@ export default function useMovieSearch(queryOptions, pageNumber) {
   };
 
   useEffect(() => {
+    let cleanUpFn = false;
+    const signal = axios.CancelToken.source();
     async function searchMovies() {
       try {
-        setIsLoading(true);
-        setError(false);
-
-        const response = await request.get(url).query({ page: pageNumber, ...queryOptions });
-        if (response.body.data.movie_count !== 0) {
-          const { data } = response.body;
-          setHasMore(checkHasMore(data));
+        if (!cleanUpFn) setIsLoading(true);
+        if (!cleanUpFn) setError(false);
+        const response = await axios.get(url,
+          { params: { page: pageNumber, ...queryOptions }, cancelToken: signal.token });
+        if (response.data.data.movie_count !== 0) {
+          const { data } = response.data;
+          if (!cleanUpFn) setHasMore(checkHasMore(data));
           const dataMovies = data.movies;
           const filteredMovies = dataMovies.filter((movie) => hasPeers(movie));
           // eslint-disable-next-line prefer-destructuring
           if (!filteredMovies.length) filteredMovies[0] = dataMovies[0];
           dispatch({ type: 'ADD_MOVIES', movies: filteredMovies });
         }
-        setIsLoading(false);
+        if (!cleanUpFn) setIsLoading(false);
       } catch (e) {
-        setIsLoading(false);
-        setError(true);
+        if (!cleanUpFn) setIsLoading(false);
+        if (!cleanUpFn) setError(true);
       }
     }
-    searchMovies();
+    if (!cleanUpFn) searchMovies();
+    return () => {
+      signal.cancel('Api has been canceled');
+      cleanUpFn = true;
+    };
   }, [queryOptions, pageNumber]);
 
   return {

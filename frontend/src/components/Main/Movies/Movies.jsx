@@ -24,7 +24,11 @@ const Movies = ({ queryOptions, setMovies }) => {
   const { userMovies } = useGetUserMovies(stateAuthReducer.user.userId);
 
   useEffect(() => {
-    setMovies(movies);
+    let cleanUpFn = false;
+    if (!cleanUpFn) setMovies(movies);
+    return () => {
+      cleanUpFn = true;
+    };
   }, [movies]);
 
   return (

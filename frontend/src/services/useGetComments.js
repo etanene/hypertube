@@ -1,24 +1,26 @@
 import { useEffect, useState } from 'react';
 
-const request = require('superagent');
+const axios = require('axios');
 
 export default function useGetComments(imdbId) {
   const url = '/api/comment/get';
   const [comment, setComment] = useState([]);
   useEffect(() => {
-    async function getMovieInfo() {
+    let cleanUpFn = false;
+    const signal = axios.CancelToken.source();
+    async function getComments() {
       try {
-        const response = await request.post(url).send({ movie_id: imdbId });
-        if (response.ok) {
-          setComment(response.body);
-        }
+        const response = await axios.post(url, { movie_id: imdbId }, { cancelToken: signal.token });
+        if (!cleanUpFn) setComment(response.data);
       } catch (e) {
         console.log(e);
       }
     }
-    getMovieInfo();
+    if (!cleanUpFn) getComments();
+    return () => {
+      signal.cancel('Api has been canceled');
+      cleanUpFn = true;
+    };
   }, [imdbId]);
-  return {
-    comment,
-  };
+  return { comment };
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const request = require('superagent');
+const axios = require('axios');
 
 export default function useGetMovieInfo(movieTitle) {
   const [trailerId, setTrailerId] = useState(false);
@@ -9,27 +9,33 @@ export default function useGetMovieInfo(movieTitle) {
   const url = 'https://www.googleapis.com/youtube/v3/search';
 
   useEffect(() => {
-    async function getMovieInfo() {
+    let cleanUpFn = false;
+    const signal = axios.CancelToken.source();
+    async function getMovieTrailer() {
       try {
-        const response = await request.get(url).query(
+        const response = await axios.get(url,
           {
-            part: 'snippet',
-            q,
-            type: 'video',
-            key,
-            maxResults: 1,
-          },
-        );
-        if (response.ok && response.body.items.length) {
-          setTrailerId(response.body.items[0].id.videoId);
+            params: {
+              part: 'snippet',
+              q,
+              type: 'video',
+              key,
+              maxResults: 1,
+            },
+            cancelToken: signal.token,
+          });
+        if (response.data && response.data.items.length) {
+          setTrailerId(response.data.items[0].id.videoId);
         }
       } catch (e) {
         console.log(e);
       }
     }
-    getMovieInfo();
+    if (!cleanUpFn) getMovieTrailer();
+    return () => {
+      signal.cancel('Api has been canceled');
+      cleanUpFn = true;
+    };
   }, [movieTitle]);
-  return {
-    trailerId,
-  };
+  return { trailerId };
 }

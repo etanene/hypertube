@@ -1,4 +1,5 @@
 /* eslint-disable */
+
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import Loader from 'react-loader-spinner';
@@ -7,11 +8,10 @@ import { useTranslation } from 'react-i18next';
 import MovieInfoContext from '../../../../../context/MovieInfoContext';
 import getTorrentInfo from '../../../../../lib/getTorrentInfo';
 import './Video.css';
-import Movie from "../../../Movies/MovieList/Movie/Movie";
-import useWindowDimensions from "../../../../../lib/useWindowDimensions";
-import getVideoDimensions from "../../../../../lib/getVideoDimensions";
+import useWindowDimensions from '../../../../../lib/useWindowDimensions';
+import getVideoDimensions from '../../../../../lib/getVideoDimensions';
 
-const superagent = require('superagent');
+const axios = require('axios');
 
 const Video = ({ hidden }) => {
   const [showVideo, setShowVideo] = useState(false);
@@ -32,14 +32,14 @@ const Video = ({ hidden }) => {
   const playerStyle = { width: trailerDimensions.width, height: trailerDimensions.height};
 
   initSocket.current = (res) => {
-    const torrentName = res.body.name;
+    const torrentName = res.data.name;
     const sockets = io(`${document.location.hostname}:8000`, {
       query: {
         movie: window.location.pathname,
-        torrentFile: `public/torrent-files/${torrentName}`
-      }
+        torrentFile: `public/torrent-files/${torrentName}`,
+      },
     });
-    sockets.on('errors', err => setPlayError(err) );
+    sockets.on('errors', (err) => setPlayError(err));
     currentSocket.current = sockets;
 
     sockets.on('stream', (stream) => {
@@ -49,19 +49,26 @@ const Video = ({ hidden }) => {
   };
 
   useEffect(() => {
+    let cleanUpFn = false;
+    const signal = axios.CancelToken.source();
     const torrent = getTorrentInfo(YTSInfo, imdbId, YTSInfo.title_long);
     if (torrent.error) {
-      setTorrentError(torrent.error);
+      if (!cleanUpFn) setTorrentError(torrent.error);
     } else if (torrent.name) {
-      setTorrentError(false);
-      superagent.post(`http://${document.location.hostname}:8080/api/torrent/download`)
-        .send(torrent)
+      if (!cleanUpFn) setTorrentError(false);
+      axios.post(`http://${document.location.hostname}:8080/api/torrent/download`, torrent, { cancelToken: signal.token })
         .then((res) => {
           initSocket.current(res);
           setTorrentInfo(torrent);
         })
-        .catch((e) => setPlayError(true));
+        .catch((e) => {
+          if (!cleanUpFn) setPlayError(true);
+        });
     }
+    return () => {
+      signal.cancel('Api has been canceled');
+      cleanUpFn = true;
+    };
   }, [imdbId, YTSInfo]);
 
   useEffect(() => () => {
@@ -107,7 +114,7 @@ const Video = ({ hidden }) => {
   };
 
   const playVideo = () => {
-    if (sendPlay) return ;
+    if (sendPlay) return;
     currentSocket.current.emit('play');
     setSendPlay(true);
     setShowPlay(false);

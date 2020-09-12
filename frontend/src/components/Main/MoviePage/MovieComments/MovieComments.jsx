@@ -3,8 +3,8 @@ import { cn } from '@bem-react/classname';
 import CommentList from './CommentList/CommentList';
 import AddComment from './AddComment/AddComment';
 import MovieInfoContext from '../../../../context/MovieInfoContext';
-import commentsReducer from '../../../../reducers/comments';
 import CommentsContext from '../../../../context/commentsContext';
+import commentsReducer from '../../../../reducers/comments';
 import useGetComments from '../../../../services/useGetComments';
 import './MovieComments.css';
 
