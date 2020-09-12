@@ -1,13 +1,14 @@
 const { db } = require('../db');
 
 const addComment = async (comment) => {
-  await db.query(`
+  const res = await db.query(`
     INSERT INTO
       comments (text, parent_id, created_at, user_id, movie_id)
     VALUES
-      ($1, $2, (to_timestamp($3)), $4, $5)
+      ($1, $2, (to_timestamp($3)), $4, $5) RETURNING id
   `, [comment.text, comment.parent_id, comment.created_at, comment.user_id, comment.movie_id]);
-  return ({ status: 'ok' });
+  const { id } = res.rows[0];
+  return ({ id });
 };
 
 const getCommentById = async (commentId) => {

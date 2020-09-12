@@ -22,22 +22,25 @@ const ReplyComment = ({ cls, parentId, setHidden }) => {
     input.current.focus();
   }, []);
   const addComment = () => {
-    dispatch({
-      type: 'ADD_COMMENT',
-      comment: {
-        user_id: stateAuthReducer.user.userId,
-        parent_id: parentId,
-        login: stateAuthReducer.user.username,
-        created_at: moment(),
-        text: comment,
-        photo: stateAuthReducer.user.photo,
-      },
-    });
     superagent.post('/api/comment/add').send({
       user_id: stateAuthReducer.user.userId,
       text: comment,
       movie_id: imdbId,
       parent_id: parentId,
+    }).then((res) => {
+      const { id } = res.body;
+      dispatch({
+        type: 'ADD_COMMENT',
+        comment: {
+          id,
+          user_id: stateAuthReducer.user.userId,
+          parent_id: parentId,
+          login: stateAuthReducer.user.username,
+          created_at: moment(),
+          text: comment,
+          photo: stateAuthReducer.user.photo,
+        },
+      });
     }).catch((e) => console.log(e));
     setComment('');
     setHidden(true);
