@@ -32,6 +32,7 @@ function Input(props) {
         value={value}
         className={inputCss('InputTag', [inputClassName], { size, error })}
         onChange={handleChange}
+        autoComplete="on"
       />
       <span className={inputCss('Message')}>{error && message}</span>
     </div>

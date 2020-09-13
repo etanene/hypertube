@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const request = require('superagent');
+const axios = require('axios');
 
 export default function useGetMovieInfo(movieID) {
   const [isLoading, setIsLoading] = useState(false);
@@ -10,25 +10,31 @@ export default function useGetMovieInfo(movieID) {
   const url = 'http://www.omdbapi.com/';
 
   useEffect(() => {
+    let cleanUpFn = false;
+    const signal = axios.CancelToken.source();
     async function getMovieInfo() {
       try {
-        setIsLoading(true);
-        setErrorOMDB(false);
-        const response = await request.get(url).query({ i: movieID, apikey: OMDB_API_KEY, plot: 'full' });
-        if (!response.body.Error) {
-          const data = response.body;
-          setOMDBInfo(data);
-          setIsLoading(false);
+        if (!cleanUpFn) setIsLoading(true);
+        if (!cleanUpFn) setErrorOMDB(false);
+        const response = await axios.get(url, { params: { i: movieID, apikey: OMDB_API_KEY, plot: 'full' }, cancelToken: signal.token });
+        if (response.data.Error) {
+          const { data } = response;
+          if (!cleanUpFn) setOMDBInfo(data);
+          if (!cleanUpFn) setIsLoading(false);
         } else {
-          setIsLoading(false);
-          setErrorOMDB(response.body.Error);
+          if (!cleanUpFn) setIsLoading(false);
+          if (!cleanUpFn) setErrorOMDB(response.data.Error);
         }
       } catch (e) {
-        setIsLoading(false);
-        setErrorOMDB(true);
+        if (!cleanUpFn) setIsLoading(false);
+        if (!cleanUpFn) setErrorOMDB(true);
       }
     }
-    getMovieInfo();
+    if (!cleanUpFn) getMovieInfo();
+    return () => {
+      signal.cancel('Api has been canceled');
+      cleanUpFn = true;
+    };
   }, [movieID]);
   return {
     isLoading,
