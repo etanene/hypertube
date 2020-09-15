@@ -25,11 +25,6 @@ const MovieSort = (props) => {
           tabIndex={sortByIndex}
           className={movieSortCss('Item')}
           onClick={handleShowList}
-          onKeyDown={(e) => {
-            if (e.code === 'KeyS') {
-              handleShowList();
-            }
-          }}
         >
           <span className={movieSortCss('SortBy')}>{sortByParams[sortByIndex].name}</span>
           <i className={iconCss({}, [movieSortCss('Icon')])}>
@@ -48,16 +43,12 @@ const MovieSort = (props) => {
               onClick={() => {
                 setSortByIndex(index);
                 setPageNumber(1);
-                dispatch({ type: 'ADD_QUERY', query: { sort_by: sortByParam.type } });
-                setVisible(false);
-              }}
-              onKeyDown={(e) => {
-                if (e.code === 'KeyT') {
-                  setSortByIndex(index);
-                  setPageNumber(1);
+                if (sortByParam.type === 'title') {
+                  dispatch({ type: 'ADD_QUERY', query: { sort_by: sortByParam.type, order_by: 'asc' } });
+                } else {
                   dispatch({ type: 'ADD_QUERY', query: { sort_by: sortByParam.type } });
-                  setVisible(false);
                 }
+                setVisible(false);
               }}
             >
               <span className={movieSortCss('SortBy')}>{sortByParam.name}</span>

@@ -31,7 +31,7 @@ const Movie = ({
               className={movieCss('Image')}
             />
             <div className={(overlayCss())}>
-              {movie.genres.length && (
+              {movie.genres && movie.genres.length > 0 && (
                 <div className={overlayCss('InfoBox')}>
                   <div className={overlayCss('Genres')}>
                     {movie.genres.map((genre, index) => (index < 3 ? `${genre} ` : ''))}
