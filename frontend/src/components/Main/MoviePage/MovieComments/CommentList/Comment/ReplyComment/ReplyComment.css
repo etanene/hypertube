@@ -39,12 +39,12 @@
 
 @media screen and (max-width: 500px) {
     .Comment-ReplyComment {
-        min-width: 220px;
+        min-width: 200px;
     }
 
     .ReplyComment-Textarea {
-        min-width: 150px;
-        width: 150px;
+        min-width: 120px;
+        width: 130px;
     }
 
     .ReplyComment-Button {
